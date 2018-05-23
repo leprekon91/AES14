@@ -32,6 +32,7 @@ public class Start extends Application {
 			Scene scene = new Scene(root, 400, 400);
 			scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
 			primaryStage.setTitle("Test Title");
+			primaryStage.setMaximized(true);
 			primaryStage.setScene(scene);
 			
 			// get host:
