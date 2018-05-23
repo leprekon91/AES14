@@ -6,42 +6,35 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.LoginFXControl">
-   <children>
-      <GridPane prefHeight="104.0" stylesheets="/client/gui/style/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      
-      	<Text fx:id="txt" text="hello!" GridPane.columnIndex="2">
-            <effect>
-               <Bloom />
-            </effect>
-         </Text>
-         <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         <CheckBox mnemonicParsing="false" text="CheckBox" GridPane.columnIndex="1" />
-         <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         <ProgressBar prefWidth="200.0" progress="0.5" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-         <Spinner GridPane.columnIndex="2" GridPane.rowIndex="2" />
-         <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-         <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" />
-         </rowConstraints>
-      </GridPane>
-   </children>
-</AnchorPane>
+<GridPane stylesheets="/client/gui/style/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.LoginFXControl">
+
+	<Text fx:id="txt" text="hello!" GridPane.columnIndex="2">
+      <effect>
+         <Bloom />
+      </effect>
+   </Text>
+   <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+   <CheckBox mnemonicParsing="false" text="CheckBox" GridPane.columnIndex="1" />
+   <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   <ProgressBar prefWidth="200.0" progress="0.5" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+   <Spinner GridPane.columnIndex="2" GridPane.rowIndex="2" />
+   <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+   </rowConstraints>
+</GridPane>
