@@ -1,0 +1,12 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+GridPane {
+	-fx-padding: 10;
+}
+Text{
+	-fx-fill: red;
+	-fx-font-size: 50px;
+}
+Text:hover{
+	-fx-fill: #FFAAAA;
+	-fx-font-size: 55px;
+}
