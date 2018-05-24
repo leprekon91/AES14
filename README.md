@@ -13,12 +13,12 @@ These instructions will get you a copy of the project up and running on your loc
 See deployment for notes on how to deploy the project on a live system. 
 First, create the database by running the test.sql script on your mysql server. This will create a database named 'test', and fill it with mock data.
 Next, clone this repository and build with your IDE of choice.
-Finally, you can run the server-side by running Server.main() run configuration.
+Finally, you can run the server-side by running server.control.Server.main() run configuration.
 The client-side is ran by client.control.start.main(). 
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+You will need a JDK that supports JavaFX to run the GUI application and a mysql-connector library for java.
 
 ```
 Give examples
