@@ -23,11 +23,14 @@ You will need a JDK that supports JavaFX to run the GUI application and a mysql-
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/leprekon91/AES14/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Andrey Grabarnick** - *Development*
+* **Alex Pitchorski** - *Development* 
+* **Carmela Rotzaid** - *Development*
+* **Mor Huri** - *Development*
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
