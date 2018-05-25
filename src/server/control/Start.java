@@ -26,7 +26,7 @@ public class Start extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.fxml + "Dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML+"dashboard.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 400, 400);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
@@ -36,16 +36,21 @@ public class Start extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        login();
+        primaryStage.show();
     }
 
     private void login() {
         // Create the custom dialog.
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Login To DataBase");
-        dialog.setHeaderText("Please Enter DataBase credentials");
+        dialog.setHeaderText("Please Enter Data Base credentials");
 
         // Set the icon (must be included in the project).
-        dialog.setGraphic(new ImageView(this.getClass().getResource(Contract.graphics+"Icon.png").toString()));
+        ImageView iv = new ImageView(this.getClass().getResource(Contract.graphics+"Icon.png").toString());
+        iv.setFitWidth(100);
+        iv.setFitHeight(100);
+        dialog.setGraphic(iv);
 
         // Set the button types.
         ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
@@ -90,7 +95,7 @@ public class Start extends Application {
         });
 
         Optional<Pair<String, String>> result = dialog.showAndWait();
-//try to connect with database
+//TODO:try to connect with database
         result.ifPresent(usernamePassword -> {
             System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
         });

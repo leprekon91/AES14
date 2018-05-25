@@ -27,7 +27,7 @@ public class Start extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.fxml + "Login.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "Login.fxml"));
 			Parent root = fxmlLoader.load();
 			Scene scene = new Scene(root, 400, 400);
 			scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
