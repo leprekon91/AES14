@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import server.gui.fxcontrol.Dashboard;
 import server.sql.MysqlManager;
 import server.sql.SQLContract;
 
@@ -20,7 +21,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.Optional;
 
-public class Start extends Application {
+public class Start extends Application implements ServerUI {
+    public Server sv;
+    public Dashboard dashboard;
 
     public static void main(String[] args) {
         launch(args);
@@ -28,11 +31,14 @@ public class Start extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "dashboard.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 1200, 600);
-            Application.setUserAgentStylesheet(STYLESHEET_MODENA);
+            dashboard = fxmlLoader.getController();
 
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
             primaryStage.setTitle("Administrator Dashboard");
@@ -42,8 +48,21 @@ public class Start extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        sv = new Server(Contract.DEFAULT_PORT,this);
+
         login();
-        //TODO: run server
+
+        try {
+            sv.listen(); //Start listening for connections
+        } catch (Exception ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error!");
+            alert.setHeaderText("Could not listen for clients! System will now Shut Down.");
+            alert.setContentText(ex.getLocalizedMessage());
+            alert.showAndWait();
+            System.exit(1);
+        }
         primaryStage.show();
     }
 
@@ -98,7 +117,7 @@ public class Start extends Application {
             if (dialogButton == loginButtonType) {
                 return new Pair<>(username.getText(), password.getText());
             }
-            if(dialogButton == ButtonType.CANCEL){
+            if (dialogButton == ButtonType.CANCEL) {
                 System.exit(0);
             }
             return null;
@@ -119,5 +138,10 @@ public class Start extends Application {
                 break;
             }
         }
+    }
+
+    @Override
+    public void logMsg(String str) {
+        dashboard.addLogMsg(str);
     }
 }

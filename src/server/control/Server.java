@@ -7,22 +7,53 @@ import server.ocsf.ConnectionToClient;
  * @author Andrey Grabarnick
  * @email reist2009@gmail.com
  * @date 23 May 2018
- * 
- *       Server implementation. This class will handle all communication with
- *       the clients, using the language defined in the com.Contract class file.
+ * <p>
+ * Server implementation. This class will handle all communication with
+ * the clients, using the language defined in the com.Contract class file.
  */
 public class Server extends AbstractServer {
 
-	public Server(int port) {
-		super(port);
-		// TODO Auto-generated constructor stub
-	}
+    private ServerUI SUI;
 
-	@Override
-	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		// TODO Auto-generated method stub
+    public Server(int port, ServerUI sui) {
+        super(port);
+        this.SUI = sui;
+    }
 
-	}
+    /**
+     * This method overrides the one in the superclass.  Called
+     * when the server starts listening for connections.
+     */
+    protected void serverStarted() {
+        SUI.logMsg
+                ("Server listening for connections on port " + getPort());
+
+    }
+
+    /**
+     * This method overrides the one in the superclass.  Called
+     * when the server stops listening for connections.
+     */
+    protected void serverStopped() {
+        SUI.logMsg("Server has stopped listening for connections.");
+    }
+
+    /**
+     * This method overrides the one in the superclass.  Called
+     * when a client has connected to the server
+     */
+    @Override
+    protected void clientConnected(ConnectionToClient client) {
+        SUI.logMsg("Client " + client.toString() + " connected.");
+        //TODO: update GUI
+    }
+
+    @Override
+    protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+        SUI.logMsg("Message received from Client: " + client.toString());
+        // TODO Auto-generated method stub
+
+    }
 
 
 }

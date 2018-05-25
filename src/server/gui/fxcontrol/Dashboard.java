@@ -33,7 +33,7 @@ public class Dashboard {
             e.printStackTrace();
         }
 
-        showError("Session Started: " + Timestamp.valueOf(LocalDateTime.now()));
+        addLogMsg("Session Started: " + Timestamp.valueOf(LocalDateTime.now()));
     }
 
     public void showErrorLog(ActionEvent actionEvent) {
@@ -46,7 +46,8 @@ public class Dashboard {
         viewPane.getChildren().removeAll(errLog);
         viewPane.getChildren().add(userPanel);
     }
-    private void setAnchorsFitScreen(Node n){
+
+    private void setAnchorsFitScreen(Node n) {
         AnchorPane.setTopAnchor(n, 0.0);
         AnchorPane.setRightAnchor(n, 0.0);
         AnchorPane.setLeftAnchor(n, 0.0);
@@ -54,7 +55,7 @@ public class Dashboard {
 
     }
 
-    public void showError(String str) {
+    public void addLogMsg(String str) {
         errControl.addEntry(str);
     }
 }
