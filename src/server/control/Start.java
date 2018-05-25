@@ -31,16 +31,18 @@ public class Start extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "dashboard.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 400, 400);
+            Scene scene = new Scene(root, 1200, 600);
+            Application.setUserAgentStylesheet(STYLESHEET_MODENA);
+
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
             primaryStage.setTitle("Administrator Dashboard");
             primaryStage.setMaximized(true);
-            primaryStage.setResizable(false);
+            //primaryStage.setResizable(false);
             primaryStage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //login();
+        login();
         //TODO: run server
         primaryStage.show();
     }
@@ -53,8 +55,8 @@ public class Start extends Application {
 
         // Set the icon (must be included in the project).
         ImageView iv = new ImageView(this.getClass().getResource(Contract.graphics + "Icon.png").toString());
-        iv.setFitWidth(100);
-        iv.setFitHeight(100);
+        iv.setFitWidth(64);
+        iv.setFitHeight(64);
         dialog.setGraphic(iv);
 
         // Set the button types.

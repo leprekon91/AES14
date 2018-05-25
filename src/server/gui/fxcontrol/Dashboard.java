@@ -4,8 +4,9 @@ package server.gui.fxcontrol;
 import com.Contract;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextArea;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -15,7 +16,7 @@ public class Dashboard {
 
     public AnchorPane viewPane;
     public AnchorPane userPanel;
-    public AnchorPane errLog;
+    public VBox errLog;
     public ErrLog errControl;
 
     public void initialize() {
@@ -23,16 +24,19 @@ public class Dashboard {
             userPanel = FXMLLoader.load(getClass().getResource(Contract.serverFXML + "userPanel.fxml"));
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "errLog.fxml"));
             errLog = loader.load();
-            errControl=(ErrLog) loader.getController();
+            setAnchorsFitScreen(userPanel);
+            setAnchorsFitScreen(errLog);
+            errControl = (ErrLog) loader.getController();
             viewPane.getChildren().add(userPanel);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        addError("Session Started: "+Timestamp.valueOf(LocalDateTime.now()));
+        showError("Session Started: " + Timestamp.valueOf(LocalDateTime.now()));
     }
 
-    public void showErrors(ActionEvent actionEvent) {
+    public void showErrorLog(ActionEvent actionEvent) {
         viewPane.getChildren().removeAll(userPanel);
         viewPane.getChildren().add(errLog);
 
@@ -42,8 +46,15 @@ public class Dashboard {
         viewPane.getChildren().removeAll(errLog);
         viewPane.getChildren().add(userPanel);
     }
+    private void setAnchorsFitScreen(Node n){
+        AnchorPane.setTopAnchor(n, 0.0);
+        AnchorPane.setRightAnchor(n, 0.0);
+        AnchorPane.setLeftAnchor(n, 0.0);
+        AnchorPane.setBottomAnchor(n, 0.0);
 
-    public void addError(String str){
+    }
+
+    public void showError(String str) {
         errControl.addEntry(str);
     }
 }

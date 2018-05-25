@@ -39,9 +39,9 @@ public class UserPanel {
 
     private ObservableList<PieChart.Data> createData(int sNum, int tNum, int pNum) {
         return FXCollections.observableArrayList(
-                new PieChart.Data("Students\t", sNum),
-                new PieChart.Data("Teachers\t", tNum),
-                new PieChart.Data("Principal\t", pNum));
+                new PieChart.Data("Students\t0", sNum),
+                new PieChart.Data("Teachers\t0", tNum),
+                new PieChart.Data("Principal\t0", pNum));
     }
 
     private void updateData(int sNum, int tNum, int pNum){
