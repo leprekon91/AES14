@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="server.gui.fxcontrol.Dashboard"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.gui.fxcontrol.Dashboard">
+   <children>
+      <SplitPane dividerPositions="0.1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
+        <items>
+          <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox layoutX="13.0" layoutY="145.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                     <children>
+                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="100.0" text="Users">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane fx:id="viewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="1170.0" />
+        </items>
+      </SplitPane>
+   </children>
+</VBox>

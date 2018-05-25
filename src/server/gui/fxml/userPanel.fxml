@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.gui.fxcontrol.UserPanel">
+
+    <children>
+        <TableView fx:id="table" layoutX="14.0" layoutY="184.0" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="250.0">
+            <columns>
+                <TableColumn fx:id="tblUser" prefWidth="75.0" text="User" />
+                <TableColumn fx:id="tblType" minWidth="50.0" prefWidth="100.0" text="Type" />
+                <TableColumn fx:id="tblIp" minWidth="-Infinity" prefWidth="100.0" text="IP" />
+                <TableColumn fx:id="tblName" minWidth="-Infinity" prefWidth="75.0" text="Name" />
+            </columns>
+        </TableView>
+        <Pane fx:id="chartPane" layoutX="260.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="8.0" />
+    </children>
+</AnchorPane>

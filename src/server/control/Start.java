@@ -13,8 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import server.sql.MysqlManager;
+import server.sql.SQLContract;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Optional;
 
 public class Start extends Application {
@@ -26,17 +29,19 @@ public class Start extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML+"dashboard.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "dashboard.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 400, 400);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
-            primaryStage.setTitle("Test Title");
+            primaryStage.setTitle("Administrator Dashboard");
             primaryStage.setMaximized(true);
+            primaryStage.setResizable(false);
             primaryStage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        login();
+        //login();
+        //TODO: run server
         primaryStage.show();
     }
 
@@ -47,7 +52,7 @@ public class Start extends Application {
         dialog.setHeaderText("Please Enter Data Base credentials");
 
         // Set the icon (must be included in the project).
-        ImageView iv = new ImageView(this.getClass().getResource(Contract.graphics+"Icon.png").toString());
+        ImageView iv = new ImageView(this.getClass().getResource(Contract.graphics + "Icon.png").toString());
         iv.setFitWidth(100);
         iv.setFitHeight(100);
         dialog.setGraphic(iv);
@@ -91,13 +96,26 @@ public class Start extends Application {
             if (dialogButton == loginButtonType) {
                 return new Pair<>(username.getText(), password.getText());
             }
+            if(dialogButton == ButtonType.CANCEL){
+                System.exit(0);
+            }
             return null;
         });
+        while (true) {
+            Optional<Pair<String, String>> result = dialog.showAndWait();
 
-        Optional<Pair<String, String>> result = dialog.showAndWait();
-//TODO:try to connect with database
-        result.ifPresent(usernamePassword -> {
-            System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
-        });
+            //try to connect with database:
+            result.ifPresent(usernamePassword -> {
+                SQLContract.user = usernamePassword.getKey();
+                SQLContract.pass = usernamePassword.getValue();
+
+            });
+
+            Connection con = MysqlManager.ConnectToDB();
+            if (MysqlManager.ConnectToDB() != null) {
+                MysqlManager.closeConnection(con);
+                break;
+            }
+        }
     }
 }
