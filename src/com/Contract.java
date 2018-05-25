@@ -17,6 +17,6 @@ public class Contract {
 	final public static String graphics = "/com/graphics/"; //location of graphics dir
 
 	// Client-Server Communication Language
-	final public static String GET_ALL_QUESTIONS = "Get All Questions";
+
 
 }

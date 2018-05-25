@@ -2,7 +2,7 @@
 
 Automated Exam System by Group 14 is a students project from Ort Braude college in Karmiel,IL.
 The System is a Java Based Client-Server program that will create better exam taking experience for students. it communicates with a premade MySQL database, and is able to:
-  - Create a questions (made by teachers) and exams collections.
+  - Create questions (multi-choice and made by teachers) and exams.
   - Test the students with the exams.
   - Check the exams submitted by students
   - Create and display statistical data.
@@ -27,12 +27,12 @@ Please read [CONTRIBUTING.md](https://github.com/leprekon91/AES14/blob/master/CO
 
 ## Authors
 
-* **Andrey Grabarnick** - *Development*
-* **Alex Pitchorski** - *Development* 
-* **Carmela Rotzaid** - *Development*
-* **Mor Huri** - *Development*
+* **Andrey Grabarnick** - *Developer*
+* **Alex Pitchorski** - *Developer*
+* **Carmela Rotzaid** - *Developer*
+* **Mor Huri** - *Developer*
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/leprekon91/AES14/contributors) who participated in this project.
 
 ## License
 
