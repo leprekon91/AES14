@@ -1,6 +1,6 @@
 package client.gui.fxcontrol;
 
-import client.gui.style.icons.FontAwesome;
+import com.style.icons.FontAwesome;
 import javafx.scene.text.Text;
 
 /**

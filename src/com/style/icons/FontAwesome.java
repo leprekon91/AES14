@@ -2,7 +2,7 @@
  * Copyright (c) 2018.  Written by Andrey Grabarnick Email: Reist2009@gmail.com
  */
 
-package client.gui.style.icons;
+package com.style.icons;
 
 import javafx.scene.text.Font;
 

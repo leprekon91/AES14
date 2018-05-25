@@ -11,9 +11,9 @@ package com;
  */
 public class Contract {
 	final public static int DEFAULT_PORT = 5555;// Default fall-back port
-	final public static String fxml = "/client/gui/fxml/"; // location of FXML files
-	final public static String css = "/client/gui/style/style.css"; // location of CSS file
-	final public static String graphics = "/client/gui/graphics/"; //location of graphics dir
+	final public static String fxml = "../gui/fxml/"; // location of FXML files
+	final public static String css = "/com/style/style.css"; // location of CSS file
+	final public static String graphics = "/com/graphics/"; //location of graphics dir
 
 	// Client-Server Communication Language
 	final public static String GET_ALL_QUESTIONS = "Get All Questions";

@@ -63,6 +63,7 @@ public class Start extends Application {
 		Optional<String> res = hostConfig.showAndWait();
 		if (res.isPresent()) {
 			host = res.get();
+			//TODO: check if the client can connect, if it cant show dialog again
 		} else {
 			System.exit(0);
 		}
