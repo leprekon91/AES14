@@ -51,7 +51,7 @@ public class Start extends Application implements ServerUI {
 
         sv = new Server(Contract.DEFAULT_PORT,this);
 
-        login();
+        //login();
 
         try {
             sv.listen(); //Start listening for connections
