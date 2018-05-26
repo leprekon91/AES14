@@ -51,7 +51,6 @@ public class Server extends AbstractServer {
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
         SUI.logMsg("Message received from Client: " + client.toString());
-        // TODO Auto-generated method stub
 
     }
 

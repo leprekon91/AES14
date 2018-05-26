@@ -929,3 +929,39 @@ VBox > .split-menu-button.last > .arrow-button {
 .slider:vertical .track {
 	-fx-pref-width: 5;
 }
+.chart {
+     -fx-padding: 10px;
+ }
+ .chart-content {
+     -fx-padding: 30px;
+ }
+
+ .chart-title {
+   -fx-font-size: 1.3em;
+ }
+
+ .axis-label {
+   -fx-text-fill: #4682b4;
+ }
+
+ .chart-plot-background {
+     -fx-background-color: black;
+ }
+ .chart-vertical-grid-lines {
+     -fx-stroke: black;
+ }
+ .chart-horizontal-grid-lines {
+     -fx-stroke: black;
+ }
+ .chart-alternative-row-fill {
+     -fx-fill: #111111;
+     -fx-stroke: transparent;
+     -fx-stroke-width: 0;
+ }
+
+ .chart-series-line {
+     -fx-stroke-width: 2px;
+     -fx-effect: null;
+ }
+
+ .default-color0.chart-series-line { -fx-stroke: lime; }
