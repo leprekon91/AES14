@@ -1,61 +1,43 @@
 package server.gui.fxcontrol;
 
-
 import com.Contract;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import javafx.fxml.FXML;
+import javafx.scene.control.Tab;
 
 public class Dashboard {
 
-    public AnchorPane viewPane;
-    public AnchorPane userPanel;
-    public VBox errLog;
-    public ErrLog errControl;
+	public AnchorPane userPanel;
+	public VBox errLog;
+	public ErrLog errControl;
+	@FXML
+	Tab userTab;
+	@FXML
+	Tab errorTab;
 
-    public void initialize() {
-        try {
-            userPanel = FXMLLoader.load(getClass().getResource(Contract.serverFXML + "userPanel.fxml"));
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "errLog.fxml"));
-            errLog = loader.load();
-            setAnchorsFitScreen(userPanel);
-            setAnchorsFitScreen(errLog);
-            errControl = (ErrLog) loader.getController();
-            viewPane.getChildren().add(userPanel);
+	public void initialize() {
+		try {
+			userPanel = FXMLLoader.load(getClass().getResource(Contract.serverFXML + "userPanel.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "errLog.fxml"));
+			errLog = loader.load();
+			errControl = (ErrLog) loader.getController();
+			userTab.setContent(userPanel);
+			errorTab.setContent(errLog);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        addLogMsg("Session Started: " + Timestamp.valueOf(LocalDateTime.now()));
-    }
+		addLogMsg("Session Started: " + Timestamp.valueOf(LocalDateTime.now()));
+	}
 
-    public void showErrorLog(ActionEvent actionEvent) {
-        viewPane.getChildren().removeAll(userPanel);
-        viewPane.getChildren().add(errLog);
-
-    }
-
-    public void showUsers(ActionEvent actionEvent) {
-        viewPane.getChildren().removeAll(errLog);
-        viewPane.getChildren().add(userPanel);
-    }
-
-    private void setAnchorsFitScreen(Node n) {
-        AnchorPane.setTopAnchor(n, 0.0);
-        AnchorPane.setRightAnchor(n, 0.0);
-        AnchorPane.setLeftAnchor(n, 0.0);
-        AnchorPane.setBottomAnchor(n, 0.0);
-
-    }
-
-    public void addLogMsg(String str) {
-        errControl.addEntry(str);
-    }
+	public void addLogMsg(String str) {
+		errControl.addEntry(str);
+	}
 }
