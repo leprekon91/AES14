@@ -12,7 +12,7 @@ import java.io.IOException;
  * @date 23 May 2018 FXController for the login form.
  * 
  */
-public class LoginFXControl {
+public class LoginScreen {
 
 
 	public void initialize() {
@@ -20,6 +20,14 @@ public class LoginFXControl {
 
 	}
 
-	public void testSendMessage(ActionEvent actionEvent) {
-	}
+
+
+    public void authorize(boolean ans) {
+		if(ans){
+			//user is authorized!
+		}
+		else{
+			//user isn't authorized!
+		}
+    }
 }

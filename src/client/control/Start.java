@@ -1,6 +1,5 @@
 package client.control;
 
-import client.gui.fxcontrol.LoginFXControl;
 import com.Contract;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +29,7 @@ public class Start extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "Login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "MainScreen.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 400, 400);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());

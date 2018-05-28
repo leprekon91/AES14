@@ -1,8 +1,12 @@
 package client.control;
 
+import client.gui.fxcontrol.LoginScreen;
+import client.gui.fxcontrol.MainScreen;
+import com.Contract;
 import com.data.Message;
 
 import client.ocsf.AbstractClient;
+import com.data.User;
 
 import java.io.IOException;
 
@@ -15,7 +19,7 @@ import java.io.IOException;
  *       the server, using the language defined in the com.Contract class file.
  */
 public class Client extends AbstractClient {
-
+    private MainScreen mainScreenFX;
 
 
 	public Client(String host, int port, Client cc) {
@@ -36,4 +40,22 @@ public class Client extends AbstractClient {
 		}
 
 	}
+
+	public void authorizeClient(User user, MainScreen controller){
+	    this.mainScreenFX=controller;
+        try {
+            this.sendToServer(new Message(Contract.AUTHORIZE,user));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void authResponse(Message ans){
+	    if(ans.getType()==Contract.AUTH_YES){
+            ((LoginScreen)this.mainScreenFX.currentController).authorize(true);
+        }
+        else{
+            ((LoginScreen)this.mainScreenFX.currentController).authorize(false);
+        }
+    }
 }
