@@ -35,6 +35,7 @@ public class Start extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "MainScreen.fxml"));
             Parent root = fxmlLoader.load();
+
             Scene scene = new Scene(root, 800, 400);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
             primaryStage.setTitle("AES Client");
@@ -47,20 +48,18 @@ public class Start extends Application {
             hostConfigDlg();
 
             primaryStage.show();
-            ((MainScreen)fxmlLoader.getController()).client=this.client;
+            ((MainScreen) fxmlLoader.getController()).client = this.client;
+            client.mainScreen=fxmlLoader.getController();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                try {
-                    client.closeConnection();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+        primaryStage.setOnCloseRequest(event -> {
+            try {
+                client.closeConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         });
     }
 

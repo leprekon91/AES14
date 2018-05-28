@@ -3,19 +3,18 @@ package client.gui.fxcontrol;
 import client.control.Client;
 import com.Contract;
 import com.data.User;
-import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+
 
 import java.io.IOException;
 
 public class MainScreen {
     public Object currentController;
     public AnchorPane rootNode;
+    public Wait wait;
     Parent login;
     public Client client;
     public User user;
@@ -49,19 +48,15 @@ public class MainScreen {
 
         Parent p = null;
         try {
-            p = FXMLLoader.load(getClass().getResource(Contract.clientFXML + "Wait.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "Wait.fxml"));
+            p = loader.load();
+            Wait wait = loader.getController();
             setAnchorsFitScreen(p);
             this.rootNode.getChildren().setAll(p);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        while(user.getAuth()==Contract.AUTHORIZE){}
-        if(user.getAuth()==Contract.AUTH_YES){
-            System.out.println("User is Authorized");
-        }
-        else{
-            System.out.println("User is not Authorized");
-        }
+
     }
 
 }

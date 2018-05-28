@@ -74,7 +74,11 @@ public class Server extends AbstractServer {
                     "\tDATA: " + ((Message) msg).getData().toString()
             );
             if(((Message) msg).getType()==Contract.AUTHORIZE){
-                authorizeUser((User)((Message) msg).getData());
+                try {
+                    client.sendToClient(authorizeUser((User)((Message) msg).getData()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
         } else {
@@ -83,8 +87,9 @@ public class Server extends AbstractServer {
 
     }
 
-    private void authorizeUser(User data) {
-        AuthorizeUser.authorize(data);
+    private Message authorizeUser(User data) {
+        User u= AuthorizeUser.authorize(data);
+        return new Message(u.getAuth(),u);
     }
 
 

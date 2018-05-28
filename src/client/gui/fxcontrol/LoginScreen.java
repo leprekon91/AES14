@@ -1,7 +1,6 @@
 package client.gui.fxcontrol;
 
 
-import client.control.Client;
 import com.data.User;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -35,14 +34,12 @@ public class LoginScreen {
     }
 
 
-
-
     public void loginBtnHandler(ActionEvent actionEvent) {
         User user = new User(usernameTextfield.getText(), passwordField.getText());
         System.out.println(user);
         mainScreenController.client.requestAuth(user);
         //TODO: close window and wait for authorization
-        mainScreenController.user=user;
+        mainScreenController.user = user;
         mainScreenController.switchToWait();
     }
 
