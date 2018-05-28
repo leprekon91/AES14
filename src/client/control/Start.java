@@ -35,7 +35,7 @@ public class Start extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "MainScreen.fxml"));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 400, 400);
+            Scene scene = new Scene(root, 800, 400);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
             primaryStage.setTitle("AES Client");
             primaryStage.setMaximized(true);
@@ -45,8 +45,9 @@ public class Start extends Application {
             this.client = null;
             // get host and start the client:
             hostConfigDlg();
-            ((MainScreen)fxmlLoader.getController()).client=this.client;
+
             primaryStage.show();
+            ((MainScreen)fxmlLoader.getController()).client=this.client;
         } catch (Exception e) {
             e.printStackTrace();
         }

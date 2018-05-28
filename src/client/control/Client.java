@@ -59,9 +59,10 @@ public class Client extends AbstractClient {
     }
 
 
-    public void requestAuth(int authorized, User user) {
+    public void requestAuth( User user) {
         this.user = user;
         try {
+            System.out.println("Sending request for login");
             this.sendToServer(new Message(Contract.AUTHORIZE, user));
         } catch (IOException e) {
             e.printStackTrace();
