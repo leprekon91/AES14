@@ -1,17 +1,19 @@
 package com.data;
 
+import java.io.Serializable;
+
 /**
  * @author Andrey Grabarnick
  * @email reist2009@gmail.com
  * @date 23 May 2018
  * 
  *       Message data type, used in communication between the server and the
- *       client. will define the type
+ *       client. will define the type as Contract enum.
  */
-public class Message {
+public class Message implements Serializable {
 	// Parameters:
 
-	private String type;
+	private int type;
 	private Object data;
 
 	// Parameters -END
@@ -25,18 +27,18 @@ public class Message {
 	 *            If needed, can be appended to the message as data sent to
 	 *            recipient.
 	 */
-	public Message(String type, Object data) {
+	public Message(int type, Object data) {
 		this.type = type;
 		this.data = data;
 	}
 
 	// Getters and Setters:
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

@@ -1,7 +1,13 @@
 package client.gui.fxcontrol;
 
+import client.control.CommunicationControl;
+import com.Contract;
+import com.data.Message;
 import com.style.icons.FontAwesome;
+import javafx.event.ActionEvent;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 /**
  * @author Andrey Grabarnick
@@ -10,11 +16,18 @@ import javafx.scene.text.Text;
  * 
  */
 public class LoginFXControl {
-	public Text txt;
+	public CommunicationControl cc;
 
 	public void initialize() {
-		txt.setFont(FontAwesome.getFont(FontAwesome.SOLID));
-		txt.setText(FontAwesome.ICON_AMBULANCE);
 
+
+	}
+
+	public void testSendMessage(ActionEvent actionEvent) {
+		try {
+			cc.getClient().sendToServer(new Message(Contract.DEFAULT_PORT,"Hello!"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

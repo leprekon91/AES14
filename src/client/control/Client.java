@@ -4,6 +4,8 @@ import com.data.Message;
 
 import client.ocsf.AbstractClient;
 
+import java.io.IOException;
+
 /**
  * @author Andrey Grabarnick
  * @email reist2009@gmail.com
@@ -14,9 +16,16 @@ import client.ocsf.AbstractClient;
  */
 public class Client extends AbstractClient {
 
-	public Client(String host, int port) {
+	public CommunicationControl clientControl;
+
+	public Client(String host, int port, CommunicationControl cc) {
 		super(host, port);
-		// TODO Auto-generated constructor stub
+		this.clientControl=cc;
+		try {
+			openConnection();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -25,6 +34,8 @@ public class Client extends AbstractClient {
 		if (!(msg instanceof Message)) {
 			System.out.println("Server sent an unidentifiable message!");
 		}
-
+		else{
+			clientControl.handleMessage((Message)msg);
+		}
 	}
 }
