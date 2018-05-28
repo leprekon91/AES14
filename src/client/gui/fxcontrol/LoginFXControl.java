@@ -1,11 +1,8 @@
 package client.gui.fxcontrol;
 
-import client.control.CommunicationControl;
 import com.Contract;
 import com.data.Message;
-import com.style.icons.FontAwesome;
 import javafx.event.ActionEvent;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -16,7 +13,7 @@ import java.io.IOException;
  * 
  */
 public class LoginFXControl {
-	public CommunicationControl cc;
+
 
 	public void initialize() {
 
@@ -24,10 +21,5 @@ public class LoginFXControl {
 	}
 
 	public void testSendMessage(ActionEvent actionEvent) {
-		try {
-			cc.getClient().sendToServer(new Message(Contract.ABSTRACT,"Hello!"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

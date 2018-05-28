@@ -16,11 +16,11 @@ import java.io.IOException;
  */
 public class Client extends AbstractClient {
 
-	public CommunicationControl clientControl;
 
-	public Client(String host, int port, CommunicationControl cc) {
+
+	public Client(String host, int port, Client cc) {
 		super(host, port);
-		this.clientControl=cc;
+
 		try {
 			openConnection();
 		} catch (IOException e) {
@@ -34,8 +34,6 @@ public class Client extends AbstractClient {
 		if (!(msg instanceof Message)) {
 			System.out.println("Server sent an unidentifiable message!");
 		}
-		else{
-			clientControl.handleMessage((Message)msg);
-		}
+
 	}
 }

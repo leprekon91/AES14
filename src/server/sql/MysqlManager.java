@@ -57,7 +57,7 @@ public class MysqlManager {
 	 * @param ex
 	 *            SQLException to Handle
 	 */
-	private static void sqlExceptionHandler(SQLException ex) {
+	public static void sqlExceptionHandler(SQLException ex) {
 		System.err.println("SQLException: " + ex.getMessage());
 		System.err.println("SQLState: " + ex.getSQLState());
 		System.err.println("VendorError: " + ex.getErrorCode());

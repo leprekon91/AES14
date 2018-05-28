@@ -2,8 +2,12 @@ package server.control;
 
 import com.Contract;
 import com.data.Message;
+import com.data.User;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
+import server.sql.AuthorizeUser;
+
+import java.io.IOException;
 
 /**
  * @author Andrey Grabarnick
@@ -60,7 +64,7 @@ public class Server extends AbstractServer {
             );
 
         } else {
-            SUI.logMsg("Client"+client.toString()+"\tsent an unidentifiable message.");
+            SUI.logMsg("Client" + client.toString() + "\tsent an unidentifiable message.");
         }
 
     }

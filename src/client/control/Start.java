@@ -24,7 +24,6 @@ public class Start extends Application {
 
     public String host = "localhost";
 
-    CommunicationControl cc;
     Client client;
 
 
@@ -40,12 +39,10 @@ public class Start extends Application {
             primaryStage.setScene(scene);
 
 
-            this.cc = new CommunicationControl(root);
-            this.client = null;
-            // get host:
-            hostConfigDlg();
 
-            ((LoginFXControl)fxmlLoader.getController()).cc=this.cc;
+            this.client = null;
+            // get host and start the client:
+            hostConfigDlg();
 
             primaryStage.show();
         } catch (Exception e) {
@@ -74,8 +71,7 @@ public class Start extends Application {
             //start Client
             try {
                 System.out.println("host:" + host + " port:" + Contract.DEFAULT_PORT);
-                client = new Client(host, Contract.DEFAULT_PORT, cc);
-                cc.setClient(this.client);
+                client = new Client(host, Contract.DEFAULT_PORT, client);
             } catch (Exception exception) {
                 System.out.println("Error: Can't setup connection!"
                         + " Terminating client.");
