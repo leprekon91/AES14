@@ -28,7 +28,7 @@ Please read [CONTRIBUTING.md](https://github.com/leprekon91/AES14/blob/master/CO
 ## Authors
 
 * **Andrey Grabarnick** - *Developer*
-* **Alex Pitchorski** - *Developer*
+* **Alex Pitchorski** - *Designer*
 * **Carmela Rotzaid** - *Developer*
 * **Mor Huri** - *Developer*
 
