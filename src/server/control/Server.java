@@ -6,8 +6,10 @@ import com.data.User;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
 import server.sql.AuthorizeUser;
+import server.sql.MysqlManager;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 /**
  * @author Andrey Grabarnick
@@ -33,7 +35,6 @@ public class Server extends AbstractServer {
     protected void serverStarted() {
         SUI.logMsg
                 ("Server listening for connections on port " + getPort());
-
     }
 
     /**
@@ -72,11 +73,18 @@ public class Server extends AbstractServer {
                     "\ttype:" + ((Message) msg).getType() + "\n" +
                     "\tDATA: " + ((Message) msg).getData().toString()
             );
+            if(((Message) msg).getType()==Contract.AUTHORIZE){
+                authorizeUser((User)((Message) msg).getData());
+            }
 
         } else {
             SUI.logMsg("Client" + client.toString() + "\tsent an unidentifiable message.");
         }
 
+    }
+
+    private void authorizeUser(User data) {
+        AuthorizeUser.authorize(data);
     }
 
 

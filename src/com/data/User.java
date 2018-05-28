@@ -1,5 +1,7 @@
 package com.data;
 
+import com.Contract;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -7,6 +9,7 @@ public class User implements Serializable {
     private String username;
     private String pass;
     private int type;
+    private int auth = Contract.AUTHORIZE;//is the user authorized?
 
     public User(String username, String pass) {
         this.username = username;
@@ -43,5 +46,24 @@ public class User implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public void setAuth(int auth) {
+        this.auth = auth;
+    }
+
+    public int getAuth() {
+        return this.auth;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", pass='" + pass + '\'' +
+                ", type=" + type +
+                ", auth=" + auth +
+                '}';
     }
 }

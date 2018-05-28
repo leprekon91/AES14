@@ -2,10 +2,9 @@ package client.control;
 
 import client.gui.fxcontrol.LoginScreen;
 import client.gui.fxcontrol.MainScreen;
+import client.ocsf.AbstractClient;
 import com.Contract;
 import com.data.Message;
-
-import client.ocsf.AbstractClient;
 import com.data.User;
 
 import java.io.IOException;
@@ -14,54 +13,70 @@ import java.io.IOException;
  * @author Andrey Grabarnick
  * @email reist2009@gmail.com
  * @date 23 May 2018
- * 
- *       Client implementation. This class will handle all communication with
- *       the server, using the language defined in the com.Contract class file.
+ * <p>
+ * Client implementation. This class will handle all communication with
+ * the server, using the language defined in the com.Contract class file.
  */
 public class Client extends AbstractClient {
     private MainScreen mainScreenFX;
+    private User user;
 
 
-	public Client(String host, int port, Client cc) {
-		super(host, port);
+    public Client(String host, int port, Client cc) {
+        super(host, port);
 
-		try {
-			openConnection();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	protected void handleMessageFromServer(Object msg) {
-		// TODO handle message from server
-		if (!(msg instanceof Message)) {
-			System.out.println("Server sent an unidentifiable message!");
-		}
-
-	}
-
-	public void authorizeClient(User user, MainScreen controller){
-	    this.mainScreenFX=controller;
         try {
-            this.sendToServer(new Message(Contract.AUTHORIZE,user));
+            openConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void authResponse(Message ans){
-	    if(ans.getType()==Contract.AUTH_YES){
-            ((LoginScreen)this.mainScreenFX.currentController).authorize(true);
+    @Override
+    protected void handleMessageFromServer(Object msg) {
+        // TODO handle message from server
+        if (!(msg instanceof Message)) {
+            System.out.println("Server sent an unidentifiable message!");
         }
-        else{
-            ((LoginScreen)this.mainScreenFX.currentController).authorize(false);
+        Message message = (Message)msg;
+        switch(message.getType()){
+            case Contract.AUTH_YES:
+            case Contract.AUTH_NO:
+                recieveAuth(message);
+                break;
+        }
+
+    }
+
+
+
+
+
+    @Override
+    protected void connectionClosed() {
+        super.connectionClosed();
+        System.out.println("Closed Connection!");
+    }
+
+
+    public void requestAuth(int authorized, User user) {
+        this.user = user;
+        try {
+            this.sendToServer(new Message(Contract.AUTHORIZE, user));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-	@Override
-	protected void connectionClosed() {
-		super.connectionClosed();
-		System.out.println("Closed Connection!");
-	}
+    public void recieveAuth(Message msg) {
+        if (msg.getType() == Contract.AUTH_YES) {
+            this.user = (User) msg.getData();
+            this.user.setAuth(Contract.AUTH_YES);
+        }
+        if (msg.getType() == Contract.AUTH_NO) {
+            this.user = (User) msg.getData();
+            this.user.setAuth(Contract.AUTH_NO);
+        }
+
+    }
 }

@@ -1,34 +1,38 @@
 package server.sql;
 
+import com.Contract;
 import com.data.User;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class AuthorizeUser {
+    private static PreparedStatement stmt;
+
     public static User authorize(User user) {
         Connection con = MysqlManager.ConnectToDB();
         try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select users.* from users" +
-                    "where username = '" + user.getUsername() + "' and password = '" + user.getPass() + "';");
-            user = null;
+            stmt = con.prepareStatement(SQLContract.USER_AUTH);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPass());
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-
                 user.setId(rs.getString("id"));
-                user.setUsername(rs.getString("username"));
-                user.setPass(rs.getString("password"));
                 user.setType(rs.getInt("type"));
-            }
-            rs.close();
 
+            }
+            if (stmt != null)
+                stmt.close();
+            if (con != null)
+                con.close();
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        if (user.getId() != null)
+            user.setAuth(Contract.AUTH_YES);
+        else user.setAuth(Contract.AUTH_NO);
         return user;
     }
 }

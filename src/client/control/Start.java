@@ -1,5 +1,6 @@
 package client.control;
 
+import client.gui.fxcontrol.MainScreen;
 import com.Contract;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -44,7 +45,7 @@ public class Start extends Application {
             this.client = null;
             // get host and start the client:
             hostConfigDlg();
-
+            ((MainScreen)fxmlLoader.getController()).client=this.client;
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

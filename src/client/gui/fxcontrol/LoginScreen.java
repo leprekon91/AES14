@@ -1,9 +1,14 @@
 package client.gui.fxcontrol;
 
 
+import client.control.Client;
+import client.control.UserAuth;
+import com.Contract;
+import com.data.Message;
 import com.data.User;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -19,12 +24,18 @@ public class LoginScreen {
 	public javafx.scene.control.PasswordField passwordField;
 	public Button loginBtn;
 	public Button cnclBtn;
-
+public Client client;
 
 
 	public void initialize() {
 
-
+		loginBtn.setDisable(true);
+		usernameTextfield.textProperty().addListener((observable, oldValue, newValue) -> {
+			loginBtn.setDisable(newValue.trim().isEmpty());
+		});
+		passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
+			loginBtn.setDisable(newValue.trim().isEmpty());
+		});
 	}
 
 
@@ -39,13 +50,10 @@ public class LoginScreen {
     }
 
 	public void loginBtnHandler(ActionEvent actionEvent) {
-		//TODO: validate the form
-		if(usernameTextfield.getText().trim().isEmpty()||
-				passwordField.getText().trim().isEmpty()){
-			//todo: display warning
-		}
 		User user = new User(usernameTextfield.getText(),passwordField.getText());
+		System.out.println(user);
 		//TODO: send user data to client for server authentication
+		UserAuth uAuth = new UserAuth(user,client);
 		//TODO: close window and wait for authorization
 	}
 
