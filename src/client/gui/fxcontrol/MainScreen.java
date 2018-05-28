@@ -18,13 +18,19 @@ public class MainScreen {
         //first, display the login screen
         try {
             FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource(Contract.clientFXML + "LoginScreen.fxml"));
-            login = fxmlLoader.load();
+            rootNode.getChildren().setAll((Node)fxmlLoader.load());
             currentController = fxmlLoader.getController();
-            rootNode.getChildren().add(login);
+            setAnchorsFitScreen(rootNode);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
+    }
+    private void setAnchorsFitScreen(Node n) {
+        AnchorPane.setTopAnchor(n, 0.0);
+        AnchorPane.setRightAnchor(n, 0.0);
+        AnchorPane.setLeftAnchor(n, 0.0);
+        AnchorPane.setBottomAnchor(n, 0.0);
     }
 }

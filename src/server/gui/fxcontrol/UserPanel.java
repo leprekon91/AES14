@@ -2,15 +2,19 @@ package server.gui.fxcontrol;
 
 import com.graphics.DoughnutChart;
 import com.graphics.StatusLine;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.util.Random;
 
@@ -23,9 +27,11 @@ public class UserPanel {
     public TableView table;
     public AnchorPane statusPane;
     public StatusLine statusLine;
-
+    public int ClientNum=0; //number of connected clients
 
     public void initialize() {
+
+
 
         ObservableList<PieChart.Data> pieChartData = createData(1, 1, 1);
         DoughnutChart chart = new DoughnutChart(pieChartData);
@@ -41,6 +47,14 @@ public class UserPanel {
         statusPane.getChildren().add(statusLine);
         setAnchorsFitScreen(statusLine);
 
+        Timeline updateStatusLine = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                statusLine.addValue(ClientNum);
+            }
+        }));
+        updateStatusLine.setCycleCount(Timeline.INDEFINITE);
+        updateStatusLine.play();
 
         //fix table width
         tblUser.prefWidthProperty().bind(table.widthProperty().divide(4));

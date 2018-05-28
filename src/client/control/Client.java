@@ -58,4 +58,10 @@ public class Client extends AbstractClient {
             ((LoginScreen)this.mainScreenFX.currentController).authorize(false);
         }
     }
+
+	@Override
+	protected void connectionClosed() {
+		super.connectionClosed();
+		System.out.println("Closed Connection!");
+	}
 }

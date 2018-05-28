@@ -52,6 +52,14 @@ public class Server extends AbstractServer {
     protected void clientConnected(ConnectionToClient client) {
         SUI.logMsg("Client " + client.toString() + " connected.");
         //TODO: update GUI
+        SUI.updateClients(this.getNumberOfClients());
+    }
+
+    @Override
+    protected synchronized void clientDisconnected(ConnectionToClient client) {
+        super.clientDisconnected(client);
+        SUI.logMsg("Client " + client.toString() + " disconnected.");
+        SUI.updateClients(this.getNumberOfClients());
     }
 
     @Override

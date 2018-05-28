@@ -2,13 +2,16 @@ package client.control;
 
 import com.Contract;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -33,10 +36,9 @@ public class Start extends Application {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 400, 400);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
-            primaryStage.setTitle("Test Title");
-
+            primaryStage.setTitle("AES Client");
+            primaryStage.setMaximized(true);
             primaryStage.setScene(scene);
-
 
 
             this.client = null;
@@ -47,6 +49,17 @@ public class Start extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                try {
+                    client.closeConnection();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     public static void main(String[] args) {

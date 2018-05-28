@@ -144,4 +144,9 @@ public class Start extends Application implements ServerUI {
     public void logMsg(String str) {
         dashboard.addLogMsg(str);
     }
+
+    @Override
+    public void updateClients(int numOfClients) {
+        dashboard.userPanelControl.ClientNum=numOfClients;
+    }
 }
