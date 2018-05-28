@@ -1,5 +1,7 @@
 package server.control;
 
+import com.Contract;
+import com.data.Message;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
 
@@ -50,7 +52,16 @@ public class Server extends AbstractServer {
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        SUI.logMsg("Message received from Client: " + client.toString()+" Message:"+msg.toString());
+        if (msg instanceof Message) {
+            SUI.logMsg("Message received from Client: " + client.toString()
+                    + " Message:\n" +
+                    "\ttype:" + ((Message) msg).getType() + "\n" +
+                    "\tDATA: " + ((Message) msg).getData().toString()
+            );
+
+        } else {
+            SUI.logMsg("Client"+client.toString()+"\tsent an unidentifiable message.");
+        }
 
     }
 

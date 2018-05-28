@@ -1,5 +1,6 @@
 package client.control;
 
+import com.Contract;
 import com.data.Message;
 import javafx.scene.Parent;
 
@@ -27,7 +28,7 @@ public class CommunicationControl {
     }
 
     public void setClient(Client client) throws Exception {
-        if(client==null){
+        if (client == null) {
             throw new Exception("Client is null!");
         }
         this.client = client;
@@ -35,8 +36,17 @@ public class CommunicationControl {
 
     //-----------------------------------------------------------------------------
     //main communication method
-    public void handleMessage(Message msg){
-
+    public Object handleMessage(Message msg) {
+        switch (msg.getType()) {
+            case Contract.ABSTRACT:
+                return msg.getData();
+            case Contract.YES:
+                return true;
+            case Contract.NO:
+                return false;
+            default:
+                return null;
+        }
     }
 
 }

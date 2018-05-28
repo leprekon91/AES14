@@ -25,7 +25,7 @@ public class LoginFXControl {
 
 	public void testSendMessage(ActionEvent actionEvent) {
 		try {
-			cc.getClient().sendToServer(new Message(Contract.DEFAULT_PORT,"Hello!"));
+			cc.getClient().sendToServer(new Message(Contract.ABSTRACT,"Hello!"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
