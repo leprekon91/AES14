@@ -53,6 +53,7 @@ public class Server extends AbstractServer {
         SUI.logMsg("Client " + client.toString() + " connected.");
         //TODO: update GUI
         SUI.updateClients(this.getNumberOfClients());
+        System.out.println(this.getNumberOfClients());
     }
 
     @Override
@@ -60,6 +61,7 @@ public class Server extends AbstractServer {
         super.clientDisconnected(client);
         SUI.logMsg("Client " + client.toString() + " disconnected.");
         SUI.updateClients(this.getNumberOfClients());
+        System.out.println("client disconnected");
     }
 
     @Override

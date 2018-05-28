@@ -1,26 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="225.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.LoginScreen">
+<GridPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.LoginScreen">
+   <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="100.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" vgrow="SOMETIMES" />
+   </rowConstraints>
    <children>
-      <Button fx:id="loginBtn" defaultButton="true" layoutX="16.0" layoutY="296.0" mnemonicParsing="false" onAction="#loginBtnHandler" text="Login" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
-      <Button fx:id="cnclBtn" cancelButton="true" layoutX="259.0" layoutY="281.0" mnemonicParsing="false" onAction="#cancelBtnHandler" text="Cancel" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <TextField fx:id="usernameEditText" layoutX="133.0" layoutY="188.0" AnchorPane.leftAnchor="133.0" AnchorPane.topAnchor="46.0" />
-      <Label layoutX="10.0" layoutY="193.0" text="Username:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
-      <Label layoutX="10.0" layoutY="257.0" text="Password:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="104.0" />
-      <PasswordField fx:id="passwordField" layoutX="133.0" layoutY="252.0" AnchorPane.leftAnchor="133.0" AnchorPane.topAnchor="100.0" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="108.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
          <image>
             <Image url="@../../../com/graphics/Icon.png" />
          </image>
+         <GridPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </GridPane.margin>
       </ImageView>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Button fx:id="loginBtn" defaultButton="true" mnemonicParsing="false" onAction="#loginBtnHandler" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="cnclBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancelBtnHandler" text="Cancel" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <children>
+            <TextField fx:id="usernameTextfield" promptText="Username" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </VBox.margin>
+            </TextField>
+            <PasswordField fx:id="passwordField" promptText="Password" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </VBox.margin>
+            </PasswordField>
+         </children>
+         <padding>
+            <Insets top="50.0" />
+         </padding>
+      </VBox>
    </children>
-</AnchorPane>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</GridPane>

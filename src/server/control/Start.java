@@ -3,6 +3,7 @@ package server.control;
 import com.Contract;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -12,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 import server.gui.fxcontrol.Dashboard;
 import server.sql.MysqlManager;
@@ -33,7 +35,6 @@ public class Start extends Application implements ServerUI {
     public void start(Stage primaryStage) {
 
 
-
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "dashboard.fxml"));
             Parent root = fxmlLoader.load();
@@ -49,7 +50,7 @@ public class Start extends Application implements ServerUI {
             e.printStackTrace();
         }
 
-        sv = new Server(Contract.DEFAULT_PORT,this);
+        sv = new Server(Contract.DEFAULT_PORT, this);
 
         login();
 
@@ -64,6 +65,16 @@ public class Start extends Application implements ServerUI {
             System.exit(1);
         }
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                try {
+                    sv.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void login() {
@@ -147,6 +158,6 @@ public class Start extends Application implements ServerUI {
 
     @Override
     public void updateClients(int numOfClients) {
-        dashboard.userPanelControl.ClientNum=numOfClients;
+        dashboard.userPanelControl.ClientNum = numOfClients;
     }
 }
