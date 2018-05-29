@@ -1,7 +1,7 @@
 package client.control;
 
-import client.gui.fxcontrol.MainScreen;
 import client.ocsf.AbstractClient;
+import client.ocsf.ObservableClient;
 import com.Contract;
 import com.data.Message;
 import com.data.User;
@@ -17,7 +17,7 @@ import java.io.IOException;
  * the server, using the language defined in the com.Contract class file.
  */
 public class Client extends AbstractClient {
-    public MainScreen mainScreen;
+
     private User user;
 
 
@@ -39,6 +39,7 @@ public class Client extends AbstractClient {
         }
         Message message = (Message) msg;
         switch (message.getType()) {
+            //Authorization Messages:
             case Contract.AUTH_YES:
             case Contract.AUTH_NO:
                 recieveAuth(message);
@@ -53,7 +54,10 @@ public class Client extends AbstractClient {
         System.out.println("Closed Connection!");
     }
 
-
+    /**
+     * Request Authentication from server for a specific user.
+     * @param user
+     */
     public void requestAuth(User user) {
         this.user = user;
         try {
@@ -64,9 +68,14 @@ public class Client extends AbstractClient {
         }
     }
 
+    /**
+     * Recieve and apply Auth. Message (ANSWER) from Server
+     * @param msg Message recieved from server.
+     */
     public void recieveAuth(Message msg) {
         System.out.println("Authentication Received");
-        this.mainScreen.wait.Continue((User) msg.getData());
+        //TODO method stub
 
     }
+
 }
