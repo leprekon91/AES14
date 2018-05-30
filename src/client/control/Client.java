@@ -1,7 +1,6 @@
 package client.control;
 
 import client.ocsf.AbstractClient;
-import client.ocsf.ObservableClient;
 import com.Contract;
 import com.data.Message;
 import com.data.User;
@@ -18,10 +17,15 @@ import java.io.IOException;
  */
 public class Client extends AbstractClient {
 
-    private User user;
 
+    private AuthControl authControl;//reference for authentication controller
 
-    public Client(String host, int port, Client cc) {
+    /**
+     *  Client constructor, opens connection to server once he is created.
+     * @param host
+     * @param port
+     */
+    public Client(String host, int port) {
         super(host, port);
 
         try {
@@ -56,12 +60,15 @@ public class Client extends AbstractClient {
 
     /**
      * Request Authentication from server for a specific user.
+     * Also, save the reference to the class that asked for it.
+     *
      * @param user
+     * @param authControl
      */
-    public void requestAuth(User user) {
-        this.user = user;
+    public void requestAuth(User user, AuthControl authControl) {
+        this.authControl = authControl;
         try {
-            System.out.println("Sending request for login");
+            System.out.println("Sending request for login of User: " + user);
             this.sendToServer(new Message(Contract.AUTHORIZE, user));
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,13 +76,14 @@ public class Client extends AbstractClient {
     }
 
     /**
-     * Recieve and apply Auth. Message (ANSWER) from Server
+     * Recieve and apply Auth. reply Message from Server
+     * through authControl.
+     *
      * @param msg Message recieved from server.
      */
     public void recieveAuth(Message msg) {
-        System.out.println("Authentication Received");
-        //TODO method stub
-
+        System.out.println("Authentication Received for User: "+msg.getData().toString());
+        authControl.receiveAuthenticationAnswer((User) msg.getData());
     }
 
 }

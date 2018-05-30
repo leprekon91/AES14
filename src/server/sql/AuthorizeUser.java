@@ -1,6 +1,7 @@
 package server.sql;
 
 import com.Contract;
+import com.data.Message;
 import com.data.User;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 public class AuthorizeUser {
     private static PreparedStatement stmt;
 
-    public static User authorize(User user) {
+    public static Message authorize(User user) {
         Connection con = MysqlManager.ConnectToDB();
         try {
             stmt = con.prepareStatement(SQLContract.USER_AUTH);
@@ -30,9 +31,10 @@ public class AuthorizeUser {
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);
         }
+        Message ans =new Message(0,user);
         if (user.getId() != null)
-            user.setAuth(Contract.AUTH_YES);
-        else user.setAuth(Contract.AUTH_NO);
-        return user;
+            ans.setType(Contract.AUTH_YES);
+        else ans.setType(Contract.AUTH_NO);
+        return ans;
     }
 }

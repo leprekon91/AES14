@@ -9,7 +9,7 @@ public class User implements Serializable {
     private String username;
     private String pass;
     private int type;
-    private int auth = Contract.AUTHORIZE;//is the user authorized?
+
 
     public User(String username, String pass) {
         this.username = username;
@@ -48,13 +48,6 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    public void setAuth(int auth) {
-        this.auth = auth;
-    }
-
-    public int getAuth() {
-        return this.auth;
-    }
 
     @Override
     public String toString() {
@@ -63,7 +56,6 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", pass='" + pass + '\'' +
                 ", type=" + type +
-                ", auth=" + auth +
                 '}';
     }
 }
