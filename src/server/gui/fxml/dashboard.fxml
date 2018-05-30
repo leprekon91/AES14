@@ -5,7 +5,7 @@
 
 <TabPane rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.gui.fxcontrol.Dashboard">
    <tabs>
-      <Tab fx:id="userTab" text="Users">
+      <Tab fx:id="userTab" closable="false" text="Users">
          <graphic>
          </graphic>
       </Tab>

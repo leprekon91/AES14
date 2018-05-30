@@ -1,6 +1,7 @@
 package server.gui.fxcontrol;
 
 import com.Contract;
+import com.style.icons.FontAwesome;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
@@ -15,14 +16,10 @@ public class Dashboard {
 
     public AnchorPane userPanel;
     public UserPanel userPanelControl;
-    public VBox errLog;
-    public ErrLog errControl;
 
 
     @FXML
     Tab userTab;
-    @FXML
-    Tab errorTab;
 
     public void initialize() {
         try {

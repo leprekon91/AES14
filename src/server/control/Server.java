@@ -6,10 +6,8 @@ import com.data.User;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
 import server.sql.AuthorizeUser;
-import server.sql.MysqlManager;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 /**
  * @author Andrey Grabarnick
@@ -73,15 +71,17 @@ public class Server extends AbstractServer {
                     "\ttype:" + ((Message) msg).getType() + "\n" +
                     "\tDATA: " + ((Message) msg).getData().toString()
             );
-
-            if(((Message) msg).getType()==Contract.AUTHORIZE){
-                try {
-                    User u = (User)((Message) msg).getData();
-                    Message authResponse = AuthorizeUser.authorize(u.getUsername(),u.getPass());
-                    client.sendToClient(authResponse);
-                } catch (IOException e) {
-                    e.printStackTrace();
+            int contractType = ((Message) msg).getType();
+            try {
+                switch (contractType) {
+                    case Contract.AUTHORIZE: //Client Requests Authorization
+                        User u = (User) ((Message) msg).getData();
+                        Message authResponse = AuthorizeUser.authorize(u.getUsername(), u.getPass());
+                        client.sendToClient(authResponse);
+                        break;
                 }
+            } catch (IOException e) {
+                SUI.logMsg(e.getMessage());
             }
 
         } else {
@@ -89,8 +89,6 @@ public class Server extends AbstractServer {
         }
 
     }
-
-
 
 
 }

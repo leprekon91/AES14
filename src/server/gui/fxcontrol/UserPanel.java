@@ -2,10 +2,12 @@ package server.gui.fxcontrol;
 
 
 import com.graphics.StatusLine;
+import com.style.icons.FontAwesome;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -23,14 +25,14 @@ public class UserPanel {
     public StatusLine statusLine;
     public TextArea textArea;
 
-    public int sNum = 0, tNum = 0, pNum = 0;
+
     public int ClientNum = 0; //number of connected clients
+    public Label icon;
 
     public void initialize() {
-
+        icon = FontAwesome.setAsIcon(FontAwesome.ICON_WRENCH, icon);
         //status line:
         statusLine = new StatusLine(0);
-        statusLine.setTitle("User Stress Load");
         statusPane.getChildren().add(statusLine);
         setAnchorsFitScreen(statusLine);
 
@@ -45,8 +47,6 @@ public class UserPanel {
 
 
     }
-
-
 
 
     private void SaveFile(String content, File file) {

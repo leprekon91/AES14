@@ -1,17 +1,23 @@
 package server.control;
 
 import com.Contract;
+import com.style.icons.FontAwesome;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Pair;
@@ -24,8 +30,8 @@ import java.sql.Connection;
 import java.util.Optional;
 
 public class Start extends Application implements ServerUI {
-    public Server sv;
-    public Dashboard dashboard;
+    private Server sv;
+    private Dashboard dashboard;
 
     public static void main(String[] args) {
         launch(args);
@@ -33,7 +39,6 @@ public class Start extends Application implements ServerUI {
 
     @Override
     public void start(Stage primaryStage) {
-        //TODO remove UserPanel and merge it with error logger
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "dashboard.fxml"));
@@ -84,10 +89,12 @@ public class Start extends Application implements ServerUI {
         dialog.setHeaderText("Please Enter Data Base credentials");
 
         // Set the icon (must be included in the project).
-        ImageView iv = new ImageView(this.getClass().getResource(Contract.graphics + "Icon.png").toString());
-        iv.setFitWidth(64);
-        iv.setFitHeight(64);
+        Label iv = FontAwesome.setAsIcon(FontAwesome.ICON_LOCK,new Label());
+        iv.setPrefSize(64,64);
+        iv.setAlignment(Pos.CENTER);
+        iv.setStyle("-fx-border-color: #555555;-fx-border-radius: 50; -fx-text-fill: #555555;");
         dialog.setGraphic(iv);
+
 
         // Set the button types.
         ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
@@ -97,16 +104,16 @@ public class Start extends Application implements ServerUI {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 100, 10, 100));
 
         TextField username = new TextField();
         username.setPromptText("Username");
         PasswordField password = new PasswordField();
         password.setPromptText("Password");
 
-        grid.add(new Label("Username:"), 0, 0);
+        grid.add(FontAwesome.setAsIcon(FontAwesome.ICON_USER,new Label()), 0, 0);
         grid.add(username, 1, 0);
-        grid.add(new Label("Password:"), 0, 1);
+        grid.add(FontAwesome.setAsIcon(FontAwesome.ICON_KEY,new Label()), 0, 1);
         grid.add(password, 1, 1);
 
         // Enable/Disable login button depending on whether a username was entered.

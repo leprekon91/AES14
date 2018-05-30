@@ -14,9 +14,10 @@ public class LoginScreen {
 
     public void initialize(){
 
+
     }
 
-    public void displayErrorMessage(){
-        System.out.println("User Is Not Authenticated.");
+    public void displayErrorMessage(String errMessage){
+        System.out.println(errMessage);
     }
 }
