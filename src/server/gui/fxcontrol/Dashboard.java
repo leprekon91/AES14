@@ -29,12 +29,7 @@ public class Dashboard {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "userPanel.fxml"));
             userPanel = loader.load();
             userPanelControl = loader.getController();
-            loader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "errLog.fxml"));
-            errLog = loader.load();
-            errControl = (ErrLog) loader.getController();
             userTab.setContent(userPanel);
-            errorTab.setContent(errLog);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,6 +38,6 @@ public class Dashboard {
     }
 
     public void addLogMsg(String str) {
-        errControl.addEntry(str);
+        userPanelControl.addEntry(str);
     }
 }

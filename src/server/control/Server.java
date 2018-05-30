@@ -77,8 +77,7 @@ public class Server extends AbstractServer {
             if(((Message) msg).getType()==Contract.AUTHORIZE){
                 try {
                     User u = (User)((Message) msg).getData();
-                    Message authResponse = AuthorizeUser.authorize(u);
-                    //TODO update gui if Authenticated
+                    Message authResponse = AuthorizeUser.authorize(u.getUsername(),u.getPass());
                     client.sendToClient(authResponse);
                 } catch (IOException e) {
                     e.printStackTrace();

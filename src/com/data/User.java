@@ -1,7 +1,5 @@
 package com.data;
 
-import com.Contract;
-
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -48,6 +46,9 @@ public class User implements Serializable {
         this.type = type;
     }
 
+    public boolean isAuthenticated() {
+        return !(this.getType() == 0);
+    }
 
     @Override
     public String toString() {

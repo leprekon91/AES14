@@ -41,7 +41,7 @@ public class AuthControl {
             e.printStackTrace();
         }
         //For testing purposes:_____________________
-        sendUserForAuthentication(new User("student","studentpass"));
+        sendUserForAuthentication(new User("teacher","teacherpass"));
 
     }
 
@@ -66,10 +66,10 @@ public class AuthControl {
                 System.out.println("User is a student and he is logged in!");
                 break;
             case 2:
-                System.out.println("User is a student and he is logged in!");
+                System.out.println("User is a teacher and he is logged in!");
                 break;
             case 3:
-                System.out.println("User is a student and he is logged in!");
+                System.out.println("User is a principal and he is logged in!");
                 break;
             default:
                 loginScreen.displayErrorMessage();

@@ -33,7 +33,7 @@ public class Start extends Application implements ServerUI {
 
     @Override
     public void start(Stage primaryStage) {
-
+        //TODO remove UserPanel and merge it with error logger
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "dashboard.fxml"));
@@ -160,4 +160,6 @@ public class Start extends Application implements ServerUI {
     public void updateClients(int numOfClients) {
         dashboard.userPanelControl.ClientNum = numOfClients;
     }
+
+
 }

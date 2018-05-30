@@ -6,6 +6,6 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.LoginScreen">
    <children>
-      <Label fx:id="ico" layoutX="212.0" layoutY="178.0" text="ico" AnchorPane.leftAnchor="212.0" AnchorPane.topAnchor="178.0" />
+
    </children>
 </AnchorPane>

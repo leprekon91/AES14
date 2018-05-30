@@ -11,11 +11,8 @@ import javafx.scene.control.Label;
 public class LoginScreen {
 
 
-    public Label ico;
 
     public void initialize(){
-        ico.setText(FontAwesome.ICON_USER);
-        ico.setFont(FontAwesome.getFont(FontAwesome.SOLID));
 
     }
 

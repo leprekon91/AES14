@@ -1,45 +1,32 @@
 package server.gui.fxcontrol;
 
-import com.graphics.DoughnutChart;
+
 import com.graphics.StatusLine;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
-import java.util.Random;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class UserPanel {
-    public Pane chartPane;
-    public TableColumn tblUser;
-    public TableColumn tblType;
-    public TableColumn tblIp;
-    public TableColumn tblName;
-    public TableView table;
+
+
     public AnchorPane statusPane;
     public StatusLine statusLine;
-    public int ClientNum=0; //number of connected clients
+    public TextArea textArea;
+
+    public int sNum = 0, tNum = 0, pNum = 0;
+    public int ClientNum = 0; //number of connected clients
 
     public void initialize() {
-
-
-
-        ObservableList<PieChart.Data> pieChartData = createData(1, 1, 1);
-        DoughnutChart chart = new DoughnutChart(pieChartData);
-
-        chart.setLegendVisible(false);
-        chart.setMaxWidth(400);
-        chart.setMaxHeight(250);
-        chartPane.getChildren().add(chart);
 
         //status line:
         statusLine = new StatusLine(0);
@@ -47,42 +34,54 @@ public class UserPanel {
         statusPane.getChildren().add(statusLine);
         setAnchorsFitScreen(statusLine);
 
-        Timeline updateStatusLine = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                statusLine.addValue(ClientNum);
-            }
-        }));
+        Timeline updateStatusLine = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> {
+                    statusLine.addValue(ClientNum);
+
+                })
+        );
         updateStatusLine.setCycleCount(Timeline.INDEFINITE);
         updateStatusLine.play();
 
-        //fix table width
-        tblUser.prefWidthProperty().bind(table.widthProperty().divide(4));
-        tblType.prefWidthProperty().bind(table.widthProperty().divide(4));
-        tblIp.prefWidthProperty().bind(table.widthProperty().divide(4));
-        tblName.prefWidthProperty().bind(table.widthProperty().divide(4));
+
     }
 
-    private ObservableList<PieChart.Data> createData(int sNum, int tNum, int pNum) {
-        return FXCollections.observableArrayList(
-                new PieChart.Data("Students\t0", sNum),
-                new PieChart.Data("Teachers\t0", tNum),
-                new PieChart.Data("Principal\t0", pNum));
+
+
+
+    private void SaveFile(String content, File file) {
+        try {
+            FileWriter fileWriter;
+
+            fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+            fileWriter.close();
+            addEntry("log file Created");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
-    private void updateUserData(int sNum, int tNum, int pNum){
-        ObservableList<PieChart.Data> pieChartData = ((DoughnutChart) chartPane.getChildren().get(0)).getData();
+    public void saveLog(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
 
-        pieChartData.get(0).setPieValue(sNum);//students
-        pieChartData.get(0).setName("Students\t"+sNum);
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter =
+                new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
 
-        pieChartData.get(1).setPieValue(tNum);//teachers
-        pieChartData.get(1).setName("Teachers\t"+tNum);
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(null);
 
-        pieChartData.get(2).setPieValue(pNum);//principal
-        pieChartData.get(2).setName("Principal\t"+pNum);
+        if (file != null) {
+            SaveFile(textArea.getText(), file);
+            addEntry("Log File:" + file.getAbsolutePath() + " Created.");
+        }
+    }
 
-        statusLine.addValue(sNum+tNum+pNum);
+    public void addEntry(String entry) {
+        textArea.setText(textArea.getText() + "\n***\n" + entry);
     }
 
     private void setAnchorsFitScreen(Node n) {
