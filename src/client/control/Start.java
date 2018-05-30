@@ -31,8 +31,8 @@ public class Start extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            //Set MainScreen
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "MainScreen.fxml"));
+            //Set LoginScreen
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "LoginScreen.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 800, 400);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
@@ -43,7 +43,7 @@ public class Start extends Application {
             // get host and start the client:
             this.client = null;
             hostConfigDlg();
-            //show MainScreen
+            //show LoginScreen
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

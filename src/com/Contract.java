@@ -17,7 +17,6 @@ public class Contract {
     final public static String graphics = "/com/graphics/"; //location of graphics dir
 
     // Client-Server Communication Language
-    final public static int ABSTRACT = 99; // abstract message
     final public static int AUTHORIZE = 2; //Autorize User in Message
     final public static int AUTH_YES = 1; // AUTHORIZE positive message
     final public static int AUTH_NO = 0; // AUTHORIZE negative message

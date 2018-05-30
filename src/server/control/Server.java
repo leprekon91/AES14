@@ -73,6 +73,7 @@ public class Server extends AbstractServer {
                     "\ttype:" + ((Message) msg).getType() + "\n" +
                     "\tDATA: " + ((Message) msg).getData().toString()
             );
+
             if(((Message) msg).getType()==Contract.AUTHORIZE){
                 try {
                     client.sendToClient(authorizeUser((User)((Message) msg).getData()));

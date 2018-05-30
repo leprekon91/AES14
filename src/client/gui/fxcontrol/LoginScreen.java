@@ -4,9 +4,9 @@ import com.style.icons.FontAwesome;
 import javafx.scene.control.Label;
 
 /**
- * MainScreen Controller
+ * LoginScreen Controller
  */
-public class MainScreen {
+public class LoginScreen {
 
 
     public void initialize(){
