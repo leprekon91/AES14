@@ -71,13 +71,20 @@ public class Server extends AbstractServer {
                     "\ttype:" + ((Message) msg).getType() + "\n" +
                     "\tDATA: " + ((Message) msg).getData().toString()
             );
+            AuthorizeUser authorizeUser = AuthorizeUser.getInstance();
             int contractType = ((Message) msg).getType();
             try {
                 switch (contractType) {
                     case Contract.AUTHORIZE: //Client Requests Authorization
                         User u = (User) ((Message) msg).getData();
-                        Message authResponse = AuthorizeUser.authorize(u.getUsername(), u.getPass());
+
+                        Message authResponse = authorizeUser.authorize(u.getUsername(), u.getPass());
                         client.sendToClient(authResponse);
+                        break;
+                    case Contract.LOG_OFF:  //client requests logoff
+                        if (authorizeUser.usernameExistsInLoggedInUsers(((User) ((Message) msg).getData()).getUsername())) {
+                            authorizeUser.deleteUserByUsername(((User) ((Message) msg).getData()).getUsername());
+                        }
                         break;
                 }
             } catch (IOException e) {

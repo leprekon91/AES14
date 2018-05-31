@@ -20,5 +20,7 @@ public class Contract {
     final public static int AUTHORIZE = 2; //Autorize User in Message
     final public static int AUTH_YES = 1; // AUTHORIZE positive message
     final public static int AUTH_NO = 0; // AUTHORIZE negative message
+    final public static int LOG_OFF = -1; // Logoff user
+
 
 }
