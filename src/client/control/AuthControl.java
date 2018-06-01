@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class AuthControl {
     public Client client;
-    public LoginScreen loginScreen;
+    private LoginScreen loginScreen;
 
     /**
      * Display Login Screen
@@ -24,7 +24,7 @@ public class AuthControl {
      * @param primaryStage Stage to set the login screen to
      * @param client       Client object through whitch the authentication process will be done.
      */
-    public void displayLogin(Stage primaryStage, Client client) {
+    void displayLogin(Stage primaryStage, Client client) {
         this.client = client;
         //Set LoginScreen and Display it
         try {
@@ -52,7 +52,7 @@ public class AuthControl {
     }
 
     /**
-     * This method will recieive the user sent from server through the client.
+     * This method will receive the user sent from server through the client.
      * If the type of the user is 0, it means that the User is not authenticated.
      * <p>
      * 1 - Student
@@ -61,7 +61,7 @@ public class AuthControl {
      *
      * @param user
      */
-    public void receiveAuthenticationAnswer(User user) {
+    void receiveAuthenticationAnswer(User user) {
 
         switch (user.getType()) {
             case 1:
