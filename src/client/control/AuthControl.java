@@ -59,7 +59,7 @@ public class AuthControl {
      * 2 - Teacher
      * 3 - Principal
      *
-     * @param user
+     * @param user user object holds information for the menu.
      */
     void receiveAuthenticationAnswer(User user) {
 

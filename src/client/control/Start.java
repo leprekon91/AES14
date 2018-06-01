@@ -2,9 +2,6 @@ package client.control;
 
 import com.Contract;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -23,7 +20,7 @@ import java.util.Optional;
  */
 public class Start extends Application {
 
-    public String host = "localhost";//initial host value
+    private String host = "localhost";//initial host value
     public Client client;
 
 
