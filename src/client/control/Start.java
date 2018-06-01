@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 public class Start extends Application {
 
-    private String host = "localhost";//initial host value
+    public String host = "localhost";//initial host value
     public Client client;
 
 
