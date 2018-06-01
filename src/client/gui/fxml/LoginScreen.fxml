@@ -50,6 +50,6 @@
       <Label fx:id="userIcon" alignment="CENTER" layoutX="279.0" layoutY="117.0" style="-fx-text-fill: #69A0B7;" text="U" AnchorPane.topAnchor="120.0" />
       <Label fx:id="keyIcon" alignment="CENTER" layoutX="280.0" layoutY="160.0" style="-fx-text-fill: #69A0B7;" text="P" AnchorPane.topAnchor="165.0" />
       <ProgressIndicator fx:id="pIndicator" layoutX="60.0" layoutY="90.0" prefHeight="120.0" prefWidth="120.0" visible="false" />
-      <Label fx:id="lblStatus" alignment="CENTER" layoutX="226.0" layoutY="82.0" style="-fx-background-color: pink; -fx-text-fill: red; -fx-font-weight: 900;" styleClass="warning" text="warning" visible="false" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
+      <Label fx:id="lblStatus" alignment="CENTER" layoutX="226.0" layoutY="82.0" style="-fx-background-color: pink; -fx-text-fill: red; -fx-font-weight: 900;" styleClass="warning" text="Login Process Failed!" visible="false" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
    </children>
 </AnchorPane>

@@ -37,10 +37,10 @@ public class LoginScreen {
         keyIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
     }
 
-    public void displayErrorMessage(String errMessage) {
+    public void displayErrorMessage() {
         pIndicator.setVisible(false);
         lblStatus.setVisible(true);
-        lblStatus.setText(errMessage);
+
     }
 
     public void loginBtnHandler(ActionEvent actionEvent) {

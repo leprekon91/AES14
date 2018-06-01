@@ -26,8 +26,7 @@ public class AuthorizeUser {
             User user = new User("", "");
             while (rs.next()) {
                 user.setId(rs.getString("id"));
-                user.setUsername(rs.getString("username"));
-                user.setPass(rs.getString("pass"));
+                user.setPass(rs.getString("password"));
                 user.setType(rs.getInt("type"));
             }
             if (password.equals(user.getPass()))

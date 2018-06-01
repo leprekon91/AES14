@@ -77,7 +77,8 @@ public class AuthControl {
                 System.out.println("User is a principal and he is logged in!");
                 break;
             default:
-                loginScreen.displayErrorMessage("User Could not be Authenticated...");
+                loginScreen.displayErrorMessage();
+                System.out.println("Authentication Failed for user: "+user.toString());
                 break;
         }
     }
