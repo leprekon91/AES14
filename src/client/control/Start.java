@@ -30,18 +30,20 @@ public class Start extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        /**
         try {
             // get host and start the client:
             this.client = null;
             hostConfigDlg();
             //show LoginScreen
-            AuthControl authControl=new AuthControl();
-            authControl.displayLogin(primaryStage,client);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+         */
+        //test
+        AuthControl authControl=new AuthControl();
+        authControl.displayLogin(primaryStage,client);
+        /*
         //Set Close event handle
         primaryStage.setOnCloseRequest(event -> {
             try {
@@ -52,6 +54,7 @@ public class Start extends Application {
             }
 
         });
+        */
     }
 
 

@@ -31,17 +31,19 @@ public class AuthControl {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "LoginScreen.fxml"));
             Parent root = fxmlLoader.load();
             loginScreen = fxmlLoader.getController();
-            Scene scene = new Scene(root, 600, 400);
+            loginScreen.authControl=this;
+            Scene scene = new Scene(root, 480, 250);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
             primaryStage.setTitle("AES Client");
             //primaryStage.setMaximized(true);
+            primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
         //For testing purposes:_____________________
-        sendUserForAuthentication(new User("teacher","teacherpass"));
+        //sendUserForAuthentication(new User("teacher","teacherpass"));
 
     }
 
