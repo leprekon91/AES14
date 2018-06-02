@@ -15,6 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import server.sql.AuthorizeUser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -35,7 +36,7 @@ public class UserPanel {
 
     public void initialize() {
 
-        splitPane.setDividerPositions(0.1);
+
         icon = FontAwesome.setAsIcon(FontAwesome.ICON_WRENCH, icon);
         //status line:
         statusLine = new StatusLine(0);
@@ -44,7 +45,7 @@ public class UserPanel {
 
         Timeline updateStatusLine = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
-                    statusLine.addValue(ClientNum);
+                    statusLine.addValue(AuthorizeUser.getInstance().getLoggedinUsertCount());
 
                 })
         );

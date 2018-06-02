@@ -3,7 +3,11 @@ package client.control;
 
 import client.gui.fxcontrol.LoginScreen;
 import com.Contract;
+import com.data.Principal;
+import com.data.Student;
+import com.data.Teacher;
 import com.data.User;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +21,7 @@ import java.io.IOException;
 public class AuthControl {
     public Client client;
     private LoginScreen loginScreen;
+    Stage stage;
 
     /**
      * Display Login Screen
@@ -26,12 +31,13 @@ public class AuthControl {
      */
     void displayLogin(Stage primaryStage, Client client) {
         this.client = client;
+        this.stage = primaryStage;
         //Set LoginScreen and Display it
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "LoginScreen.fxml"));
             Parent root = fxmlLoader.load();
             loginScreen = fxmlLoader.getController();
-            loginScreen.authControl=this;
+            loginScreen.authControl = this;
             Scene scene = new Scene(root, 480, 250);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
             primaryStage.setTitle("AES Client");
@@ -42,8 +48,6 @@ public class AuthControl {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //For testing purposes:_____________________
-        //sendUserForAuthentication(new User("teacher","teacherpass"));
 
     }
 
@@ -63,23 +67,91 @@ public class AuthControl {
      */
     void receiveAuthenticationAnswer(User user) {
 
+        if (user == null) {
+            loginScreen.displayErrorMessage();
+            System.out.println("Authentication Failed!");
+            return;
+        }
         switch (user.getType()) {
             case 1:
                 //Open Student Menu
                 System.out.println("User is a student and he is logged in!");
+                Student student = new Student(user);
+                loadStudentMenu(student);
                 break;
             case 2:
                 //Open Teacher Menu
                 System.out.println("User is a teacher and he is logged in!");
+                Teacher teacher = new Teacher(user);
+                loadTeacherMenu(teacher);
                 break;
             case 3:
                 //Open Principal Menu
                 System.out.println("User is a principal and he is logged in!");
+                Principal principal = new Principal(user);
+                loadPrincipalMenu(principal);
                 break;
             default:
                 loginScreen.displayErrorMessage();
-                System.out.println("Authentication Failed for user: "+user.toString());
+                System.out.println("Authentication Failed for user: " + user.toString());
                 break;
         }
+    }
+
+    private void loadStudentMenu(Student student) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                // if you change the UI, do it here !
+                try {
+                    stage.close();
+                    StudentControl studentControl =new StudentControl();
+                    studentControl.student=student;
+                    studentControl.client=client;
+                    studentControl.start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+
+    }
+
+    private void loadTeacherMenu(Teacher teacher) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                // if you change the UI, do it here !
+                try {
+                    stage.close();
+                    TeacherControl teacherControl =new TeacherControl();
+                   teacherControl.teacher=teacher;
+                   teacherControl.client=client;
+                    teacherControl.start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void loadPrincipalMenu(Principal principal) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                // if you change the UI, do it here !
+                try {
+                    stage.close();
+                    PrincipalControl principalControl =new PrincipalControl();
+                    principalControl.principal=principal;
+                    principalControl.client=client;
+                    principalControl.start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

@@ -35,6 +35,7 @@ public class Client extends AbstractClient {
         }
     }
 
+
     @Override
     protected void handleMessageFromServer(Object msg) {
         // TODO handle message from server
@@ -46,10 +47,16 @@ public class Client extends AbstractClient {
             //Authorization Messages:
             case Contract.AUTH_YES:
             case Contract.AUTH_NO:
-                recieveAuth(message);
+                receiveAuth(message);
                 break;
         }
 
+    }
+
+    @Override
+    protected void connectionException(Exception exception) {
+        super.connectionException(exception);
+        exception.printStackTrace();
     }
 
     @Override
@@ -81,8 +88,9 @@ public class Client extends AbstractClient {
      *
      * @param msg Message recieved from server.
      */
-    public void recieveAuth(Message msg) {
-        System.out.println("Authentication Received for User: "+msg.getData().toString());
+    public void receiveAuth(Message msg) {
+        System.out.println("Authentication Reply Received");
+
         authControl.receiveAuthenticationAnswer((User) msg.getData());
     }
 

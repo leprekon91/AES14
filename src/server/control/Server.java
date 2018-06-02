@@ -50,17 +50,12 @@ public class Server extends AbstractServer {
     @Override
     protected void clientConnected(ConnectionToClient client) {
         SUI.logMsg("Client " + client.toString() + " connected.");
-        //TODO: update GUI
-        SUI.updateClients(this.getNumberOfClients());
-        System.out.println(this.getNumberOfClients());
     }
 
     @Override
     protected synchronized void clientDisconnected(ConnectionToClient client) {
         super.clientDisconnected(client);
         SUI.logMsg("Client " + client.toString() + " disconnected.");
-        SUI.updateClients(this.getNumberOfClients());
-        System.out.println("client disconnected");
     }
 
     @Override
@@ -77,13 +72,13 @@ public class Server extends AbstractServer {
                 switch (contractType) {
                     case Contract.AUTHORIZE: //Client Requests Authorization
                         User u = (User) ((Message) msg).getData();
-
-                        Message authResponse = authorizeUser.authorize(u.getUsername(), u.getPass());
+                        Message authResponse = authorizeUser.authorize(u.getId(), u.getPass());
                         client.sendToClient(authResponse);
                         break;
-                    case Contract.LOG_OFF:  //client requests logoff
-                        if (authorizeUser.usernameExistsInLoggedInUsers(((User) ((Message) msg).getData()).getUsername())) {
-                            authorizeUser.deleteUserByUsername(((User) ((Message) msg).getData()).getUsername());
+                    case Contract.LOG_OFF:  //client requests logoff - delete client from list
+                        if (authorizeUser.usernameExistsInLoggedInUsers(((User) ((Message) msg).getData()).getId())) {
+                            authorizeUser.deleteUserByUsername(((User) ((Message) msg).getData()).getId());
+
                         }
                         break;
                 }

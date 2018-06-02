@@ -4,13 +4,12 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private String id;
-    private String username;
     private String pass;
     private int type;
 
 
-    public User(String username, String pass) {
-        this.username = username;
+    public User(String id, String pass) {
+        this.id = id;
         this.pass = pass;
     }
 
@@ -22,13 +21,6 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPass() {
         return pass;
@@ -54,7 +46,6 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", username='" + username + '\'' +
                 ", pass='" + pass + '\'' +
                 ", type=" + type +
                 '}';

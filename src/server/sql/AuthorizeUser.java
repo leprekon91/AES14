@@ -42,10 +42,13 @@ public class AuthorizeUser {
                 user.setPass(rs.getString("password"));
                 user.setType(rs.getInt("type"));
             }
-            if (password.equals(user.getPass()))
+            if (password.equals(user.getPass())) {
                 ans.setType(Contract.AUTH_YES);
-            else
+                this.loggedInUsers.add(user);
+            } else {
+
                 ans.setType(Contract.AUTH_NO);
+            }
             ans.setData(user);
             if (stmt != null)
                 stmt.close();
@@ -67,18 +70,20 @@ public class AuthorizeUser {
     public boolean usernameExistsInLoggedInUsers(String username) {
         for (User u :
                 loggedInUsers) {
-            if (u.getUsername().equals(username)) {
+            if (u.getId().equals(username)) {
                 return true;
             }
         }
         return false;
     }
 
+    public int getLoggedinUsertCount() {
+        return this.loggedInUsers.size();
+    }
+
     public void deleteUserByUsername(String username) {
         for (int i = 0; i < loggedInUsers.size(); i++)
-            if (loggedInUsers.get(i).getUsername().equals(username))
+            if (loggedInUsers.get(i).getId().equals(username))
                 loggedInUsers.remove(loggedInUsers.get(i));
-
-
     }
 }

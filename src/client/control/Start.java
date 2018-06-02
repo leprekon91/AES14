@@ -1,6 +1,7 @@
 package client.control;
 
 import com.Contract;
+import com.data.Message;
 import javafx.application.Application;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
@@ -44,11 +45,12 @@ public class Start extends Application {
         primaryStage.setOnCloseRequest(event -> {
             try {
                 //Close connection to server.
+                //TODO doesn't work! cant log off user!
+                client.sendToServer(new Message(Contract.LOG_OFF,null));
                 client.closeConnection();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         });
 
     }

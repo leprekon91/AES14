@@ -165,5 +165,10 @@ public class Start extends Application implements ServerUI {
         dashboard.userPanelControl.ClientNum = numOfClients;
     }
 
+    @Override
+    public int getConnectedCount() {
+        return dashboard.userPanelControl.ClientNum;
+    }
+
 
 }

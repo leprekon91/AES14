@@ -14,4 +14,5 @@ public interface ServerUI {
 
     void updateClients(int numOfClients);
 
+    int getConnectedCount();
 }
