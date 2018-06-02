@@ -2,6 +2,7 @@ package server.gui.fxcontrol;
 
 import com.Contract;
 import com.style.icons.FontAwesome;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
@@ -22,6 +23,8 @@ public class Dashboard {
     Tab userTab;
 
     public void initialize() {
+
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "userPanel.fxml"));
             userPanel = loader.load();

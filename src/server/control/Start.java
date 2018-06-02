@@ -70,14 +70,11 @@ public class Start extends Application implements ServerUI {
             System.exit(1);
         }
         primaryStage.show();
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                try {
-                    sv.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        primaryStage.setOnCloseRequest(event -> {
+            try {
+                sv.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
@@ -151,7 +148,7 @@ public class Start extends Application implements ServerUI {
             });
 
             Connection con = MysqlManager.ConnectToDB();
-            if (MysqlManager.ConnectToDB() != null) {
+            if (con != null) {
                 MysqlManager.closeConnection(con);
                 break;
             }

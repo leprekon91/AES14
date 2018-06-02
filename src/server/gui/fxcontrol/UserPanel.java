@@ -5,9 +5,12 @@ import com.graphics.StatusLine;
 import com.style.icons.FontAwesome;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -28,8 +31,11 @@ public class UserPanel {
 
     public int ClientNum = 0; //number of connected clients
     public Label icon;
+    public SplitPane splitPane;
 
     public void initialize() {
+
+        splitPane.setDividerPositions(0.1);
         icon = FontAwesome.setAsIcon(FontAwesome.ICON_WRENCH, icon);
         //status line:
         statusLine = new StatusLine(0);
