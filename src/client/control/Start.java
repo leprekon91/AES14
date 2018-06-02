@@ -2,9 +2,6 @@ package client.control;
 
 import com.Contract;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -30,17 +27,18 @@ public class Start extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         try {
             // get host and start the client:
             this.client = null;
             hostConfigDlg();
             //show LoginScreen
-            AuthControl authControl=new AuthControl();
-            authControl.displayLogin(primaryStage,client);
-
+         AuthControl authControl=new AuthControl();
+         authControl.displayLogin(primaryStage,client);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         //Set Close event handle
         primaryStage.setOnCloseRequest(event -> {
@@ -52,6 +50,7 @@ public class Start extends Application {
             }
 
         });
+
     }
 
 
