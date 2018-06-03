@@ -8,6 +8,8 @@ import server.ocsf.ConnectionToClient;
 import server.sql.AuthorizeUser;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 /**
  * @author Andrey Grabarnick
@@ -53,6 +55,16 @@ public class Server extends AbstractServer {
     }
 
     @Override
+    protected synchronized void clientException(ConnectionToClient client, Throwable e) {
+        super.clientException(client, e);
+        SUI.logMsg("Client: "+client.toString()+" has encountered an exception!");
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        String exceptionAsString = sw.toString();
+        SUI.logMsg(exceptionAsString);
+    }
+
+    @Override
     protected synchronized void clientDisconnected(ConnectionToClient client) {
         super.clientDisconnected(client);
         SUI.logMsg("Client " + client.toString() + " disconnected.");
@@ -60,17 +72,18 @@ public class Server extends AbstractServer {
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        if (msg instanceof Message) {
+        if (msg instanceof Message ) {
             SUI.logMsg("Message received from Client: " + client.toString()
                     + " Message:\n" +
-                    "\ttype:" + ((Message) msg).getType() + "\n" +
-                    "\tDATA: " + ((Message) msg).getData().toString()
+                    "\ttype:" + ((Message) msg).getType()
             );
             AuthorizeUser authorizeUser = AuthorizeUser.getInstance();
+            authorizeUser.connectionToClient=client;
             int contractType = ((Message) msg).getType();
             try {
                 switch (contractType) {
                     case Contract.AUTHORIZE: //Client Requests Authorization
+
                         User u = (User) ((Message) msg).getData();
                         Message authResponse = authorizeUser.authorize(u.getId(), u.getPass());
                         client.sendToClient(authResponse);

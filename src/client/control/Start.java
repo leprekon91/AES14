@@ -2,6 +2,7 @@ package client.control;
 
 import com.Contract;
 import com.data.Message;
+import com.data.User;
 import javafx.application.Application;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
@@ -26,6 +27,7 @@ public class Start extends Application {
 
 
 
+
     @Override
     public void start(Stage primaryStage) {
 
@@ -46,7 +48,7 @@ public class Start extends Application {
             try {
                 //Close connection to server.
                 //TODO doesn't work! cant log off user!
-                client.sendToServer(new Message(Contract.LOG_OFF,null));
+                client.sendToServer(new Message(Contract.LOG_OFF,client.user));
                 client.closeConnection();
             } catch (IOException e) {
                 e.printStackTrace();

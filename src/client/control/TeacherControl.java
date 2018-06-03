@@ -34,7 +34,7 @@ public class TeacherControl extends Application {
         primaryStage.setOnCloseRequest(event -> {
             try {
                 //Close connection to server.
-                client.sendToServer(new Message(Contract.LOG_OFF, null));
+                client.sendToServer(new Message(Contract.LOG_OFF,client.user));
                 client.closeConnection();
             } catch (IOException e) {
                 e.printStackTrace();

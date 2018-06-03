@@ -77,18 +77,21 @@ public class AuthControl {
                 //Open Student Menu
                 System.out.println("User is a student and he is logged in!");
                 Student student = new Student(user);
+                client.user=student;
                 loadStudentMenu(student);
                 break;
             case 2:
                 //Open Teacher Menu
                 System.out.println("User is a teacher and he is logged in!");
                 Teacher teacher = new Teacher(user);
+                client.user=teacher;
                 loadTeacherMenu(teacher);
                 break;
             case 3:
                 //Open Principal Menu
                 System.out.println("User is a principal and he is logged in!");
                 Principal principal = new Principal(user);
+                client.user=principal;
                 loadPrincipalMenu(principal);
                 break;
             default:

@@ -3,20 +3,25 @@ package server.sql;
 import com.Contract;
 import com.data.Message;
 import com.data.User;
+import server.ocsf.ConnectionToClient;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class AuthorizeUser {
 
     private static AuthorizeUser INSTANCE = null;
-    private ArrayList<User> loggedInUsers;
+    public ConnectionToClient connectionToClient;
+    private HashMap<String,ConnectionToClient> loggedInUsers;
 
     private AuthorizeUser() {
-        this.loggedInUsers = new ArrayList<>();
+        this.loggedInUsers = new HashMap<>();
     }
 
     public Message authorize(String username, String password) {
@@ -44,7 +49,7 @@ public class AuthorizeUser {
             }
             if (password.equals(user.getPass())) {
                 ans.setType(Contract.AUTH_YES);
-                this.loggedInUsers.add(user);
+                this.loggedInUsers.put(user.getId(),connectionToClient);
             } else {
 
                 ans.setType(Contract.AUTH_NO);
@@ -68,9 +73,10 @@ public class AuthorizeUser {
     }
 
     public boolean usernameExistsInLoggedInUsers(String username) {
-        for (User u :
-                loggedInUsers) {
-            if (u.getId().equals(username)) {
+        Set<Map.Entry<String,ConnectionToClient>> st = loggedInUsers.entrySet();
+        for (Map.Entry<String,ConnectionToClient> u :
+                st) {
+            if (u.getKey().equals(username)) {
                 return true;
             }
         }
@@ -82,8 +88,6 @@ public class AuthorizeUser {
     }
 
     public void deleteUserByUsername(String username) {
-        for (int i = 0; i < loggedInUsers.size(); i++)
-            if (loggedInUsers.get(i).getId().equals(username))
-                loggedInUsers.remove(loggedInUsers.get(i));
+        loggedInUsers.remove(username);
     }
 }

@@ -3,6 +3,7 @@ package client.control;
 import client.ocsf.AbstractClient;
 import com.Contract;
 import com.data.Message;
+import com.data.Student;
 import com.data.User;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.io.IOException;
 public class Client extends AbstractClient {
 
 
+    public User user;
     private AuthControl authControl;//reference for authentication controller
 
     /**
