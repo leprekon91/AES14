@@ -10,7 +10,7 @@ public class Teacher extends User {
      * @param user
      */
     public Teacher(User user) {
-        super(user.getId(), user.getPass());
+        super(user.getUsername(), user.getPass());
         this.setType(user.getType());
     }
 }

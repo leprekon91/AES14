@@ -11,7 +11,7 @@ public class Principal extends User {
      * @param user
      */
     public Principal(User user) {
-        super(user.getId(), user.getPass());
+        super(user.getUsername(), user.getPass());
         this.setType(user.getType());
     }
 }

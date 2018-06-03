@@ -22,7 +22,7 @@ public class TeacherControl extends Application {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
-            primaryStage.setTitle("AES - " + teacher.getId());
+            primaryStage.setTitle("AES - " + teacher.getUsername());
             primaryStage.setMaximized(true);
             primaryStage.setScene(scene);
             primaryStage.show();

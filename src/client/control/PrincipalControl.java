@@ -22,7 +22,7 @@ public class PrincipalControl extends Application {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
-            primaryStage.setTitle("AES - "+principal.getId());
+            primaryStage.setTitle("AES - "+principal.getUsername());
             primaryStage.setMaximized(true);
             primaryStage.setScene(scene);
             primaryStage.show();

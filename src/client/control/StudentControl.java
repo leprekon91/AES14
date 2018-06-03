@@ -23,7 +23,7 @@ public class StudentControl extends Application {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
-            primaryStage.setTitle("AES - "+student.getId());
+            primaryStage.setTitle("AES - "+student.getFirst_name()+" "+student.getLast_name());
             primaryStage.setMaximized(true);
             primaryStage.setScene(scene);
             primaryStage.show();

@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -43,15 +42,16 @@ public class AuthorizeUser {
             //if user exists,set the message to authorized
             User user = new User("", "");
             while (rs.next()) {
-                user.setId(rs.getString("id"));
-                user.setPass(rs.getString("password"));
+                user.setUsername(rs.getString("user_name"));
+                user.setPass(rs.getString("pass"));
+                user.setFirst_name("first_name");
+                user.setLast_name("last_name");
                 user.setType(rs.getInt("type"));
             }
             if (password.equals(user.getPass())) {
                 ans.setType(Contract.AUTH_YES);
-                this.loggedInUsers.put(user.getId(),connectionToClient);
+                this.loggedInUsers.put(user.getUsername(),connectionToClient);
             } else {
-
                 ans.setType(Contract.AUTH_NO);
             }
             ans.setData(user);

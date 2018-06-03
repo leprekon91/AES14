@@ -85,12 +85,12 @@ public class Server extends AbstractServer {
                     case Contract.AUTHORIZE: //Client Requests Authorization
 
                         User u = (User) ((Message) msg).getData();
-                        Message authResponse = authorizeUser.authorize(u.getId(), u.getPass());
+                        Message authResponse = authorizeUser.authorize(u.getUsername(), u.getPass());
                         client.sendToClient(authResponse);
                         break;
                     case Contract.LOG_OFF:  //client requests logoff - delete client from list
-                        if (authorizeUser.usernameExistsInLoggedInUsers(((User) ((Message) msg).getData()).getId())) {
-                            authorizeUser.deleteUserByUsername(((User) ((Message) msg).getData()).getId());
+                        if (authorizeUser.usernameExistsInLoggedInUsers(((User) ((Message) msg).getData()).getUsername())) {
+                            authorizeUser.deleteUserByUsername(((User) ((Message) msg).getData()).getUsername());
 
                         }
                         break;

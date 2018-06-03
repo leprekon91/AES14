@@ -7,7 +7,7 @@ public class SQLContract {
     public static String user="root";       //default database user
 	public static String pass="Braude";     //default database password
 
-    public static final String USER_AUTH = "SELECT * FROM USER " +
-            "WHERE id =?;";
+    public static final String USER_AUTH = "SELECT * FROM users " +
+            "WHERE user_name =?;";
 
 }
