@@ -31,9 +31,11 @@ public class LoginScreen {
     public ProgressIndicator pIndicator;
 
     public void initialize() {
+    	//Set Icon Text
         lockIcon.setText(FontAwesome.ICON_LOCK);
         userIcon.setText(FontAwesome.ICON_USER);
         keyIcon.setText(FontAwesome.ICON_KEY);
+        //Set Icon Font
         lockIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         userIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         keyIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
