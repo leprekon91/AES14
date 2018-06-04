@@ -4,6 +4,7 @@
 
 package com.style.icons;
 
+import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
 /**
@@ -29,9 +30,9 @@ public class FontAwesome {
      * and assigning them to their respective global variable holders.
      */
     private FontAwesome() {
-        this.brands = Font.loadFont(FontAwesome.class.getResource("fa-brands-400.ttf").toExternalForm(), 20);
-        this.regular = Font.loadFont(FontAwesome.class.getResource("fa-regular-400.ttf").toExternalForm(), 20);
-        this.solid = Font.loadFont(FontAwesome.class.getResource("fa-solid-900.ttf").toExternalForm(), 20);
+        this.brands = Font.loadFont(FontAwesome.class.getResource("fa-brands-400.ttf").toExternalForm(), 25);
+        this.regular = Font.loadFont(FontAwesome.class.getResource("fa-regular-400.ttf").toExternalForm(), 25);
+        this.solid = Font.loadFont(FontAwesome.class.getResource("fa-solid-900.ttf").toExternalForm(), 25);
     }
 
     /**
@@ -61,10 +62,16 @@ public class FontAwesome {
         }
         return null;
     }
+    public static Label setAsIcon(String icon,Label label){
+        label.setFont(getFont(FontAwesome.SOLID));
+        label.setText(icon);
+        return label;
+    }
     //Constants
     public static final int BRANDS = 1;
     public static final int REGULAR = 2;
     public static final int SOLID = 3;
+
     //ICON values (Constants) (For reference on each icon goto: FontAwesome.com)
     public static final String ICON_GLASS = "\uf000";
     public static final String ICON_MUSIC = "\uf001";

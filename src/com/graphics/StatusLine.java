@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
 
 
 public class StatusLine extends LineChart<Number,Number> {
@@ -31,7 +32,6 @@ public class StatusLine extends LineChart<Number,Number> {
         this.setLegendVisible(false);
         this.setVerticalZeroLineVisible(false);
         this.setVerticalGridLinesVisible(false);
-
         //init dummy data
         for (int i = 0; i < MAX_NUM; i++) {
             series.getData().add(new XYChart.Data(i, baseLine));
@@ -58,6 +58,7 @@ public class StatusLine extends LineChart<Number,Number> {
                 (XYChart.Data<Number, Number>) series.getData().get(numOfPoint - 1);
         lastData.setYValue(newValue);
     }
+
 
 
 }
