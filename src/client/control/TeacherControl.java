@@ -18,6 +18,11 @@ public class TeacherControl extends Application {
     Teacher teacher;
     public Client client;
 
+    /**
+     * Start Method: Opens the Teacher Menu Window
+     *
+     * @param primaryStage Stage for the window.(Supplied by AuthControl)
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
