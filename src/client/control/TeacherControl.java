@@ -2,6 +2,7 @@ package client.control;
 
 import com.Contract;
 import com.data.Message;
+import com.data.Question;
 import com.data.Teacher;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,20 @@ public class TeacherControl extends Application {
             }
         });
 
+    }
+
+    /**
+     * Add Question to the database.
+     * @param q
+     */
+    public void createQuestion(Question q) throws Exception {
+        if(q!=null) {
+            Message message = new Message(Contract.CREATE_QUESTION, q);
+            client.sendToServer(message);
+        }
+        else{
+            throw new Exception(this.getClass().toString()+": Question is NULL!");
+        }
     }
 
 }
