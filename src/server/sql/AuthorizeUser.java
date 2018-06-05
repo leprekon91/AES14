@@ -57,6 +57,8 @@ public class AuthorizeUser {
             //if user exists,set the message to authorized
             User user = new User("", "");
             while (rs.next()) {
+
+                //Create new User Object from database values
                 user.setUsername(rs.getString("user_name"));
                 user.setPass(rs.getString("pass"));
                 user.setFirst_name(rs.getString("first_name"));

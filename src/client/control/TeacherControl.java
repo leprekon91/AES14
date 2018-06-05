@@ -26,7 +26,6 @@ public class TeacherControl extends Application {
             primaryStage.setMaximized(true);
             primaryStage.setScene(scene);
             primaryStage.show();
-            //primaryStage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
