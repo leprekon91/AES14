@@ -102,58 +102,43 @@ public class AuthControl {
     }
 
     private void loadStudentMenu(Student student) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // if you change the UI, do it here !
-                try {
-                    stage.close();
-                    StudentControl studentControl =new StudentControl();
-                    studentControl.student=student;
-                    studentControl.client=client;
-                    studentControl.start(new Stage());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        Platform.runLater(() -> {
+            try {
+                stage.close();
+                StudentControl studentControl =new StudentControl();
+                studentControl.student=student;
+                studentControl.client=client;
+                studentControl.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
-
-
-
     }
 
     private void loadTeacherMenu(Teacher teacher) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // if you change the UI, do it here !
-                try {
-                    stage.close();
-                    TeacherControl teacherControl =new TeacherControl();
-                   teacherControl.teacher=teacher;
-                   teacherControl.client=client;
-                    teacherControl.start(new Stage());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        Platform.runLater(() -> {
+            try {
+                stage.close();
+                TeacherControl teacherControl =new TeacherControl();
+               teacherControl.teacher=teacher;
+               teacherControl.client=client;
+                teacherControl.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
 
     private void loadPrincipalMenu(Principal principal) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // if you change the UI, do it here !
-                try {
-                    stage.close();
-                    PrincipalControl principalControl =new PrincipalControl();
-                    principalControl.principal=principal;
-                    principalControl.client=client;
-                    principalControl.start(new Stage());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        Platform.runLater(() -> {
+            try {
+                stage.close();
+                PrincipalControl principalControl =new PrincipalControl();
+                principalControl.principal=principal;
+                principalControl.client=client;
+                principalControl.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }

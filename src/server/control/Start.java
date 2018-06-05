@@ -37,9 +37,14 @@ public class Start extends Application implements ServerUI {
         launch(args);
     }
 
+    /**
+     * Start the first screen. initialize the stage object.
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
 
+        //Initialize GUI for server.
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.serverFXML + "dashboard.fxml"));
             Parent root = fxmlLoader.load();
@@ -54,11 +59,12 @@ public class Start extends Application implements ServerUI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        //Start the Server
         sv = new Server(Contract.DEFAULT_PORT, this);
-
+        //display LOGIN dialog for server credentials
         login();
 
+        //after the login was successful, start listening for clients
         try {
             sv.listen(); //Start listening for connections
         } catch (Exception ex) {
@@ -69,7 +75,9 @@ public class Start extends Application implements ServerUI {
             alert.showAndWait();
             System.exit(1);
         }
+        //Show the GUI
         primaryStage.show();
+        //set close event to close the server properly
         primaryStage.setOnCloseRequest(event -> {
             try {
                 sv.close();
@@ -79,6 +87,9 @@ public class Start extends Application implements ServerUI {
         });
     }
 
+    /**
+     * Display login Dialog. (MySQL User Credentials needed for connection)
+     */
     private void login() {
         // Create the custom dialog.
         Dialog<Pair<String, String>> dialog = new Dialog<>();
