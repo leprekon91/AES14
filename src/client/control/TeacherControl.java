@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TeacherControl extends Application {
     public Teacher teacher;
@@ -48,15 +49,78 @@ public class TeacherControl extends Application {
     /**
      * Add Question to the database.
      *
-     * @param q
+     * @param question question to be created
      */
-    public void createQuestion(Question q) throws Exception {
-        if (q != null) {
-            Message message = new Message(Contract.CREATE_QUESTION, q);
+    public void createQuestion(Question question) throws Exception {
+        if (question != null) {
+            Message message = new Message(Contract.CREATE_QUESTION, question);
             client.sendToServer(message);
         } else {
             throw new Exception(this.getClass().toString() + ": Question is NULL!");
         }
+    }
+
+    /**
+     * Delete Question from the database
+     *
+     * @param question question to be deleted
+     */
+    public void deleteQuestion(Question question) {
+        //TODO Stub Method
+    }
+
+    /**
+     * Read question from the database by question ID.
+     *
+     * @param QID
+     * @return Question received from server
+     */
+    public Question readQuestion(int QID) {
+        //TODO Stub Method
+        return new Question(QID);
+    }
+
+    /**
+     * Update question parameters
+     *
+     * @param question question to be updated
+     */
+    public void updateQuestion(Question question) {
+        //TODO Stub Method
+
+    }
+
+    /**
+     * get all question uunder a specific subject
+     *
+     * @param subjectId the id of the subject
+     * @return Array List collection of Question Objects
+     */
+    public ArrayList<Question> getQuestionsBySubjectId(int subjectId) {
+        //TODO Stub Method
+        return new ArrayList<Question>();
+    }
+
+    /**
+     * get all question in a specific Exam
+     *
+     * @param examId id of the Exam
+     * @return Array List collection of Question Objects
+     */
+    public ArrayList<Question> getQuestionsByExamId(int examId) {
+        //TODO Stub Method
+        return new ArrayList<Question>();
+    }
+
+    /**
+     * get all question written by the teacher that is logged in.
+     *
+     * @return
+     */
+    public ArrayList<Question> getQuestionsByTeaacherId() {
+        String teacherID = this.teacher.getUsername();
+        //TODO Stub Method
+        return new ArrayList<Question>();
     }
 
 }
