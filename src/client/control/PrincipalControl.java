@@ -16,7 +16,7 @@ public class PrincipalControl extends Application {
     public Client client;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "PrincipalMenu.fxml"));
             Parent root = fxmlLoader.load();
