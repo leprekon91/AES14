@@ -2,6 +2,7 @@ package server.control;
 
 import com.Contract;
 import com.data.Message;
+import com.data.Question;
 import com.data.User;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
@@ -85,6 +86,7 @@ public class Server extends AbstractServer {
      */
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+        //TODO Handle Message from client
         if (msg instanceof Message) {
             SUI.logMsg("Message received from Client: " + client.toString()
                     + " Message:\n" +
@@ -120,6 +122,10 @@ public class Server extends AbstractServer {
                     case Contract.GET_EXAMS_BY_SUBJECT:     //Get Exams in a specific Subject
                         break;
                     case Contract.CREATE_QUESTION:          //Create a new Question
+                        SUI.logMsg("Server Has received a create question message."
+                                +"\nDATA: "+(Question)((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.QUESTION,new Question(2)));
+                        break;
                     case Contract.READ_QUESTION:            //Read an existing question By ID
                     case Contract.UPDATE_QUESTION:          //Update an existing Question
                     case Contract.DELETE_QUESTION:          //Delete Question from A database

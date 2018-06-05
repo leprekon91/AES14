@@ -1,5 +1,6 @@
 package client.control;
 
+import client.gui.fxcontrol.TeacherMenu;
 import com.Contract;
 import com.data.Message;
 import com.data.Question;
@@ -22,6 +23,7 @@ public class TeacherControl extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "TeacherMenu.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
+            ((TeacherMenu) fxmlLoader.getController()).teacherControl = this;
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
             primaryStage.setTitle("AES - " + teacher.getUsername());
             primaryStage.setMaximized(true);
@@ -34,7 +36,7 @@ public class TeacherControl extends Application {
         primaryStage.setOnCloseRequest(event -> {
             try {
                 //Close connection to server.
-                client.sendToServer(new Message(Contract.LOG_OFF,client.user));
+                client.sendToServer(new Message(Contract.LOG_OFF, client.user));
                 client.closeConnection();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -45,15 +47,15 @@ public class TeacherControl extends Application {
 
     /**
      * Add Question to the database.
+     *
      * @param q
      */
     public void createQuestion(Question q) throws Exception {
-        if(q!=null) {
+        if (q != null) {
             Message message = new Message(Contract.CREATE_QUESTION, q);
             client.sendToServer(message);
-        }
-        else{
-            throw new Exception(this.getClass().toString()+": Question is NULL!");
+        } else {
+            throw new Exception(this.getClass().toString() + ": Question is NULL!");
         }
     }
 

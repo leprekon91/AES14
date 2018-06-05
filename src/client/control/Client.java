@@ -3,6 +3,7 @@ package client.control;
 import client.ocsf.AbstractClient;
 import com.Contract;
 import com.data.Message;
+import com.data.Question;
 import com.data.Student;
 import com.data.User;
 
@@ -23,7 +24,8 @@ public class Client extends AbstractClient {
     private AuthControl authControl;//reference for authentication controller
 
     /**
-     *  Client constructor, opens connection to server once he is created.
+     * Client constructor, opens connection to server once he is created.
+     *
      * @param host
      * @param port
      */
@@ -50,6 +52,10 @@ public class Client extends AbstractClient {
             case Contract.AUTH_YES:
             case Contract.AUTH_NO:
                 receiveAuth(message);
+                break;
+            case Contract.QUESTION: //Question Object was received.
+                Question question = (Question) ((Message) msg).getData();
+                System.out.println("Question Object was received: " + question);
                 break;
         }
 
