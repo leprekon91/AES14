@@ -11,6 +11,8 @@ public class Teacher extends User {
      */
     public Teacher(User user) {
         super(user.getUsername(), user.getPass());
+        this.setFirst_name(user.getFirst_name());
+        this.setLast_name(user.getLast_name());
         this.setType(user.getType());
     }
 }

@@ -23,7 +23,6 @@ public class StudentControl extends Application {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
-            primaryStage.setTitle("AES - "+student.getFirst_name()+" "+student.getLast_name());
             primaryStage.setMaximized(true);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -35,7 +34,7 @@ public class StudentControl extends Application {
         primaryStage.setOnCloseRequest(event -> {
             try {
                 //Close connection to server.
-                client.sendToServer(new Message(Contract.LOG_OFF,client.user));
+                client.sendToServer(new Message(Contract.LOG_OFF, client.user));
                 client.closeConnection();
             } catch (IOException e) {
                 e.printStackTrace();

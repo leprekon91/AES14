@@ -77,21 +77,21 @@ public class AuthControl {
                 //Open Student Menu
                 System.out.println("User is a student and he is logged in!");
                 Student student = new Student(user);
-                client.user=student;
+                client.user = student;
                 loadStudentMenu(student);
                 break;
             case 2:
                 //Open Teacher Menu
                 System.out.println("User is a teacher and he is logged in!");
                 Teacher teacher = new Teacher(user);
-                client.user=teacher;
+                client.user = teacher;
                 loadTeacherMenu(teacher);
                 break;
             case 3:
                 //Open Principal Menu
                 System.out.println("User is a principal and he is logged in!");
                 Principal principal = new Principal(user);
-                client.user=principal;
+                client.user = principal;
                 loadPrincipalMenu(principal);
                 break;
             default:
@@ -103,16 +103,19 @@ public class AuthControl {
 
     /**
      * Load the UserMenu Screen for Student user type.
+     *
      * @param student User Object for the screen
      */
     private void loadStudentMenu(Student student) {
         Platform.runLater(() -> {
             try {
                 stage.close();
-                StudentControl studentControl =new StudentControl();
-                studentControl.student=student;
-                studentControl.client=client;
-                studentControl.start(new Stage());
+                StudentControl studentControl = new StudentControl();
+                studentControl.student = student;
+                studentControl.client = client;
+                Stage stage = new Stage();
+                stage.setTitle("AES - " + student.getFirst_name() + " " + student.getLast_name());
+                studentControl.start(stage);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -121,16 +124,19 @@ public class AuthControl {
 
     /**
      * Load the UserMenu Screen for Teacher user type.
+     *
      * @param teacher User Object for the screen.
      */
     private void loadTeacherMenu(Teacher teacher) {
         Platform.runLater(() -> {
             try {
                 stage.close();
-                TeacherControl teacherControl =new TeacherControl();
-               teacherControl.teacher=teacher;
-               teacherControl.client=client;
-                teacherControl.start(new Stage());
+                TeacherControl teacherControl = new TeacherControl();
+                teacherControl.teacher = teacher;
+                teacherControl.client = client;
+                Stage stage = new Stage();
+                stage.setTitle("AES - " + teacher.getFirst_name() + " " + teacher.getLast_name());
+                teacherControl.start(stage);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -139,16 +145,19 @@ public class AuthControl {
 
     /**
      * Load the Usermenu Screen for Principal user type.
+     *
      * @param principal User Object for the screen.
      */
     private void loadPrincipalMenu(Principal principal) {
         Platform.runLater(() -> {
             try {
                 stage.close();
-                PrincipalControl principalControl =new PrincipalControl();
-                principalControl.principal=principal;
-                principalControl.client=client;
-                principalControl.start(new Stage());
+                PrincipalControl principalControl = new PrincipalControl();
+                principalControl.principal = principal;
+                principalControl.client = client;
+                Stage stage = new Stage();
+                stage.setTitle("AES - " + principal.getFirst_name() + " " + principal.getLast_name());
+                principalControl.start(stage);
             } catch (Exception e) {
                 e.printStackTrace();
             }
