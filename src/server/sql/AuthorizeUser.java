@@ -20,7 +20,7 @@ public class AuthorizeUser {
     //Singleton Instance
     private static AuthorizeUser INSTANCE = null;
     //current connection to client
-    public ConnectionToClient connectionToClient;
+    // public ConnectionToClient connectionToClient;
     //User List <'user_name',Client Thread> of logged-in users.
     private HashMap<String, ConnectionToClient> loggedInUsers;
 
@@ -38,7 +38,7 @@ public class AuthorizeUser {
      * @param password
      * @return Reply with Yes Or NO
      */
-    public Message authorize(String username, String password) {
+    public Message authorize(String username, String password, ConnectionToClient connectionToClient) {
         //Prepare Answer Message:
         Message ans = new Message(0, null);
         if (usernameExistsInLoggedInUsers(username)) {

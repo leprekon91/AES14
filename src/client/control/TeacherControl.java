@@ -141,6 +141,7 @@ public class TeacherControl extends Application {
     public void receiveQuestion(Question question) throws NullPointerException {
         if (question != null) {
             System.out.println("Question Received: \n" + question.toString());
+            return;
         }
         throw new NullPointerException(this.getClass() + "NULL Question Object received from Server!");
     }
@@ -155,7 +156,7 @@ public class TeacherControl extends Application {
         if (questions != null) {
             if (questions.size() > 0) {//Check that there are questions in the array list
                 System.out.println("Question Array Received: \n" + questions.toString());
-
+                return;
             }
         }
         throw new NullPointerException(this.getClass() + "NULL or Empty Question Array received from Server!");

@@ -2,14 +2,17 @@ package server.control;
 
 import com.Contract;
 import com.data.Message;
+import com.data.Question;
 import com.data.User;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
 import server.sql.AuthorizeUser;
+import server.sql.QuestionTable;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 
 /**
  * Server implementation. This class will handle all communication with
@@ -91,8 +94,9 @@ public class Server extends AbstractServer {
                     + " Message:\n" +
                     "\ttype:" + ((Message) msg).getType()
             );
-            AuthorizeUser authorizeUser = AuthorizeUser.getInstance();
-            authorizeUser.connectionToClient = client;
+            //Table Controllers:
+            QuestionTable questionTable = new QuestionTable(client);
+
             int contractType = ((Message) msg).getType();
             //------------------------Message decode--------------------------------------------------------------------
             try {
@@ -100,16 +104,15 @@ public class Server extends AbstractServer {
                     case Contract.AUTHORIZE: //Client Requests Authorization
 
                         User u = (User) ((Message) msg).getData();
-                        Message authResponse = authorizeUser.authorize(u.getUsername(), u.getPass());
+                        Message authResponse = (AuthorizeUser.getInstance()).authorize(u.getUsername(), u.getPass(), client);
                         client.sendToClient(authResponse);
 
                         break;
 
                     case Contract.LOG_OFF:  //client requests logoff - delete client from list
 
-                        if (authorizeUser.usernameExistsInLoggedInUsers(((User) ((Message) msg).getData()).getUsername())) {
-                            authorizeUser.deleteUserByUsername(((User) ((Message) msg).getData()).getUsername());
-
+                        if ((AuthorizeUser.getInstance()).usernameExistsInLoggedInUsers(((User) ((Message) msg).getData()).getUsername())) {
+                            (AuthorizeUser.getInstance()).deleteUserByUsername(((User) ((Message) msg).getData()).getUsername());
                         }
 
                         break;
@@ -123,30 +126,41 @@ public class Server extends AbstractServer {
                     case Contract.CREATE_QUESTION:          //Create a new Question
                         SUI.logMsg("Server Has received a 'Create question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
+                        questionTable.createQuestion((Question) ((Message) msg).getData());
                         break;
                     case Contract.READ_QUESTION:            //Read an existing question By ID
                         SUI.logMsg("Server Has received a 'Read Question' message."
                                 + "\nQuestion ID: " + ((Message) msg).getData());
+                        Question question = questionTable.readQuestion((Integer) ((Message) msg).getData());
+                        client.sendToClient(question);
                         break;
                     case Contract.UPDATE_QUESTION:          //Update an existing Question
                         SUI.logMsg("Server Has received a 'Update Question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
+                        questionTable.updateQuestion((Question) ((Message) msg).getData());
                         break;
                     case Contract.DELETE_QUESTION:          //Delete Question from A database
                         SUI.logMsg("Server Has received a 'Delete Question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
+                        questionTable.deleteQuestion((Question) ((Message) msg).getData());
                         break;
                     case Contract.GET_QUESTIONS_BY_EXAM:    //Get all questions in a specific Exam
                         SUI.logMsg("Server Has received a 'Get Questions by Subject ID' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
+                        ArrayList<Question> Questions = questionTable.selectAllQuestionsByExam((Integer) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.QUESTIONS, Questions));
                         break;
                     case Contract.GET_QUESTIONS_BY_SUBJECT: //Get Questions in a specific Subject
                         SUI.logMsg("Server Has received a 'Get Questions by Exam ID' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
+                        Questions = questionTable.selectAllQuestionsBySubject((Integer) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.QUESTIONS, Questions));
                         break;
-                    case Contract.GET_QUESTIONS_BY_TEACHER: //Get Questions written
+                    case Contract.GET_QUESTIONS_BY_TEACHER: //Get Questions written by a specific teacher
                         SUI.logMsg("Server Has received a 'Get Questions by Teacher ID' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
+                        Questions = questionTable.selectAllQuestionsByTeacher((String) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.QUESTIONS, Questions));
                         break;
                     case Contract.GET_COURSE:               //Get Course details
                     case Contract.GET_SUBJECT:              //Get Subject details
