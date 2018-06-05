@@ -4,7 +4,6 @@ import com.Contract;
 import com.style.icons.FontAwesome;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,14 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 import server.gui.fxcontrol.Dashboard;
 import server.sql.MysqlManager;
@@ -29,6 +22,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.Optional;
 
+/**
+ * Emtry point and the Run configuration point of beginning
+ */
 public class Start extends Application implements ServerUI {
     private Server sv;
     private Dashboard dashboard;
@@ -39,6 +35,7 @@ public class Start extends Application implements ServerUI {
 
     /**
      * Start the first screen. initialize the stage object.
+     *
      * @param primaryStage
      */
     @Override
@@ -97,8 +94,8 @@ public class Start extends Application implements ServerUI {
         dialog.setHeaderText("Please Enter Data Base credentials");
 
         // Set the icon (must be included in the project).
-        Label iv = FontAwesome.setAsIcon(FontAwesome.ICON_LOCK,new Label());
-        iv.setPrefSize(64,64);
+        Label iv = FontAwesome.setAsIcon(FontAwesome.ICON_LOCK, new Label());
+        iv.setPrefSize(64, 64);
         iv.setAlignment(Pos.CENTER);
         iv.setStyle("-fx-border-color: #555555;-fx-border-radius: 50; -fx-text-fill: #555555;");
         dialog.setGraphic(iv);
@@ -119,9 +116,9 @@ public class Start extends Application implements ServerUI {
         PasswordField password = new PasswordField();
         password.setPromptText("Password");
 
-        grid.add(FontAwesome.setAsIcon(FontAwesome.ICON_USER,new Label()), 0, 0);
+        grid.add(FontAwesome.setAsIcon(FontAwesome.ICON_USER, new Label()), 0, 0);
         grid.add(username, 1, 0);
-        grid.add(FontAwesome.setAsIcon(FontAwesome.ICON_KEY,new Label()), 0, 1);
+        grid.add(FontAwesome.setAsIcon(FontAwesome.ICON_KEY, new Label()), 0, 1);
         grid.add(password, 1, 1);
 
         // Enable/Disable login button depending on whether a username was entered.
@@ -170,16 +167,4 @@ public class Start extends Application implements ServerUI {
     public void logMsg(String str) {
         dashboard.addLogMsg(str);
     }
-
-    @Override
-    public void updateClients(int numOfClients) {
-        dashboard.userPanelControl.ClientNum = numOfClients;
-    }
-
-    @Override
-    public int getConnectedCount() {
-        return dashboard.userPanelControl.ClientNum;
-    }
-
-
 }

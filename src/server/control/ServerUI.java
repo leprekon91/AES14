@@ -1,8 +1,9 @@
 package server.control;
 
 
-import server.gui.fxcontrol.Dashboard;
-
+/**
+ * Interface for logging messages from server system.
+ */
 public interface ServerUI {
 
     /**
@@ -11,8 +12,4 @@ public interface ServerUI {
      */
     void logMsg(String str);
 
-
-    void updateClients(int numOfClients);
-
-    int getConnectedCount();
 }

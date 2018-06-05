@@ -2,12 +2,8 @@
 package com;
 
 /**
- * @author Andrey Grabarnick
- * @email reist2009@gmail.com
- * @date 23 May 2018
- * <p>
  * Contract Constant Strings Manager holds: configuration locations +
- * communication language.
+ * Client-Server communication Vocabulary.
  */
 public class Contract {
     final public static int DEFAULT_PORT = 5555;// Default fall-back port

@@ -12,10 +12,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * @author Andrey Grabarnick
- * @email reist2009@gmail.com
- * @date 23 May 2018
- * <p>
  * Server implementation. This class will handle all communication with
  * the clients, using the language defined in the com.Contract class file.
  */

@@ -101,6 +101,10 @@ public class AuthControl {
         }
     }
 
+    /**
+     * Load the UserMenu Screen for Student user type.
+     * @param student User Object for the screen
+     */
     private void loadStudentMenu(Student student) {
         Platform.runLater(() -> {
             try {
@@ -115,6 +119,10 @@ public class AuthControl {
         });
     }
 
+    /**
+     * Load the UserMenu Screen for Teacher user type.
+     * @param teacher User Object for the screen.
+     */
     private void loadTeacherMenu(Teacher teacher) {
         Platform.runLater(() -> {
             try {
@@ -129,6 +137,10 @@ public class AuthControl {
         });
     }
 
+    /**
+     * Load the Usermenu Screen for Principal user type.
+     * @param principal User Object for the screen.
+     */
     private void loadPrincipalMenu(Principal principal) {
         Platform.runLater(() -> {
             try {
