@@ -2,7 +2,6 @@ package server.control;
 
 import com.Contract;
 import com.data.Message;
-import com.data.Question;
 import com.data.User;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
@@ -122,16 +121,32 @@ public class Server extends AbstractServer {
                     case Contract.GET_EXAMS_BY_SUBJECT:     //Get Exams in a specific Subject
                         break;
                     case Contract.CREATE_QUESTION:          //Create a new Question
-                        SUI.logMsg("Server Has received a create question message."
-                                +"\nDATA: "+(Question)((Message) msg).getData());
-                        client.sendToClient(new Message(Contract.QUESTION,new Question(2)));
+                        SUI.logMsg("Server Has received a 'Create question' message."
+                                + "\nQuestion: " + ((Message) msg).getData());
                         break;
                     case Contract.READ_QUESTION:            //Read an existing question By ID
+                        SUI.logMsg("Server Has received a 'Read Question' message."
+                                + "\nQuestion ID: " + ((Message) msg).getData());
+                        break;
                     case Contract.UPDATE_QUESTION:          //Update an existing Question
+                        SUI.logMsg("Server Has received a 'Update Question' message."
+                                + "\nQuestion: " + ((Message) msg).getData());
+                        break;
                     case Contract.DELETE_QUESTION:          //Delete Question from A database
+                        SUI.logMsg("Server Has received a 'Delete Question' message."
+                                + "\nQuestion: " + ((Message) msg).getData());
+                        break;
                     case Contract.GET_QUESTIONS_BY_EXAM:    //Get all questions in a specific Exam
+                        SUI.logMsg("Server Has received a 'Get Questions by Subject ID' message."
+                                + "\nQuestion: " + ((Message) msg).getData());
+                        break;
                     case Contract.GET_QUESTIONS_BY_SUBJECT: //Get Questions in a specific Subject
+                        SUI.logMsg("Server Has received a 'Get Questions by Exam ID' message."
+                                + "\nQuestion: " + ((Message) msg).getData());
+                        break;
                     case Contract.GET_QUESTIONS_BY_TEACHER: //Get Questions written
+                        SUI.logMsg("Server Has received a 'Get Questions by Teacher ID' message."
+                                + "\nQuestion: " + ((Message) msg).getData());
                         break;
                     case Contract.GET_COURSE:               //Get Course details
                     case Contract.GET_SUBJECT:              //Get Subject details

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TeacherControl extends Application {
-    public Teacher teacher;
+    Teacher teacher;
     public Client client;
 
     @Override
@@ -60,24 +60,18 @@ public class TeacherControl extends Application {
         }
     }
 
-    /**
-     * Delete Question from the database
-     *
-     * @param question question to be deleted
-     */
-    public void deleteQuestion(Question question) {
-        //TODO Stub Method
-    }
 
     /**
-     * Read question from the database by question ID.
+     * Request question from the database by question ID.
      *
-     * @param QID
-     * @return Question received from server
+     * @param QID question id for the question that is requested.
      */
-    public Question readQuestion(int QID) {
-        //TODO Stub Method
-        return new Question(QID);
+    public void requestQuestion(int QID) throws Exception {
+        Message message = new Message(Contract.READ_QUESTION, QID);
+        client.teacherControl = this;
+        client.sendToServer(message);
+
+
     }
 
     /**
@@ -85,42 +79,87 @@ public class TeacherControl extends Application {
      *
      * @param question question to be updated
      */
-    public void updateQuestion(Question question) {
-        //TODO Stub Method
+    public void updateQuestion(Question question) throws Exception {
+        Message message = new Message(Contract.UPDATE_QUESTION, question);
+        client.teacherControl = this;
+        client.sendToServer(message);
 
     }
 
     /**
-     * get all question uunder a specific subject
+     * Delete Question from the database
+     *
+     * @param question question to be deleted
+     */
+    public void deleteQuestion(Question question) throws Exception {
+        if (question != null) {
+            Message message = new Message(Contract.DELETE_QUESTION, question);
+            client.sendToServer(message);
+        } else {
+            throw new Exception(this.getClass().toString() + ": Question is NULL!");
+        }
+    }
+
+    /**
+     * Request all question under a specific subject
      *
      * @param subjectId the id of the subject
-     * @return Array List collection of Question Objects
      */
-    public ArrayList<Question> getQuestionsBySubjectId(int subjectId) {
-        //TODO Stub Method
-        return new ArrayList<Question>();
+    public void requestQuestionsBySubjectId(int subjectId) throws Exception {
+        Message message = new Message(Contract.GET_QUESTIONS_BY_SUBJECT, subjectId);
+        client.teacherControl = this;
+        client.sendToServer(message);
     }
 
     /**
-     * get all question in a specific Exam
+     * Request all question in a specific Exam
      *
      * @param examId id of the Exam
-     * @return Array List collection of Question Objects
      */
-    public ArrayList<Question> getQuestionsByExamId(int examId) {
-        //TODO Stub Method
-        return new ArrayList<Question>();
+    public void requestQuestionsByExamId(int examId) throws Exception {
+        Message message = new Message(Contract.GET_QUESTIONS_BY_EXAM, examId);
+        client.teacherControl = this;
+        client.sendToServer(message);
     }
 
     /**
-     * get all question written by the teacher that is logged in.
-     *
-     * @return
+     * Request all question written by the teacher that is logged in.
      */
-    public ArrayList<Question> getQuestionsByTeaacherId() {
+    public void requestQuestionsByTeaacherId() throws Exception {
         String teacherID = this.teacher.getUsername();
-        //TODO Stub Method
-        return new ArrayList<Question>();
+        Message message = new Message(Contract.GET_QUESTIONS_BY_TEACHER, teacherID);
+        client.teacherControl = this;
+        client.sendToServer(message);
+    }
+
+    /**
+     * Answer for the requestQuestion() method received from the server.
+     * called by the client!
+     *
+     * @param question Question object sent by the server.
+     */
+    public void receiveQuestion(Question question) throws NullPointerException {
+        if (question != null) {
+            System.out.println("Question Received: \n" + question.toString());
+        }
+        throw new NullPointerException(this.getClass() + "NULL Question Object received from Server!");
+    }
+
+    /**
+     * Receive server response for array of questions.
+     *
+     * @param questions arrayList of question Objects
+     * @return ArrayList of question Objects
+     */
+    public void receiveQuestionArray(ArrayList<Question> questions) {
+        if (questions != null) {
+            if (questions.size() > 0) {//Check that there are questions in the array list
+                System.out.println("Question Array Received: \n" + questions.toString());
+
+            }
+        }
+        throw new NullPointerException(this.getClass() + "NULL or Empty Question Array received from Server!");
+
     }
 
 }

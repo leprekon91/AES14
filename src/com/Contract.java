@@ -22,6 +22,7 @@ public class Contract {
 
     // Exam Vocabulary
     final public static int EXAM = 10;
+    final public static int EXAMS = 17;
     final public static int CREATE_EXAM = 11;
     final public static int READ_EXAM = 12;
     final public static int UPDATE_EXAM = 13;
@@ -32,6 +33,7 @@ public class Contract {
 
     // Question vocabulary
     final public static int QUESTION = 20;
+    final public static int QUESTIONS = 28;
     final public static int CREATE_QUESTION = 21;
     final public static int READ_QUESTION = 22;
     final public static int UPDATE_QUESTION = 23;
@@ -39,6 +41,7 @@ public class Contract {
     final public static int GET_QUESTIONS_BY_SUBJECT = 25;
     final public static int GET_QUESTIONS_BY_EXAM = 26;
     final public static int GET_QUESTIONS_BY_TEACHER = 27;
+
 
     // Courses/Subject Vocabulary
     final public static int COURSE = 30;
