@@ -47,5 +47,4 @@ public class PrincipalControl extends Application {
 
     //todo: create excel sheet using poi.apache.(optional)
     //todo: display graphs.
-    //todo: dialog for a specific statistical data.
 }

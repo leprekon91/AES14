@@ -1,2 +1,4 @@
-//TODO add JavaDoc
+/**
+ * Server-Side SQL Controllers and Boundaries
+ */
 package server.sql;

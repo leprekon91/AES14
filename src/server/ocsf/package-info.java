@@ -1,2 +1,4 @@
-//TODO add JavaDoc
+/**
+ * Server-Side OCSF Framework Classes
+ */
 package server.ocsf;

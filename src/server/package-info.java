@@ -1,2 +1,4 @@
-//TODO add JavaDoc
+/**
+ * Server-Side System Part.
+ */
 package server;
