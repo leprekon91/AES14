@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" maxHeight="1.7976931348623157E308"
+          maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" vgap="10"
+          xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.Report">
+    <columnConstraints>
+        <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="520.0"/>
+
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+    <children>
+        <BarChart fx:id="barChart" legendSide="RIGHT" legendVisible="false">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" fx:id="xAxis"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" side="LEFT"/>
+            </yAxis>
+            <GridPane.margin>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+            </GridPane.margin>
+        </BarChart>
+        <Label fx:id="lblAvg" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+               style="-fx-border-color: #555555; -fx-border-radius: 50;" text="Label" GridPane.columnSpan="2147483647"
+               GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+            <GridPane.margin>
+                <Insets bottom="4.0" left="4.0" right="4.0" top="4.0"/>
+            </GridPane.margin>
+            <graphic>
+                <Label fx:id="averageIcon" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" text="IC">
+                    <font>
+                        <Font size="25.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </padding>
+                </Label>
+            </graphic>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+            </padding>
+        </Label>
+        <Label fx:id="lblMed" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+               style="-fx-border-radius: 50; -fx-border-color: #555555;" text="Label" GridPane.hgrow="NEVER"
+               GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+            <GridPane.margin>
+                <Insets bottom="4.0" left="4.0" right="4.0" top="4.0"/>
+            </GridPane.margin>
+            <graphic>
+                <Label fx:id="medianIcon" text="IC">
+                    <font>
+                        <Font size="25.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </padding>
+                </Label>
+            </graphic>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+            </padding>
+        </Label>
+    </children>
+</GridPane>

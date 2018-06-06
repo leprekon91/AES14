@@ -2,7 +2,6 @@ package client.control;
 
 import com.Contract;
 import com.data.Message;
-import com.data.User;
 import javafx.application.Application;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
@@ -12,20 +11,13 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * @author Andrey Grabarnick
- * @email reist2009@gmail.com
- * @date 23 May 2018
- * <p>
  * Here, the client-side will start it's process. This class will run the first
  * javaFX form and will initialize the client.
- * </p>
  */
 public class Start extends Application {
 
     public String host = "localhost";//initial host value
     public Client client;
-
-
 
 
     @Override
@@ -36,8 +28,8 @@ public class Start extends Application {
             this.client = null;
             hostConfigDlg();
             //show LoginScreen
-         AuthControl authControl=new AuthControl();
-         authControl.displayLogin(primaryStage,client);
+            AuthControl authControl = new AuthControl();
+            authControl.displayLogin(primaryStage, client);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,8 +39,7 @@ public class Start extends Application {
         primaryStage.setOnCloseRequest(event -> {
             try {
                 //Close connection to server.
-                //TODO doesn't work! cant log off user!
-                client.sendToServer(new Message(Contract.LOG_OFF,client.user));
+                client.sendToServer(new Message(Contract.LOG_OFF, client.user));
                 client.closeConnection();
             } catch (IOException e) {
                 e.printStackTrace();
