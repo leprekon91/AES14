@@ -2,6 +2,7 @@ package client.control;
 
 import client.gui.fxcontrol.TeacherMenu;
 import com.Contract;
+import com.data.Exam;
 import com.data.Message;
 import com.data.Question;
 import com.data.Teacher;
@@ -14,6 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * TeacherControl class controls all data streams from the teacher perspective
+ */
 public class TeacherControl extends Application {
     Teacher teacher;
     public Client client;
@@ -38,7 +42,8 @@ public class TeacherControl extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//Set Close event handle
+
+        //Set Close event handle
         primaryStage.setOnCloseRequest(event -> {
             try {
                 //Close connection to server.
@@ -50,6 +55,9 @@ public class TeacherControl extends Application {
         });
 
     }
+
+
+    //Question Communication Methods
 
     /**
      * Add Question to the database.
@@ -168,4 +176,86 @@ public class TeacherControl extends Application {
 
     }
 
+    //Exam Communication Methods
+
+    /**
+     * Create New Exam Entry in the Database
+     *
+     * @param exam exam object that defines the entry
+     */
+    public void createExam(Exam exam) {
+        //TODO stub Method
+    }
+
+    /**
+     * Request an Exam Object from the server by ID
+     *
+     * @param examID
+     */
+    public void requestExam(int examID) {
+        //TODO stub Method
+    }
+
+    /**
+     * Request all exams written by a specific teacher
+     *
+     * @param teacherID
+     */
+    public void requestExamsByTeacher(String teacherID) {
+        //TODO stub Method
+    }
+
+    /**
+     * Request all exams under a specific subject
+     *
+     * @param subjectID id number of subject
+     */
+    public void requestExamsBySubjectID(int subjectID) {
+        //TODO stub Method
+    }
+
+    /**
+     * Request all Exams under a specific course
+     *
+     * @param courseID id of course
+     */
+    public void requestExamsByCourseID(int courseID) {
+
+    }
+
+    /**
+     * Update existing entry in Exam table
+     *
+     * @param exam Exam Object to be updated
+     */
+    public void updateExam(Exam exam) {
+        //TODO stub Method
+    }
+
+    /**
+     * Delete exam entry from the database
+     *
+     * @param exam Exam to be deleted.
+     */
+    public void deleteExam(Exam exam) {
+        //TODO stub Method
+    }
+
+    /**
+     * Receive Exam from Server
+     *
+     * @param exam exam that was received
+     */
+    public void receiveExam(Exam exam) {
+        //TODO stub Method
+    }
+
+    /**
+     * Receive Exam ArrayList from Server
+     *
+     * @param exams exam array that was received
+     */
+    public void receiveExamArray(ArrayList<Exam> exams) {
+        //TODO stub Method
+    }
 }

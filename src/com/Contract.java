@@ -22,13 +22,14 @@ public class Contract {
 
     // Exam Vocabulary
     final public static int EXAM = 10;
-    final public static int EXAMS = 17;
-    final public static int CREATE_EXAM = 11;
-    final public static int READ_EXAM = 12;
-    final public static int UPDATE_EXAM = 13;
-    final public static int DELETE_EXAM = 14;
-    final public static int GET_EXAMS_BY_SUBJECT = 15;
-    final public static int GET_EXAMS_BY_COURSE = 16;
+    final public static int EXAMS = 11;
+    final public static int CREATE_EXAM = 12;
+    final public static int READ_EXAM = 13;
+    final public static int UPDATE_EXAM = 14;
+    final public static int DELETE_EXAM = 15;
+    final public static int GET_EXAMS_BY_SUBJECT = 16;
+    final public static int GET_EXAMS_BY_COURSE = 17;
+    final public static int GET_EXAMS_BY_TEACHER = 18;
 
 
     // Question vocabulary

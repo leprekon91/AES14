@@ -2,6 +2,7 @@ package client.control;
 
 import client.ocsf.AbstractClient;
 import com.Contract;
+import com.data.Exam;
 import com.data.Message;
 import com.data.Question;
 import com.data.User;
@@ -61,6 +62,14 @@ public class Client extends AbstractClient {
             case Contract.QUESTIONS:
                 ArrayList<Question> questionArrayList = (ArrayList<Question>) ((Message) msg).getData();
                 teacherControl.receiveQuestionArray(questionArrayList);
+                break;
+            case Contract.EXAM:
+                Exam exam = (Exam) ((Message) msg).getData();
+                teacherControl.receiveExam(exam);
+                break;
+            case Contract.EXAMS:
+                ArrayList<Exam> exams = (ArrayList<Exam>) ((Message) msg).getData();
+                teacherControl.receiveExamArray(exams);
                 break;
         }
 

@@ -122,6 +122,7 @@ public class Server extends AbstractServer {
                     case Contract.DELETE_EXAM:              //Delete an existing Exam
                     case Contract.GET_EXAMS_BY_COURSE:      //Get Exams in a specific course
                     case Contract.GET_EXAMS_BY_SUBJECT:     //Get Exams in a specific Subject
+                    case Contract.GET_EXAMS_BY_TEACHER:     //Get Exams written by a specific teacher
                         break;
                     case Contract.CREATE_QUESTION:          //Create a new Question
                         SUI.logMsg("Server Has received a 'Create question' message."
