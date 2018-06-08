@@ -22,6 +22,7 @@ public class QuestionTable {
      * @param question question to be created
      */
     public void createQuestion(Question question) {
+        //TODO Test
         System.out.println("QuestionTable - Create Question\n" +
                 "Question: " + question);
         //TEST: Question Creation:
@@ -56,17 +57,18 @@ public class QuestionTable {
     /**
      * Read Question entry from the database, create a question object and return it.
      *
-     * @param qid id of the question entry to read
+     * @param question empty question object to be filled with data from the DB.
      * @return Question Object filled with the entry data.
      */
-    public Question readQuestion(int qid) {
+    public Question readQuestion(Question question) {
+        //TODO test
         System.out.println("QuestionTable - Read Question\n" +
-                "Question ID: " + qid);
+                "Question ID: " + question.getQID());
         PreparedStatement stmt;
         Connection con = MysqlManager.ConnectToDB();
-        Question question = null;
-        qid = 265;
-        int subject = 3;
+
+        int qid = question.getQID();
+        int subject = question.getSubjectId();
         try {
             stmt = con.prepareStatement(SQLContract.READ_QUESTION);
             stmt.setInt(1, qid);
@@ -96,10 +98,36 @@ public class QuestionTable {
      * @param question question object corresponding to the entry that is going to be updated
      */
     public void updateQuestion(Question question) {
-        //TODO STUB method
+        //TODO Test
         System.out.println("QuestionTable - Update Question\n" +
                 "Question: " + question);
 
+        int indicator = question.getCorrectAnswer();
+        int subjectId = question.getSubjectId();
+        String teacherID = question.getTeacherId();
+        String questionText = question.getQuestionText();
+        String[] data = question.getPossibleAnswers();
+        PreparedStatement stmt;
+        Connection con = MysqlManager.ConnectToDB();
+        //------------------------------------
+        try {
+            stmt = con.prepareStatement(SQLContract.UPDATE_QUESTION);
+
+            stmt.setString(1, questionText);
+            stmt.setString(2, data[0]);
+            stmt.setString(3, data[1]);
+            stmt.setString(4, data[2]);
+            stmt.setString(5, data[3]);
+            stmt.setInt(6, indicator);
+            stmt.setString(7, teacherID);
+            stmt.setInt(8, subjectId);
+
+            stmt.execute();
+            stmt.close();
+            MysqlManager.closeConnection(con);
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
     }
 
     /**
@@ -111,6 +139,20 @@ public class QuestionTable {
         //TODO STUB method
         System.out.println("QuestionTable - Delete Question\n" +
                 "Question: " + question);
+        //------------------------------------
+        PreparedStatement stmt;
+        Connection con = MysqlManager.ConnectToDB();
+        //------------------------------------
+        try {
+            stmt = con.prepareStatement(SQLContract.DELETE_QUESTION);
+            stmt.setInt(1, question.getQID());
+            stmt.setInt(2, question.getSubjectId());
+            stmt.execute();
+            stmt.close();
+            MysqlManager.closeConnection(con);
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
     }
 
     public ArrayList<Question> selectAllQuestionsBySubject(int subjectID) {

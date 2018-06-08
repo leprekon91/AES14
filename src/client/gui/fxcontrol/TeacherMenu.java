@@ -10,7 +10,7 @@ public class TeacherMenu {
 
     public void sendCreateQuestionMessage(ActionEvent actionEvent) {
         try {
-            teacherControl.createQuestion(new Question(1));
+            teacherControl.createQuestion(new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -18,7 +18,7 @@ public class TeacherMenu {
 
     public void sendReadQuestionMessage(ActionEvent actionEvent) {
         try {
-            teacherControl.requestQuestion(1);
+            teacherControl.requestQuestion(new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,7 +26,10 @@ public class TeacherMenu {
 
     public void sendUpdateQuestion(ActionEvent actionEvent) {
         try {
-            teacherControl.updateQuestion(new Question(1));
+            Question q = new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername());
+            q.setQID(1);
+            q.setSubjectId(6);
+            teacherControl.updateQuestion(new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,7 +37,7 @@ public class TeacherMenu {
 
     public void sendDeleteQuestionMessage(ActionEvent actionEvent) {
         try {
-            teacherControl.deleteQuestion(new Question(1));
+            teacherControl.deleteQuestion(new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername()));
         } catch (Exception e) {
             e.printStackTrace();
         }

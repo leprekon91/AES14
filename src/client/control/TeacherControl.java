@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * TeacherControl class controls all data streams from the teacher perspective
  */
 public class TeacherControl extends Application {
-    Teacher teacher;
+    public Teacher teacher;
     public Client client;
 
     /**
@@ -77,10 +77,10 @@ public class TeacherControl extends Application {
     /**
      * Request question from the database by question ID.
      *
-     * @param QID question id for the question that is requested.
+     * @param question question id for the question that is requested.
      */
-    public void requestQuestion(int QID) throws Exception {
-        Message message = new Message(Contract.READ_QUESTION, QID);
+    public void requestQuestion(Question question) throws Exception {
+        Message message = new Message(Contract.READ_QUESTION, question);
         client.teacherControl = this;
         client.sendToServer(message);
 

@@ -32,7 +32,7 @@ public class SQLContract {
             "`users_user_name` = ?\n" +
             "WHERE `id_question` = ? AND `subjects_id_subject` = ?;";
     public static final String DELETE_QUESTION = "DELETE FROM aes.questions " +
-            "WHERE id_question= ?;";
+            "WHERE id_question = ? AND subjects_id_subject = ?;";
     //------------------------------------------------------------------------------------------------------------------
     public static final String SHOW_QUESTION_BY_ID = "SELECT * FROM aes.questions " +
             "WHERE id_question =?;";
