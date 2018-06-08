@@ -1,40 +1,83 @@
 package com.data;
 
+
 import java.io.Serializable;
 
-/**
- * Stub Entity Class represents a Question *for testing purposes only!*
- */
 public class Question implements Serializable {
-    private int id;
+    /*
+     * Question fields
+     */
+    private int QID;
+    private String questionText;
+    private String possibleAnswers[];
+    private int correctAnswer;
+    private int subjectId;
+    private String teacherId;
 
-    //TODO this is a STUB Class!
-    public Question(int id) {
-        this.id = id;
+    /*
+     * Question constructor
+     */
+    public Question(String questionText, String[] possibleAnswers, int correctAnswer, int questionSubject, String questionAuthorTeacher) {
+        this.questionText = questionText;
+        this.correctAnswer = correctAnswer;
+        this.subjectId = questionSubject;
+        this.teacherId = questionAuthorTeacher;
+        this.possibleAnswers = possibleAnswers;
     }
 
-    @Override
-    public String toString() {
-        return "Question Stub Class! id=" + this.id;
+    /*
+     * Question getters and setters
+     */
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
+
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public int getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String[] getPossibleAnswers() {
+        return possibleAnswers;
+    }
+
+    public void setPossibleAnswers(String[] possibleAnswers) {
+        this.possibleAnswers = possibleAnswers;
+    }
+
+    public String getAns(int index) {
+        return this.possibleAnswers[index];
     }
 
     public int getQID() {
-        return id;
+        return QID;
     }
 
-    public String getText() {
-        return "Question " + this.id + " - Text";
-    }
-
-    public String getAns(int ansIndex) {
-        return "Ans " + ansIndex;
-    }
-
-    public int getIndicator() {
-        return id;
-    }
-
-    public String getAuthor() {
-        return "Author";
+    public void setQID(int QID) {
+        this.QID = QID;
     }
 }
+

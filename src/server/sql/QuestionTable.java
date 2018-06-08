@@ -22,31 +22,30 @@ public class QuestionTable {
      * @param question question to be created
      */
     public void createQuestion(Question question) {
-        //TODO STUB method remove test data values. change to question object properties
         System.out.println("QuestionTable - Create Question\n" +
                 "Question: " + question);
         //TEST: Question Creation:
-        int indicator = 2;
-        int subjectId = 6;
-        String teacherID = "t";
-        String[] data = new String[]{"test_text", "ans1", "ans2", "ans3", "ans4"};
+        int indicator = question.getCorrectAnswer();
+        int subjectId = question.getSubjectId();
+        String teacherID = question.getTeacherId();
+        String questionText = question.getQuestionText();
+        String[] data = question.getPossibleAnswers();
         PreparedStatement stmt;
         Connection con = MysqlManager.ConnectToDB();
         //------------------------------------
         try {
             stmt = con.prepareStatement(SQLContract.CREATE_QUESTION);
 
-            stmt.setString(1, data[0]);
-            stmt.setString(2, data[1]);
-            stmt.setString(3, data[2]);
-            stmt.setString(4, data[3]);
-            stmt.setString(5, data[4]);
+            stmt.setString(1, questionText);
+            stmt.setString(2, data[0]);
+            stmt.setString(3, data[1]);
+            stmt.setString(4, data[2]);
+            stmt.setString(5, data[3]);
             stmt.setInt(6, indicator);
             stmt.setString(7, teacherID);
             stmt.setInt(8, subjectId);
 
             stmt.execute();
-
             stmt.close();
             MysqlManager.closeConnection(con);
         } catch (SQLException e) {
@@ -61,25 +60,34 @@ public class QuestionTable {
      * @return Question Object filled with the entry data.
      */
     public Question readQuestion(int qid) {
-        //TODO STUB method
         System.out.println("QuestionTable - Read Question\n" +
                 "Question ID: " + qid);
         PreparedStatement stmt;
         Connection con = MysqlManager.ConnectToDB();
+        Question question = null;
+        qid = 265;
+        int subject = 3;
         try {
             stmt = con.prepareStatement(SQLContract.READ_QUESTION);
             stmt.setInt(1, qid);
-            stmt.setInt(2, qid);
-
+            stmt.setInt(2, subject);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                //TODO NEW Question
+
+                String text = rs.getString("question_text");
+                String ans1 = rs.getString("ans_1");
+                String ans2 = rs.getString("ans_2");
+                String ans3 = rs.getString("ans_3");
+                String ans4 = rs.getString("ans_4");
+                int indicator = rs.getInt("indicator");
+                String teacherId = rs.getString("users_user_name");
+                question = new Question(text, new String[]{ans1, ans2, ans3, ans4}, indicator, subject, teacherId);
             }
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);
         }
-        return new Question(qid);
+        return question;
     }
 
     /**
@@ -110,9 +118,7 @@ public class QuestionTable {
         System.out.println("QuestionTable - Select Questions By Subject\n" +
                 "Subject: " + subjectID);
         ArrayList<Question> questions = new ArrayList<>();
-        questions.add(new Question(1));
-        questions.add(new Question(2));
-        questions.add(new Question(3));
+
         return questions;
     }
 
@@ -121,9 +127,7 @@ public class QuestionTable {
         System.out.println("QuestionTable - Select Questions By Exam\n" +
                 "Exam: " + examID);
         ArrayList<Question> questions = new ArrayList<>();
-        questions.add(new Question(4));
-        questions.add(new Question(5));
-        questions.add(new Question(6));
+
         return questions;
     }
 
@@ -132,9 +136,7 @@ public class QuestionTable {
         System.out.println("QuestionTable - Select Questions By teacher\n" +
                 "Teacher: " + teacherID);
         ArrayList<Question> questions = new ArrayList<>();
-        questions.add(new Question(7));
-        questions.add(new Question(8));
-        questions.add(new Question(9));
+
         return questions;
     }
 }
