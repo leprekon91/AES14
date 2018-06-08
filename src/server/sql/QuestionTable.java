@@ -22,24 +22,31 @@ public class QuestionTable {
      * @param question question to be created
      */
     public void createQuestion(Question question) {
-        //TODO STUB method
+        //TODO STUB method remove test data values. change to question object properties
         System.out.println("QuestionTable - Create Question\n" +
                 "Question: " + question);
+        //TEST: Question Creation:
+        int indicator = 2;
+        int subjectId = 6;
+        String teacherID = "t";
+        String[] data = new String[]{"test_text", "ans1", "ans2", "ans3", "ans4"};
         PreparedStatement stmt;
         Connection con = MysqlManager.ConnectToDB();
+        //------------------------------------
         try {
             stmt = con.prepareStatement(SQLContract.CREATE_QUESTION);
-            stmt.setInt(1, question.getQID());
-            stmt.setString(2, question.getText());
-            stmt.setString(3, question.getAns(1));
-            stmt.setString(4, question.getAns(2));
-            stmt.setString(5, question.getAns(3));
-            stmt.setString(6, question.getAns(4));
-            stmt.setInt(7, question.getIndicator());
-            stmt.setString(8, question.getAuthor());
 
-            ResultSet rs = stmt.executeQuery();
-            rs.close();
+            stmt.setString(1, data[0]);
+            stmt.setString(2, data[1]);
+            stmt.setString(3, data[2]);
+            stmt.setString(4, data[3]);
+            stmt.setString(5, data[4]);
+            stmt.setInt(6, indicator);
+            stmt.setString(7, teacherID);
+            stmt.setInt(8, subjectId);
+
+            stmt.execute();
+
             stmt.close();
             MysqlManager.closeConnection(con);
         } catch (SQLException e) {

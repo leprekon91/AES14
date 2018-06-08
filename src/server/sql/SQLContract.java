@@ -17,8 +17,8 @@ public class SQLContract {
     public static final String ALL_QUESTION = "SELECT * FROM aes.questions;";
     //-----------------CRUD---------------------------------------------------------------------------------------------
     public static final String CREATE_QUESTION = "INSERT INTO aes.questions" +
-            "(id_question,question_text,ans_1,ans_2,ans_3,ans_4,indicator,users_user_name,subjects_id_subject)" +
-            " VALUES (?,?,?,?,?,?,?,?,?);";
+            "(question_text,ans_1,ans_2,ans_3,ans_4,indicator,users_user_name,subjects_id_subject)" +
+            " VALUES (?,?,?,?,?,?,?,?);";
     public static final String READ_QUESTION = "SELECT * FROM aes.questions WHERE id_question=? AND subjects_id_subject=?;";
 
     public static final String UPDATE_QUESTION = "UPDATE `aes`.`questions`\n" +
