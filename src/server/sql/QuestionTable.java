@@ -30,13 +30,13 @@ public class QuestionTable {
         try {
             stmt = con.prepareStatement(SQLContract.CREATE_QUESTION);
             stmt.setInt(1, question.getQID());
-            stmt.setString(1, question.getText());
-            stmt.setString(1, question.getAns(1));
-            stmt.setString(1, question.getAns(2));
-            stmt.setString(1, question.getAns(3));
-            stmt.setString(1, question.getAns(4));
-            stmt.setInt(1, question.getIndicator());
-            stmt.setString(1, question.getAuthor());
+            stmt.setString(2, question.getText());
+            stmt.setString(3, question.getAns(1));
+            stmt.setString(4, question.getAns(2));
+            stmt.setString(5, question.getAns(3));
+            stmt.setString(6, question.getAns(4));
+            stmt.setInt(7, question.getIndicator());
+            stmt.setString(8, question.getAuthor());
 
             ResultSet rs = stmt.executeQuery();
             rs.close();
@@ -60,11 +60,15 @@ public class QuestionTable {
         PreparedStatement stmt;
         Connection con = MysqlManager.ConnectToDB();
         try {
-            stmt = con.prepareStatement(SQLContract.CREATE_QUESTION);
-            stmt.setInt(1, );
+            stmt = con.prepareStatement(SQLContract.READ_QUESTION);
+            stmt.setInt(1, qid);
+            stmt.setInt(2, qid);
 
 
             ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                //TODO NEW Question
+            }
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);
         }
@@ -80,6 +84,7 @@ public class QuestionTable {
         //TODO STUB method
         System.out.println("QuestionTable - Update Question\n" +
                 "Question: " + question);
+
     }
 
     /**
