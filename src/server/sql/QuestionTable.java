@@ -3,6 +3,10 @@ package server.sql;
 import com.data.Question;
 import server.ocsf.ConnectionToClient;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class QuestionTable {
@@ -21,6 +25,26 @@ public class QuestionTable {
         //TODO STUB method
         System.out.println("QuestionTable - Create Question\n" +
                 "Question: " + question);
+        PreparedStatement stmt;
+        Connection con = MysqlManager.ConnectToDB();
+        try {
+            stmt = con.prepareStatement(SQLContract.CREATE_QUESTION);
+            stmt.setInt(1, question.getQID());
+            stmt.setString(1, question.getText());
+            stmt.setString(1, question.getAns(1));
+            stmt.setString(1, question.getAns(2));
+            stmt.setString(1, question.getAns(3));
+            stmt.setString(1, question.getAns(4));
+            stmt.setInt(1, question.getIndicator());
+            stmt.setString(1, question.getAuthor());
+
+            ResultSet rs = stmt.executeQuery();
+            rs.close();
+            stmt.close();
+            MysqlManager.closeConnection(con);
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
     }
 
     /**
@@ -33,6 +57,17 @@ public class QuestionTable {
         //TODO STUB method
         System.out.println("QuestionTable - Read Question\n" +
                 "Question ID: " + qid);
+        PreparedStatement stmt;
+        Connection con = MysqlManager.ConnectToDB();
+        try {
+            stmt = con.prepareStatement(SQLContract.CREATE_QUESTION);
+            stmt.setInt(1, );
+
+
+            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
         return new Question(qid);
     }
 
