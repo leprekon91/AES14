@@ -5,7 +5,12 @@ package server.sql;
  */
 public class SQLContract {
     // jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    final public static String databaseURL = "jdbc:mysql://localhost/aes?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    final public static String databaseURL = "jdbc:mysql://localhost/aes?" +
+            "useUnicode=true" +
+            "&useJDBCCompliantTimezoneShift=true" +
+            "&useLegacyDatetimeCode=false" +
+            "&serverTimezone=UTC" +
+            "&useSSL=false";
 
     public static String user = "root";       //default database user
     public static String pass = "Braude";     //default database password

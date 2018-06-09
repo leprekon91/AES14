@@ -2,11 +2,17 @@ package client.gui.fxcontrol;
 
 import client.control.TeacherControl;
 import com.data.Question;
+import com.data.Teacher;
 import javafx.event.ActionEvent;
 
 public class TeacherMenu {
     public TeacherControl teacherControl;
 
+
+    public Question openNewQuestionDialog() {
+        Teacher teacher = teacherControl.teacher;
+        return null;
+    }
 
     public void sendCreateQuestionMessage(ActionEvent actionEvent) {
         try {
