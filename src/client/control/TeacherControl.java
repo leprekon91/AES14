@@ -2,10 +2,7 @@ package client.control;
 
 import client.gui.fxcontrol.TeacherMenu;
 import com.Contract;
-import com.data.Exam;
-import com.data.Message;
-import com.data.Question;
-import com.data.Teacher;
+import com.data.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +18,7 @@ import java.util.ArrayList;
 public class TeacherControl extends Application {
     public Teacher teacher;
     public Client client;
+    public ArrayList<Subject> subjectList; //list of Subjects this teacher teaches in.
 
     /**
      * Start Method: Opens the Teacher Menu Window
@@ -29,6 +27,7 @@ public class TeacherControl extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+        requestSubjectListByTeacher();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "TeacherMenu.fxml"));
             Parent root = fxmlLoader.load();
@@ -56,6 +55,21 @@ public class TeacherControl extends Application {
 
     }
 
+    //Subject communication Methods.
+    public void requestSubjectListByTeacher() {
+        Message message = new Message(Contract.GET_SUBJECTS_BY_TEACHER, teacher);
+        try {
+            client.teacherControl = this;
+            client.sendToServer(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void receiveSubjectListByTeacher(ArrayList<Subject> subjects) {
+        this.subjectList = subjects;
+        System.out.println("Subjects Received: " + subjects);
+    }
 
     //Question Communication Methods
 

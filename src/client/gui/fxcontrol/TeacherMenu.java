@@ -4,14 +4,28 @@ import client.control.TeacherControl;
 import com.data.Question;
 import com.data.Teacher;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class TeacherMenu {
     public TeacherControl teacherControl;
+    public AnchorPane mainPane;
 
 
-    public Question openNewQuestionDialog() {
+    public void openNewQuestionDialog(ActionEvent actionEvent) {
         Teacher teacher = teacherControl.teacher;
-        return null;
+        Question question = new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 0, 5, teacher.getUsername());
+        try {
+            SingleQuestion singleQuestion = SingleQuestion.openDialog(new Stage(), question, this.teacherControl);
+            question = singleQuestion.getQuestion();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(question);
+
     }
 
     public void sendCreateQuestionMessage(ActionEvent actionEvent) {

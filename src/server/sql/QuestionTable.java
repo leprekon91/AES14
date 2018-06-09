@@ -1,7 +1,6 @@
 package server.sql;
 
 import com.data.Question;
-import server.ocsf.ConnectionToClient;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,18 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class QuestionTable {
-    public ConnectionToClient connectionToClient;//used to define whom to send the answer to...
 
-    public QuestionTable(ConnectionToClient client) {
-        this.connectionToClient = client;
-    }
 
     /**
      * Create a question entry in the database
      *
      * @param question question to be created
      */
-    public void createQuestion(Question question) {
+    public static void createQuestion(Question question) {
         System.out.println("QuestionTable - Create Question\n" +
                 "Question: " + question);
         //TEST: Question Creation:
@@ -59,7 +54,7 @@ public class QuestionTable {
      * @param question empty question object to be filled with data from the DB.
      * @return Question Object filled with the entry data.
      */
-    public Question readQuestion(Question question) {
+    public static Question readQuestion(Question question) {
         //TODO test
         System.out.println("QuestionTable - Read Question\n" +
                 "Question ID: " + question.getQID());
@@ -96,7 +91,7 @@ public class QuestionTable {
      *
      * @param question question object corresponding to the entry that is going to be updated
      */
-    public void updateQuestion(Question question) {
+    public static void updateQuestion(Question question) {
         System.out.println("QuestionTable - Update Question\n" +
                 "Question: " + question);
 
@@ -134,7 +129,7 @@ public class QuestionTable {
      *
      * @param question question object corresponding to the entry that is going to be deleted
      */
-    public void deleteQuestion(Question question) {
+    public static void deleteQuestion(Question question) {
         System.out.println("QuestionTable - Delete Question\n" +
                 "Question: " + question);
         //------------------------------------
@@ -153,7 +148,7 @@ public class QuestionTable {
         }
     }
 
-    public ArrayList<Question> selectAllQuestionsBySubject(int subjectID) {
+    public static ArrayList<Question> selectAllQuestionsBySubject(int subjectID) {
         //TODO STUB method
         System.out.println("QuestionTable - Select Questions By Subject\n" +
                 "Subject: " + subjectID);
@@ -162,7 +157,7 @@ public class QuestionTable {
         return questions;
     }
 
-    public ArrayList<Question> selectAllQuestionsByExam(int examID) {
+    public static ArrayList<Question> selectAllQuestionsByExam(int examID) {
         //TODO STUB method
         System.out.println("QuestionTable - Select Questions By Exam\n" +
                 "Exam: " + examID);
@@ -171,7 +166,7 @@ public class QuestionTable {
         return questions;
     }
 
-    public ArrayList<Question> selectAllQuestionsByTeacher(String teacherID) {
+    public static ArrayList<Question> selectAllQuestionsByTeacher(String teacherID) {
         //TODO STUB method
         System.out.println("QuestionTable - Select Questions By teacher\n" +
                 "Teacher: " + teacherID);

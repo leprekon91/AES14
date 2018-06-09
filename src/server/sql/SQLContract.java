@@ -75,4 +75,8 @@ public class SQLContract {
     public static final String GET_ALL_EXAMs_BY_COURSE = "SELECT * FROM aes.exams " +
             "WHERE courses_id_course =?;";
 
+    public static String SUBJECT_BY_TEACHER = "SELECT subjects.id_subject,subjects.subject_name\n" +
+            "FROM teachers_teach_subjects JOIN subjects\n" +
+            "ON subjects_id_subject=id_subject\n" +
+            "WHERE users_user_name=?;";
 }

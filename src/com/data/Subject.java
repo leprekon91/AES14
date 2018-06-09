@@ -1,6 +1,8 @@
 package com.data;
 
-public class Subject {
+import java.io.Serializable;
+
+public class Subject implements Serializable {
     /*
      * Subject fields
      */
@@ -35,5 +37,9 @@ public class Subject {
         this.subjectName = subjectName;
     }
 
+    @Override
+    public String toString() {
+        return subjectID + " - " + subjectName;
+    }
 }
 

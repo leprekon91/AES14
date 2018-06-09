@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="client.gui.fxcontrol.TeacherMenu">
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/"
+            xmlns:fx="http://javafx.com/fxml/" fx:controller="client.gui.fxcontrol.TeacherMenu">
     <children>
         <Button mnemonicParsing="false" onAction="#sendCreateQuestionMessage" text="Create Question"
                 AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0"/>
@@ -19,5 +19,7 @@
                 text="Questions By Exam ID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="160.0"/>
         <Button layoutX="10.0" layoutY="188.0" mnemonicParsing="false" onAction="#sendQuestionByTeacherMessage"
                 text="Questions By Teacher ID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="190.0"/>
+        <Button layoutX="168.0" layoutY="10.0" mnemonicParsing="false" onAction="#openNewQuestionDialog"
+                text="open dialog"/>
     </children>
 </AnchorPane>

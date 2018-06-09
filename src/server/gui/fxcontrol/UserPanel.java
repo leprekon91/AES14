@@ -5,8 +5,6 @@ import com.graphics.StatusLine;
 import com.style.icons.FontAwesome;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -40,6 +38,7 @@ public class UserPanel {
         icon = FontAwesome.setAsIcon(FontAwesome.ICON_WRENCH, icon);
         //status line:
         statusLine = new StatusLine(0);
+        statusPane.setMaxHeight(350);
         statusPane.getChildren().add(statusLine);
         setAnchorsFitScreen(statusLine);
 

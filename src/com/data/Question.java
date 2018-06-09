@@ -18,11 +18,11 @@ public class Question implements Serializable {
     /*
      * Question constructor
      */
-    public Question(String questionText, String[] possibleAnswers, int correctAnswer, int questionSubject, String questionAuthorTeacher) {
+    public Question(String questionText, String[] possibleAnswers, int correctAnswer, int questionSubject, String teacherID) {
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
         this.subjectId = questionSubject;
-        this.teacherId = questionAuthorTeacher;
+        this.teacherId = teacherID;
         this.possibleAnswers = possibleAnswers;
     }
 

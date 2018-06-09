@@ -30,9 +30,9 @@ public class FontAwesome {
      * and assigning them to their respective global variable holders.
      */
     private FontAwesome() {
-        this.brands = Font.loadFont(FontAwesome.class.getResource("fa-brands-400.ttf").toExternalForm(), 25);
-        this.regular = Font.loadFont(FontAwesome.class.getResource("fa-regular-400.ttf").toExternalForm(), 25);
-        this.solid = Font.loadFont(FontAwesome.class.getResource("fa-solid-900.ttf").toExternalForm(), 25);
+        this.brands = Font.loadFont(FontAwesome.class.getResource("fa-brands-400.ttf").toExternalForm(), 16);
+        this.regular = Font.loadFont(FontAwesome.class.getResource("fa-regular-400.ttf").toExternalForm(), 16);
+        this.solid = Font.loadFont(FontAwesome.class.getResource("fa-solid-900.ttf").toExternalForm(), 16);
     }
 
     /**

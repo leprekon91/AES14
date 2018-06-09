@@ -45,14 +45,13 @@ public class Contract {
 
 
     // Courses/Subject Vocabulary
-    final public static int COURSE = 30;
-    final public static int SUBJECT = 31;
-    final public static int GET_COURSE = 32;
-    final public static int GET_SUBJECT = 33;
+    final public static int SUBJECT = 30;
+    public static final int SUBJECTS = 31;
+    final public static int GET_SUBJECT = 32;
+    public static final int GET_SUBJECTS_BY_TEACHER = 33;
 
     //Grades Vocabulary
     final public static int GET_GRADES_BY_EXAM = 41;
     final public static int GET_GRADES_BY_STUDENT = 42;
-
 
 }

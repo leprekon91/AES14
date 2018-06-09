@@ -1,14 +1,10 @@
 package com.graphics;
 
 
-
-
 import com.Contract;
-import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.layout.AnchorPane;
 
 
 public class StatusLine extends LineChart<Number,Number> {
@@ -26,7 +22,7 @@ public class StatusLine extends LineChart<Number,Number> {
         this.getData().add(series);
         this.getStylesheets().add(this.getClass().getResource(Contract.css).toExternalForm());
         this.setCreateSymbols(false);
-        this.setAnimated(false);
+        //this.setAnimated(false);
         this.getXAxis().setTickLabelsVisible(false);
         this.getXAxis().setOpacity(0);
         this.setLegendVisible(false);

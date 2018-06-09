@@ -1,13 +1,12 @@
 package server.control;
 
 import com.Contract;
-import com.data.Message;
-import com.data.Question;
-import com.data.User;
+import com.data.*;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
 import server.sql.AuthorizeUser;
 import server.sql.QuestionTable;
+import server.sql.SubjectsTable;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -94,8 +93,7 @@ public class Server extends AbstractServer {
                     + " Message:\n" +
                     "\ttype:" + ((Message) msg).getType()
             );
-            //Table Controllers:
-            QuestionTable questionTable = new QuestionTable(client);
+
 
             int contractType = ((Message) msg).getType();
             //------------------------Message decode--------------------------------------------------------------------
@@ -127,44 +125,49 @@ public class Server extends AbstractServer {
                     case Contract.CREATE_QUESTION:          //Create a new Question
                         SUI.logMsg("Server Has received a 'Create question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
-                        questionTable.createQuestion((Question) ((Message) msg).getData());
+                        QuestionTable.createQuestion((Question) ((Message) msg).getData());
                         break;
                     case Contract.READ_QUESTION:            //Read an existing question By ID
                         SUI.logMsg("Server Has received a 'Read Question' message."
                                 + "\nQuestion ID: " + ((Message) msg).getData());
-                        Question question = questionTable.readQuestion((Question) ((Message) msg).getData());
+                        Question question = QuestionTable.readQuestion((Question) ((Message) msg).getData());
                         client.sendToClient(new Message(Contract.QUESTION, question));
                         break;
                     case Contract.UPDATE_QUESTION:          //Update an existing Question
                         SUI.logMsg("Server Has received a 'Update Question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
-                        questionTable.updateQuestion((Question) ((Message) msg).getData());
+                        QuestionTable.updateQuestion((Question) ((Message) msg).getData());
                         break;
                     case Contract.DELETE_QUESTION:          //Delete Question from A database
                         SUI.logMsg("Server Has received a 'Delete Question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
-                        questionTable.deleteQuestion((Question) ((Message) msg).getData());
+                        QuestionTable.deleteQuestion((Question) ((Message) msg).getData());
                         break;
                     case Contract.GET_QUESTIONS_BY_EXAM:    //Get all questions in a specific Exam
                         SUI.logMsg("Server Has received a 'Get Questions by Subject ID' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
-                        ArrayList<Question> Questions = questionTable.selectAllQuestionsByExam((Integer) ((Message) msg).getData());
+                        ArrayList<Question> Questions = QuestionTable.selectAllQuestionsByExam((Integer) ((Message) msg).getData());
                         client.sendToClient(new Message(Contract.QUESTIONS, Questions));
                         break;
                     case Contract.GET_QUESTIONS_BY_SUBJECT: //Get Questions in a specific Subject
                         SUI.logMsg("Server Has received a 'Get Questions by Exam ID' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
-                        Questions = questionTable.selectAllQuestionsBySubject((Integer) ((Message) msg).getData());
+                        Questions = QuestionTable.selectAllQuestionsBySubject((Integer) ((Message) msg).getData());
                         client.sendToClient(new Message(Contract.QUESTIONS, Questions));
                         break;
                     case Contract.GET_QUESTIONS_BY_TEACHER: //Get Questions written by a specific teacher
                         SUI.logMsg("Server Has received a 'Get Questions by Teacher ID' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
-                        Questions = questionTable.selectAllQuestionsByTeacher((String) ((Message) msg).getData());
+                        Questions = QuestionTable.selectAllQuestionsByTeacher((String) ((Message) msg).getData());
                         client.sendToClient(new Message(Contract.QUESTIONS, Questions));
                         break;
-                    case Contract.GET_COURSE:               //Get Course details
                     case Contract.GET_SUBJECT:              //Get Subject details
+                    case Contract.GET_SUBJECTS_BY_TEACHER:
+                        SUI.logMsg("Server Has received a 'Get Subjects by Teacher ID' message."
+                                + "\nQuestion: " + ((Message) msg).getData());
+                        Teacher t = (Teacher) ((Message) msg).getData();
+                        ArrayList<Subject> subjects = SubjectsTable.getAllSubjectsByTeacher(t.getUsername());
+                        client.sendToClient(new Message(Contract.SUBJECTS, subjects));
                         break;
                     case Contract.GET_GRADES_BY_EXAM:       //Get Grades of an exam
                     case Contract.GET_GRADES_BY_STUDENT:    //Get grades of a specific student
