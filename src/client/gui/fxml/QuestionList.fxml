@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+            minWidth="-Infinity" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="client.gui.fxcontrol.QuestionList">
+    <children>
+        <Button layoutX="506.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+                onAction="#openNewQuestionDialog" prefWidth="100.0" styleClass="success" text="New"
+                AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0"/>
+        <Button layoutX="492.0" layoutY="51.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+                prefWidth="100.0" styleClass="primary" text="Edit" AnchorPane.rightAnchor="8.0"
+                AnchorPane.topAnchor="45.0"/>
+        <Button layoutX="492.0" layoutY="87.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+                prefWidth="100.0" styleClass="danger" text="Delete" AnchorPane.rightAnchor="8.0"
+                AnchorPane.topAnchor="82.0"/>
+        <ListView fx:id="questionListView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0"
+                  AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="116.0"
+                  AnchorPane.topAnchor="8.0"/>
+    </children>
+</AnchorPane>

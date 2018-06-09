@@ -12,6 +12,7 @@ public class SQLContract {
             "&serverTimezone=UTC" +
             "&useSSL=false";
 
+
     public static String user = "root";       //default database user
     public static String pass = "Braude";     //default database password
 
@@ -39,6 +40,7 @@ public class SQLContract {
     public static final String DELETE_QUESTION = "DELETE FROM aes.questions " +
             "WHERE id_question = ? AND subjects_id_subject = ?;";
     //------------------------------------------------------------------------------------------------------------------
+    public static final String GET_ALL_QUESTIONS = "SELECT * FROM aes.questions";
     public static final String SHOW_QUESTION_BY_ID = "SELECT * FROM aes.questions " +
             "WHERE id_question =?;";
     public static final String SHOW_TEACHERS_QUESTION = "SELECT * FROM aes.questions " +

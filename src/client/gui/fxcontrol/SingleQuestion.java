@@ -38,7 +38,7 @@ public class SingleQuestion {
     public ArrayList<Subject> subjectList;
 
     public static SingleQuestion openDialog(Stage primaryStage, Question q, TeacherControl teacherControl) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Report.class.getResource(Contract.clientFXML + "SingleQuestion.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SingleQuestion.class.getResource(Contract.clientFXML + "SingleQuestion.fxml"));
 
         Parent root = fxmlLoader.load();
         SingleQuestion dialogController = fxmlLoader.getController();

@@ -19,6 +19,7 @@ public class TeacherControl extends Application {
     public Teacher teacher;
     public Client client;
     public ArrayList<Subject> subjectList; //list of Subjects this teacher teaches in.
+    public ArrayList<Question> questions = new ArrayList<>();
 
     /**
      * Start Method: Opens the Teacher Menu Window
@@ -28,13 +29,14 @@ public class TeacherControl extends Application {
     @Override
     public void start(Stage primaryStage) {
         requestSubjectListByTeacher();
+        requestAllQuestions();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "TeacherMenu.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            ((TeacherMenu) fxmlLoader.getController()).teacherControl = this;
+            ((TeacherMenu) fxmlLoader.getController()).setTeacherControl(this);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
-            primaryStage.setTitle("AES - " + teacher.getUsername());
+            primaryStage.setTitle("AES - " + teacher.getFirst_name() + " " + teacher.getLast_name());
             primaryStage.setMaximized(true);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -68,7 +70,6 @@ public class TeacherControl extends Application {
 
     public void receiveSubjectListByTeacher(ArrayList<Subject> subjects) {
         this.subjectList = subjects;
-        System.out.println("Subjects Received: " + subjects);
     }
 
     //Question Communication Methods
@@ -128,6 +129,20 @@ public class TeacherControl extends Application {
     }
 
     /**
+     * TODO
+     *
+     * @throws IOException
+     */
+    public void requestAllQuestions() {
+        Message message = new Message(Contract.QUESTIONS, new ArrayList<Question>());
+        client.teacherControl = this;
+        try {
+            client.sendToServer(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
      * Request all question under a specific subject
      *
      * @param subjectId the id of the subject
@@ -182,7 +197,7 @@ public class TeacherControl extends Application {
     public void receiveQuestionArray(ArrayList<Question> questions) {
         if (questions != null) {
             if (questions.size() > 0) {//Check that there are questions in the array list
-                System.out.println("Question Array Received: \n" + questions.toString());
+                this.questions = questions;
                 return;
             }
         }

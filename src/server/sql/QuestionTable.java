@@ -174,4 +174,30 @@ public class QuestionTable {
 
         return questions;
     }
+
+    public static void selectAllQuestions(ArrayList<Question> data) {
+        System.out.println("QuestionTable - All Questions\n");
+        //------------------------------------
+        PreparedStatement stmt;
+        Connection con = MysqlManager.ConnectToDB();
+        //------------------------------------
+        try {
+            stmt = con.prepareStatement(SQLContract.GET_ALL_QUESTIONS);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Question question = new Question(rs.getInt("id_question"), rs.getInt("subjects_id_subject"));
+                question.setQuestionText(rs.getString("question_text"));
+                String ans1 = rs.getString("ans_1");
+                String ans2 = rs.getString("ans_2");
+                String ans3 = rs.getString("ans_3");
+                String ans4 = rs.getString("ans_4");
+                question.setPossibleAnswers(new String[]{ans1, ans2, ans3, ans4});
+                question.setCorrectAnswer(rs.getInt("indicator"));
+                question.setTeacherId(rs.getString("users_user_name"));
+                data.add(question);
+            }
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
+    }
 }

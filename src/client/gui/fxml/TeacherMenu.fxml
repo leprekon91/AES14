@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.*?>
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/"
-            xmlns:fx="http://javafx.com/fxml/" fx:controller="client.gui.fxcontrol.TeacherMenu">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.TeacherMenu">
     <children>
-        <Button mnemonicParsing="false" onAction="#sendCreateQuestionMessage" text="Create Question"
-                AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0"/>
-        <Button mnemonicParsing="false" onAction="#sendReadQuestionMessage" text="Read Question"
-                AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="40.0"/>
-        <Button mnemonicParsing="false" onAction="#sendUpdateQuestion" text="Update Question"
-                AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="70.0"/>
-        <Button layoutX="10.0" layoutY="102.0" mnemonicParsing="false" onAction="#sendDeleteQuestionMessage"
-                text="Delete Question" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0"/>
-        <Button layoutX="10.0" layoutY="133.0" mnemonicParsing="false" onAction="#sendQuestionsBySubjectIDMessage"
-                text="Questions By Subject ID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0"/>
-        <Button layoutX="10.0" layoutY="168.0" mnemonicParsing="false" onAction="#sendQuestionsByExamIDMessage"
-                text="Questions By Exam ID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="160.0"/>
-        <Button layoutX="10.0" layoutY="188.0" mnemonicParsing="false" onAction="#sendQuestionByTeacherMessage"
-                text="Questions By Teacher ID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="190.0"/>
-        <Button layoutX="168.0" layoutY="10.0" mnemonicParsing="false" onAction="#openNewQuestionDialog"
-                text="open dialog"/>
+        <TabPane layoutX="270.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE"
+                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab closable="false" text="Questions">
+                    <content>
+                        <AnchorPane fx:id="questionPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0"/>
+                    </content>
+                </Tab>
+                <Tab text="Untitled Tab 2">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
     </children>
 </AnchorPane>

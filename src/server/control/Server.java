@@ -122,6 +122,11 @@ public class Server extends AbstractServer {
                     case Contract.GET_EXAMS_BY_SUBJECT:     //Get Exams in a specific Subject
                     case Contract.GET_EXAMS_BY_TEACHER:     //Get Exams written by a specific teacher
                         break;
+                    case Contract.QUESTIONS:
+                        SUI.logMsg("Server Has received a 'Get All Questions' message.");
+                        QuestionTable.selectAllQuestions((ArrayList<Question>) ((Message) msg).getData());
+                        client.sendToClient(msg);
+                        break;
                     case Contract.CREATE_QUESTION:          //Create a new Question
                         SUI.logMsg("Server Has received a 'Create question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());

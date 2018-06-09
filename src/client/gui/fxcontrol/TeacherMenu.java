@@ -2,36 +2,24 @@ package client.gui.fxcontrol;
 
 import client.control.TeacherControl;
 import com.data.Question;
-import com.data.Teacher;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class TeacherMenu {
+
+
     public TeacherControl teacherControl;
-    public AnchorPane mainPane;
+    public AnchorPane questionPane;
+    public QuestionList questionListControl;
 
-
-    public void openNewQuestionDialog(ActionEvent actionEvent) {
-        Teacher teacher = teacherControl.teacher;
-        Question question = new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 0, 5, teacher.getUsername());
+    public void initialize() {
         try {
-            SingleQuestion singleQuestion = SingleQuestion.openDialog(new Stage(), question, this.teacherControl);
-            question = singleQuestion.getQuestion();
+            questionListControl = QuestionList.load(questionPane);
+
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(question);
-
-    }
-
-    public void sendCreateQuestionMessage(ActionEvent actionEvent) {
-        try {
-            teacherControl.createQuestion(new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername()));
-        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -88,5 +76,16 @@ public class TeacherMenu {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public TeacherControl getTeacherControl() {
+        return teacherControl;
+    }
+
+    public void setTeacherControl(TeacherControl teacherControl) {
+        this.teacherControl = teacherControl;
+        questionListControl.teacherControl = teacherControl;
+        questionListControl.questions = FXCollections.observableArrayList(teacherControl.questions);
+        questionListControl.questionListView.setItems(questionListControl.questions);
     }
 }
