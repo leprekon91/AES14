@@ -2,6 +2,7 @@ package com.data;
 
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Question implements Serializable {
     /*
@@ -23,6 +24,11 @@ public class Question implements Serializable {
         this.subjectId = questionSubject;
         this.teacherId = questionAuthorTeacher;
         this.possibleAnswers = possibleAnswers;
+    }
+
+    public Question(int QID, int subjectId) {
+        this.QID = QID;
+        this.subjectId = subjectId;
     }
 
     /*
@@ -78,6 +84,18 @@ public class Question implements Serializable {
 
     public void setQID(int QID) {
         this.QID = QID;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "QID=" + QID +
+                ", questionText='" + questionText + '\'' +
+                ", possibleAnswers=" + Arrays.toString(possibleAnswers) +
+                ", correctAnswer=" + correctAnswer +
+                ", subjectId=" + subjectId +
+                ", teacherId='" + teacherId + '\'' +
+                '}';
     }
 }
 

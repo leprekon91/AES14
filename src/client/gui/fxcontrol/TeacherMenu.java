@@ -18,7 +18,7 @@ public class TeacherMenu {
 
     public void sendReadQuestionMessage(ActionEvent actionEvent) {
         try {
-            teacherControl.requestQuestion(new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername()));
+            teacherControl.requestQuestion(new Question(300, 4));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,7 +29,7 @@ public class TeacherMenu {
             Question q = new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername());
             q.setQID(1);
             q.setSubjectId(6);
-            teacherControl.updateQuestion(new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername()));
+            teacherControl.updateQuestion(q);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,7 +37,10 @@ public class TeacherMenu {
 
     public void sendDeleteQuestionMessage(ActionEvent actionEvent) {
         try {
-            teacherControl.deleteQuestion(new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername()));
+            Question q = new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername());
+            q.setQID(1);
+            q.setSubjectId(6);
+            teacherControl.deleteQuestion(q);
         } catch (Exception e) {
             e.printStackTrace();
         }

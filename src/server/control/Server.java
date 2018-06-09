@@ -133,7 +133,7 @@ public class Server extends AbstractServer {
                         SUI.logMsg("Server Has received a 'Read Question' message."
                                 + "\nQuestion ID: " + ((Message) msg).getData());
                         Question question = questionTable.readQuestion((Question) ((Message) msg).getData());
-                        client.sendToClient(question);
+                        client.sendToClient(new Message(Contract.QUESTION, question));
                         break;
                     case Contract.UPDATE_QUESTION:          //Update an existing Question
                         SUI.logMsg("Server Has received a 'Update Question' message."
