@@ -37,13 +37,13 @@ public class SingleQuestion {
     public TeacherControl teacherControl;
     public ArrayList<Subject> subjectList;
 
-    public static SingleQuestion openDialog(Stage primaryStage, Question q, TeacherControl teacherControl) throws IOException {
+    public static SingleQuestion openDialog(Stage primaryStage, Question q) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SingleQuestion.class.getResource(Contract.clientFXML + "SingleQuestion.fxml"));
 
         Parent root = fxmlLoader.load();
         SingleQuestion dialogController = fxmlLoader.getController();
         dialogController.setQuestion(q);
-        dialogController.teacherControl = teacherControl;
+        dialogController.teacherControl = TeacherControl.getInstance();
         dialogController.initQuestion();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Report.class.getResource(Contract.css).toExternalForm());

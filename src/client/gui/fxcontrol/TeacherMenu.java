@@ -2,26 +2,18 @@ package client.gui.fxcontrol;
 
 import client.control.TeacherControl;
 import com.data.Question;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
-
-import java.io.IOException;
 
 public class TeacherMenu {
 
 
-    public TeacherControl teacherControl;
+    public TeacherControl teacherControl = TeacherControl.getInstance();
     public AnchorPane questionPane;
-    public QuestionList questionListControl;
+
 
     public void initialize() {
-        try {
-            questionListControl = QuestionList.load(questionPane);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void sendReadQuestionMessage(ActionEvent actionEvent) {
@@ -78,14 +70,5 @@ public class TeacherMenu {
         }
     }
 
-    public TeacherControl getTeacherControl() {
-        return teacherControl;
-    }
 
-    public void setTeacherControl(TeacherControl teacherControl) {
-        this.teacherControl = teacherControl;
-        questionListControl.teacherControl = teacherControl;
-        questionListControl.questions = FXCollections.observableArrayList(teacherControl.questions);
-        questionListControl.questionListView.setItems(questionListControl.questions);
-    }
 }

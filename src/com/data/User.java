@@ -44,14 +44,7 @@ public class User implements Serializable {
         return !(this.getType() == 0);
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", pass='" + pass + '\'' +
-                ", type=" + type +
-                '}';
-    }
+
 
     public String getLast_name() {
         return last_name;
@@ -67,5 +60,14 @@ public class User implements Serializable {
 
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", pass='" + pass + '\'' +
+                ", type=" + type +
+                '}';
     }
 }

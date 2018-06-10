@@ -1,6 +1,5 @@
 package client.control;
 
-import client.gui.fxcontrol.TeacherMenu;
 import com.Contract;
 import com.data.*;
 import javafx.application.Application;
@@ -20,6 +19,12 @@ public class TeacherControl extends Application {
     public Client client;
     public ArrayList<Subject> subjectList; //list of Subjects this teacher teaches in.
     public ArrayList<Question> questions = new ArrayList<>();
+    private static TeacherControl INSTANCE;
+
+    public static TeacherControl getInstance() {
+        if (INSTANCE == null) INSTANCE = new TeacherControl();
+        return INSTANCE;
+    }
 
     /**
      * Start Method: Opens the Teacher Menu Window
@@ -28,13 +33,13 @@ public class TeacherControl extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+        INSTANCE = this;
         requestSubjectListByTeacher();
         requestAllQuestions();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "TeacherMenu.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            ((TeacherMenu) fxmlLoader.getController()).setTeacherControl(this);
             scene.getStylesheets().add(getClass().getResource(Contract.css).toExternalForm());
             primaryStage.setTitle("AES - " + teacher.getFirst_name() + " " + teacher.getLast_name());
             primaryStage.setMaximized(true);
