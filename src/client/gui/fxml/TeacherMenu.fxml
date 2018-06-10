@@ -14,14 +14,12 @@
                         <AnchorPane fx:id="questionPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
                                     prefWidth="200.0">
                             <children>
-                                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false"
+                                <Button layoutX="14.0" layoutY="127.0" mnemonicParsing="false"
                                         onAction="#openQDialogTest" text="Open Question Dialog"/>
-                                <Button layoutX="56.0" layoutY="57.0" mnemonicParsing="false"
-                                        onAction="#requestAllQuestions" text="get all questions"/>
                                 <ListView fx:id="questionList" layoutX="215.0" layoutY="14.0" prefHeight="282.0"
-                                          prefWidth="371.0" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0"
-                                          AnchorPane.topAnchor="8.0"/>
-                                <Button layoutX="97.0" layoutY="92.0" mnemonicParsing="false"
+                                          prefWidth="500.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="200.0"
+                                          AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0"/>
+                                <Button layoutX="11.0" layoutY="84.0" mnemonicParsing="false"
                                         onAction="#openNewQuestionDialog" text="new Question"/>
                             </children>
                         </AnchorPane>

@@ -77,7 +77,4 @@ public class TeacherMenu {
         openSingleQuestion(question);
     }
 
-    public void requestAllQuestions(ActionEvent actionEvent) {
-        teacherControl.requestAllQuestions();
-    }
 }

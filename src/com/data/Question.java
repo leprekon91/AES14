@@ -97,8 +97,8 @@ public class Question implements Serializable {
                 ", questionText='" + questionText + '\'' +
                 ", possibleAnswers=" + Arrays.toString(possibleAnswers) +
                 ", correctAnswer=" + correctAnswer +
-                ", subjectId=" + subject +
-                ", teacherId='" + author + '\'' +
+                ", subject=" + subject +
+                ", author='" + author + '\'' +
                 '}';
     }
 }

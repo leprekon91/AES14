@@ -9,11 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,10 +27,12 @@ public class SingleQuestion {
     public TextField teacherNameField;
     public ComboBox correctAnswerCmb;
     public ComboBox subjectCmb;
+    public Button saveBtn;
 
     public Label backIcon;
     public Label saveIcon;
     public Label clearIcon;
+
 
 
     private Question question;
@@ -46,9 +47,9 @@ public class SingleQuestion {
         dialogController.setQuestion(q);
         dialogController.teacherControl = TeacherControl.getInstance();
         dialogController.initQuestion();
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 600, 500);
         scene.getStylesheets().add(Report.class.getResource(Contract.css).toExternalForm());
-        primaryStage.setTitle("Question " + q.getSubject().getSubjectID() + q.getQID() + q.getSubject().getSubjectID());
+        primaryStage.setTitle("Question " + q.getQIDString());
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
         return dialogController;
@@ -65,7 +66,7 @@ public class SingleQuestion {
                 + " " + question.getTeacherId().getLast_name());
         correctAnswerCmb.getItems().addAll("Answer 1", "Answer 2", "Answer 3", "Answer 4");
         if (question.getCorrectAnswer() != 0) {
-            correctAnswerCmb.getSelectionModel().select(question.getCorrectAnswer());
+            correctAnswerCmb.getSelectionModel().select(question.getCorrectAnswer() - 1);
         }
         subjectList = teacherControl.subjectList;
         subjectCmb.getItems().addAll(subjectList);
@@ -84,7 +85,15 @@ public class SingleQuestion {
         backIcon.setText(FontAwesome.ICON_ANGLE_RIGHT);
         saveIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         clearIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
-
+        ValidationSupport support = new ValidationSupport();
+        support.registerValidator(textField, Validator.createEmptyValidator("Question Must Have A Text!"));
+        support.registerValidator(answer1Field, Validator.createEmptyValidator("Question Must Have All 4 Answers!"));
+        support.registerValidator(answer2Field, Validator.createEmptyValidator("Question Must Have All 4 Answers!"));
+        support.registerValidator(answer3Field, Validator.createEmptyValidator("Question Must Have All 4 Answers!"));
+        support.registerValidator(answer4Field, Validator.createEmptyValidator("Question Must Have All 4 Answers!"));
+        support.registerValidator(subjectCmb, Validator.createEmptyValidator("Subject Selection Is Required!"));
+        support.registerValidator(correctAnswerCmb, Validator.createEmptyValidator("Correct Answer Selection Is Required!"));
+        saveBtn.disableProperty().bind(support.invalidProperty());
 
     }
 
