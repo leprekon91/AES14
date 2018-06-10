@@ -2,7 +2,10 @@ package client.control;
 
 import client.ocsf.AbstractClient;
 import com.Contract;
-import com.data.*;
+import com.data.Message;
+import com.data.Question;
+import com.data.Subject;
+import com.data.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,20 +56,13 @@ public class Client extends AbstractClient {
                 receiveAuth(message);
                 break;
             case Contract.QUESTION: //Question Object was received.
-                Question question = (Question) ((Message) msg).getData();
-                teacherControl.receiveQuestion(question);
                 break;
             case Contract.QUESTIONS:
-                ArrayList<Question> questionArrayList = (ArrayList<Question>) ((Message) msg).getData();
-                teacherControl.receiveQuestionArray(questionArrayList);
+                TeacherControl.getInstance().receiveAllQuestions((ArrayList<Question>) ((Message) msg).getData());
                 break;
             case Contract.EXAM:
-                Exam exam = (Exam) ((Message) msg).getData();
-                teacherControl.receiveExam(exam);
                 break;
             case Contract.EXAMS:
-                ArrayList<Exam> exams = (ArrayList<Exam>) ((Message) msg).getData();
-                teacherControl.receiveExamArray(exams);
                 break;
             case Contract.SUBJECTS:
                 teacherControl.receiveSubjectListByTeacher((ArrayList<Subject>) ((Message) msg).getData());

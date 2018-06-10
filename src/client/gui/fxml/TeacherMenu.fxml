@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.TeacherMenu">
@@ -17,7 +15,14 @@
                                     prefWidth="200.0">
                             <children>
                                 <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false"
-                                        text="Open Question Dialog"/>
+                                        onAction="#openQDialogTest" text="Open Question Dialog"/>
+                                <Button layoutX="56.0" layoutY="57.0" mnemonicParsing="false"
+                                        onAction="#requestAllQuestions" text="get all questions"/>
+                                <ListView fx:id="questionList" layoutX="215.0" layoutY="14.0" prefHeight="282.0"
+                                          prefWidth="371.0" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="8.0"
+                                          AnchorPane.topAnchor="8.0"/>
+                                <Button layoutX="97.0" layoutY="92.0" mnemonicParsing="false"
+                                        onAction="#openNewQuestionDialog" text="new Question"/>
                             </children>
                         </AnchorPane>
                     </content>

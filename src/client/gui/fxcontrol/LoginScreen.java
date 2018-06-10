@@ -2,14 +2,14 @@ package client.gui.fxcontrol;
 
 
 import client.control.AuthControl;
-import com.Contract;
 import com.data.User;
 import com.style.icons.FontAwesome;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 /**
  * LoginScreen Controller
@@ -39,6 +39,10 @@ public class LoginScreen {
         lockIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         userIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         keyIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+        ValidationSupport support = new ValidationSupport();
+        support.registerValidator(txtUserName, Validator.createEmptyValidator("Must Enter A Username!"));
+        support.registerValidator(txtPassword, Validator.createEmptyValidator("Must Enter A Password!"));
+        btnLogin.disableProperty().bind(support.invalidProperty());
     }
 
     public void displayErrorMessage() {

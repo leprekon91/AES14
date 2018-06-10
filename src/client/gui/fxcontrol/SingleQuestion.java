@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SingleQuestion {
+    public TextField qidTextField;
     public TextArea textField;
     public TextArea answer1Field;
     public TextArea answer2Field;
@@ -47,33 +48,34 @@ public class SingleQuestion {
         dialogController.initQuestion();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Report.class.getResource(Contract.css).toExternalForm());
-        primaryStage.setTitle("Question Dialog");
+        primaryStage.setTitle("Question " + q.getSubject().getSubjectID() + q.getQID() + q.getSubject().getSubjectID());
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
         return dialogController;
     }
 
     public void initQuestion() {
+        qidTextField.setText(question.getQIDString());
         textField.setText(question.getQuestionText());
         answer1Field.setText(question.getAns(0));
         answer2Field.setText(question.getAns(1));
         answer3Field.setText(question.getAns(2));
         answer4Field.setText(question.getAns(3));
-        teacherNameField.setText(teacherControl.teacher.getFirst_name()
-                + " "
-                + teacherControl.teacher.getLast_name());
+        teacherNameField.setText(question.getTeacherId().getFirst_name()
+                + " " + question.getTeacherId().getLast_name());
         correctAnswerCmb.getItems().addAll("Answer 1", "Answer 2", "Answer 3", "Answer 4");
         if (question.getCorrectAnswer() != 0) {
             correctAnswerCmb.getSelectionModel().select(question.getCorrectAnswer());
         }
         subjectList = teacherControl.subjectList;
         subjectCmb.getItems().addAll(subjectList);
-        for (Subject s :
-                subjectList) {
-            if (s.getSubjectID() == question.getSubjectId()) {
-                subjectCmb.getSelectionModel().select(subjectList.indexOf(s));
+        if (question.getSubject() != null)
+            for (Subject s :
+                    subjectList) {
+                if (s.getSubjectID() == question.getSubject().getSubjectID()) {
+                    subjectCmb.getSelectionModel().select(subjectList.indexOf(s));
+                }
             }
-        }
 
     }
 
@@ -109,7 +111,7 @@ public class SingleQuestion {
                 answer3Field.getText(),
                 answer4Field.getText()
         });
-        question.setSubjectId(((Subject) subjectCmb.getSelectionModel().getSelectedItem()).getSubjectID());
+        question.setSubject(((Subject) subjectCmb.getSelectionModel().getSelectedItem()));
         closeDialog(actionEvent);
     }
 

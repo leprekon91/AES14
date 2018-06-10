@@ -12,23 +12,23 @@ public class Question implements Serializable {
     private String questionText;
     private String possibleAnswers[];
     private int correctAnswer;
-    private int subjectId;
-    private String teacherId;
+    private Subject subject;
+    private Teacher author;
 
     /*
      * Question constructor
      */
-    public Question(String questionText, String[] possibleAnswers, int correctAnswer, int questionSubject, String teacherID) {
+    public Question(String questionText, String[] possibleAnswers, int correctAnswer, Subject questionSubject, Teacher teacherID) {
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
-        this.subjectId = questionSubject;
-        this.teacherId = teacherID;
+        this.subject = questionSubject;
+        this.author = teacherID;
         this.possibleAnswers = possibleAnswers;
     }
 
-    public Question(int QID, int subjectId) {
+    public Question(int QID, Subject subjectId) {
         this.QID = QID;
-        this.subjectId = subjectId;
+        this.subject = subjectId;
     }
 
     /*
@@ -50,20 +50,20 @@ public class Question implements Serializable {
         this.correctAnswer = correctAnswer;
     }
 
-    public int getSubjectId() {
-        return subjectId;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
+    public void setSubject(Subject subjectId) {
+        this.subject = subjectId;
     }
 
-    public String getTeacherId() {
-        return teacherId;
+    public Teacher getTeacherId() {
+        return author;
     }
 
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacherId(Teacher teacher) {
+        this.author = teacher;
     }
 
     public String[] getPossibleAnswers() {
@@ -82,6 +82,10 @@ public class Question implements Serializable {
         return QID;
     }
 
+    public String getQIDString() {
+        return String.format("%02d", getSubject().getSubjectID()) + String.format("%03d", QID);
+    }
+
     public void setQID(int QID) {
         this.QID = QID;
     }
@@ -89,12 +93,12 @@ public class Question implements Serializable {
     @Override
     public String toString() {
         return "Question{" +
-                "QID=" + QID +
+                "QID=" + String.format("%03d", QID) +
                 ", questionText='" + questionText + '\'' +
                 ", possibleAnswers=" + Arrays.toString(possibleAnswers) +
                 ", correctAnswer=" + correctAnswer +
-                ", subjectId=" + subjectId +
-                ", teacherId='" + teacherId + '\'' +
+                ", subjectId=" + subject +
+                ", teacherId='" + author + '\'' +
                 '}';
     }
 }

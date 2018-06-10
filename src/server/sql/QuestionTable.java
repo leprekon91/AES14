@@ -1,11 +1,14 @@
 package server.sql;
 
 import com.data.Question;
+import com.data.Subject;
+import com.data.Teacher;
+import com.data.User;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class QuestionTable {
@@ -17,35 +20,10 @@ public class QuestionTable {
      * @param question question to be created
      */
     public static void createQuestion(Question question) {
+        //TODO test
         System.out.println("QuestionTable - Create Question\n" +
                 "Question: " + question);
-        //TEST: Question Creation:
-        int indicator = question.getCorrectAnswer();
-        int subjectId = question.getSubjectId();
-        String teacherID = question.getTeacherId();
-        String questionText = question.getQuestionText();
-        String[] data = question.getPossibleAnswers();
-        PreparedStatement stmt;
-        Connection con = MysqlManager.ConnectToDB();
-        //------------------------------------
-        try {
-            stmt = con.prepareStatement(SQLContract.CREATE_QUESTION);
 
-            stmt.setString(1, questionText);
-            stmt.setString(2, data[0]);
-            stmt.setString(3, data[1]);
-            stmt.setString(4, data[2]);
-            stmt.setString(5, data[3]);
-            stmt.setInt(6, indicator);
-            stmt.setString(7, teacherID);
-            stmt.setInt(8, subjectId);
-
-            stmt.execute();
-            stmt.close();
-            MysqlManager.closeConnection(con);
-        } catch (SQLException e) {
-            MysqlManager.sqlExceptionHandler(e);
-        }
     }
 
     /**
@@ -58,31 +36,6 @@ public class QuestionTable {
         //TODO test
         System.out.println("QuestionTable - Read Question\n" +
                 "Question ID: " + question.getQID());
-        PreparedStatement stmt;
-        Connection con = MysqlManager.ConnectToDB();
-
-        int qid = question.getQID();
-        int subject = question.getSubjectId();
-        try {
-            stmt = con.prepareStatement(SQLContract.READ_QUESTION);
-            stmt.setInt(1, qid);
-            stmt.setInt(2, subject);
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-
-                question.setQuestionText(rs.getString("question_text"));
-                String ans1 = rs.getString("ans_1");
-                String ans2 = rs.getString("ans_2");
-                String ans3 = rs.getString("ans_3");
-                String ans4 = rs.getString("ans_4");
-                question.setPossibleAnswers(new String[]{ans1, ans2, ans3, ans4});
-                question.setCorrectAnswer(rs.getInt("indicator"));
-                question.setTeacherId(rs.getString("users_user_name"));
-            }
-        } catch (SQLException e) {
-            MysqlManager.sqlExceptionHandler(e);
-        }
         return question;
     }
 
@@ -94,35 +47,10 @@ public class QuestionTable {
     public static void updateQuestion(Question question) {
         System.out.println("QuestionTable - Update Question\n" +
                 "Question: " + question);
+        //TODO STUB method
 
-        int indicator = question.getCorrectAnswer();
-        int subjectId = question.getSubjectId();
-        String teacherID = question.getTeacherId();
-        String questionText = question.getQuestionText();
-        String[] data = question.getPossibleAnswers();
-        PreparedStatement stmt;
-        Connection con = MysqlManager.ConnectToDB();
-        //------------------------------------
-        try {
-            stmt = con.prepareStatement(SQLContract.UPDATE_QUESTION);
-
-            stmt.setString(1, questionText);
-            stmt.setString(2, data[0]);
-            stmt.setString(3, data[1]);
-            stmt.setString(4, data[2]);
-            stmt.setString(5, data[3]);
-            stmt.setInt(6, indicator);
-            stmt.setString(7, teacherID);
-            stmt.setInt(8, question.getQID());
-            stmt.setInt(9, question.getSubjectId());
-
-            stmt.execute();
-            stmt.close();
-            MysqlManager.closeConnection(con);
-        } catch (SQLException e) {
-            MysqlManager.sqlExceptionHandler(e);
-        }
     }
+
 
     /**
      * Delete Question from the database.
@@ -132,20 +60,6 @@ public class QuestionTable {
     public static void deleteQuestion(Question question) {
         System.out.println("QuestionTable - Delete Question\n" +
                 "Question: " + question);
-        //------------------------------------
-        PreparedStatement stmt;
-        Connection con = MysqlManager.ConnectToDB();
-        //------------------------------------
-        try {
-            stmt = con.prepareStatement(SQLContract.DELETE_QUESTION);
-            stmt.setInt(1, question.getQID());
-            stmt.setInt(2, question.getSubjectId());
-            stmt.execute();
-            stmt.close();
-            MysqlManager.closeConnection(con);
-        } catch (SQLException e) {
-            MysqlManager.sqlExceptionHandler(e);
-        }
     }
 
     public static ArrayList<Question> selectAllQuestionsBySubject(int subjectID) {
@@ -177,27 +91,41 @@ public class QuestionTable {
 
     public static void selectAllQuestions(ArrayList<Question> data) {
         System.out.println("QuestionTable - All Questions\n");
-        //------------------------------------
-        PreparedStatement stmt;
+        //-------------------------------------------------------------------------------------------------------------
         Connection con = MysqlManager.ConnectToDB();
-        //------------------------------------
+        Statement stmt = null;
         try {
-            stmt = con.prepareStatement(SQLContract.GET_ALL_QUESTIONS);
-            ResultSet rs = stmt.executeQuery();
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(SQLContract.ALL_QUESTION);
+
             while (rs.next()) {
-                Question question = new Question(rs.getInt("id_question"), rs.getInt("subjects_id_subject"));
-                question.setQuestionText(rs.getString("question_text"));
-                String ans1 = rs.getString("ans_1");
-                String ans2 = rs.getString("ans_2");
-                String ans3 = rs.getString("ans_3");
-                String ans4 = rs.getString("ans_4");
-                question.setPossibleAnswers(new String[]{ans1, ans2, ans3, ans4});
-                question.setCorrectAnswer(rs.getInt("indicator"));
-                question.setTeacherId(rs.getString("users_user_name"));
+                Question question = new Question(
+                        rs.getString("question_text"),
+                        new String[]{
+                                rs.getString("ans_1"),
+                                rs.getString("ans_2"),
+                                rs.getString("ans_3"),
+                                rs.getString("ans_4")
+                        },
+                        rs.getInt("indicator"),
+                        new Subject(
+                                rs.getInt("id_subject"),
+                                rs.getString("subject_name")
+                        ),
+                        new Teacher(
+                                new User(
+                                        rs.getString("user_name"),
+                                        rs.getString("first_name"),
+                                        rs.getString("last_name"),
+                                        2)
+                        )
+                );
+                question.setQID(rs.getInt("id_question"));
                 data.add(question);
             }
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);
         }
+
     }
 }

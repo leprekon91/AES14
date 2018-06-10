@@ -68,8 +68,9 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="245.0"
                             style="-fx-background-color: white;">
                     <children>
-                        <TextField disable="true" layoutX="22.0" layoutY="30.0" prefHeight="25.0" prefWidth="182.0"
-                                   promptText="Question ID" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
+                        <TextField fx:id="qidTextField" disable="true" layoutX="22.0" layoutY="30.0" prefHeight="25.0"
+                                   prefWidth="182.0" promptText="Question ID" AnchorPane.leftAnchor="20.0"
+                                   AnchorPane.rightAnchor="20.0"/>
                         <TextField fx:id="teacherNameField" disable="true" layoutX="22.0" layoutY="75.0"
                                    prefHeight="25.0" prefWidth="182.0" text="Teacher name:" AnchorPane.leftAnchor="20.0"
                                    AnchorPane.rightAnchor="20.0"/>

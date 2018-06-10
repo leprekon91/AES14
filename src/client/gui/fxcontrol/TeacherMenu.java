@@ -2,73 +2,82 @@ package client.gui.fxcontrol;
 
 import client.control.TeacherControl;
 import com.data.Question;
+import com.data.Subject;
+import com.data.Teacher;
+import com.data.User;
 import javafx.event.ActionEvent;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class TeacherMenu {
 
 
     public TeacherControl teacherControl = TeacherControl.getInstance();
     public AnchorPane questionPane;
+    public ListView questionList;
 
 
     public void initialize() {
+        questionList.setItems(TeacherControl.getInstance().questions);
 
     }
 
-    public void sendReadQuestionMessage(ActionEvent actionEvent) {
+
+    public void openSingleQuestion(Question question) {
         try {
-            teacherControl.requestQuestion(new Question(300, 4));
-        } catch (Exception e) {
+            SingleQuestion.openDialog(new Stage(), question);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void sendUpdateQuestion(ActionEvent actionEvent) {
-        try {
-            Question q = new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername());
-            q.setQID(1);
-            q.setSubjectId(6);
-            teacherControl.updateQuestion(q);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendDeleteQuestionMessage(ActionEvent actionEvent) {
-        try {
-            Question q = new Question("text", new String[]{"ans1", "ans2", "ans3", "ans4"}, 2, 3, teacherControl.teacher.getUsername());
-            q.setQID(1);
-            q.setSubjectId(6);
-            teacherControl.deleteQuestion(q);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendQuestionsBySubjectIDMessage(ActionEvent actionEvent) {
-        try {
-            teacherControl.requestQuestionsBySubjectId(9);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendQuestionsByExamIDMessage(ActionEvent actionEvent) {
-        try {
-            teacherControl.requestQuestionsByExamId(8);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendQuestionByTeacherMessage(ActionEvent actionEvent) {
-        try {
-            teacherControl.requestQuestionsByTeaacherId();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void openNewQuestionDialog(ActionEvent actionEvent) {
+        Question question = new Question(
+                "",
+                new String[]{
+                        "",
+                        "",
+                        "",
+                        ""
+                },
+                4,
+                null,
+                teacherControl.teacher
+        );
+        openSingleQuestion(question);
     }
 
 
+    public void openQDialogTest(ActionEvent actionEvent) {
+        Question question = new Question(
+                "This is Question Text",
+                new String[]{
+                        "Answer 1",
+                        "Answer 2",
+                        "Answer 3",
+                        "Answer 4"
+                },
+                4,
+                new Subject(
+                        1,
+                        "Math"
+                ),
+                new Teacher(
+                        new User(
+                                "userName",
+                                "fName",
+                                "lName",
+                                2)
+                )
+        );
+        question.setQID(5);
+        openSingleQuestion(question);
+    }
+
+    public void requestAllQuestions(ActionEvent actionEvent) {
+        teacherControl.requestAllQuestions();
+    }
 }
