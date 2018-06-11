@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.TeacherMenu">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9"
+            fx:controller="client.gui.fxcontrol.TeacherMenu">
     <children>
         <TabPane layoutX="270.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE"
                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -44,6 +44,8 @@
                                         <Label fx:id="delIcon" text=""/>
                                     </graphic>
                                 </Button>
+                                <Button fx:id="openViewBtn" onAction="#openView" layoutX="7.0" layoutY="251.0"
+                                        mnemonicParsing="false" text="openView"/>
                             </children>
                         </AnchorPane>
                     </content>

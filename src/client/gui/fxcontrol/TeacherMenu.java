@@ -116,4 +116,10 @@ public class TeacherMenu {
         }
     }
 
+    public void openView(ActionEvent actionEvent) {
+        for (Object q :
+                questionList.getSelectionModel().getSelectedItems()) {
+
+        }
+    }
 }

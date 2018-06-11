@@ -47,7 +47,7 @@ public class SingleQuestion {
         dialogController.teacherControl = TeacherControl.getInstance();
         dialogController.initQuestion();
         Scene scene = new Scene(root, 600, 500);
-        scene.getStylesheets().add(Report.class.getResource(Contract.css).toExternalForm());
+        scene.getStylesheets().add(SingleQuestion.class.getResource(Contract.css).toExternalForm());
         primaryStage.setTitle("Question Dialog");
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
