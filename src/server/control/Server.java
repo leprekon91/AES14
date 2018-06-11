@@ -96,6 +96,7 @@ public class Server extends AbstractServer {
 
 
             int contractType = ((Message) msg).getType();
+            ArrayList<Question> updatedQuestions = new ArrayList<>();
             //------------------------Message decode--------------------------------------------------------------------
             try {
                 switch (contractType) {
@@ -131,6 +132,9 @@ public class Server extends AbstractServer {
                         SUI.logMsg("Server Has received a 'Create question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
                         QuestionTable.createQuestion((Question) ((Message) msg).getData());
+                        updatedQuestions = new ArrayList<>();
+                        QuestionTable.selectAllQuestions(updatedQuestions);
+                        client.sendToClient(new Message(Contract.QUESTIONS, updatedQuestions));
                         break;
                     case Contract.READ_QUESTION:            //Read an existing question By ID
                         SUI.logMsg("Server Has received a 'Read Question' message."
@@ -142,11 +146,17 @@ public class Server extends AbstractServer {
                         SUI.logMsg("Server Has received a 'Update Question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
                         QuestionTable.updateQuestion((Question) ((Message) msg).getData());
+                        updatedQuestions = new ArrayList<>();
+                        QuestionTable.selectAllQuestions(updatedQuestions);
+                        client.sendToClient(new Message(Contract.QUESTIONS, updatedQuestions));
                         break;
                     case Contract.DELETE_QUESTION:          //Delete Question from A database
                         SUI.logMsg("Server Has received a 'Delete Question' message."
                                 + "\nQuestion: " + ((Message) msg).getData());
                         QuestionTable.deleteQuestion((Question) ((Message) msg).getData());
+                        updatedQuestions = new ArrayList<>();
+                        QuestionTable.selectAllQuestions(updatedQuestions);
+                        client.sendToClient(new Message(Contract.QUESTIONS, updatedQuestions));
                         break;
                     case Contract.GET_QUESTIONS_BY_EXAM:    //Get all questions in a specific Exam
                         SUI.logMsg("Server Has received a 'Get Questions by Subject ID' message."

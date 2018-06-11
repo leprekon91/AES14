@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.TeacherMenu">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.TeacherMenu">
     <children>
         <TabPane layoutX="270.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE"
                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -14,8 +14,6 @@
                         <AnchorPane fx:id="questionPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
                                     prefWidth="200.0">
                             <children>
-                                <Button layoutX="14.0" layoutY="314.0" mnemonicParsing="false"
-                                        onAction="#openQDialogTest" text="Open Question Dialog"/>
                                 <ListView fx:id="questionList" layoutX="215.0" layoutY="14.0" prefHeight="282.0"
                                           prefWidth="500.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="100.0"
                                           AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0"/>
@@ -28,18 +26,20 @@
                                         <Label fx:id="plusIcon" text=""/>
                                     </graphic>
                                 </Button>
-                                <Button contentDisplay="TOP" graphicTextGap="10.0" layoutX="8.0" layoutY="80.0"
-                                        maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                                        prefHeight="80.0" prefWidth="80.0" styleClass="warning" text="Edit"
-                                        AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="80.0">
+                                <Button fx:id="editBtn" contentDisplay="TOP" graphicTextGap="10.0" layoutX="8.0"
+                                        layoutY="80.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                        onAction="#openEditQuestionDialog" prefHeight="80.0" prefWidth="80.0"
+                                        styleClass="warning" text="Edit" AnchorPane.leftAnchor="8.0"
+                                        AnchorPane.topAnchor="80.0">
                                     <graphic>
                                         <Label fx:id="editIcon" text=""/>
                                     </graphic>
                                 </Button>
-                                <Button contentDisplay="TOP" graphicTextGap="10.0" layoutX="8.0" layoutY="151.0"
-                                        maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                                        prefHeight="80.0" prefWidth="80.0" styleClass="danger" text="Delete"
-                                        AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="155.0">
+                                <Button fx:id="deleteBtn" contentDisplay="TOP" graphicTextGap="10.0" layoutX="8.0"
+                                        layoutY="151.0" maxWidth="-Infinity" minWidth="-Infinity"
+                                        mnemonicParsing="false" onAction="#deleteQuestion" prefHeight="80.0"
+                                        prefWidth="80.0" styleClass="danger" text="Delete" AnchorPane.leftAnchor="8.0"
+                                        AnchorPane.topAnchor="155.0">
                                     <graphic>
                                         <Label fx:id="delIcon" text=""/>
                                     </graphic>

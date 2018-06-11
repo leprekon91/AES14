@@ -34,7 +34,6 @@ public class SingleQuestion {
     public Label clearIcon;
 
 
-
     private Question question;
     public TeacherControl teacherControl;
     public ArrayList<Subject> subjectList;
@@ -49,7 +48,7 @@ public class SingleQuestion {
         dialogController.initQuestion();
         Scene scene = new Scene(root, 600, 500);
         scene.getStylesheets().add(Report.class.getResource(Contract.css).toExternalForm());
-        primaryStage.setTitle("Question " + q.getQIDString());
+        primaryStage.setTitle("Question Dialog");
         primaryStage.setScene(scene);
         primaryStage.showAndWait();
         return dialogController;
@@ -62,8 +61,8 @@ public class SingleQuestion {
         answer2Field.setText(question.getAns(1));
         answer3Field.setText(question.getAns(2));
         answer4Field.setText(question.getAns(3));
-        teacherNameField.setText(question.getTeacherId().getFirst_name()
-                + " " + question.getTeacherId().getLast_name());
+        teacherNameField.setText(question.getAuthor().getFirst_name()
+                + " " + question.getAuthor().getLast_name());
         correctAnswerCmb.getItems().addAll("\u2776 Answer 1", "\u2777 Answer 2", "\u2778; Answer 3", "\u2779 Answer 4");
         if (question.getCorrectAnswer() != 0) {
             correctAnswerCmb.getSelectionModel().select(question.getCorrectAnswer() - 1);

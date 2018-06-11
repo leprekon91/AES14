@@ -1,18 +1,19 @@
 package client.gui.fxcontrol;
 
 import client.control.TeacherControl;
+import com.Contract;
+import com.data.Message;
 import com.data.Question;
-import com.data.Subject;
-import com.data.Teacher;
-import com.data.User;
 import com.style.icons.FontAwesome;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class TeacherMenu {
 
@@ -23,6 +24,8 @@ public class TeacherMenu {
     public Label plusIcon;
     public Label editIcon;
     public Label delIcon;
+    public Button editBtn;
+    public Button deleteBtn;
 
 
     public void initialize() {
@@ -31,7 +34,10 @@ public class TeacherMenu {
         delIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
 
         questionList.setItems(TeacherControl.getInstance().questions);
-
+        ValidationSupport support = new ValidationSupport();
+        support.registerValidator(questionList, Validator.createEmptyValidator("Subject Selection Is Required!"));
+        editBtn.disableProperty().bind(support.invalidProperty());
+        deleteBtn.disableProperty().bind(support.invalidProperty());
     }
 
 
@@ -44,49 +50,70 @@ public class TeacherMenu {
     }
 
     public void openNewQuestionDialog(ActionEvent actionEvent) {
-        Question question = new Question(
-                "",
-                new String[]{
-                        "",
-                        "",
-                        "",
-                        ""
-                },
-                4,
-                null,
-                teacherControl.teacher
-        );
+        Question question = new Question("", new String[]{"", "", "", ""}, 0, null, teacherControl.teacher);
         openSingleQuestion(question);
-        //add question to list
-        //send question to the database
+        System.out.println(question);
+
+        try {
+            teacherControl.client.sendToServer(new Message(Contract.CREATE_QUESTION, question));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //update questions
     }
 
 
-    //--------------------------------------------------------
-    public void openQDialogTest(ActionEvent actionEvent) {
-        Question question = new Question(
-                "This is Question Text",
-                new String[]{
-                        "Answer 1",
-                        "Answer 2",
-                        "Answer 3",
-                        "Answer 4"
-                },
-                4,
-                new Subject(
-                        1,
-                        "Math"
-                ),
-                new Teacher(
-                        new User(
-                                "userName",
-                                "fName",
-                                "lName",
-                                2)
-                )
-        );
-        question.setQID(5);
-        openSingleQuestion(question);
+    public void openEditQuestionDialog(ActionEvent actionEvent) {
+        for (Object q :
+                questionList.getSelectionModel().getSelectedItems()) {
+            if (((Question) q).getAuthor().getUsername().equals(teacherControl.teacher.getUsername())) {
+                openSingleQuestion((Question) q);
+                try {
+                    teacherControl.client.sendToServer(new Message(Contract.UPDATE_QUESTION, q));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Can't Edit Question!");
+                alert.setContentText("You can't edit questions you didn't write!");
+                alert.showAndWait();
+            }
+
+        }
+
+
     }
-//--------------------------------------------------------
+
+    public void deleteQuestion(ActionEvent actionEvent) {
+        //display warning dialog
+        for (Object q :
+                questionList.getSelectionModel().getSelectedItems()) {
+            if (((Question) q).getAuthor().getUsername().equals(teacherControl.teacher.getUsername())) {
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Wait!");
+                alert.setHeaderText("Are You Sure?");
+                alert.setContentText("You can't restore the questions you delete! " +
+                        "\nAre you sure you wan't to delete this question?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    //send question to deletion
+                    try {
+                        teacherControl.client.sendToServer(new Message(Contract.DELETE_QUESTION, q));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Can't Edit Question!");
+                alert.setContentText("You can't edit questions you didn't write!");
+                alert.showAndWait();
+            }
+        }
+    }
+
 }

@@ -5,10 +5,7 @@ import com.data.Subject;
 import com.data.Teacher;
 import com.data.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class QuestionTable {
@@ -23,6 +20,26 @@ public class QuestionTable {
         //TODO test
         System.out.println("QuestionTable - Create Question\n" +
                 "Question: " + question);
+        Connection con = MysqlManager.ConnectToDB();
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(SQLContract.CREATE_QUESTION);
+            stmt.setString(1, question.getQuestionText());
+            stmt.setString(2, question.getAns(0));
+            stmt.setString(3, question.getAns(1));
+            stmt.setString(4, question.getAns(2));
+            stmt.setString(5, question.getAns(3));
+            stmt.setInt(6, question.getCorrectAnswer());
+            stmt.setString(7, question.getAuthor().getUsername());
+            stmt.setInt(8, question.getSubject().getSubjectID());
+            stmt.execute();
+            con.commit();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
+
 
     }
 
@@ -47,7 +64,27 @@ public class QuestionTable {
     public static void updateQuestion(Question question) {
         System.out.println("QuestionTable - Update Question\n" +
                 "Question: " + question);
-        //TODO STUB method
+
+        Connection con = MysqlManager.ConnectToDB();
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(SQLContract.UPDATE_QUESTION);
+            stmt.setString(1, question.getQuestionText());
+            stmt.setString(2, question.getAns(0));
+            stmt.setString(3, question.getAns(1));
+            stmt.setString(4, question.getAns(2));
+            stmt.setString(5, question.getAns(3));
+            stmt.setInt(6, question.getCorrectAnswer());
+            stmt.setString(7, question.getAuthor().getUsername());
+            stmt.setInt(8, question.getQID());
+            stmt.setInt(9, question.getSubject().getSubjectID());
+            stmt.execute();
+            con.commit();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
 
     }
 
@@ -60,6 +97,20 @@ public class QuestionTable {
     public static void deleteQuestion(Question question) {
         System.out.println("QuestionTable - Delete Question\n" +
                 "Question: " + question);
+        Connection con = MysqlManager.ConnectToDB();
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(SQLContract.DELETE_QUESTION);
+            stmt.setInt(1, question.getQID());
+            stmt.setInt(2, question.getSubject().getSubjectID());
+
+            stmt.execute();
+            con.commit();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
     }
 
     public static ArrayList<Question> selectAllQuestionsBySubject(int subjectID) {

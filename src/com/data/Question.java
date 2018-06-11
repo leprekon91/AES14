@@ -58,11 +58,11 @@ public class Question implements Serializable {
         this.subject = subjectId;
     }
 
-    public Teacher getTeacherId() {
+    public Teacher getAuthor() {
         return author;
     }
 
-    public void setTeacherId(Teacher teacher) {
+    public void setAuthor(Teacher teacher) {
         this.author = teacher;
     }
 
@@ -83,7 +83,9 @@ public class Question implements Serializable {
     }
 
     public String getQIDString() {
-        return String.format("%02d", getSubject().getSubjectID()) + String.format("%03d", QID);
+        if (subject != null)
+            return String.format("%02d", getSubject().getSubjectID()) + String.format("%03d", QID);
+        return "00000";
     }
 
     public void setQID(int QID) {

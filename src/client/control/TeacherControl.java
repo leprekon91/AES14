@@ -6,6 +6,7 @@ import com.data.Question;
 import com.data.Subject;
 import com.data.Teacher;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -84,8 +85,10 @@ public class TeacherControl extends Application {
     }
 
     public void receiveAllQuestions(ArrayList<Question> questions) {
-        this.questions.setAll(questions);
-        System.out.println("Questions Were Changed in observable List - " + questions);
+        Platform.runLater(() -> {
+            this.questions.setAll(questions);
+            System.out.println("Questions Were Changed in observable List - " + questions);
+        });
     }
 
     public void requestAllQuestions() {
