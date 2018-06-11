@@ -2,14 +2,19 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9"
-            fx:controller="client.gui.fxcontrol.TeacherMenu">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.TeacherMenu">
     <children>
-        <TabPane layoutX="270.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE"
-                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                 AnchorPane.topAnchor="0.0">
+        <TabPane layoutX="270.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0" side="LEFT"
+                 tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
                 <Tab closable="false" text="Questions">
+                    <graphic>
+
+                        <Label fx:id="questionsIcon" text="&#xf059;"/>
+
+                    </graphic>
                     <content>
                         <AnchorPane fx:id="questionPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
                                     prefWidth="200.0">
@@ -56,7 +61,12 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Untitled Tab 2">
+                <Tab text="Exams">
+                    <graphic>
+
+                        <Label fx:id="examsIcon" text="&#xf06a;"/>
+
+                    </graphic>
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
                     </content>

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class Question implements Serializable {
-    /*
+    /**
      * Question fields
      */
     private int QID;
@@ -26,6 +26,10 @@ public class Question implements Serializable {
         this.possibleAnswers = possibleAnswers;
     }
 
+    /**
+     * @param QID
+     * @param subjectId
+     */
     public Question(int QID, Subject subjectId) {
         this.QID = QID;
         this.subject = subjectId;

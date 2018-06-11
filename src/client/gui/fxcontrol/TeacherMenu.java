@@ -27,6 +27,8 @@ public class TeacherMenu {
     public Button editBtn;
     public Button deleteBtn;
     public Label eyeIcon;
+    public Label examsIcon;
+    public Label questionsIcon;
 
 
     public void initialize() {
@@ -34,6 +36,8 @@ public class TeacherMenu {
         editIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         delIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         eyeIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+        examsIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+        questionsIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
 
         questionList.setItems(TeacherControl.getInstance().questions);
         ValidationSupport support = new ValidationSupport();
