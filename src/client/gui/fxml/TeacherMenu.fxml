@@ -44,8 +44,14 @@
                                         <Label fx:id="delIcon" text=""/>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="openViewBtn" onAction="#openView" layoutX="7.0" layoutY="251.0"
-                                        mnemonicParsing="false" text="openView"/>
+                                <Button fx:id="openViewBtn" contentDisplay="TOP" layoutX="8.0" layoutY="225.0"
+                                        maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                        onAction="#openView" prefHeight="80.0" prefWidth="80.0" text="View"
+                                        AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="225.0">
+                                    <graphic>
+                                        <Label fx:id="eyeIcon" text=""/>
+                                    </graphic>
+                                </Button>
                             </children>
                         </AnchorPane>
                     </content>

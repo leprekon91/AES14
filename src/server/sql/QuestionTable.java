@@ -17,7 +17,6 @@ public class QuestionTable {
      * @param question question to be created
      */
     public static void createQuestion(Question question) {
-        //TODO test
         System.out.println("QuestionTable - Create Question\n" +
                 "Question: " + question);
         Connection con = MysqlManager.ConnectToDB();

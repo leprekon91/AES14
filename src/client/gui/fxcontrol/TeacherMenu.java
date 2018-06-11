@@ -26,12 +26,14 @@ public class TeacherMenu {
     public Label delIcon;
     public Button editBtn;
     public Button deleteBtn;
+    public Label eyeIcon;
 
 
     public void initialize() {
         plusIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         editIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         delIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+        eyeIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
 
         questionList.setItems(TeacherControl.getInstance().questions);
         ValidationSupport support = new ValidationSupport();
@@ -53,12 +55,12 @@ public class TeacherMenu {
         Question question = new Question("", new String[]{"", "", "", ""}, 0, null, teacherControl.teacher);
         openSingleQuestion(question);
         System.out.println(question);
-
-        try {
-            teacherControl.client.sendToServer(new Message(Contract.CREATE_QUESTION, question));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if (question.getQuestionText().equals(""))
+            try {
+                teacherControl.client.sendToServer(new Message(Contract.CREATE_QUESTION, question));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         //update questions
     }
 
@@ -119,7 +121,11 @@ public class TeacherMenu {
     public void openView(ActionEvent actionEvent) {
         for (Object q :
                 questionList.getSelectionModel().getSelectedItems()) {
-
+            try {
+                QuestionView.openWindow(new Stage(), (Question) q);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

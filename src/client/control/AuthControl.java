@@ -124,7 +124,7 @@ public class AuthControl {
                 studentControl.student = student;
                 studentControl.client = client;
                 Stage stage = new Stage();
-                stage.setTitle("AES - " + student.getFirst_name() + " " + student.getLast_name());
+                stage.setTitle("AES - " + student.getFullName());
                 studentControl.start(stage);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -145,7 +145,7 @@ public class AuthControl {
                 teacherControl.teacher = teacher;
                 teacherControl.client = client;
                 Stage stage = new Stage();
-                stage.setTitle("AES - " + teacher.getFirst_name() + " " + teacher.getLast_name());
+                stage.setTitle("AES - " + teacher.getFullName());
                 teacherControl.start(stage);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -166,7 +166,7 @@ public class AuthControl {
                 principalControl.principal = principal;
                 principalControl.client = client;
                 Stage stage = new Stage();
-                stage.setTitle("AES - " + principal.getFirst_name() + " " + principal.getLast_name());
+                stage.setTitle("AES - " + principal.getFullName());
                 principalControl.start(stage);
             } catch (Exception e) {
                 e.printStackTrace();
