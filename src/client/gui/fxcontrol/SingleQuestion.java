@@ -64,7 +64,7 @@ public class SingleQuestion {
         answer4Field.setText(question.getAns(3));
         teacherNameField.setText(question.getTeacherId().getFirst_name()
                 + " " + question.getTeacherId().getLast_name());
-        correctAnswerCmb.getItems().addAll("Answer 1", "Answer 2", "Answer 3", "Answer 4");
+        correctAnswerCmb.getItems().addAll("\u2776 Answer 1", "\u2777 Answer 2", "\u2778; Answer 3", "\u2779 Answer 4");
         if (question.getCorrectAnswer() != 0) {
             correctAnswerCmb.getSelectionModel().select(question.getCorrectAnswer() - 1);
         }

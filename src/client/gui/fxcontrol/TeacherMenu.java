@@ -5,7 +5,9 @@ import com.data.Question;
 import com.data.Subject;
 import com.data.Teacher;
 import com.data.User;
+import com.style.icons.FontAwesome;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -18,9 +20,16 @@ public class TeacherMenu {
     public TeacherControl teacherControl = TeacherControl.getInstance();
     public AnchorPane questionPane;
     public ListView questionList;
+    public Label plusIcon;
+    public Label editIcon;
+    public Label delIcon;
 
 
     public void initialize() {
+        plusIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+        editIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+        delIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+
         questionList.setItems(TeacherControl.getInstance().questions);
 
     }
@@ -48,9 +57,12 @@ public class TeacherMenu {
                 teacherControl.teacher
         );
         openSingleQuestion(question);
+        //add question to list
+        //send question to the database
     }
 
 
+    //--------------------------------------------------------
     public void openQDialogTest(ActionEvent actionEvent) {
         Question question = new Question(
                 "This is Question Text",
@@ -76,5 +88,5 @@ public class TeacherMenu {
         question.setQID(5);
         openSingleQuestion(question);
     }
-
+//--------------------------------------------------------
 }

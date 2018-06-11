@@ -24,25 +24,26 @@
                                    AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.0">
                             <panes>
                                 <TitledPane animated="false" opacity="0.98" prefHeight="100.0" prefWidth="202.0"
-                                            text="Answer 1">
+                                            text="&#x2776; Answer 1">
                                     <content>
                                         <TextArea fx:id="answer1Field" prefHeight="200.0" prefWidth="200.0"
                                                   promptText="First Answer"/>
                                     </content>
                                 </TitledPane>
-                                <TitledPane animated="false" text="Answer 2">
+                                <TitledPane animated="false" text="&#x2777; Answer 2">
                                     <content>
                                         <TextArea fx:id="answer2Field" prefHeight="200.0" prefWidth="200.0"
                                                   promptText="Second Answer"/>
                                     </content>
                                 </TitledPane>
-                                <TitledPane prefHeight="23.0" prefWidth="202.0" text="Answer 3">
+                                <TitledPane prefHeight="23.0" prefWidth="202.0" text="&#x2778; Answer 3">
                                     <content>
                                         <TextArea fx:id="answer3Field" prefHeight="200.0" prefWidth="200.0"
                                                   promptText="Third Answer"/>
                                     </content>
                                 </TitledPane>
-                                <TitledPane animated="false" prefHeight="0.0" prefWidth="193.0" text="Answer 4">
+                                <TitledPane animated="false" prefHeight="0.0" prefWidth="193.0"
+                                            text="&#x2779; Answer 4">
                                     <content>
                                         <TextArea fx:id="answer4Field" prefHeight="200.0" prefWidth="200.0"
                                                   promptText="Fourth Answer"/>
