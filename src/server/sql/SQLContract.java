@@ -33,7 +33,7 @@ public class SQLContract {
             " VALUES (?,?,?,?,?,?,?,?);";
     public static final String READ_QUESTION = "SELECT * FROM questions WHERE id_question=? AND subjects_id_subject=?;";
 
-    public static final String UPDATE_QUESTION = "UPDATE `AES`.`questions`\n" +
+    public static final String UPDATE_QUESTION = "UPDATE `questions`\n" +
             "SET\n" +
             "`question_text` = ?,\n" +
             "`ans_1` = ?,\n" +
@@ -46,7 +46,6 @@ public class SQLContract {
     public static final String DELETE_QUESTION = "DELETE FROM questions " +
             "WHERE id_question = ? AND subjects_id_subject = ?;";
     //------------------------------------------------------------------------------------------------------------------
-    public static final String GET_ALL_QUESTIONS = "SELECT * FROM questions";
     public static final String SHOW_QUESTION_BY_ID = "SELECT * FROM questions " +
             "WHERE id_question =?;";
     public static final String SHOW_TEACHERS_QUESTION = "SELECT * FROM questions " +
