@@ -82,7 +82,7 @@ ENGINE = InnoDB;
 -- Table `AES`.`questions`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AES`.`questions` (
-  `id_question` INT NOT NULL,
+  `id_question` INT NOT NULL AUTO_INCREMENT,
   `question_text` TEXT(200) NOT NULL,
   `ans_1` TEXT(200) NOT NULL,
   `ans_2` TEXT(200) NOT NULL,
