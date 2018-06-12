@@ -24,9 +24,12 @@ public class QuestionListViewCell extends ListCell<Question> {
 
     @Override
     protected void updateItem(Question item, boolean empty) {
+        super.updateItem(item, empty);
         if (empty || item == null) {
+
             setText(null);
             setGraphic(null);
+
         } else {
             if (mlLoader == null) {
                 mlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "QuestionListViewCell.fxml"));
@@ -36,17 +39,18 @@ public class QuestionListViewCell extends ListCell<Question> {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String thisUser = TeacherControl.getInstance().teacher.getUsername();
-                if (item.getAuthor().getUsername().equals(thisUser)) this.qIcon.setTextFill(Color.GREEN);
-                else this.qIcon.setTextFill(Color.RED);
-                qidLbl.setText(item.getQIDString());
-                qTextLbl.setText(item.getQuestionText());
-                authorLbl.setText(item.getAuthor().getFullName());
-                subjectIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
-                subjectLbl.setText("(" + item.getSubject().getSubjectID() + ") " + item.getSubject().getSubjectName());
-                setText(null);
-                setGraphic(grid);
             }
+            String thisUser = TeacherControl.getInstance().teacher.getUsername();
+            if (item.getAuthor().getUsername().equals(thisUser)) this.qIcon.setTextFill(Color.GREEN);
+            else this.qIcon.setTextFill(Color.RED);
+            qidLbl.setText(item.getQIDString());
+            qTextLbl.setText(item.getQuestionText());
+            authorLbl.setText(item.getAuthor().getFullName());
+            subjectIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+            subjectLbl.setText("(" + item.getSubject().getSubjectID() + ") " + item.getSubject().getSubjectName());
+            setText(null);
+            setGraphic(grid);
         }
     }
 }
+

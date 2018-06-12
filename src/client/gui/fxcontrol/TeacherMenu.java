@@ -5,6 +5,7 @@ import com.Contract;
 import com.data.Message;
 import com.data.Question;
 import com.style.icons.FontAwesome;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -14,6 +15,7 @@ import org.controlsfx.validation.Validator;
 
 import java.io.IOException;
 import java.util.Optional;
+
 
 public class TeacherMenu {
 
@@ -29,6 +31,8 @@ public class TeacherMenu {
     public Label eyeIcon;
     public Label examsIcon;
     public Label questionsIcon;
+    public TextField searchBar;
+    public Label searchIcon;
 
 
     public void initialize() {
@@ -38,13 +42,38 @@ public class TeacherMenu {
         eyeIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         examsIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         questionsIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
+        searchIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
 
-        questionList.setItems(TeacherControl.getInstance().questions);
+
         ValidationSupport support = new ValidationSupport();
         support.registerValidator(questionList, Validator.createEmptyValidator("Subject Selection Is Required!"));
         editBtn.disableProperty().bind(support.invalidProperty());
         deleteBtn.disableProperty().bind(support.invalidProperty());
         questionList.setCellFactory(questionListView -> new QuestionListViewCell());
+        FilteredList<Question> filteredData = new FilteredList<>(
+                TeacherControl.getInstance().questions,
+                s -> true
+        );
+
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(
+                    question -> {
+                        if (newValue == null || newValue.isEmpty()) {
+                            return true;
+                        }
+                        String lowerCase = newValue.toLowerCase();
+                        if (question.getQuestionText().toLowerCase().contains(lowerCase)) {
+                            return true;
+                        }
+                        if (question.getAuthor().getFullName().contains(lowerCase))
+                            return true;
+                        return false;
+                    }
+
+            );
+        });
+
+        questionList.setItems(filteredData);
     }
 
 
@@ -133,4 +162,6 @@ public class TeacherMenu {
             }
         }
     }
+
+
 }
