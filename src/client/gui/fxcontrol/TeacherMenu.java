@@ -44,6 +44,7 @@ public class TeacherMenu {
         support.registerValidator(questionList, Validator.createEmptyValidator("Subject Selection Is Required!"));
         editBtn.disableProperty().bind(support.invalidProperty());
         deleteBtn.disableProperty().bind(support.invalidProperty());
+        questionList.setCellFactory(questionListView -> new QuestionListViewCell());
     }
 
 
