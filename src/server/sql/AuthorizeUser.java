@@ -60,7 +60,7 @@ public class AuthorizeUser {
 
                 //Create new User Object from database values
                 user.setUsername(rs.getString("user_name"));
-                user.setPass(rs.getString("password"));
+                user.setPass(rs.getString("pass"));
                 user.setFirst_name(rs.getString("first_name"));
                 user.setLast_name(rs.getString("last_name"));
                 user.setType(rs.getInt("type"));
