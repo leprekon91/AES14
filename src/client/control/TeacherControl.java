@@ -22,7 +22,6 @@ public class TeacherControl extends Application {
     public Client client;
 
     public ObservableList<Question> questions = FXCollections.observableArrayList();
-    //TODO this is for testing!
     public ObservableList<Exam> exams = FXCollections.observableArrayList();
 
 

@@ -70,13 +70,15 @@
                                         <Label fx:id="backIcon" text="➜"/>
                                     </graphic>
                                 </Button>
-                                <TextField editable="false" layoutX="20.0" layoutY="95.0"
+                                <TextField fx:id="nameIdFilter" editable="false" layoutX="20.0" layoutY="95.0"
                                            promptText="Filter by ID/Name course" AnchorPane.leftAnchor="20.0"
                                            AnchorPane.rightAnchor="20.0"/>
-                                <TextField layoutX="20.0" layoutY="42.0" promptText="Filter by Subject"
-                                           AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
-                                <TextField layoutX="20.0" layoutY="148.0" promptText="Filter by Teacher's Name"
-                                           AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
+                                <TextField fx:id="subjectFilter" layoutX="20.0" layoutY="42.0"
+                                           promptText="Filter by Subject" AnchorPane.leftAnchor="20.0"
+                                           AnchorPane.rightAnchor="20.0"/>
+                                <TextField fx:id="teacherFilter" layoutX="20.0" layoutY="148.0"
+                                           promptText="Filter by Teacher's Name" AnchorPane.leftAnchor="20.0"
+                                           AnchorPane.rightAnchor="20.0"/>
                             </children>
                         </AnchorPane>
                     </items>
