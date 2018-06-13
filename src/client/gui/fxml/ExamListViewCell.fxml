@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="grid" xmlns="http://javafx.com/javafx/8.0.121">
+
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <Label fx:id="eidLbl" prefHeight="17.0" prefWidth="57.0" text="Exam id" GridPane.halignment="CENTER"/>
+        <Label fx:id="subjectLbl" text="Subject" GridPane.columnIndex="1" GridPane.halignment="CENTER"/>
+        <Label fx:id="teacherLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+               text="Teacher name" GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
+        <Label fx:id="courseLbl" text="Course id/name" GridPane.columnIndex="3" GridPane.halignment="CENTER"/>
+        <Label fx:id="statusLbl" text="Status" GridPane.columnIndex="4" GridPane.halignment="CENTER"/>
+    </children>
+</GridPane>

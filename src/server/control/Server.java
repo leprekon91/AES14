@@ -115,6 +115,34 @@ public class Server extends AbstractServer {
                         }
 
                         break;
+                    case Contract.EXAMS:
+                        ArrayList<Exam> ans = new ArrayList<Exam>();
+                        ans.add(new Exam(
+                                new ArrayList(),
+                                "teacher notes",
+                                "student notes",
+                                new Course(2, "course", new Subject(0, "subject1")),
+                                new Subject(1, "subject"),
+                                new Teacher(new User("t", "john", "smith", 2))
+                        ));
+                        ans.add(new Exam(
+                                new ArrayList(),
+                                "teacher notes",
+                                "student notes",
+                                new Course(1, "course", new Subject(0, "subject0")),
+                                new Subject(0, "subject"),
+                                new Teacher(new User("t", "jane", "smithy", 2))
+                        ));
+                        ans.add(new Exam(
+                                new ArrayList(),
+                                "teacher notes",
+                                "student notes",
+                                new Course(67, "course", new Subject(15, "subject15")),
+                                new Subject(15, "subject"),
+                                new Teacher(new User("t", "mark", "smithson", 2))
+                        ));
+                        client.sendToClient(new Message(Contract.EXAMS, ans));
+                        break;
                     case Contract.CREATE_EXAM:              //Create a New Exam
                     case Contract.READ_EXAM:                //Read Exam Object by ID
                     case Contract.UPDATE_EXAM:              //Update an existing Exam

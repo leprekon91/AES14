@@ -15,7 +15,8 @@ public class Subject implements Serializable {
     public Subject(int subjectNumber, String subjectName) {
         super();
         this.subjectID = subjectNumber;
-        this.subjectName = subjectName;
+        this.subjectName = subjectName.substring(0, 1).toUpperCase()
+                + subjectName.substring(1).toLowerCase();
     }
 
     /*
@@ -34,7 +35,8 @@ public class Subject implements Serializable {
     }
 
     public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
+        this.subjectName = subjectName.substring(0, 1).toUpperCase()
+                + subjectName.substring(1).toLowerCase();
     }
 
     @Override

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *  Entity Class Defining Exam Object
+ * Entity Class Defining Exam Object
  */
 public class Exam implements Serializable {
 
@@ -23,9 +23,8 @@ public class Exam implements Serializable {
     /**
      * Exam constructor
      */
-    public Exam(int examNumber, ArrayList<Question> examQuestions, String teacherNotes, String studentNotes,
+    public Exam(ArrayList<Question> examQuestions, String teacherNotes, String studentNotes,
                 Course examCourse, Subject examSubject, Teacher examAuthorTeacher) {
-        super();
         this.examQuestions = examQuestions;
         this.teacherNotes = teacherNotes;
         this.studentNotes = studentNotes;
@@ -107,6 +106,13 @@ public class Exam implements Serializable {
     public void setUsed(boolean used) {
         this.used = used;
     }
+
+    public String getExamIDStr() {
+        return String.format("%02d", getExamSubject().getSubjectID())
+                + String.format("%02d", getExamCourse().getCourseNumber())
+                + String.format("%02d", getExamNumber());
+    }
+
 
 }
 

@@ -2,10 +2,7 @@ package client.control;
 
 import client.ocsf.AbstractClient;
 import com.Contract;
-import com.data.Message;
-import com.data.Question;
-import com.data.Subject;
-import com.data.User;
+import com.data.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,6 +60,7 @@ public class Client extends AbstractClient {
             case Contract.EXAM:
                 break;
             case Contract.EXAMS:
+                TeacherControl.getInstance().receiveAllExams((ArrayList<Exam>) ((Message) msg).getData());
                 break;
             case Contract.SUBJECTS:
                 teacherControl.receiveSubjectListByTeacher((ArrayList<Subject>) ((Message) msg).getData());
@@ -93,7 +91,7 @@ public class Client extends AbstractClient {
     public void requestAuth(User user, AuthControl authControl) {
         this.authControl = authControl;
         try {
-            System.out.println("Sending request for login of User: " + user);
+            System.out.println("Sending request for login");
             this.sendToServer(new Message(Contract.AUTHORIZE, user));
         } catch (IOException e) {
             e.printStackTrace();

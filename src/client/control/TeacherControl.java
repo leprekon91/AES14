@@ -1,10 +1,7 @@
 package client.control;
 
 import com.Contract;
-import com.data.Message;
-import com.data.Question;
-import com.data.Subject;
-import com.data.Teacher;
+import com.data.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -25,6 +22,10 @@ public class TeacherControl extends Application {
     public Client client;
 
     public ObservableList<Question> questions = FXCollections.observableArrayList();
+    //TODO this is for testing!
+    public ObservableList<Exam> exams = FXCollections.observableArrayList();
+
+
     private static TeacherControl INSTANCE;
 
     public static TeacherControl getInstance() {
@@ -43,6 +44,7 @@ public class TeacherControl extends Application {
         //fill data from database
         requestSubjectListByTeacher();
         requestAllQuestions();
+        requestAllExams();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "TeacherMenu.fxml"));
             Parent root = fxmlLoader.load();
@@ -85,10 +87,7 @@ public class TeacherControl extends Application {
     }
 
     public void receiveAllQuestions(ArrayList<Question> questions) {
-        Platform.runLater(() -> {
-            this.questions.setAll(questions);
-            System.out.println("Questions Were Changed in observable List - " + questions);
-        });
+        Platform.runLater(() -> this.questions.setAll(questions));
     }
 
     public void requestAllQuestions() {
@@ -97,5 +96,17 @@ public class TeacherControl extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void requestAllExams() {
+        try {
+            this.client.sendToServer(new Message(Contract.EXAMS, new ArrayList<Question>()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void receiveAllExams(ArrayList<Exam> receivedExams) {
+        Platform.runLater(() -> this.exams.setAll(receivedExams));
     }
 }

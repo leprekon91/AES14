@@ -64,7 +64,8 @@ public class User implements Serializable {
     }
 
     public void setLast_name(String last_name) {
-        this.last_name = last_name;
+        this.last_name = last_name.substring(0, 1).toUpperCase()
+                + last_name.substring(1).toLowerCase();
     }
 
     public String getFirst_name() {
@@ -72,18 +73,16 @@ public class User implements Serializable {
     }
 
     public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+        this.first_name = first_name.substring(0, 1).toUpperCase()
+                + first_name.substring(1).toLowerCase();
     }
 
     public String getFullName() {
         return this.first_name + " " + this.last_name;
     }
+
     @Override
     public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", pass='" + pass + '\'' +
-                ", type=" + type +
-                '}';
+        return getFullName();
     }
 }
