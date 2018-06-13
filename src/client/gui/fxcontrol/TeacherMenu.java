@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
@@ -16,7 +17,7 @@ public class TeacherMenu {
     public TeacherControl teacherControl = TeacherControl.getInstance();
     public AnchorPane questionPane;
     public AnchorPane examPane;
-    public AnchorPane welcomeScreen;
+    public BorderPane welcomeScreen;
 
 
     public void initialize() {

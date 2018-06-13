@@ -8,14 +8,13 @@ import javafx.scene.chart.XYChart;
 
 
 public class StatusLine extends LineChart<Number,Number> {
-    private NumberAxis xAxis;
     private NumberAxis yAxis;
       XYChart.Series series;
     final int MAX_NUM = 100;
 
     public StatusLine(int baseLine) {
         super(new NumberAxis(), new NumberAxis());
-        xAxis = (NumberAxis) this.getXAxis();
+        NumberAxis xAxis = (NumberAxis) this.getXAxis();
         yAxis = (NumberAxis) this.getYAxis();
         series = new XYChart.Series();
 

@@ -27,7 +27,7 @@ public class AuthControl {
      * Display Login Screen
      *
      * @param primaryStage Stage to set the login screen to
-     * @param client       Client object through whitch the authentication process will be done.
+     * @param client       Client object through which the authentication process will be done.
      */
     void displayLogin(Stage primaryStage, Client client) {
         this.client = client;
@@ -154,7 +154,7 @@ public class AuthControl {
     }
 
     /**
-     * Load the Usermenu Screen for Principal user type.
+     * Load the User Menu Screen for Principal user type.
      *
      * @param principal User Object for the screen.
      */

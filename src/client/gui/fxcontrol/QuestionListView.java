@@ -57,6 +57,9 @@ public class QuestionListView {
                             return true;
                         }
                         String lowerCase = newValue.toLowerCase();
+                        if (question.getQIDString().toLowerCase().contains(lowerCase)) {
+                            return true;
+                        }
                         if (question.getQuestionText().toLowerCase().contains(lowerCase)) {
                             return true;
                         }

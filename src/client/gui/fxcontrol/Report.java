@@ -33,9 +33,7 @@ public class Report {
     public Label averageIcon;
 
 
-    private XYChart.Series series;
     private double average = 0;
-    private double median = 0;
 
     public static void openReport(
             Stage primaryStage,
@@ -60,7 +58,7 @@ public class Report {
     }
 
     public void createData(String dataName, HashMap<String, Integer> dataMap) {
-        series = new XYChart.Series();
+        XYChart.Series series = new XYChart.Series();
         series.setName(dataName);
         ArrayList<Integer> medianArray = new ArrayList<>();
         Set<Map.Entry<String, Integer>> st = dataMap.entrySet();
@@ -75,6 +73,7 @@ public class Report {
         }
 
         medianArray.sort(Integer::compareTo);
+        double median = 0;
         if (medianArray.size() % 2 == 1)
             median = medianArray.get(((medianArray.size() + 1) / 2) - 1);
         else {
