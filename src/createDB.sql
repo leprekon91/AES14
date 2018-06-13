@@ -15,11 +15,11 @@ CREATE SCHEMA IF NOT EXISTS `AES` DEFAULT CHARACTER SET utf8 ;
 USE `AES` ;
 
 -- -----------------------------------------------------
--- Table `AES`.`users`
+-- Table `users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `user_name` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(50) NOT NULL,
+  `pass` VARCHAR(50) NOT NULL,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `type` INT NOT NULL,
@@ -29,10 +29,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`subjects`
+-- Table `subjects`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`subjects` (
-  `id_subject` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `subjects` (
+  `id_subject` INT(2) NOT NULL,
   `subject_name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_subject`),
   UNIQUE INDEX `idsubjects_UNIQUE` (`id_subject` ASC))
@@ -40,10 +40,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`courses`
+-- Table `courses`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`courses` (
-  `id_course` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `courses` (
+  `id_course` INT(2) NOT NULL,
   `subjects_id_subjects` INT NOT NULL,
   `course_name` VARCHAR(45) NULL,
   PRIMARY KEY (`id_course`),
@@ -57,16 +57,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`student_studies_in_course`
+-- Table `student_studies_in_course`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`student_studies_in_course` (
-  `users_user_name` VARCHAR(50) NOT NULL,
-  `courses_id_course` INT NOT NULL,
-  PRIMARY KEY (`users_user_name`, `courses_id_course`),
+CREATE TABLE IF NOT EXISTS `student_studies_in_course` (
+  `student_name` VARCHAR(50) NOT NULL,
+  `courses_id_course` INT(2) NOT NULL,
+  PRIMARY KEY (`student_name`, `courses_id_course`),
   INDEX `fk_users_has_courses_courses1_idx` (`courses_id_course` ASC),
-  INDEX `fk_users_has_courses_users1_idx` (`users_user_name` ASC),
+  INDEX `fk_users_has_courses_users1_idx` (`student_name` ASC),
   CONSTRAINT `fk_users_has_courses_users1`
-    FOREIGN KEY (`users_user_name`)
+    FOREIGN KEY (`student_name`)
     REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -79,10 +79,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`questions`
+-- Table `questions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`questions` (
-  `id_question` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `questions` (
+  `id_question` INT(3) NOT NULL AUTO_INCREMENT,
   `question_text` TEXT(200) NOT NULL,
   `ans_1` TEXT(200) NOT NULL,
   `ans_2` TEXT(200) NOT NULL,
@@ -90,17 +90,17 @@ CREATE TABLE IF NOT EXISTS `AES`.`questions` (
   `ans_4` TEXT(200) NOT NULL,
   `indicator` INT NULL,
   `subjects_id_subject` INT NOT NULL,
-  `users_user_name` VARCHAR(50) NOT NULL,
+  `teacher_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id_question`, `subjects_id_subject`),
   INDEX `fk_questions_subjects1_idx` (`subjects_id_subject` ASC),
-  INDEX `fk_questions_users1_idx` (`users_user_name` ASC),
+  INDEX `fk_questions_users1_idx` (`teacher_name` ASC),
   CONSTRAINT `fk_questions_subjects1`
     FOREIGN KEY (`subjects_id_subject`)
     REFERENCES `AES`.`subjects` (`id_subject`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_questions_users1`
-    FOREIGN KEY (`users_user_name`)
+    FOREIGN KEY (`teacher_name`)
     REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -108,16 +108,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`teachers_teach_subjects`
+-- Table `teachers_teach_subjects`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`teachers_teach_subjects` (
-  `users_user_name` VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `teachers_teach_subjects` (
+  `teacher_name` VARCHAR(50) NOT NULL,
   `subjects_id_subject` INT NOT NULL,
-  PRIMARY KEY (`users_user_name`, `subjects_id_subject`),
+  PRIMARY KEY (`teacher_name`, `subjects_id_subject`),
   INDEX `fk_users_has_subjects_subjects1_idx` (`subjects_id_subject` ASC),
-  INDEX `fk_users_has_subjects_users1_idx` (`users_user_name` ASC),
+  INDEX `fk_users_has_subjects_users1_idx` (`teacher_name` ASC),
   CONSTRAINT `fk_users_has_subjects_users1`
-    FOREIGN KEY (`users_user_name`)
+    FOREIGN KEY (`teacher_name`)
     REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -130,16 +130,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`exams`
+-- Table `exams`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`exams` (
-  `id_exam` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `exams` (
+  `id_exam` INT(2) NOT NULL AUTO_INCREMENT,
   `exam_duration` INT NULL,
   `teacher_instructions` TEXT(200) NULL,
   `student_instructions` TEXT(200) NULL,
   `subjects_id_subject` INT NOT NULL,
   `courses_id_course` INT NOT NULL,
   `users_user_name` VARCHAR(50) NOT NULL,
+  `used` TINYINT(1) NULL,
   PRIMARY KEY (`id_exam`, `subjects_id_subject`, `courses_id_course`),
   INDEX `fk_exams_subjects1_idx` (`subjects_id_subject` ASC),
   INDEX `fk_exams_courses1_idx` (`courses_id_course` ASC),
@@ -163,7 +164,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`exams_has_questions`
+-- Table `exams_has_questions`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AES`.`exams_has_questions` (
   `exams_id_exam` INT NOT NULL,
@@ -187,19 +188,19 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`user_answers`
+-- Table `student_answers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`user_answers` (
-  `users_user_name` VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `student_answers` (
+  `student_name` VARCHAR(50) NOT NULL,
   `exams_has_questions_exams_id_exam` INT NOT NULL,
   `exams_has_questions_questions_id_question` INT NOT NULL,
   `exams_has_questions_questions_subjects_id_subject` INT NOT NULL,
   `answer` INT NULL,
-  PRIMARY KEY (`users_user_name`, `exams_has_questions_exams_id_exam`, `exams_has_questions_questions_id_question`, `exams_has_questions_questions_subjects_id_subject`),
+  PRIMARY KEY (`student_name`, `exams_has_questions_exams_id_exam`, `exams_has_questions_questions_id_question`, `exams_has_questions_questions_subjects_id_subject`),
   INDEX `fk_users_has_exams_has_questions_exams_has_questions1_idx` (`exams_has_questions_exams_id_exam` ASC, `exams_has_questions_questions_id_question` ASC, `exams_has_questions_questions_subjects_id_subject` ASC),
-  INDEX `fk_users_has_exams_has_questions_users1_idx` (`users_user_name` ASC),
+  INDEX `fk_users_has_exams_has_questions_users1_idx` (`student_name` ASC),
   CONSTRAINT `fk_users_has_exams_has_questions_users1`
-    FOREIGN KEY (`users_user_name`)
+    FOREIGN KEY (`student_name`)
     REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -212,27 +213,35 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `AES`.`student_grades`
+-- Table `exam_solutions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`student_grades` (
-  `users_user_name` VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `exam_solutions` (
+  `student_name` VARCHAR(50) NOT NULL,
   `exams_id_exam` INT NOT NULL,
   `exams_subjects_id_subject` INT NOT NULL,
   `exams_courses_id_course` INT NOT NULL,
-  `grade` INT NOT NULL,
+  `grade` INT NULL,
   `approved` TINYINT(1) NOT NULL,
   `teacher_notes` TEXT(200) NULL,
-  PRIMARY KEY (`users_user_name`, `exams_id_exam`, `exams_subjects_id_subject`, `exams_courses_id_course`),
+  `teacher_name` VARCHAR(50) NOT NULL,
+  `execution_duration` VARCHAR(45) NULL,
+  PRIMARY KEY (`student_name`, `exams_id_exam`, `exams_subjects_id_subject`, `exams_courses_id_course`, `teacher_name`),
   INDEX `fk_users_has_exams_exams1_idx` (`exams_id_exam` ASC, `exams_subjects_id_subject` ASC, `exams_courses_id_course` ASC),
-  INDEX `fk_users_has_exams_users1_idx` (`users_user_name` ASC),
+  INDEX `fk_users_has_exams_users1_idx` (`student_name` ASC),
+  INDEX `fk_student_grades_users1_idx` (`teacher_name` ASC),
   CONSTRAINT `fk_users_has_exams_users1`
-    FOREIGN KEY (`users_user_name`)
+    FOREIGN KEY (`student_name`)
     REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_users_has_exams_exams1`
     FOREIGN KEY (`exams_id_exam` , `exams_subjects_id_subject` , `exams_courses_id_course`)
     REFERENCES `AES`.`exams` (`id_exam` , `subjects_id_subject` , `courses_id_course`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_student_grades_users1`
+    FOREIGN KEY (`teacher_name`)
+    REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

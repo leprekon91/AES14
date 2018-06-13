@@ -10,7 +10,9 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-
+/**
+ *
+ */
 public class TeacherMenu {
 
 
@@ -19,7 +21,9 @@ public class TeacherMenu {
     public AnchorPane examPane;
     public BorderPane welcomeScreen;
 
-
+    /**
+     * initialize the window
+     */
     public void initialize() {
         //load question pane
         loadQuestionPane();
@@ -27,7 +31,9 @@ public class TeacherMenu {
         hideAll();
     }
 
-
+    /**
+     * Load Question Manager View
+     */
     public void loadQuestionPane() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "QuestionListView.fxml"));
@@ -43,6 +49,9 @@ public class TeacherMenu {
         }
     }
 
+    /**
+     * Load Exam Manager View
+     */
     public void loadExamPane() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "ExamManagement.fxml"));
@@ -58,12 +67,20 @@ public class TeacherMenu {
         }
     }
 
+    /**
+     * hide all viewes. and show the welcome screen.
+     */
     private void hideAll() {
         questionPane.setVisible(false);
         examPane.setVisible(false);
         welcomeScreen.setVisible(true);
     }
 
+    /**
+     * switch to Question Manager View
+     *
+     * @param actionEvent actionEvent for the javaFX Button
+     */
     public void switchToQuestionView(ActionEvent actionEvent) {
 
         examPane.setVisible(false);
@@ -72,6 +89,10 @@ public class TeacherMenu {
 
     }
 
+    /**
+     * switch to Exam Manager View
+     * @param actionEvent actionEvent for the javaFX Button
+     */
     public void switchToExamView(ActionEvent actionEvent) {
 
         questionPane.setVisible(false);
