@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class TeacherControl extends Application {
     public Teacher teacher;
     public Client client;
-    public ArrayList<Subject> subjectList; //list of Subjects this teacher teaches in.
+
     public ObservableList<Question> questions = FXCollections.observableArrayList();
     private static TeacherControl INSTANCE;
 
@@ -81,7 +81,7 @@ public class TeacherControl extends Application {
     }
 
     public void receiveSubjectListByTeacher(ArrayList<Subject> subjects) {
-        this.subjectList = subjects;
+        this.teacher.setTeacherSubjectList(subjects);
     }
 
     public void receiveAllQuestions(ArrayList<Question> questions) {

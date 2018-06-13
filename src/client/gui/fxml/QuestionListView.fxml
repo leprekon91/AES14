@@ -1,50 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="questionPane" maxHeight="1.7976931348623157E308"
             maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
             fx:controller="client.gui.fxcontrol.QuestionListView">
     <children>
-        <ListView fx:id="questionList" layoutX="215.0" layoutY="14.0" prefHeight="282.0" prefWidth="500.0"
-                  AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="8.0"
-                  AnchorPane.topAnchor="35.0"/>
-        <Button contentDisplay="TOP" graphicTextGap="10.0" layoutX="11.0" layoutY="84.0" maxWidth="-Infinity"
-                minWidth="-Infinity" mnemonicParsing="false" onAction="#openNewQuestionDialog" prefHeight="80.0"
-                prefWidth="80.0" styleClass="success" text="New" AnchorPane.leftAnchor="8.0"
-                AnchorPane.topAnchor="35.0">
+        <ListView fx:id="questionList" layoutX="215.0" layoutY="87.0" prefHeight="271.0" prefWidth="584.0"
+                  AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0"
+                  AnchorPane.topAnchor="116.0"/>
+        <Button graphicTextGap="10.0" layoutX="88.0" layoutY="360.0" minWidth="-Infinity" mnemonicParsing="false"
+                onAction="#openNewQuestionDialog" prefWidth="100.0" styleClass="success" text="New"
+                AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0">
             <graphic>
                 <Label fx:id="plusIcon" text=""/>
             </graphic>
         </Button>
-        <Button fx:id="editBtn" contentDisplay="TOP" graphicTextGap="10.0" layoutX="8.0" layoutY="80.0"
-                maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openEditQuestionDialog"
-                prefHeight="80.0" prefWidth="80.0" styleClass="warning" text="Edit" AnchorPane.leftAnchor="8.0"
-                AnchorPane.topAnchor="107.0">
+        <Button fx:id="editBtn" graphicTextGap="10.0" layoutX="362.0" layoutY="360.0" maxWidth="-Infinity"
+                minWidth="-Infinity" mnemonicParsing="false" onAction="#openEditQuestionDialog" prefWidth="100.0"
+                styleClass="warning" text="Edit" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="332.0">
             <graphic>
                 <Label fx:id="editIcon" text=""/>
             </graphic>
         </Button>
-        <Button fx:id="deleteBtn" contentDisplay="TOP" graphicTextGap="10.0" layoutX="8.0" layoutY="151.0"
-                maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteQuestion"
-                prefHeight="80.0" prefWidth="80.0" styleClass="danger" text="Delete" AnchorPane.leftAnchor="8.0"
-                AnchorPane.topAnchor="182.0">
+        <Button fx:id="deleteBtn" graphicTextGap="10.0" layoutX="266.0" layoutY="360.0" maxWidth="-Infinity"
+                minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteQuestion" prefWidth="100.0"
+                styleClass="danger" text="Delete" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="224.0">
             <graphic>
                 <Label fx:id="delIcon" text=""/>
             </graphic>
         </Button>
-        <Button contentDisplay="TOP" layoutX="8.0" layoutY="225.0" maxWidth="-Infinity" minWidth="-Infinity"
-                mnemonicParsing="false" onAction="#openView" prefHeight="80.0" prefWidth="80.0" text="View"
-                AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="252.0">
+        <Button layoutX="179.0" layoutY="360.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                onAction="#openView" prefWidth="100.0" text="View" AnchorPane.bottomAnchor="8.0"
+                AnchorPane.leftAnchor="116.0">
             <graphic>
                 <Label fx:id="eyeIcon" text=""/>
             </graphic>
         </Button>
-        <TextField fx:id="searchBar" layoutX="369.0" layoutY="9.0" promptText="Search" AnchorPane.rightAnchor="8.0"
-                   AnchorPane.topAnchor="4.0"/>
-        <Label fx:id="searchIcon" layoutX="360.0" layoutY="11.0" text="" AnchorPane.rightAnchor="185.0"
-               AnchorPane.topAnchor="10.0"/>
+        <TextField fx:id="searchBar" layoutX="369.0" layoutY="9.0" promptText="Search" AnchorPane.leftAnchor="30.0"
+                   AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="78.0"/>
+        <Label fx:id="searchIcon" layoutX="360.0" layoutY="11.0" text="" AnchorPane.leftAnchor="8.0"
+               AnchorPane.topAnchor="85.0"/>
+        <AnchorPane layoutX="149.0" prefHeight="70.0" style="-fx-background-color: #ADD8E6;"
+                    AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+            <children>
+                <Text layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QUESTION CATALOG"
+                      AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="465.953125"
+                      AnchorPane.topAnchor="20.0">
+                    <font>
+                        <Font name="Agency FB" size="28.0"/>
+                    </font>
+                </Text>
+                <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
+                           preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                    <image>
+                        <Image url="@../../../com/graphics/Icon.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
     </children>
 
 </AnchorPane>

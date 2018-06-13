@@ -1,13 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.ExamManagement">
     <children>
-        <Label layoutX="123.0" layoutY="103.0" text="Exam Management" AnchorPane.leftAnchor="0.0"
-               AnchorPane.topAnchor="0.0"/>
+        <AnchorPane prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <SplitPane dividerPositions="0.75" layoutX="438.0" layoutY="417.0" prefHeight="83.0" prefWidth="162.0"
+                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                           AnchorPane.topAnchor="70.0">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                            <children>
+                                <ListView layoutX="14.0" layoutY="14.0" prefHeight="367.0" prefWidth="372.0"
+                                          AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0"
+                                          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+                                <TreeTableView layoutX="20.0" layoutY="20.0" prefHeight="338.0" prefWidth="372.0"
+                                               showRoot="false" styleClass="info" tableMenuButtonVisible="true"
+                                               AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0"
+                                               AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <columns>
+                                        <TreeTableColumn prefWidth="75.0" text="Exam"/>
+                                        <TreeTableColumn prefWidth="69.33332824707031" text="Subject"/>
+                                        <TreeTableColumn prefWidth="70.66665649414062" text="Teacher"/>
+                                        <TreeTableColumn prefWidth="75.99996948242188" text="Course"/>
+                                        <TreeTableColumn prefWidth="87.33331298828125" text="Status"/>
+                                    </columns>
+                                    <columnResizePolicy>
+                                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                                    </columnResizePolicy>
+                                </TreeTableView>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="245.0">
+                            <children>
+                                <Button contentDisplay="RIGHT" layoutX="152.0" layoutY="277.0" mnemonicParsing="false"
+                                        prefWidth="85.0" text="Back" AnchorPane.bottomAnchor="8.0"
+                                        AnchorPane.rightAnchor="20.0">
+                                    <graphic>
+                                        <Label fx:id="backIcon" text="➜"/>
+                                    </graphic>
+                                </Button>
+                                <TextField editable="false" layoutX="20.0" layoutY="95.0"
+                                           promptText="Filter by id/name course" AnchorPane.leftAnchor="20.0"
+                                           AnchorPane.rightAnchor="20.0"/>
+                                <TextField layoutX="20.0" layoutY="42.0" promptText="Filter by subject"
+                                           AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
+                                <TextField layoutX="20.0" layoutY="148.0" promptText="Filter by teacher"
+                                           AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+                <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="70.0" style="-fx-background-color: #ADD8E6;"
+                            AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+                    <children>
+                        <Text layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EXAM CATALOG"
+                              AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
+                              AnchorPane.rightAnchor="465.953125" AnchorPane.topAnchor="20.0">
+                            <font>
+                                <Font name="Agency FB" size="28.0"/>
+                            </font>
+                        </Text>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
+                                   preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                            <image>
+                                <Image url="@../../../com/graphics/Icon.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

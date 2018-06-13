@@ -1,30 +1,31 @@
 package com.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *  Entity Class Defining Exam Object
  */
-public class Exam {
+public class Exam implements Serializable {
 
-    /*
+    /**
      * Exam fields
      */
-    private String examNumber;
+    private int examNumber;
     private ArrayList<Question> examQuestions;
     private String teacherNotes;
     private String studentNotes;
     private Course examCourse;
     private Subject examSubject;
     private Teacher examAuthorTeacher;
+    private boolean used;
 
-    /*
+    /**
      * Exam constructor
      */
-    public Exam(String examNumber, ArrayList<Question> examQuestions, String teacherNotes, String studentNotes,
+    public Exam(int examNumber, ArrayList<Question> examQuestions, String teacherNotes, String studentNotes,
                 Course examCourse, Subject examSubject, Teacher examAuthorTeacher) {
         super();
-        this.examNumber = examNumber;
         this.examQuestions = examQuestions;
         this.teacherNotes = teacherNotes;
         this.studentNotes = studentNotes;
@@ -33,14 +34,21 @@ public class Exam {
         this.examAuthorTeacher = examAuthorTeacher;
     }
 
+    public Exam(int examNumber, Subject examSubject, Course examCourse) {
+        this.examNumber = examNumber;
+        this.examSubject = examSubject;
+        this.examCourse = examCourse;
+    }
+
+
     /*
      * Exam getters and setters
      */
-    public String getExamNumber() {
+    public int getExamNumber() {
         return examNumber;
     }
 
-    public void setExamNumber(String examNumber) {
+    public void setExamNumber(int examNumber) {
         this.examNumber = examNumber;
     }
 
@@ -92,6 +100,13 @@ public class Exam {
         this.examAuthorTeacher = examAuthorTeacher;
     }
 
-}
+    public boolean isUsed() {
+        return used;
+    }
 
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+
+}
 

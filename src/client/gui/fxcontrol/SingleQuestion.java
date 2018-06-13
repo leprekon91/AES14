@@ -67,7 +67,7 @@ public class SingleQuestion {
         if (question.getCorrectAnswer() != 0) {
             correctAnswerCmb.getSelectionModel().select(question.getCorrectAnswer() - 1);
         }
-        subjectList = teacherControl.subjectList;
+        subjectList = teacherControl.teacher.getTeacherSubjectList();
         subjectCmb.getItems().addAll(subjectList);
         if (question.getSubject() != null)
             for (Subject s :

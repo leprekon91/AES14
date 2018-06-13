@@ -3,13 +3,18 @@ package com.data;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    /**
+     * User entity additional fields
+     */
     private String username;
     private String pass;
     private String first_name;
     private String last_name;
     private int type;
 
-
+    /**
+     * User entity constructors
+     */
     public User(String username, String pass) {
         this.username = username;
         this.pass = pass;
@@ -22,6 +27,9 @@ public class User implements Serializable {
         this.type = type;
     }
 
+    /**
+     * User entity getters and setters
+     */
     public String getUsername() {
         return username;
     }
@@ -50,8 +58,6 @@ public class User implements Serializable {
     public boolean isAuthenticated() {
         return !(this.getType() == 0);
     }
-
-
 
     public String getLast_name() {
         return last_name;

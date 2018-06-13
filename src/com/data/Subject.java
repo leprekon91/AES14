@@ -42,4 +42,3 @@ public class Subject implements Serializable {
         return subjectID + " - " + subjectName;
     }
 }
-
