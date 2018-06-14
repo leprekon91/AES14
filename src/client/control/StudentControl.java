@@ -14,7 +14,12 @@ import java.io.IOException;
 public class StudentControl extends Application {
     public Student student;
     public Client client;
+    private static StudentControl INSTANCE;
 
+    public static StudentControl getInstance() {
+        if (INSTANCE == null) INSTANCE = new StudentControl();
+        return INSTANCE;
+    }
 
     @Override
     public void start(Stage primaryStage)  {
