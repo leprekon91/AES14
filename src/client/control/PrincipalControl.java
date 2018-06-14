@@ -14,9 +14,17 @@ import java.io.IOException;
 public class PrincipalControl extends Application {
     public Principal principal;
     public Client client;
+    private static PrincipalControl INSTANCE;
+
+    public static PrincipalControl getInstance() {
+        if (INSTANCE == null) INSTANCE = new PrincipalControl();
+        return INSTANCE;
+    }
+
 
     @Override
     public void start(Stage primaryStage) {
+        INSTANCE = this;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "PrincipalMenu.fxml"));
             Parent root = fxmlLoader.load();
