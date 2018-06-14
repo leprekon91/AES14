@@ -25,11 +25,11 @@ public class SQLContract {
             "\tJOIN subjects \n" +
             "\t\tON questions.subjects_id_subject = subjects.id_subject\n" +
             "\tJOIN users \n" +
-            "\t\tON questions.users_user_name = users.user_name\n" +
-            "WHERE (users.user_name=questions.users_user_name AND questions.subjects_id_subject=subjects.id_subject);";
+            "\t\tON questions.teacher_name = users.user_name\n" +
+            "WHERE (users.user_name=questions.teacher_name AND questions.subjects_id_subject=subjects.id_subject);";
     //-----------------CRUD---------------------------------------------------------------------------------------------
     public static final String CREATE_QUESTION = "INSERT INTO questions" +
-            "(question_text,ans_1,ans_2,ans_3,ans_4,indicator,users_user_name,subjects_id_subject)" +
+            "(question_text,ans_1,ans_2,ans_3,ans_4,indicator,teacher_name,subjects_id_subject)" +
             " VALUES (?,?,?,?,?,?,?,?);";
     public static final String READ_QUESTION = "SELECT * FROM questions WHERE id_question=? AND subjects_id_subject=?;";
 
@@ -41,7 +41,7 @@ public class SQLContract {
             "`ans_3` = ?,\n" +
             "`ans_4` = ?,\n" +
             "`indicator` = ?,\n" +
-            "`users_user_name` = ?\n" +
+            "`teacher_name` = ?\n" +
             "WHERE `id_question` = ? AND `subjects_id_subject` = ?;";
     public static final String DELETE_QUESTION = "DELETE FROM questions " +
             "WHERE id_question = ? AND subjects_id_subject = ?;";
@@ -49,7 +49,7 @@ public class SQLContract {
     public static final String SHOW_QUESTION_BY_ID = "SELECT * FROM questions " +
             "WHERE id_question =?;";
     public static final String SHOW_TEACHERS_QUESTION = "SELECT * FROM questions " +
-            "WHERE users_user_name =?;";
+            "WHERE teacher_name =?;";
     public static final String SHOW_QUESTION_IN_SUBJECTS = "SELECT * FROM questions " +
             "WHERE subjects_id_subject=?;";
     //------------------------------------------------------------------------------------------------------------------
@@ -85,5 +85,5 @@ public class SQLContract {
     public static String SUBJECT_BY_TEACHER = "SELECT subjects.id_subject,subjects.subject_name\n" +
             "FROM teachers_teach_subjects JOIN subjects\n" +
             "ON subjects_id_subject=id_subject\n" +
-            "WHERE users_user_name=?;";
+            "WHERE teacher_name=?;";
 }

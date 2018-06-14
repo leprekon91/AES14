@@ -13,10 +13,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.Arrays;
 
 public class Report {
 
@@ -32,12 +29,12 @@ public class Report {
     public Label medianIcon;
     public Label averageIcon;
 
-
-    private double average = 0;
+    double avg = 0;
+    double med = 0;
 
     public static void openReport(
             Stage primaryStage,
-            HashMap<String, Integer> data,
+            int[] data,
             String chartTitle,
             String xLabel,
             String yLabel) throws IOException {
@@ -57,44 +54,55 @@ public class Report {
 
     }
 
-    public void createData(String dataName, HashMap<String, Integer> dataMap) {
+    public void createData(String dataName, int[] data) {
         XYChart.Series series = new XYChart.Series();
         series.setName(dataName);
-        ArrayList<Integer> medianArray = new ArrayList<>();
-        Set<Map.Entry<String, Integer>> st = dataMap.entrySet();
+        int[] dataMap = generateData(data);
 
-        for (Map.Entry mapEntry : st
-                ) {
-            String label = (String) mapEntry.getKey();
-            int value = (int) mapEntry.getValue();
-            series.getData().add(new XYChart.Data<String, Integer>(label, value));
-            average += value;
-            medianArray.add(value);
-        }
 
-        medianArray.sort(Integer::compareTo);
-        double median = 0;
-        if (medianArray.size() % 2 == 1)
-            median = medianArray.get(((medianArray.size() + 1) / 2) - 1);
-        else {
-            double median1 = medianArray.get((medianArray.size() / 2) - 1);
-            double median2 = medianArray.get(medianArray.size() / 2);
-            median = (median1 + median2) / 2;
-        }
-        average /= st.size();
+        series.getData().add(new XYChart.Data<>("0-9", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("10-19", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("20-29", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("30-39", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("40-49", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("50-59", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("60-69", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("70-79", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("80-89", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("90-100", dataMap[0]));
         barChart.getData().add(series);
-        lblAvg.setText("Average: " + average);
-        lblMed.setText("Median: " + median);
 
 
         barChart.setTitle(chartTitle);
+
         xAxis.setLabel(xLabel);
         yAxis.setLabel(yLabel);
+
+        lblAvg.setText("Average - " + avg);
+        lblMed.setText("Median - " + med);
+    }
+
+    public int[] generateData(int[] data) {
+        int[] cnts = new int[10];
+        int sum = 0;
+        for (int i = 0; i < data.length; i++) {
+            sum += data[i];
+            if (data[i] / 10 == 10) cnts[9]++;
+            else cnts[data[i] / 10]++;
+        }
+        //calculate
+        Arrays.sort(data);
+        if (data.length % 2 == 0)
+            med = ((double) data[data.length / 2] + (double) data[data.length / 2 - 1]) / 2;
+        else
+            med = (double) data[data.length / 2];
+        avg = sum / data.length;
+        return cnts;
     }
 
     public void initialize() {
         averageIcon.setText(FontAwesome.ICON_ALIGN_CENTER);
-        medianIcon.setText(FontAwesome.ICON_PLUS);
+        medianIcon.setText(FontAwesome.ICON_ALIGN_JUSTIFY);
 
         averageIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         medianIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));

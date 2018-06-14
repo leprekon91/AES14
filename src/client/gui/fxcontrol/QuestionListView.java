@@ -66,9 +66,7 @@ public class QuestionListView {
                         }
                         if (question.getAuthor().getFullName().contains(lowerCase))
                             return true;
-                        if (question.getSubject().getSubjectName().contains(lowerCase))
-                            return true;
-                        return false;
+                        return question.getSubject().getSubjectName().contains(lowerCase);
                     }
 
             );
@@ -90,7 +88,7 @@ public class QuestionListView {
         Question question = new Question("", new String[]{"", "", "", ""}, 0, null, teacherControl.teacher);
         openSingleQuestion(question);
         System.out.println(question);
-        if (question.getQuestionText().equals(""))
+        if (!question.getQuestionText().equals(""))
             try {
                 teacherControl.client.sendToServer(new Message(Contract.CREATE_QUESTION, question));
             } catch (IOException e) {
