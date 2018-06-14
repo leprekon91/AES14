@@ -3,8 +3,13 @@ package client.gui.fxcontrol;
 import client.control.TeacherControl;
 import com.data.Exam;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ExamManagement {
 
@@ -74,5 +79,22 @@ public class ExamManagement {
 
         examList.setItems(filteredData);
 
+        //set double click listener:
+        examList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() == 2) {
+                    Exam exam = (Exam) examList.getSelectionModel().getSelectedItems().get(0);
+                    try {
+                        ExamView.openWindow(new Stage(), exam);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
     }
+
+
 }

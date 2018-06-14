@@ -2,89 +2,135 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" hgap="5.0" prefHeight="500.0" prefWidth="500.0" vgap="5.0"
-          xmlns="http://javafx.com/javafx/9" fx:controller="client.gui.fxcontrol.QuestionView">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0"
+          prefWidth="600.0" xmlns="http://javafx.com/javafx/9" fx:controller="client.gui.fxcontrol.QuestionView">
     <columnConstraints>
-        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="551.0" minWidth="10.0" percentWidth="5.0"
-                           prefWidth="19.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="250.0" percentWidth="45.0"
-                           prefWidth="280.0"/>
-        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" percentWidth="10.0"
-                           prefWidth="63.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="250.0" percentWidth="40.0"
-                           prefWidth="250.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" percentWidth="100.0"
+                           prefWidth="620.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0"/>
-        <RowConstraints percentHeight="5.0"/>
-        <RowConstraints minHeight="10.0" percentHeight="45.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" percentHeight="25.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" percentHeight="25.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="400.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Label fx:id="questionText" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="558.0"
-               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="question text"
-               GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
-            <opaqueInsets>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </opaqueInsets>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </padding>
-        </Label>
-        <Label fx:id="answer1Label" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="273.0"
-               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer1" GridPane.columnSpan="2"
-               GridPane.rowIndex="3">
-            <opaqueInsets>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </opaqueInsets>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </padding>
-        </Label>
-        <Label fx:id="answer2Label" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer2" GridPane.columnIndex="2"
-               GridPane.columnSpan="2" GridPane.rowIndex="3">
-            <opaqueInsets>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </opaqueInsets>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </padding>
-        </Label>
-        <Label fx:id="answer3Label" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="273.0"
-               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer3" GridPane.columnSpan="2"
-               GridPane.rowIndex="4">
-            <opaqueInsets>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </opaqueInsets>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </padding>
-        </Label>
-        <Label fx:id="answer4Label" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer4" GridPane.columnIndex="2"
-               GridPane.columnSpan="2" GridPane.rowIndex="4">
-            <opaqueInsets>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </opaqueInsets>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </padding>
-        </Label>
-        <Label prefHeight="30.0" text="#" GridPane.rowIndex="1"/>
-        <Label fx:id="qidLbl" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Label text="Subject:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <Label fx:id="subjectLbl" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-        <Label fx:id="authorLbl" text="Written By Author" GridPane.columnSpan="2147483647"/>
+        <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0"
+                    prefWidth="600.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+            <content>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+                    <children>
+                        <VBox layoutX="87.0" layoutY="206.0" prefHeight="390.0" prefWidth="598.0" spacing="5.0"
+                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                              AnchorPane.topAnchor="0.0">
+                            <children>
+                                <Label fx:id="authorLbl" text="Written By Author"/>
+                                <HBox spacing="5.0">
+                                    <children>
+                                        <Label maxHeight="1.7976931348623157E308" text="#"/>
+                                        <Label fx:id="qidLbl" maxHeight="1.7976931348623157E308"
+                                               maxWidth="1.7976931348623157E308" text="Label"/>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="5.0">
+                                    <children>
+                                        <Label maxHeight="1.7976931348623157E308" text="Subject:"/>
+                                        <Label fx:id="subjectLbl" maxHeight="1.7976931348623157E308" text="Label"/>
+                                    </children>
+                                </HBox>
+                                <Label fx:id="questionText" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
+                                       maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="558.0"
+                                       style="-fx-border-color: #555555; -fx-border-radius: 5;" text="question text">
+                                    <opaqueInsets>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </opaqueInsets>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </padding>
+                                </Label>
+                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                    <children>
+                                        <Label fx:id="answer1Label" alignment="TOP_LEFT"
+                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer1"
+                                               HBox.hgrow="ALWAYS">
+                                            <opaqueInsets>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </opaqueInsets>
+                                            <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </padding>
+                                        </Label>
+                                        <Label fx:id="answer2Label" alignment="TOP_LEFT"
+                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                               minHeight="-Infinity" minWidth="-Infinity"
+                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer2"
+                                               HBox.hgrow="ALWAYS">
+                                            <opaqueInsets>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </opaqueInsets>
+                                            <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </padding>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                    <children>
+                                        <Label fx:id="answer3Label" alignment="TOP_LEFT"
+                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer3"
+                                               HBox.hgrow="ALWAYS">
+                                            <opaqueInsets>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </opaqueInsets>
+                                            <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </padding>
+                                        </Label>
+                                        <Label fx:id="answer4Label" alignment="TOP_LEFT"
+                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                               minHeight="-Infinity" minWidth="-Infinity"
+                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer4"
+                                               HBox.hgrow="ALWAYS">
+                                            <opaqueInsets>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </opaqueInsets>
+                                            <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </padding>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <AnchorPane maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="70.0" prefWidth="583.0"
+                    style="-fx-background-color: #ADD8E6;" GridPane.columnSpan="2147483647">
+            <children>
+                <Text fx:id="questionViewTitle" layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="QUESTION VIEW" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
+                      AnchorPane.rightAnchor="465.953125" AnchorPane.topAnchor="20.0">
+                    <font>
+                        <Font name="Agency FB" size="28.0"/>
+                    </font>
+                </Text>
+                <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
+                           preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                    <image>
+                        <Image url="@../../../com/graphics/Icon.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
     </children>
-    <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-    </padding>
 </GridPane>

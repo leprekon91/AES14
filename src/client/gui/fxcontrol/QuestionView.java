@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class QuestionView {
     public Label answer3Label;
     public Label answer4Label;
     public Label authorLbl;
+    public Text questionViewTitle;
 
     public static void openWindow(Stage stage, Question q) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SingleQuestion.class.getResource(Contract.clientFXML + "QuestionView.fxml"));
@@ -46,5 +48,6 @@ public class QuestionView {
         answer2Label.setText(q.getAns(1));
         answer3Label.setText(q.getAns(2));
         answer4Label.setText(q.getAns(3));
+        questionViewTitle.setText("Question #" + q.getQIDString());
     }
 }
