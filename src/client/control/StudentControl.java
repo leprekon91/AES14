@@ -23,6 +23,7 @@ public class StudentControl extends Application {
 
     @Override
     public void start(Stage primaryStage)  {
+        INSTANCE = this;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "StudentMenu.fxml"));
             Parent root = fxmlLoader.load();
