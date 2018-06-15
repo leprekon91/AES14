@@ -128,4 +128,14 @@ public class AuthorizeUser {
     public void deleteUserByUsername(String username) {
         loggedInUsers.remove(username);
     }
+
+    public void deleteUserByClient(ConnectionToClient client) {
+        Set<Map.Entry<String, ConnectionToClient>> st = loggedInUsers.entrySet();
+        for (Map.Entry<String, ConnectionToClient> u :
+                st) {
+            if (u.getValue().equals(client)) {
+                loggedInUsers.remove(u);
+            }
+        }
+    }
 }

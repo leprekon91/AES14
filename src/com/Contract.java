@@ -54,4 +54,7 @@ public class Contract {
     final public static int GET_GRADES_BY_EXAM = 41;
     final public static int GET_GRADES_BY_STUDENT = 42;
 
+    public static final int GET_PRINCIPAL_REQUESTS = 50;
+    public static final int PRINCIPAL_REQUESTS = 51;
+    public static final int SEND_PRINCIPAL_REQUEST_ANSWER = 52;
 }

@@ -36,6 +36,7 @@ public class TeacherMenu {
      */
     public void loadQuestionPane() {
         try {
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "QuestionListView.fxml"));
             Parent root = fxmlLoader.load();
             questionPane.getChildren().setAll(root);

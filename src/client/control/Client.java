@@ -65,6 +65,9 @@ public class Client extends AbstractClient {
             case Contract.SUBJECTS:
                 teacherControl.receiveSubjectListByTeacher((ArrayList<Subject>) ((Message) msg).getData());
                 break;
+            case Contract.PRINCIPAL_REQUESTS:
+                PrincipalControl.getInstance().receiveNewRequests((ArrayList<ExtensionRequest>) ((Message) msg).getData());
+                break;
         }
 
     }

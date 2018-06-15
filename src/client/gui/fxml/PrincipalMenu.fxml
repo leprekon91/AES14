@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.PrincipalMenu">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.PrincipalMenu">
     <children>
-        <Button layoutX="168.0" layoutY="160.0" mnemonicParsing="false" onAction="#openExampleReport"
-                text="open example report" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0"/>
+        <SplitPane dividerPositions="0.7040133779264214" layoutX="200.0" layoutY="130.0" prefHeight="160.0"
+                   prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane fx:id="viewPane" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="400.0">
+                    <children>
+                        <ImageView fitHeight="400.0" fitWidth="400.0" layoutX="17.0" layoutY="3.0" opacity="0.5"
+                                   pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0"
+                                   AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="15.0"
+                                   AnchorPane.topAnchor="0.0">
+                            <image>
+                                <Image url="@../../../com/graphics/Icon.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="170.0">
+                    <children>
+                        <Button layoutX="42.0" layoutY="33.0" mnemonicParsing="false" onAction="#switchToRequests"
+                                text="Requests" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0"
+                                AnchorPane.topAnchor="8.0">
+                            <graphic>
+                                <Label fx:id="requestNumIcon" alignment="CENTER" minHeight="-Infinity" prefHeight="20.0"
+                                       prefWidth="20.0"
+                                       style="-fx-background-color: #AA0000; -fx-background-radius: 100;" text="❗"
+                                       textFill="WHITE">
+                                    <font>
+                                        <Font name="Agency FB Bold" size="12.0"/>
+                                    </font>
+                                </Label>
+                            </graphic>
+                        </Button>
+                        <Button layoutX="35.0" layoutY="79.0" mnemonicParsing="false" onAction="#switchToReports"
+                                text="Reports" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0"
+                                AnchorPane.topAnchor="50.0">
+                            <graphic>
+                                <Label text="📕"/>
+                            </graphic>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
     </children>
 </AnchorPane>
