@@ -218,18 +218,7 @@ public class Server extends AbstractServer {
                         break;
                     case Contract.GET_PRINCIPAL_REQUESTS:
                         //TODO for testing
-                        ((ArrayList<ExtensionRequest>) (((Message) msg).getData())).add(new ExtensionRequest(
-                                        new Exam(
-                                                new ArrayList(),
-                                                "teacher notes",
-                                                "student notes",
-                                                new Course(67, "course", new Subject(15, "subject15")),
-                                                new Subject(15, "subject"),
-                                                new Teacher(new User("t", "mark", "smithson", 2))),
-                                        new Teacher(new User("t", "mark", "smithson", 2)),
-                                        5
-                                )
-                        );
+                        ((ArrayList<ExtensionRequest>) (((Message) msg).getData())).addAll(RequestManager.getInstance().requests);
                         client.sendToClient(new Message(Contract.PRINCIPAL_REQUESTS, ((Message) msg).getData()));
                         break;
 

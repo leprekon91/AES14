@@ -14,6 +14,7 @@ public class RequestManager {
 
 
     private RequestManager() {
+        this.requests = new ArrayList<>();
     }
 
 
