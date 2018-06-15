@@ -88,7 +88,6 @@ public class Server extends AbstractServer {
      */
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        //TODO Handle Message from client
         if (msg instanceof Message) {
             SUI.logMsg("Message received from Client: " + client.toString()
                     + " Message:\n" +
@@ -217,7 +216,6 @@ public class Server extends AbstractServer {
                     case Contract.GET_GRADES_BY_STUDENT:    //Get grades of a specific student
                         break;
                     case Contract.GET_PRINCIPAL_REQUESTS:
-                        //TODO for testing
                         ((ArrayList<ExtensionRequest>) (((Message) msg).getData())).addAll(RequestManager.getInstance().requests);
                         client.sendToClient(new Message(Contract.PRINCIPAL_REQUESTS, ((Message) msg).getData()));
                         break;

@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="client.gui.fxcontrol.PrincipalReportsView"
-            prefHeight="400.0" prefWidth="600.0">
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.MaskerPane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.PrincipalReportsView">
+    <children>
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#showStudentReportDialog"
+                text="Get Student Grade Summary" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0"
+                AnchorPane.topAnchor="14.0"/>
+        <MaskerPane fx:id="progressPane" layoutX="290.0" layoutY="167.0" visible="false" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+    </children>
 </AnchorPane>
