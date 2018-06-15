@@ -3,10 +3,9 @@ package client.gui.fxcontrol;
 import client.control.TeacherControl;
 import com.data.Exam;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,10 +33,7 @@ public class ExamManagement {
                         if (exam.getExamCourse().getCourseName().toLowerCase().contains(lowerCase)) {
                             return true;
                         }
-                        if (String.valueOf(exam.getExamCourse().getCourseNumber()).contains(lowerCase)) {
-                            return true;
-                        }
-                        return false;
+                return String.valueOf(exam.getExamCourse().getCourseNumber()).contains(lowerCase);
                     }
 
             );
@@ -51,10 +47,7 @@ public class ExamManagement {
                         if (exam.getExamSubject().getSubjectName().toLowerCase().contains(lowerCase)) {
                             return true;
                         }
-                        if (String.valueOf(exam.getExamSubject().getSubjectID()).contains(lowerCase)) {
-                            return true;
-                        }
-                        return false;
+                return String.valueOf(exam.getExamSubject().getSubjectID()).contains(lowerCase);
                     }
 
             );
@@ -68,10 +61,7 @@ public class ExamManagement {
                         if (exam.getExamAuthorTeacher().getFullName().toLowerCase().contains(lowerCase)) {
                             return true;
                         }
-                        if (exam.getExamAuthorTeacher().getUsername().toLowerCase().contains(lowerCase)) {
-                            return true;
-                        }
-                        return false;
+                return exam.getExamAuthorTeacher().getUsername().toLowerCase().contains(lowerCase);
                     }
 
             );
@@ -80,16 +70,13 @@ public class ExamManagement {
         examList.setItems(filteredData);
 
         //set double click listener:
-        examList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getClickCount() == 2) {
-                    Exam exam = (Exam) examList.getSelectionModel().getSelectedItems().get(0);
-                    try {
-                        ExamView.openWindow(new Stage(), exam);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+        examList.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Exam exam = (Exam) examList.getSelectionModel().getSelectedItems().get(0);
+                try {
+                    ExamView.openWindow(new Stage(), exam);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -97,4 +84,19 @@ public class ExamManagement {
     }
 
 
+    public void createNewExam(ActionEvent actionEvent) {
+        //TODO Stub
+    }
+
+    public void viewSelectedExam(ActionEvent actionEvent) {
+        //TODO Stub
+    }
+
+    public void deleteSelectedExam(ActionEvent actionEvent) {
+        //TODO Stub
+    }
+
+    public void editSelectedExam(ActionEvent actionEvent) {
+        //TODO Stub
+    }
 }

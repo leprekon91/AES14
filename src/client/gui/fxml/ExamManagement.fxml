@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-            minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.ExamManagement">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.ExamManagement">
     <children>
         <AnchorPane prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -19,11 +19,11 @@
                     <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                             <children>
-                                <GridPane xmlns:fx="http://javafx.com/fxml/1" gridLinesVisible="true"
-                                          maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                          minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="429.0"
-                                          AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0"
-                                          AnchorPane.topAnchor="8.0" xmlns="http://javafx.com/javafx/9">
+                                <GridPane gridLinesVisible="true" maxHeight="1.7976931348623157E308"
+                                          maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
+                                          prefHeight="30.0" prefWidth="429.0" AnchorPane.leftAnchor="8.0"
+                                          AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0"
+                                          xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
 
                                     <columnConstraints>
                                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
@@ -67,10 +67,10 @@
                                         prefWidth="85.0" text="Back" AnchorPane.bottomAnchor="8.0"
                                         AnchorPane.rightAnchor="20.0">
                                     <graphic>
-                                        <Label fx:id="backIcon" text="➜"/>
+                                        <Label text="➜"/>
                                     </graphic>
                                 </Button>
-                                <TextField fx:id="nameIdFilter" editable="false" layoutX="20.0" layoutY="95.0"
+                                <TextField fx:id="nameIdFilter" layoutX="20.0" layoutY="95.0"
                                            promptText="Filter by ID/Name course" AnchorPane.leftAnchor="20.0"
                                            AnchorPane.rightAnchor="20.0"/>
                                 <TextField fx:id="subjectFilter" layoutX="20.0" layoutY="42.0"
@@ -79,6 +79,40 @@
                                 <TextField fx:id="teacherFilter" layoutX="20.0" layoutY="148.0"
                                            promptText="Filter by Teacher's Name" AnchorPane.leftAnchor="20.0"
                                            AnchorPane.rightAnchor="20.0"/>
+                                <VBox layoutX="14.0" layoutY="203.0" prefHeight="300.0" prefWidth="100.0" spacing="10.0"
+                                      AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
+                                      AnchorPane.rightAnchor="20.0">
+                                    <children>
+                                        <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
+                                                mnemonicParsing="false" onAction="#createNewExam" styleClass="success"
+                                                text="New">
+                                            <graphic>
+                                                <Label text="✚"/>
+                                            </graphic>
+                                        </Button>
+                                        <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
+                                                mnemonicParsing="false" onAction="#viewSelectedExam" prefWidth="85.0"
+                                                styleClass="info" text="View">
+                                            <graphic>
+                                                <Label text="📖"/>
+                                            </graphic>
+                                        </Button>
+                                        <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
+                                                mnemonicParsing="false" onAction="#deleteSelectedExam" prefWidth="85.0"
+                                                styleClass="danger" text="Delete">
+                                            <graphic>
+                                                <Label text="✖"/>
+                                            </graphic>
+                                        </Button>
+                                        <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
+                                                mnemonicParsing="false" onAction="#editSelectedExam" prefWidth="85.0"
+                                                styleClass="warning" text="Edit">
+                                            <graphic>
+                                                <Label text="✎"/>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </VBox>
                             </children>
                         </AnchorPane>
                     </items>
