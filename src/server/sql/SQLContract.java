@@ -25,11 +25,11 @@ public class SQLContract {
             "\tJOIN subjects \n" +
             "\t\tON questions.subjects_id_subject = subjects.id_subject\n" +
             "\tJOIN users \n" +
-            "\t\tON questions.teacher_name = users.user_name\n" +
-            "WHERE (users.user_name=questions.teacher_name AND questions.subjects_id_subject=subjects.id_subject);";
+            "\t\tON questions.teacher_user = users.user_name\n" +
+            "WHERE (users.user_name=questions.teacher_user AND questions.subjects_id_subject=subjects.id_subject);";
     //-----------------CRUD---------------------------------------------------------------------------------------------
     public static final String CREATE_QUESTION = "INSERT INTO questions" +
-            "(question_text,ans_1,ans_2,ans_3,ans_4,indicator,teacher_name,subjects_id_subject)" +
+            "(question_text,ans_1,ans_2,ans_3,ans_4,indicator,teacher_user,subjects_id_subject)" +
             " VALUES (?,?,?,?,?,?,?,?);";
     public static final String READ_QUESTION = "SELECT * FROM questions WHERE id_question=? AND subjects_id_subject=?;";
 
@@ -41,7 +41,7 @@ public class SQLContract {
             "`ans_3` = ?,\n" +
             "`ans_4` = ?,\n" +
             "`indicator` = ?,\n" +
-            "`teacher_name` = ?\n" +
+            "`teacher_user` = ?\n" +
             "WHERE `id_question` = ? AND `subjects_id_subject` = ?;";
     public static final String DELETE_QUESTION = "DELETE FROM questions " +
             "WHERE id_question = ? AND subjects_id_subject = ?;";
@@ -53,11 +53,11 @@ public class SQLContract {
             "\tJOIN subjects \n" +
             "\t\tON questions.subjects_id_subject = subjects.id_subject\n" +
             "\tJOIN users \n" +
-            "\t\tON questions.teacher_name = users.user_name\n" +
-            "WHERE (users.user_name=questions.teacher_name AND questions.subjects_id_subject=subjects.id_subject AND exams.id_exam = ?);";
+            "\t\tON questions.teacher_user = users.user_name\n" +
+            "WHERE (users.user_name=questions.teacher_user AND questions.subjects_id_subject=subjects.id_subject AND exams.id_exam = ?);";
     public static final String RECIVE_EXAM_ID = "SELECT LAST_INSERT_ID();";
     public static final String SHOW_TEACHERS_QUESTION = "SELECT * FROM questions " +
-            "WHERE teacher_name =?;";
+            "WHERE teacher_user =?;";
     public static final String SHOW_QUESTION_IN_SUBJECTS = "SELECT * FROM questions " +
             "WHERE subjects_id_subject=?;";
     //------------------------------------------------------------------------------------------------------------------

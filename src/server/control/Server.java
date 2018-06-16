@@ -5,6 +5,7 @@ import com.data.*;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
 import server.sql.AuthorizeUser;
+import server.sql.ExamTable;
 import server.sql.QuestionTable;
 import server.sql.SubjectsTable;
 
@@ -122,30 +123,7 @@ public class Server extends AbstractServer {
                         break;
                     case Contract.EXAMS:
                         ArrayList<Exam> ans = new ArrayList<Exam>();
-                        ans.add(new Exam(
-                                new ArrayList(),
-                                "teacher notes",
-                                "student notes",
-                                new Course(2, "course", new Subject(0, "subject1")),
-                                new Subject(1, "subject"),
-                                new Teacher(new User("t", "john", "smith", 2)), false, 0
-                        ));
-                        ans.add(new Exam(
-                                new ArrayList(),
-                                "teacher notes",
-                                "student notes",
-                                new Course(1, "course", new Subject(0, "subject0")),
-                                new Subject(0, "subject"),
-                                new Teacher(new User("t", "jane", "smithy", 2)), false, 0
-                        ));
-                        ans.add(new Exam(
-                                new ArrayList(),
-                                "teacher notes",
-                                "student notes",
-                                new Course(67, "course", new Subject(15, "subject15")),
-                                new Subject(15, "subject"),
-                                new Teacher(new User("t", "mark", "smithson", 2)), false, 0
-                        ));
+                        ExamTable.selectAllExam(ans);
                         client.sendToClient(new Message(Contract.EXAMS, ans));
                         break;
                     case Contract.CREATE_EXAM:              //Create a New Exam

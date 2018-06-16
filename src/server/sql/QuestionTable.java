@@ -32,7 +32,7 @@ public class QuestionTable {
             stmt.setString(7, question.getAuthor().getUsername());
             stmt.setInt(8, question.getSubject().getSubjectID());
             stmt.execute();
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {
@@ -78,7 +78,7 @@ public class QuestionTable {
             stmt.setInt(8, question.getQID());
             stmt.setInt(9, question.getSubject().getSubjectID());
             stmt.execute();
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {
@@ -104,7 +104,7 @@ public class QuestionTable {
             stmt.setInt(2, question.getSubject().getSubjectID());
 
             stmt.execute();
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {
@@ -173,7 +173,7 @@ public class QuestionTable {
                 data.add(question);
             }
 
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {

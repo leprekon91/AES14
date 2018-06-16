@@ -35,7 +35,7 @@ public class ExamTable {
             try {
                 stmtExamID = con.createStatement();
             } catch (SQLException e1) {
-                // TODO Auto-generated catch block
+
                 e1.printStackTrace();
             }
 
@@ -65,7 +65,7 @@ public class ExamTable {
     /**
      * Read Exam entry from the database, create a Exam object and return it.
      *
-     * @param empty Exam object to be filled with data from the DB, required exam ID
+     * @param exam empty Exam object to be filled with data from the DB, required exam ID
      * @return Exam Object filled with the entry data.
      */
     public static void readExam(Exam exam, int examID) {
@@ -195,7 +195,7 @@ public class ExamTable {
     /**
      * Delete Exam(and the question of the exam) from the database.
      *
-     * @param Exam object corresponding to the entry that is going to be deleted
+     * @param exam object corresponding to the entry that is going to be deleted
      */
     public static void deleteExam(Exam exam) {
         System.out.println("ExamTable - Delete Exam\n" +
@@ -233,7 +233,7 @@ public class ExamTable {
         return exam;
     }
 
-    public static ArrayList<Exam> selectAllExamByCours(int courseID) {
+    public static ArrayList<Exam> selectAllExamByCourse(int courseID) {
         //TODO STUB method
         System.out.println("ExamTable - Select Exam By course\n" +
                 "Exam: " + courseID);
