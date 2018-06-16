@@ -44,7 +44,7 @@ public class Report {
         ((Report) fxmlLoader.getController()).chartTitle = chartTitle;
         ((Report) fxmlLoader.getController()).xLabel = xLabel;
         ((Report) fxmlLoader.getController()).yLabel = yLabel;
-        ((Report) fxmlLoader.getController()).createData("Example", data);
+        ((Report) fxmlLoader.getController()).createData("Report", data);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Report.class.getResource(Contract.css).toExternalForm());
@@ -61,15 +61,15 @@ public class Report {
 
 
         series.getData().add(new XYChart.Data<>("0-9", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("10-19", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("20-29", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("30-39", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("40-49", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("50-59", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("60-69", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("70-79", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("80-89", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("90-100", dataMap[0]));
+        series.getData().add(new XYChart.Data<>("10-19", dataMap[1]));
+        series.getData().add(new XYChart.Data<>("20-29", dataMap[2]));
+        series.getData().add(new XYChart.Data<>("30-39", dataMap[3]));
+        series.getData().add(new XYChart.Data<>("40-49", dataMap[4]));
+        series.getData().add(new XYChart.Data<>("50-59", dataMap[5]));
+        series.getData().add(new XYChart.Data<>("60-69", dataMap[6]));
+        series.getData().add(new XYChart.Data<>("70-79", dataMap[7]));
+        series.getData().add(new XYChart.Data<>("80-89", dataMap[8]));
+        series.getData().add(new XYChart.Data<>("90-100", dataMap[9]));
         barChart.getData().add(series);
 
 

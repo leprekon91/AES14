@@ -1,8 +1,10 @@
 package client.control;
 
+import client.gui.fxcontrol.PrincipalReportsView;
 import client.ocsf.AbstractClient;
 import com.Contract;
 import com.data.*;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +69,12 @@ public class Client extends AbstractClient {
                 break;
             case Contract.PRINCIPAL_REQUESTS:
                 PrincipalControl.getInstance().receiveNewRequests((ArrayList<ExtensionRequest>) ((Message) msg).getData());
+                break;
+            case Contract.REPORT:
+                Platform.runLater(() -> PrincipalReportsView.getInstance().openReport((int[]) ((Message) msg).getData()));
+                break;
+            case Contract.STUDENTS:
+                Platform.runLater(() -> PrincipalReportsView.getInstance().receiveAllStudentsForReport((ArrayList<Student>) ((Message) msg).getData()));
                 break;
         }
 

@@ -88,6 +88,11 @@ public class Server extends AbstractServer {
      */
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (msg instanceof Message) {
             SUI.logMsg("Message received from Client: " + client.toString()
                     + " Message:\n" +
@@ -218,6 +223,17 @@ public class Server extends AbstractServer {
                     case Contract.GET_PRINCIPAL_REQUESTS:
                         ((ArrayList<ExtensionRequest>) (((Message) msg).getData())).addAll(RequestManager.getInstance().requests);
                         client.sendToClient(new Message(Contract.PRINCIPAL_REQUESTS, ((Message) msg).getData()));
+                        break;
+                    case Contract.STUDENTS:
+                        ArrayList<Student> students = new ArrayList<>();
+                        students.add(new Student(new User("t", "tom", "one", 1)));
+                        students.add(new Student(new User("t", "john", "two", 1)));
+                        students.add(new Student(new User("t", "bob", "three", 1)));
+                        students.add(new Student(new User("t", "max", "four", 1)));
+                        client.sendToClient(new Message(Contract.STUDENTS, students));
+                        break;
+                    case Contract.GET_REPORT_BY_STUDENT:
+                        client.sendToClient(new Message(Contract.REPORT, new int[]{1, 11, 21, 31, 41, 51, 61, 71, 72, 81, 91}));
                         break;
 
                 }

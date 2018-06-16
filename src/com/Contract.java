@@ -6,19 +6,21 @@ package com;
  * Client-Server communication Vocabulary.
  */
 public class Contract {
-    final public static int DEFAULT_PORT = 5555;// Default fall-back port
-    final public static String clientFXML = "/client/gui/fxml/"; // location of FXML files for the client
-    final public static String serverFXML = "/server/gui/fxml/"; // location of FXML files for the server
-    final public static String css = "/com/style/style.css"; // location of CSS file
-    final public static String graphics = "/com/graphics/"; //location of graphics dir
+    final public static int DEFAULT_PORT = 5555;                // Default fall-back port
+    final public static String clientFXML = "/client/gui/fxml/";// location of FXML files for the client
+    final public static String serverFXML = "/server/gui/fxml/";// location of FXML files for the server
+    final public static String css = "/com/style/style.css";    // location of CSS file
+    final public static String graphics = "/com/graphics/";     //location of graphics dir
 
     // Client-Server Communication Language
     // Authorization Vocabulary
-    final public static int AUTHORIZE = 2; //Authorize User in Message
-    final public static int AUTH_YES = 1; // AUTHORIZE positive message
-    final public static int AUTH_NO = 0; // AUTHORIZE negative message
-    final public static int LOG_OFF = -1; // Logoff user
-
+    final public static int AUTHORIZE = 2;  //Authorize User in Message
+    final public static int AUTH_YES = 1;   // AUTHORIZE positive message
+    final public static int AUTH_NO = 0;    // AUTHORIZE negative message
+    final public static int LOG_OFF = -1;   // Logoff user
+    //Users Vocabulary
+    public static final int STUDENTS = 3;   //get/receive all students
+    public static final int TEACHERS = 4;   //get/receive all teachers
 
     // Exam Vocabulary
     final public static int EXAM = 10;
@@ -32,7 +34,7 @@ public class Contract {
     final public static int GET_EXAMS_BY_TEACHER = 18;
 
 
-    // Question vocabulary
+    // Question Vocabulary
     final public static int QUESTION = 20;
     final public static int QUESTIONS = 28;
     final public static int CREATE_QUESTION = 21;
@@ -54,7 +56,12 @@ public class Contract {
     final public static int GET_GRADES_BY_EXAM = 41;
     final public static int GET_GRADES_BY_STUDENT = 42;
 
+    //Extension Requests Vocabulary
     public static final int GET_PRINCIPAL_REQUESTS = 50;
     public static final int PRINCIPAL_REQUESTS = 51;
     public static final int SEND_PRINCIPAL_REQUEST_ANSWER = 52;
+
+    //Reports Vocabulary
+    public static final int REPORT = 60;
+    public static final int GET_REPORT_BY_STUDENT = 61;
 }
