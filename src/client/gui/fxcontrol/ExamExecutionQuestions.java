@@ -208,8 +208,8 @@ public class ExamExecutionQuestions {
 
     public void generateAndSendSolvedExam() {
         Student solvingStudent = new Student(new User("j", "john", "smithy", 1));
-        Solved_Exam solved_exam = new Solved_Exam(exam, generateAnswerArray(), solvingStudent, (int) (elapsed / 60));
-        System.out.println("Sending to server: " + Arrays.toString(solved_exam.getAnswers()));
+        Solved_Exam solved_exam = new Solved_Exam(exam, generateAnswerArray(), solvingStudent, (int) (elapsed / 60), exam.getExamAuthorTeacher());
+        System.out.println("Sending to server: " + Arrays.toString(solved_exam.getStudentAnswers()));
     }
 
 }

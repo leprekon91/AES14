@@ -13,24 +13,30 @@ public class Exam implements Serializable {
      */
     private int examNumber;
     private ArrayList<Question> examQuestions;
+    private int questionGrades[];
     private String teacherNotes;
     private String studentNotes;
     private Course examCourse;
     private Subject examSubject;
     private Teacher examAuthorTeacher;
     private boolean used;
+    private int assignedTime;
 
     /**
      * Exam constructor
      */
-    public Exam(ArrayList<Question> examQuestions, String teacherNotes, String studentNotes,
-                Course examCourse, Subject examSubject, Teacher examAuthorTeacher) {
+    public Exam(ArrayList<Question> examQuestions, String teacherNotes,
+                String studentNotes, Course examCourse, Subject examSubject,
+                Teacher examAuthorTeacher, boolean used, int assignedTime) {
+        super();
         this.examQuestions = examQuestions;
         this.teacherNotes = teacherNotes;
         this.studentNotes = studentNotes;
         this.examCourse = examCourse;
         this.examSubject = examSubject;
         this.examAuthorTeacher = examAuthorTeacher;
+        this.used = used;
+        this.assignedTime = assignedTime;
     }
 
     public Exam(int examNumber, Subject examSubject, Course examCourse) {
@@ -57,6 +63,14 @@ public class Exam implements Serializable {
 
     public void setExamQuestions(ArrayList<Question> examQuestions) {
         this.examQuestions = examQuestions;
+    }
+
+    public int[] getQuestionGrades() {
+        return questionGrades;
+    }
+
+    public void setQuestionGrades(int questionGrades[]) {
+        this.questionGrades = questionGrades;
     }
 
     public String getTeacherNotes() {
@@ -113,6 +127,12 @@ public class Exam implements Serializable {
                 + String.format("%02d", getExamNumber());
     }
 
+    public int getAssignedTime() {
+        return assignedTime;
+    }
 
+    public void setAssignedTime(int assignedTime) {
+        this.assignedTime = assignedTime;
+    }
 }
 

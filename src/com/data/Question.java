@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class Question implements Serializable {
+
     /**
      * Question fields
      */
@@ -15,13 +16,13 @@ public class Question implements Serializable {
     private Subject subject;
     private Teacher author;
 
-    /*
-     * Question constructor
+    /**
+     * Question constructors
      */
-    public Question(String questionText, String[] possibleAnswers, int correctAnswer, Subject questionSubject, Teacher teacherID) {
+    public Question(String questionText, String[] possibleAnswers, int correctAnswer, Subject subject, Teacher teacherID) {
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
-        this.subject = questionSubject;
+        this.subject = subject;
         this.author = teacherID;
         this.possibleAnswers = possibleAnswers;
     }
@@ -35,7 +36,7 @@ public class Question implements Serializable {
         this.subject = subjectId;
     }
 
-    /*
+    /**
      * Question getters and setters
      */
     public String getQuestionText() {
@@ -58,8 +59,8 @@ public class Question implements Serializable {
         return subject;
     }
 
-    public void setSubject(Subject subjectId) {
-        this.subject = subjectId;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public Teacher getAuthor() {

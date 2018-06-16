@@ -7,19 +7,36 @@ public class Solved_Exam {
      * Solved exam fields
      */
     private Exam exam;
-    private int answers[];
+    private int studentAnswers[];
     private Student solvingStudent;
-    private int examDuration;
+    private int examSolvingDuration;
     private Teacher examinerTeacher;
 
+    private int examGrade; //fields designated for after the solution check
+    private boolean approved;
+    private String teacherGradingNotes;
+
     /**
-     * Solved exam constructor
+     * Solved exam constructors
      */
-    public Solved_Exam(Exam exam, int[] answers, Student solvingStudent, int examDuration) {
-        super();
+    public Solved_Exam(Exam exam, int[] studentAnswers, Student solvingStudent, int examSolvingDuration, Teacher examinerTeacher) {
         this.exam = exam;
-        this.answers = answers;
+        this.studentAnswers = studentAnswers;
         this.solvingStudent = solvingStudent;
+        this.examSolvingDuration = examSolvingDuration;
+        this.examinerTeacher = examinerTeacher;
+    }
+
+    public Solved_Exam(Exam exam, int[] studentAnswers, Student solvingStudent, int examSolvingDuration,
+                       Teacher examinerTeacher, int examGrade, boolean approved, String teacherGradingNotes) {
+        this.exam = exam;
+        this.studentAnswers = studentAnswers;
+        this.solvingStudent = solvingStudent;
+        this.examSolvingDuration = examSolvingDuration;
+        this.examinerTeacher = examinerTeacher;
+        this.setExamGrade(examGrade);
+        this.setApproved(approved);
+        this.setTeacherGradingNotes(teacherGradingNotes);
     }
 
     /**
@@ -33,12 +50,12 @@ public class Solved_Exam {
         this.exam = exam;
     }
 
-    public int[] getAnswers() {
-        return answers;
+    public int[] getStudentAnswers() {
+        return studentAnswers;
     }
 
-    public void setAnswers(int[] answers) {
-        this.answers = answers;
+    public void setStudentAnswers(int[] studentAnswers) {
+        this.studentAnswers = studentAnswers;
     }
 
     public Student getSolvingStudent() {
@@ -49,12 +66,12 @@ public class Solved_Exam {
         this.solvingStudent = solvingStudent;
     }
 
-    public int getExamDuration() {
-        return examDuration;
+    public int getExamSolvingDuration() {
+        return examSolvingDuration;
     }
 
-    public void setExamDuration(int examDuration) {
-        this.examDuration = examDuration;
+    public void setExamSolvingDuration(int examSolvingDuration) {
+        this.examSolvingDuration = examSolvingDuration;
     }
 
     public Teacher getExaminerTeacher() {
@@ -63,6 +80,30 @@ public class Solved_Exam {
 
     public void setExaminerTeacher(Teacher examinerTeacher) {
         this.examinerTeacher = examinerTeacher;
+    }
+
+    public int getExamGrade() {
+        return examGrade;
+    }
+
+    public void setExamGrade(int examGrade) {
+        this.examGrade = examGrade;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public String getTeacherGradingNotes() {
+        return teacherGradingNotes;
+    }
+
+    public void setTeacherGradingNotes(String teacherGradingNotes) {
+        this.teacherGradingNotes = teacherGradingNotes;
     }
 }
 

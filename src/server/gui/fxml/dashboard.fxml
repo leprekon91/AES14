@@ -2,12 +2,10 @@
 
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-
-<TabPane rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="server.gui.fxcontrol.Dashboard">
-   <tabs>
-      <Tab fx:id="userTab" closable="false" text="Users">
-         <graphic>
-         </graphic>
-      </Tab>
-   </tabs>
+<TabPane rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml" fx:controller="server.gui.fxcontrol.Dashboard">
+    <Tab fx:id="userTab" closable="false" text="Users">
+        <graphic>
+        </graphic>
+    </Tab>
 </TabPane>

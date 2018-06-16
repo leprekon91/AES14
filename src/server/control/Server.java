@@ -128,7 +128,7 @@ public class Server extends AbstractServer {
                                 "student notes",
                                 new Course(2, "course", new Subject(0, "subject1")),
                                 new Subject(1, "subject"),
-                                new Teacher(new User("t", "john", "smith", 2))
+                                new Teacher(new User("t", "john", "smith", 2)), false, 0
                         ));
                         ans.add(new Exam(
                                 new ArrayList(),
@@ -136,7 +136,7 @@ public class Server extends AbstractServer {
                                 "student notes",
                                 new Course(1, "course", new Subject(0, "subject0")),
                                 new Subject(0, "subject"),
-                                new Teacher(new User("t", "jane", "smithy", 2))
+                                new Teacher(new User("t", "jane", "smithy", 2)), false, 0
                         ));
                         ans.add(new Exam(
                                 new ArrayList(),
@@ -144,7 +144,7 @@ public class Server extends AbstractServer {
                                 "student notes",
                                 new Course(67, "course", new Subject(15, "subject15")),
                                 new Subject(15, "subject"),
-                                new Teacher(new User("t", "mark", "smithson", 2))
+                                new Teacher(new User("t", "mark", "smithson", 2)), false, 0
                         ));
                         client.sendToClient(new Message(Contract.EXAMS, ans));
                         break;

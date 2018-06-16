@@ -9,133 +9,131 @@
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.ExamManagement">
-    <children>
-        <AnchorPane prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <SplitPane dividerPositions="0.8" layoutX="438.0" layoutY="417.0" prefHeight="83.0" prefWidth="162.0"
-                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                           AnchorPane.topAnchor="70.0">
-                    <items>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                            <children>
-                                <GridPane gridLinesVisible="true" maxHeight="1.7976931348623157E308"
-                                          maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                                          prefHeight="30.0" prefWidth="429.0" AnchorPane.leftAnchor="8.0"
-                                          AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0"
-                                          xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+            <SplitPane dividerPositions="0.8" layoutX="438.0" layoutY="417.0" prefHeight="83.0" prefWidth="162.0"
+                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                       AnchorPane.topAnchor="70.0">
+                <items>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                        <children>
+                            <GridPane gridLinesVisible="true" maxHeight="1.7976931348623157E308"
+                                      maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
+                                      prefHeight="30.0" prefWidth="429.0" AnchorPane.leftAnchor="8.0"
+                                      AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0"
+                                      xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
 
-                                    <columnConstraints>
-                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
-                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
-                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
-                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
-                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                        <RowConstraints minHeight="-Infinity" prefHeight="30.0" valignment="CENTER"
-                                                        vgrow="SOMETIMES"/>
-                                    </rowConstraints>
-                                    <children>
-                                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
-                                               maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="57.0"
-                                               text="Exam id" GridPane.halignment="CENTER"/>
-                                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
-                                               maxWidth="1.7976931348623157E308" text="Subject" GridPane.columnIndex="1"
-                                               GridPane.halignment="CENTER"/>
-                                        <Label alignment="CENTER" contentDisplay="CENTER"
-                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                               text="Author" GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
-                                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
-                                               maxWidth="1.7976931348623157E308" text="Course" GridPane.columnIndex="3"
-                                               GridPane.halignment="CENTER"/>
-                                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
-                                               maxWidth="1.7976931348623157E308" text="Status" GridPane.columnIndex="4"
-                                               GridPane.halignment="CENTER"/>
-                                    </children>
-                                </GridPane>
-                                <ListView fx:id="examList" layoutX="104.0" layoutY="107.0"
-                                          maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                          minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0"
-                                          prefWidth="429.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0"
-                                          AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="38.0"/>
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="245.0">
-                            <children>
-                                <Button contentDisplay="RIGHT" layoutX="152.0" layoutY="277.0" mnemonicParsing="false"
-                                        prefWidth="85.0" text="Back" AnchorPane.bottomAnchor="8.0"
-                                        AnchorPane.rightAnchor="20.0">
-                                    <graphic>
-                                        <Label text="➜"/>
-                                    </graphic>
-                                </Button>
-                                <TextField fx:id="nameIdFilter" layoutX="20.0" layoutY="95.0"
-                                           promptText="Filter by ID/Name course" AnchorPane.leftAnchor="20.0"
-                                           AnchorPane.rightAnchor="20.0"/>
-                                <TextField fx:id="subjectFilter" layoutX="20.0" layoutY="42.0"
-                                           promptText="Filter by Subject" AnchorPane.leftAnchor="20.0"
-                                           AnchorPane.rightAnchor="20.0"/>
-                                <TextField fx:id="teacherFilter" layoutX="20.0" layoutY="148.0"
-                                           promptText="Filter by Teacher's Name" AnchorPane.leftAnchor="20.0"
-                                           AnchorPane.rightAnchor="20.0"/>
-                                <VBox layoutX="14.0" layoutY="203.0" prefHeight="300.0" prefWidth="100.0" spacing="10.0"
-                                      AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
-                                      AnchorPane.rightAnchor="20.0">
-                                    <children>
-                                        <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
-                                                mnemonicParsing="false" onAction="#createNewExam" styleClass="success"
-                                                text="New">
-                                            <graphic>
-                                                <Label text="✚"/>
-                                            </graphic>
-                                        </Button>
-                                        <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
-                                                mnemonicParsing="false" onAction="#viewSelectedExam" prefWidth="85.0"
-                                                styleClass="info" text="View">
-                                            <graphic>
-                                                <Label text="📖"/>
-                                            </graphic>
-                                        </Button>
-                                        <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
-                                                mnemonicParsing="false" onAction="#deleteSelectedExam" prefWidth="85.0"
-                                                styleClass="danger" text="Delete">
-                                            <graphic>
-                                                <Label text="✖"/>
-                                            </graphic>
-                                        </Button>
-                                        <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
-                                                mnemonicParsing="false" onAction="#editSelectedExam" prefWidth="85.0"
-                                                styleClass="warning" text="Edit">
-                                            <graphic>
-                                                <Label text="✎"/>
-                                            </graphic>
-                                        </Button>
-                                    </children>
-                                </VBox>
-                            </children>
-                        </AnchorPane>
-                    </items>
-                </SplitPane>
-                <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="70.0" style="-fx-background-color: #ADD8E6;"
-                            AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
-                    <children>
-                        <Text layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EXAM CATALOG"
-                              AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
-                              AnchorPane.rightAnchor="465.953125" AnchorPane.topAnchor="20.0">
-                            <font>
-                                <Font name="Agency FB" size="28.0"/>
-                            </font>
-                        </Text>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
-                                   preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                            <image>
-                                <Image url="@../../../com/graphics/Icon.png"/>
-                            </image>
-                        </ImageView>
-                    </children>
-                </AnchorPane>
-            </children>
-        </AnchorPane>
-    </children>
+                                <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="-Infinity" prefHeight="30.0" valignment="CENTER"
+                                                    vgrow="SOMETIMES"/>
+                                </rowConstraints>
+                                <children>
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
+                                           maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="57.0"
+                                           text="Exam id" GridPane.halignment="CENTER"/>
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
+                                           maxWidth="1.7976931348623157E308" text="Subject" GridPane.columnIndex="1"
+                                           GridPane.halignment="CENTER"/>
+                                    <Label alignment="CENTER" contentDisplay="CENTER"
+                                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                           text="Author" GridPane.columnIndex="2" GridPane.halignment="CENTER"/>
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
+                                           maxWidth="1.7976931348623157E308" text="Course" GridPane.columnIndex="3"
+                                           GridPane.halignment="CENTER"/>
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308"
+                                           maxWidth="1.7976931348623157E308" text="Status" GridPane.columnIndex="4"
+                                           GridPane.halignment="CENTER"/>
+                                </children>
+                            </GridPane>
+                            <ListView fx:id="examList" layoutX="104.0" layoutY="107.0"
+                                      maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0"
+                                      prefWidth="429.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0"
+                                      AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="38.0"/>
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="245.0">
+                        <children>
+                            <Button contentDisplay="RIGHT" layoutX="152.0" layoutY="277.0" mnemonicParsing="false"
+                                    prefWidth="85.0" text="Back" AnchorPane.bottomAnchor="8.0"
+                                    AnchorPane.rightAnchor="20.0">
+                                <graphic>
+                                    <Label text="➜"/>
+                                </graphic>
+                            </Button>
+                            <TextField fx:id="nameIdFilter" layoutX="20.0" layoutY="95.0"
+                                       promptText="Filter by ID/Name course" AnchorPane.leftAnchor="20.0"
+                                       AnchorPane.rightAnchor="20.0"/>
+                            <TextField fx:id="subjectFilter" layoutX="20.0" layoutY="42.0"
+                                       promptText="Filter by Subject" AnchorPane.leftAnchor="20.0"
+                                       AnchorPane.rightAnchor="20.0"/>
+                            <TextField fx:id="teacherFilter" layoutX="20.0" layoutY="148.0"
+                                       promptText="Filter by Teacher's Name" AnchorPane.leftAnchor="20.0"
+                                       AnchorPane.rightAnchor="20.0"/>
+                            <VBox layoutX="14.0" layoutY="203.0" prefHeight="300.0" prefWidth="100.0" spacing="10.0"
+                                  AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
+                                  AnchorPane.rightAnchor="20.0">
+                                <children>
+                                    <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
+                                            mnemonicParsing="false" onAction="#createNewExam" styleClass="success"
+                                            text="New">
+                                        <graphic>
+                                            <Label text="✚"/>
+                                        </graphic>
+                                    </Button>
+                                    <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
+                                            mnemonicParsing="false" onAction="#viewSelectedExam" prefWidth="85.0"
+                                            styleClass="info" text="View">
+                                        <graphic>
+                                            <Label text="📖"/>
+                                        </graphic>
+                                    </Button>
+                                    <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
+                                            mnemonicParsing="false" onAction="#deleteSelectedExam" prefWidth="85.0"
+                                            styleClass="danger" text="Delete">
+                                        <graphic>
+                                            <Label text="✖"/>
+                                        </graphic>
+                                    </Button>
+                                    <Button contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
+                                            mnemonicParsing="false" onAction="#editSelectedExam" prefWidth="85.0"
+                                            styleClass="warning" text="Edit">
+                                        <graphic>
+                                            <Label text="✎"/>
+                                        </graphic>
+                                    </Button>
+                                </children>
+                            </VBox>
+                        </children>
+                    </AnchorPane>
+                </items>
+            </SplitPane>
+            <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="70.0" style="-fx-background-color: #ADD8E6;"
+                        AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+                <children>
+                    <Text layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EXAM CATALOG"
+                          AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
+                          AnchorPane.rightAnchor="465.953125" AnchorPane.topAnchor="20.0">
+                        <font>
+                            <Font name="Agency FB" size="28.0"/>
+                        </font>
+                    </Text>
+                    <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
+                               preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                        <image>
+                            <Image url="@../../../com/graphics/Icon.png"/>
+                        </image>
+                    </ImageView>
+                </children>
+            </AnchorPane>
+        </children>
+    </AnchorPane>
 </AnchorPane>

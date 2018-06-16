@@ -9,21 +9,19 @@
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.ExamView">
     <AnchorPane layoutX="149.0" prefHeight="70.0" style="-fx-background-color: #ADD8E6;" AnchorPane.leftAnchor="-1.0"
                 AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
-        <children>
-            <Text fx:id="examViewTitle" layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                  text="EXAM VIEW" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
-                  AnchorPane.rightAnchor="465.953125" AnchorPane.topAnchor="20.0">
-                <font>
-                    <Font name="Agency FB" size="28.0"/>
-                </font>
-            </Text>
-            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
-                       preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                <image>
-                    <Image url="@../../../com/graphics/Icon.png"/>
-                </image>
-            </ImageView>
-        </children>
+        <Text fx:id="examViewTitle" layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="EXAM VIEW" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0"
+              AnchorPane.rightAnchor="465.953125" AnchorPane.topAnchor="20.0">
+            <font>
+                <Font name="Agency FB" size="28.0"/>
+            </font>
+        </Text>
+        <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
+                   preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <image>
+                <Image url="@../../../com/graphics/Icon.png"/>
+            </image>
+        </ImageView>
     </AnchorPane>
 
 </AnchorPane>
