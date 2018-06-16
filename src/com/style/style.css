@@ -965,3 +965,11 @@ VBox > .split-menu-button.last > .arrow-button {
  }
 
  .default-color0.chart-series-line { -fx-stroke: lime; }
+ 
+ .navigation,.navigation:focused{
+	-fx-background-radius: 0;
+	-fx-border-radius: 0;
+	-fx-background-color:  #ADD8E6;
+	-fx-text-fill: #000000;
+	-fx-effect:none;
+ }

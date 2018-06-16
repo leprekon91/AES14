@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.PrincipalMenu">
     <children>
         <SplitPane dividerPositions="0.7040133779264214" layoutX="200.0" layoutY="130.0" prefHeight="160.0"
@@ -26,9 +26,10 @@
                 </AnchorPane>
                 <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="170.0">
                     <children>
-                        <Button layoutX="42.0" layoutY="33.0" mnemonicParsing="false" onAction="#switchToRequests"
-                                text="Requests" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0"
-                                AnchorPane.topAnchor="8.0">
+                        <Button layoutX="42.0" layoutY="33.0" maxHeight="-Infinity" minHeight="-Infinity"
+                                mnemonicParsing="false" onAction="#switchToRequests" prefHeight="30.0"
+                                styleClass="navigation" text="Requests" AnchorPane.leftAnchor="0.0"
+                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <graphic>
                                 <Label fx:id="requestNumIcon" alignment="CENTER" minHeight="-Infinity" prefHeight="20.0"
                                        prefWidth="20.0"
@@ -40,9 +41,10 @@
                                 </Label>
                             </graphic>
                         </Button>
-                        <Button layoutX="35.0" layoutY="79.0" mnemonicParsing="false" onAction="#switchToReports"
-                                text="Reports" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0"
-                                AnchorPane.topAnchor="50.0">
+                        <Button layoutX="35.0" layoutY="79.0" maxHeight="-Infinity" minHeight="-Infinity"
+                                mnemonicParsing="false" onAction="#switchToReports" prefHeight="30.0"
+                                styleClass="navigation" text="Reports" AnchorPane.leftAnchor="0.0"
+                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                             <graphic>
                                 <Label text="📕"/>
                             </graphic>
