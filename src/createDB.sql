@@ -90,17 +90,17 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `ans_4` TEXT(200) NOT NULL,
   `indicator` INT NULL,
   `subjects_id_subject` INT NOT NULL,
-  `teacher_name` VARCHAR(50) NOT NULL,
+  `teacher_user` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id_question`, `subjects_id_subject`),
   INDEX `fk_questions_subjects1_idx` (`subjects_id_subject` ASC),
-  INDEX `fk_questions_users1_idx` (`teacher_name` ASC),
+  INDEX `fk_questions_users1_idx` (`teacher_user` ASC),
   CONSTRAINT `fk_questions_subjects1`
     FOREIGN KEY (`subjects_id_subject`)
     REFERENCES `AES`.`subjects` (`id_subject`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_questions_users1`
-    FOREIGN KEY (`teacher_name`)
+    FOREIGN KEY (`teacher_user`)
     REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -169,9 +169,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `AES`.`exams_has_questions` (
   `exams_id_exam` INT NOT NULL,
   `questions_id_question` INT NOT NULL,
+  `exam_courses_id` INT NOT NULL,
   `questions_subjects_id_subject` INT NOT NULL,
   `question_grade` INT NULL,
-  PRIMARY KEY (`exams_id_exam`, `questions_id_question`, `questions_subjects_id_subject`),
+  PRIMARY KEY (`exams_id_exam`, `questions_id_question`, `exam_courses_id`, `questions_subjects_id_subject`),
   INDEX `fk_exams_has_questions_questions1_idx` (`questions_id_question` ASC, `questions_subjects_id_subject` ASC),
   INDEX `fk_exams_has_questions_exams1_idx` (`exams_id_exam` ASC),
   CONSTRAINT `fk_exams_has_questions_exams1`
@@ -190,23 +191,24 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `student_answers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `student_answers` (
-  `student_name` VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `AES`.`student_answers` (
+  `answer` INT NOT NULL,
   `exams_has_questions_exams_id_exam` INT NOT NULL,
   `exams_has_questions_questions_id_question` INT NOT NULL,
+  `exams_has_questions_exam_courses_id` INT NOT NULL,
   `exams_has_questions_questions_subjects_id_subject` INT NOT NULL,
-  `answer` INT NULL,
-  PRIMARY KEY (`student_name`, `exams_has_questions_exams_id_exam`, `exams_has_questions_questions_id_question`, `exams_has_questions_questions_subjects_id_subject`),
-  INDEX `fk_users_has_exams_has_questions_exams_has_questions1_idx` (`exams_has_questions_exams_id_exam` ASC, `exams_has_questions_questions_id_question` ASC, `exams_has_questions_questions_subjects_id_subject` ASC),
-  INDEX `fk_users_has_exams_has_questions_users1_idx` (`student_name` ASC),
-  CONSTRAINT `fk_users_has_exams_has_questions_users1`
-    FOREIGN KEY (`student_name`)
-    REFERENCES `AES`.`users` (`user_name`)
+  `student_user` VARCHAR(50) NOT NULL,
+  INDEX `fk_student_answers_exams_has_questions1_idx` (`exams_has_questions_exams_id_exam` ASC, `exams_has_questions_questions_id_question` ASC, `exams_has_questions_exam_courses_id` ASC, `exams_has_questions_questions_subjects_id_subject` ASC),
+  INDEX `fk_student_answers_users1_idx` (`student_user` ASC),
+  PRIMARY KEY (`exams_has_questions_exams_id_exam`, `exams_has_questions_questions_id_question`, `exams_has_questions_exam_courses_id`, `exams_has_questions_questions_subjects_id_subject`, `student_user`),
+  CONSTRAINT `fk_student_answers_exams_has_questions1`
+    FOREIGN KEY (`exams_has_questions_exams_id_exam` , `exams_has_questions_questions_id_question` , `exams_has_questions_exam_courses_id` , `exams_has_questions_questions_subjects_id_subject`)
+    REFERENCES `AES`.`exams_has_questions` (`exams_id_exam` , `questions_id_question` , `exam_courses_id` , `questions_subjects_id_subject`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_has_exams_has_questions_exams_has_questions1`
-    FOREIGN KEY (`exams_has_questions_exams_id_exam` , `exams_has_questions_questions_id_question` , `exams_has_questions_questions_subjects_id_subject`)
-    REFERENCES `AES`.`exams_has_questions` (`exams_id_exam` , `questions_id_question` , `questions_subjects_id_subject`)
+  CONSTRAINT `fk_student_answers_users1`
+    FOREIGN KEY (`student_user`)
+    REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -223,14 +225,14 @@ CREATE TABLE IF NOT EXISTS `exam_solutions` (
   `grade` INT NULL,
   `approved` TINYINT(1) NOT NULL,
   `teacher_notes` TEXT(200) NULL,
-  `teacher_name` VARCHAR(50) NOT NULL,
+  `teacher_user` VARCHAR(50) NOT NULL,
   `execution_duration` VARCHAR(45) NULL,
-  PRIMARY KEY (`student_name`, `exams_id_exam`, `exams_subjects_id_subject`, `exams_courses_id_course`, `teacher_name`),
+  PRIMARY KEY (`student_user`, `exams_id_exam`, `exams_subjects_id_subject`, `exams_courses_id_course`, `teacher_user`),
   INDEX `fk_users_has_exams_exams1_idx` (`exams_id_exam` ASC, `exams_subjects_id_subject` ASC, `exams_courses_id_course` ASC),
-  INDEX `fk_users_has_exams_users1_idx` (`student_name` ASC),
-  INDEX `fk_student_grades_users1_idx` (`teacher_name` ASC),
+  INDEX `fk_users_has_exams_users1_idx` (`student_user` ASC),
+  INDEX `fk_student_grades_users1_idx` (`teacher_user` ASC),
   CONSTRAINT `fk_users_has_exams_users1`
-    FOREIGN KEY (`student_name`)
+    FOREIGN KEY (`student_user`)
     REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -240,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `exam_solutions` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_student_grades_users1`
-    FOREIGN KEY (`teacher_name`)
+    FOREIGN KEY (`teacher_user`)
     REFERENCES `AES`.`users` (`user_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

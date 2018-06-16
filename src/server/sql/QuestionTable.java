@@ -123,10 +123,9 @@ public class QuestionTable {
 
     public static ArrayList<Question> selectAllQuestionsByExam(int examID) {
         //TODO STUB method
+        ArrayList<Question> questions = new ArrayList<>();
         System.out.println("QuestionTable - Select Questions By Exam\n" +
                 "Exam: " + examID);
-        ArrayList<Question> questions = new ArrayList<>();
-
         return questions;
     }
 
@@ -173,6 +172,10 @@ public class QuestionTable {
                 question.setQID(rs.getInt("id_question"));
                 data.add(question);
             }
+
+            con.commit();
+            stmt.close();
+            con.close();
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);
         }
