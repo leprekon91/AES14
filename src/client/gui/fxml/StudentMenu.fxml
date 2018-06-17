@@ -2,10 +2,41 @@
 
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.StudentMenu">
-    <children>
-        <Button mnemonicParsing="false" onAction="#doExamTest" text="do exam test"/>
-    </children>
-</AnchorPane>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<SplitPane dividerPositions="0.5, 0.5" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="client.gui.fxcontrol.StudentMenu">
+    <items>
+        <AnchorPane>
+            <children>
+                <Button mnemonicParsing="false" onAction="#doExamTest" text="do exam test"/>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="viewPane">
+            <children>
+                <BorderPane>
+                    <center>
+                        <ImageView fitHeight="500.0" fitWidth="500.0" opacity="0.5" pickOnBounds="true"
+                                   preserveRatio="true" BorderPane.alignment="CENTER">
+                            <image>
+                                <Image url="@../../../com/graphics/Icon.png"/>
+                            </image>
+                        </ImageView>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <Button layoutX="34.0" layoutY="39.0" maxHeight="-Infinity" minHeight="-Infinity"
+                        mnemonicParsing="false" prefHeight="30.0" styleClass="navigation" text="Exams"
+                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                <Button layoutX="24.0" layoutY="45.0" maxHeight="-Infinity" minHeight="-Infinity"
+                        mnemonicParsing="false" prefHeight="30.0" styleClass="navigation" text="Grades"
+                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0"/>
+            </children>
+        </AnchorPane>
+    </items>
+</SplitPane>

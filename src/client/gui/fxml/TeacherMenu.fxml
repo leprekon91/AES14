@@ -33,12 +33,13 @@
     </AnchorPane>
     <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="120.0">
         <children>
-            <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#switchToQuestionView"
-                    prefHeight="35.0" styleClass="navigation" text="Questions" textFill="WHITE"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-            <Button layoutX="29.0" layoutY="35.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false"
-                    onAction="#switchToExamView" prefHeight="35.0" styleClass="navigation" text="Exams"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0"/>
+            <Button focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false"
+                    onAction="#switchToQuestionView" prefHeight="35.0" styleClass="navigation" text="Questions"
+                    textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0"/>
+            <Button focusTraversable="false" layoutX="29.0" layoutY="35.0" maxHeight="-Infinity" minHeight="-Infinity"
+                    mnemonicParsing="false" onAction="#switchToExamView" prefHeight="35.0" styleClass="navigation"
+                    text="Exams" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0"/>
         </children>
     </AnchorPane>
 </SplitPane>
