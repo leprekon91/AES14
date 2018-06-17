@@ -13,7 +13,7 @@ public class Exam implements Serializable {
      */
     private int examNumber;
     private ArrayList<Question> examQuestions;
-    private int questionGrades[];
+    private int[] questionGrades;
     private String teacherNotes;
     private String studentNotes;
     private Course examCourse;
@@ -21,13 +21,14 @@ public class Exam implements Serializable {
     private Teacher examAuthorTeacher;
     private boolean used;
     private int assignedTime;
+    private boolean isWordExam;//false = automatic, true = word
 
     /**
      * Exam constructor
      */
     public Exam(ArrayList<Question> examQuestions, String teacherNotes,
                 String studentNotes, Course examCourse, Subject examSubject,
-                Teacher examAuthorTeacher, boolean used, int assignedTime) {
+                Teacher examAuthorTeacher, boolean used, int assignedTime, boolean ExamType) {
         super();
         this.examQuestions = examQuestions;
         this.teacherNotes = teacherNotes;
@@ -37,6 +38,7 @@ public class Exam implements Serializable {
         this.examAuthorTeacher = examAuthorTeacher;
         this.used = used;
         this.assignedTime = assignedTime;
+        this.isWordExam = ExamType;
     }
 
     public Exam(int examNumber, Subject examSubject, Course examCourse) {
@@ -119,6 +121,14 @@ public class Exam implements Serializable {
 
     public void setUsed(boolean used) {
         this.used = used;
+    }
+
+    public boolean ExamType() {
+        return isWordExam;
+    }
+
+    public void setWordExam(boolean ExamType) {
+        this.isWordExam = ExamType;
     }
 
     public String getExamIDStr() {

@@ -29,6 +29,7 @@ public class ExamTable {
             stmtE.setInt(5, exam.getExamCourse().getCourseNumber());
             stmtE.setString(6, exam.getExamAuthorTeacher().getUsername());
             stmtE.setBoolean(7, exam.isUsed());
+            stmtE.setBoolean(8, exam.ExamType());
             stmtE.execute();
             con.commit();
             stmtE.close();
@@ -83,6 +84,7 @@ public class ExamTable {
             stmtQ = con.prepareStatement(SQLContract.ALL_QUESTIONS_IN_EXAM);
             stmtQ.setInt(1, examID);
             ResultSet qrs = stmtQ.executeQuery();
+            int i = 0;
             while (qrs.next()) {
                 Question question = new Question(
                         qrs.getString("question_text"),
@@ -107,6 +109,8 @@ public class ExamTable {
                 );
                 question.setQID(qrs.getInt("id_question"));
                 questionArray.add(question);
+
+
             }
             Exam resultExam = new Exam(
                     questionArray,
@@ -132,7 +136,8 @@ public class ExamTable {
                                     2)
                     ),
                     rs.getBoolean("used"),
-                    rs.getInt("exam_duration")
+                    rs.getInt("exam_duration"),
+                    rs.getBoolean("ExamType")
 
             );
             exam = resultExam;
@@ -265,6 +270,8 @@ public class ExamTable {
             while (rs.next()) {
                 stmtQ = con.prepareStatement(SQLContract.ALL_QUESTIONS_IN_EXAM);
                 stmtQ.setInt(1, rs.getInt("id_exam"));
+                stmtQ.setInt(2, rs.getInt("exam_courses_id"));
+                stmtQ.setInt(3, rs.getInt("subjects_id_subject"));
                 ResultSet qrs = stmtQ.executeQuery();
                 while (qrs.next()) {
                     Question question = new Question(
@@ -315,7 +322,9 @@ public class ExamTable {
                                         2)
                         ),
                         rs.getBoolean("used"),
-                        rs.getInt("exam_duration")
+                        rs.getInt("exam_duration"),
+                        rs.getBoolean("ExamType")
+
 
                 );
                 questionArray.clear();

@@ -48,13 +48,15 @@ public class SQLContract {
     //------------------------------------------------------------------------------------------------------------------
     public static final String SHOW_QUESTION_BY_ID = "SELECT * FROM questions " +
             "WHERE id_question =?;";
-    public static final String ALL_QUESTIONS_IN_EXAM = "SELECT questions.*,subjects.*,users.user_name,users.first_name,users.last_name\n" +
-            "FROM questions \n" +
-            "\tJOIN subjects \n" +
+    public static final String ALL_QUESTIONS_IN_EXAM = "SELECT questions.*,subjects.*,users.user_name,users.first_name,users.last_name,exams_has_questions.question_grade\n" +
+            "FROM questions\n" +
+            "\tJOIN subjects\n" +
             "\t\tON questions.subjects_id_subject = subjects.id_subject\n" +
             "\tJOIN users \n" +
             "\t\tON questions.teacher_user = users.user_name\n" +
-            "WHERE (users.user_name=questions.teacher_user AND questions.subjects_id_subject=subjects.id_subject AND exams.id_exam = ?);";
+            "\tJOIN exams_has_questions\n" +
+            "\t\tON questions.id_question= exams_has_questions.questions_id_question\n" +
+            "WHERE (users.user_name=questions.teacher_user AND questions.subjects_id_subject=subjects.id_subject AND exams_has_questions.exams_id_exam =? AND exams_has_questions.exam_courses_id= ? AND exams_has_questions.questions_subjects_id_subject = ?);";
     public static final String RECIVE_EXAM_ID = "SELECT LAST_INSERT_ID();";
     public static final String SHOW_TEACHERS_QUESTION = "SELECT * FROM questions " +
             "WHERE teacher_user =?;";
@@ -177,4 +179,15 @@ public class SQLContract {
             "WHERE exams_has_questions_exams_id_exam = ? AND users_user_name = ? exams_has_questions_questions_id_question = ?;";
     public static final String DELETE_EXAM_SOLUTION = "DELETE FROM exam_solutions " +
             "WHERE exams_id_exam = ? AND users_user_name = ?;";
+
+    // ------------------------------------------------------------------
+
+    //statistics
+    public static final String STATISTICS_BY_COURSE = "select exam_solutions.grade from exam_solutions where exams_courses_id_course = ?;";
+    public static final String STATISTICS_BY_SUBJECT = "select exam_solutions.grade from exam_solutions where  exams_subjects_id_subject= ?;";
+    public static final String STATISTICS_BY_STUDENT = "select exam_solutions.grade from exam_solutions where student_user = ?;";
+    public static final String STATISTICS_BY_EXAM = "select exam_solutions.grade from exam_solutions " +
+            "WHERE  exams_subjects_id_subject= ? AND exams_courses_id_course = ? AND exams_id_exam = ?;";
+    public static final String STATISTICS_BY_TEACHER = "select exam_solutions.grade from exam_solutions where  teacher_user= ?;";
+
 }
