@@ -336,7 +336,6 @@ public class ExamTable {
                 questionArray.clear();
                 data.add(exam);
             }
-            con.commit();
             stmtQ.close();
             stmtE.close();
             con.close();
