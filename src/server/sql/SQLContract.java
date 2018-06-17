@@ -68,24 +68,24 @@ public class SQLContract {
     //Queries for Exam Table
     //-----------------CRUD---------------------------------------------------------------------------------------------
     public static final String CREATE_EXAM = "INSERT INTO exams" +
-            "(exam_duration,teacher_instructions,student_instructions,subjects_id_subject,courses_id_course,users_user_name,used) " +
-            "VALUES (?,?,?,?,?,?,?);";
+            "(exam_duration,teacher_instructions,student_instructions,subjects_id_subject,courses_id_course,users_user_name,used,ExamType) " +
+            "VALUES (?,?,?,?,?,?,?,?);";
     public static final String CREATE_EXAM_HAS_QUESTIONS = "INSERT INTO exams_has_questions" +
-            "(exams_id_exam,questions_id_question,questions_subjects_id_subject,question_grade) " +
-            "VALUES (?,?,?,?);";
+            "(exams_id_exam,questions_id_question,questions_subjects_id_subject,exam_courses_id,question_grade) " +
+            "VALUES (?,?,?,?,?);";
 
-    public static final String READ_EXAM = "SELECT exams.*,exams_has_questions.*,subjects.*,courses.*,questions.*\n" +
+    public static final String READ_EXAM = "SELECT exams.*,subjects.subject_name,courses.course_name,users.first_name ,users.last_name\n" +
             "FROM exams\n" +
             "\tJOIN exams_has_questions\n" +
-            "\t\tON exams.id_exam = exams_has_questions.exams_id_exam AND exams.subjects_id_subject = exams_has_questions.questions_subjects_id_subject\n" +
-            "\t\tJOIN subjects\n" +
+            "\t\t ON exams.id_exam = exams_has_questions.exams_id_exam AND exams.subjects_id_subject = exams_has_questions.questions_subjects_id_subject AND exams.courses_id_course = exams_has_questions.exam_courses_id\n" +
+            "\tJOIN subjects\n" +
             "\t\tON exams.subjects_id_subject = subjects.id_subject\n" +
             "\tJOIN courses\n" +
             "\t\tON exams.courses_id_course = courses.id_course\n" +
             "\tJOIN users\n" +
             "\t\tON exams.users_user_name = users.user_name\n" +
             "\tJOIN questions\n" +
-            "\t\tON exams_has_questions.questions_id_question = questions.id_question AND exams_has_questions.questions_subjects_id_subject = questions.subjects_id_subject AND exams.id_exam = ?;";
+            "\t\tON exams_has_questions.questions_id_question = questions.id_question AND exams_has_questions.questions_subjects_id_subject = questions.subjects_id_subject AND exams.id_exam = ? AND exams.courses_id_course = ? AND exams.subjects_id_subject=?;";
     static final String UPDATE_EXAM = "UPDATE exams\n" +
             "SET\n" +
             "`exam_duration` = ?,\n" +
@@ -95,9 +95,9 @@ public class SQLContract {
             "`used` = ?\n" +
             "WHERE `id_exam` = ? AND `subjects_id_subject` = ? AND `courses_id_course` = ?;";
     public static final String DELETE_EXAM = "DELETE FROM exams " +
-            "WHERE id_exam= ?;";
+            "WHERE id_exam= ? AND subjects_id_subject = ? AND courses_id_course = ?;";
     public static final String DELETE_QUESTION_FROM_EXAM = "DELETE FROM exams_has_questions " +
-            "WHERE id_exam = ? AND id_question = ? AND subjects_id_subject = ?;";
+            "WHERE exams_id_exam = ? AND questions_id_question = ? AND questions_subjects_id_subject = ? AND exam_courses_id =?;";
     //------------------------------------------------------------------------------------------------------------------
     public static final String ADD_QUESTION_TO_EXAM = "INSERT INTO exams_has_questions" +
             "(exams_id_exam,questions_id_question,questions_subjects_id_subject,question_grade) " +
@@ -127,7 +127,7 @@ public class SQLContract {
     public static final String ALL_EXAM = "SELECT exams.*,exams_has_questions.*,subjects.*,courses.*,questions.*, users.*\n" +
             "FROM exams\n" +
             "\tJOIN exams_has_questions\n" +
-            "\t\tON exams.id_exam = exams_has_questions.exams_id_exam AND exams.subjects_id_subject = exams_has_questions.questions_subjects_id_subject\n" +
+            "\t\tON exams.id_exam = exams_has_questions.exams_id_exam AND exams.subjects_id_subject = exams_has_questions.questions_subjects_id_subject AND exams.courses_id_course = exams_has_questions.exam_courses_id\n" +
             "\t\tJOIN subjects\n" +
             "\t\tON exams.subjects_id_subject = subjects.id_subject\n" +
             "\tJOIN courses\n" +

@@ -78,11 +78,16 @@ public class ExamTable {
         PreparedStatement stmtE = null;
         try {
             stmtE = con.prepareStatement(SQLContract.READ_EXAM);
-            stmtE.setInt(1, examID);
+            stmtQ.setInt(1, examID);
+            stmtQ.setInt(2, exam.getExamCourse().getCourseNumber());
+            stmtQ.setInt(3, exam.getExamSubject().getSubjectID());
+
             ResultSet rs = stmtE.executeQuery();
             ArrayList<Question> questionArray = new ArrayList<Question>();
             stmtQ = con.prepareStatement(SQLContract.ALL_QUESTIONS_IN_EXAM);
             stmtQ.setInt(1, examID);
+            stmtQ.setInt(2, exam.getExamCourse().getCourseNumber());
+            stmtQ.setInt(3, exam.getExamSubject().getSubjectID());
             ResultSet qrs = stmtQ.executeQuery();
             int i = 0;
             while (qrs.next()) {
@@ -117,7 +122,7 @@ public class ExamTable {
                     rs.getString("teacher_instructions"),
                     rs.getString("student_instructions"),
                     new Course(
-                            rs.getInt("id_course"),
+                            rs.getInt("courses_id_course"),
                             rs.getString("course_name"),
                             new Subject(
                                     rs.getInt("id_subject"),
@@ -125,12 +130,12 @@ public class ExamTable {
                             )
                     ),
                     new Subject(
-                            rs.getInt("id_subject"),
+                            rs.getInt("subjects_id_subject"),
                             rs.getString("subject_name")
                     ),
                     new Teacher(
                             new User(
-                                    qrs.getString("user_name"),
+                                    qrs.getString("users_user_name"),
                                     qrs.getString("first_name"),
                                     qrs.getString("last_name"),
                                     2)
@@ -270,8 +275,8 @@ public class ExamTable {
             while (rs.next()) {
                 stmtQ = con.prepareStatement(SQLContract.ALL_QUESTIONS_IN_EXAM);
                 stmtQ.setInt(1, rs.getInt("id_exam"));
-                stmtQ.setInt(2, rs.getInt("exam_courses_id"));
-                stmtQ.setInt(3, rs.getInt("subjects_id_subject"));
+                stmtQ.setInt(2, rs.getInt("id_course"));
+                stmtQ.setInt(3, rs.getInt("id_subject"));
                 ResultSet qrs = stmtQ.executeQuery();
                 while (qrs.next()) {
                     Question question = new Question(
@@ -295,6 +300,7 @@ public class ExamTable {
                                             2)
                             )
                     );
+
                     question.setQID(qrs.getInt("id_question"));
                     questionArray.add(question);
                 }
@@ -316,9 +322,9 @@ public class ExamTable {
                         ),
                         new Teacher(
                                 new User(
-                                        qrs.getString("user_name"),
-                                        qrs.getString("first_name"),
-                                        qrs.getString("last_name"),
+                                        rs.getString("user_name"),
+                                        rs.getString("first_name"),
+                                        rs.getString("last_name"),
                                         2)
                         ),
                         rs.getBoolean("used"),
