@@ -111,6 +111,18 @@ public class AuthorizeUser {
         return false;
     }
 
+    public String findUsernameByClient(ConnectionToClient client) {
+        Set<Map.Entry<String, ConnectionToClient>> st = loggedInUsers.entrySet();
+        for (Map.Entry<String, ConnectionToClient> u :
+                st) {
+            if (u.getValue().equals(client)) {
+                return u.getKey();
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Get The count of logged in users
      *

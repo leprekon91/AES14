@@ -64,4 +64,9 @@ public class Contract {
     //Reports Vocabulary
     public static final int REPORT = 60;
     public static final int GET_REPORT_BY_STUDENT = 61;
+
+    //Exam In Progress Vocabulary
+    public static final int BEGIN_EXAM = 70;
+    public static final int CANT_BEGIN_EXAM = 71;
+    public static final int STOP_EXAM = 72;
 }
