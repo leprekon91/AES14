@@ -2,6 +2,7 @@ package client.gui.fxcontrol;
 
 import com.Contract;
 import com.data.*;
+import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
@@ -14,7 +15,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,7 +32,7 @@ public class ExamExecutionQuestions {
     public Pagination pagination;
     public AnchorPane solutionView;
     public Label timeLeft;
-    public ProgressBar progress;
+    public JFXProgressBar progress;
     public AnchorPane titleBar;
     public Label checkIcon;
     public JFXRadioButton demo;

@@ -329,9 +329,9 @@ public class ExamTable {
                         ),
                         new Teacher(
                                 new User(
-                                        qrs.getString("user_name"),
-                                        qrs.getString("first_name"),
-                                        qrs.getString("last_name"),
+                                        rs.getString("users_user_name"),
+                                        rs.getString("first_name"),
+                                        rs.getString("last_name"),
                                         2)
                         ),
                         rs.getBoolean("used"),
@@ -340,6 +340,7 @@ public class ExamTable {
 
 
                 );
+                exam.setExamNumber(rs.getInt("id_exam"));
                 questionArray.clear();
                 data.add(exam);
             }

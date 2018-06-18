@@ -219,7 +219,7 @@ ENGINE = InnoDB;
 -- Table `exam_solutions`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `exam_solutions` (
-  `student_name` VARCHAR(50) NOT NULL,
+  `student_user` VARCHAR(50) NOT NULL,
   `exams_id_exam` INT NOT NULL,
   `exams_subjects_id_subject` INT NOT NULL,
   `exams_courses_id_course` INT NOT NULL,
