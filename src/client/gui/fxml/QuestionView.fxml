@@ -27,15 +27,15 @@
                               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                               AnchorPane.topAnchor="0.0">
                             <children>
-                                <Label fx:id="authorLbl" text="Written By Author"/>
-                                <HBox spacing="5.0">
+                                <Label fx:id="authorLbl" text="Written By Author" VBox.vgrow="ALWAYS"/>
+                                <HBox spacing="5.0" VBox.vgrow="ALWAYS">
                                     <children>
                                         <Label maxHeight="1.7976931348623157E308" text="#"/>
                                         <Label fx:id="qidLbl" maxHeight="1.7976931348623157E308"
                                                maxWidth="1.7976931348623157E308" text="Label"/>
                                     </children>
                                 </HBox>
-                                <HBox spacing="5.0">
+                                <HBox spacing="5.0" VBox.vgrow="ALWAYS">
                                     <children>
                                         <Label maxHeight="1.7976931348623157E308" text="Subject:"/>
                                         <Label fx:id="subjectLbl" maxHeight="1.7976931348623157E308" text="Label"/>
@@ -51,7 +51,7 @@
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                                     </padding>
                                 </Label>
-                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
                                     <children>
                                         <Label fx:id="answer1Label" alignment="TOP_LEFT"
                                                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
@@ -78,10 +78,11 @@
                                         </Label>
                                     </children>
                                 </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
                                     <children>
                                         <Label fx:id="answer3Label" alignment="TOP_LEFT"
                                                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                               minHeight="-Infinity" minWidth="-Infinity"
                                                style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer3"
                                                HBox.hgrow="ALWAYS">
                                             <opaqueInsets>
