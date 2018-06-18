@@ -51,6 +51,7 @@ public class Contract {
     public static final int SUBJECTS = 31;
     final public static int GET_SUBJECT = 32;
     public static final int GET_SUBJECTS_BY_TEACHER = 33;
+    public static final int COURSES_BY_TEACHER = 34;
 
     //Grades Vocabulary
     final public static int GET_GRADES_BY_EXAM = 41;
@@ -72,4 +73,5 @@ public class Contract {
     public static final int EXAM_SUBMITTED = 73;
     public static final int CANT_SUBMIT_EXAM = 74;
     public static final int EXAM_LOCK = 74;
+
 }

@@ -1,5 +1,6 @@
 package server.sql;
 
+import com.data.Course;
 import com.data.Subject;
 
 import java.sql.Connection;
@@ -34,5 +35,32 @@ public class SubjectsTable {
 
         }
         return subjects;
+    }
+
+    public static void getAllTeachersCourses(ArrayList<Course> courses, String teacherId) {
+
+        //------------------------------------
+        PreparedStatement stmt;
+        Connection con = MysqlManager.ConnectToDB();
+        //------------------------------------
+        try {
+            stmt = con.prepareStatement(SQLContract.COURSES_BY_TEACHER);
+            stmt.setString(1, teacherId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                courses.add(
+                        new Course(
+                                rs.getInt("id_course"),
+                                rs.getString("course_name"),
+                                new Subject(rs.getInt("id_subject"), rs.getString("subject_name"))
+                        )
+                );
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+
+        }
     }
 }

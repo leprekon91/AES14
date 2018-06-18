@@ -1,7 +1,9 @@
 package client.gui.fxcontrol;
 
 import client.control.TeacherControl;
+import com.Contract;
 import com.data.Exam;
+import com.data.Message;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ExamManagement {
 
@@ -85,7 +88,14 @@ public class ExamManagement {
 
 
     public void createNewExam(ActionEvent actionEvent) {
-        //TODO Stub
+
+        try {
+            Exam exam = new Exam(new ArrayList<>(), "", "", null, null, TeacherControl.getInstance().teacher, false, 0, false);
+            CreateExamDialog.openWindow(new Stage(), exam);
+            TeacherControl.getInstance().client.sendToServer(new Message(Contract.CREATE_EXAM, exam));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void viewSelectedExam(ActionEvent actionEvent) {

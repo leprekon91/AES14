@@ -52,10 +52,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "courseNumber=" + courseNumber +
-                ", courseName='" + courseName + '\'' +
-                ", courseSubject=" + courseSubject +
-                '}';
+        return courseSubject.getSubjectID() + "\u275A" + courseNumber +
+                " - " + courseName;
     }
 }

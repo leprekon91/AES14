@@ -8,6 +8,7 @@ public class Teacher extends User {
      */
     private ArrayList<Exam> teacherExamsList;
     private ArrayList<Subject> teacherSubjectList;
+    private ArrayList<Course> teacherCourses;
 
     /**
      * teacher entity constructors
@@ -49,4 +50,12 @@ public class Teacher extends User {
         this.teacherSubjectList = teacherSubjectList;
     }
 
+
+    public ArrayList<Course> getTeacherCourses() {
+        return teacherCourses;
+    }
+
+    public void setTeacherCourses(ArrayList<Course> teacherCourses) {
+        this.teacherCourses = teacherCourses;
+    }
 }

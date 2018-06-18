@@ -76,6 +76,9 @@ public class Client extends AbstractClient {
             case Contract.STUDENTS:
                 Platform.runLater(() -> PrincipalReportsView.getInstance().receiveAllStudentsForReport((ArrayList<Student>) ((Message) msg).getData()));
                 break;
+            case Contract.COURSES_BY_TEACHER:
+                TeacherControl.getInstance().teacher.setTeacherCourses((ArrayList<Course>) ((Message) msg).getData());
+                break;
         }
 
     }

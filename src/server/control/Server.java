@@ -89,11 +89,13 @@ public class Server extends AbstractServer {
      */
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+        /*
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        */
         if (msg instanceof Message) {
             SUI.logMsg("Message received from Client: " + client.toString()
                     + " Message:\n" +
@@ -127,12 +129,18 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.EXAMS, ans));
                         break;
                     case Contract.CREATE_EXAM:              //Create a New Exam
+                        break;
                     case Contract.READ_EXAM:                //Read Exam Object by ID
                     case Contract.UPDATE_EXAM:              //Update an existing Exam
                     case Contract.DELETE_EXAM:              //Delete an existing Exam
                     case Contract.GET_EXAMS_BY_COURSE:      //Get Exams in a specific course
                     case Contract.GET_EXAMS_BY_SUBJECT:     //Get Exams in a specific Subject
                     case Contract.GET_EXAMS_BY_TEACHER:     //Get Exams written by a specific teacher
+                        break;
+                    case Contract.COURSES_BY_TEACHER:
+                        ArrayList<Course> courses = new ArrayList<>();
+                        SubjectsTable.getAllTeachersCourses(courses, (String) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.COURSES_BY_TEACHER, courses));
                         break;
                     case Contract.QUESTIONS:
                         SUI.logMsg("Server Has received a 'Get All Questions' message.");

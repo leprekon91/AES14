@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.ListSelectionView?>
+<?import java.lang.String?>
+<AnchorPane prefHeight="573.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.CreateExamDialog">
+    <SplitPane dividerPositions="0.5" layoutY="70.0" prefHeight="83.0" prefWidth="162.0" AnchorPane.bottomAnchor="0.0"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+        <items>
+            <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="200.0"
+                  spacing="50.0">
+                <children>
+                    <Label fx:id="step1Lbl" alignment="CENTER" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                           style="-fx-border-color: LIGHTBLUE; -fx-border-radius: 15;" text="General Details"
+                           VBox.vgrow="ALWAYS">
+                        <font>
+                            <Font name="System Bold" size="12.0"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="step2Lbl" alignment="CENTER" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                           style="-fx-border-color: #555555; -fx-border-radius: 15;" text="Question Selection">
+                        <font>
+                            <Font name="System Bold" size="12.0"/>
+                        </font>
+                    </Label>
+                    <Label fx:id="step3Lbl" alignment="CENTER" contentDisplay="TOP" maxWidth="1.7976931348623157E308"
+                           style="-fx-border-color: #555555; -fx-border-radius: 15;" text="Finalize">
+                        <font>
+                            <Font name="System Bold" size="12.0"/>
+                        </font>
+                    </Label>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                        <children>
+                            <JFXButton fx:id="nextBtn" maxHeight="-Infinity" onAction="#nextStep" prefWidth="65.0"
+                                       ripplerFill="#0033ff" text="❮ Next">
+                                <styleClass>
+                                    <String fx:value="arrow-button"/>
+                                    <String fx:value="info"/>
+                                </styleClass>
+                            </JFXButton>
+                            <JFXButton fx:id="backBtn" disable="true" maxWidth="-Infinity" onAction="#prevStep"
+                                       prefWidth="65.0" ripplerFill="#792800" styleClass="warning" text="❯ Back"/>
+                        </children>
+                    </HBox>
+                </children>
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+            </VBox>
+            <AnchorPane fx:id="mainPane">
+                <children>
+                    <AnchorPane fx:id="step1Pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                prefHeight="100.0" prefWidth="396.0" AnchorPane.bottomAnchor="0.0"
+                                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <children>
+                            <JFXComboBox fx:id="subjectCmb" focusColor="LIGHTBLUE" layoutX="20.0" layoutY="50.0"
+                                         prefHeight="25.0" prefWidth="358.0" promptText="Choose A Subject"
+                                         style="-fx-padding: 3;" AnchorPane.leftAnchor="20.0"
+                                         AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0"/>
+                            <JFXComboBox fx:id="courseCmb" focusColor="LIGHTBLUE" layoutX="20.0" layoutY="109.0"
+                                         prefHeight="25.0" prefWidth="358.0" promptText="Choose A Course"
+                                         style="-fx-padding: 3;" AnchorPane.leftAnchor="20.0"
+                                         AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="110.0"/>
+                            <Label fx:id="authorLbl" layoutX="20.0" layoutY="14.0" prefHeight="30.0"
+                                   style="-fx-border-color: #555555; -fx-border-radius: 5;" text="Author"
+                                   AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                                   AnchorPane.topAnchor="20.0">
+                                <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                </padding>
+                            </Label>
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane fx:id="step2Pane" prefHeight="200.0" prefWidth="200.0" visible="false"
+                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                AnchorPane.topAnchor="0.0">
+                        <children>
+                            <ListSelectionView fx:id="questionSelectionList" layoutX="31.0" layoutY="113.0"
+                                               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0"/>
+                            <Label alignment="CENTER" layoutX="102.0" layoutY="22.0" maxHeight="-Infinity"
+                                   minHeight="-Infinity" prefHeight="50.0" style="-fx-background-color: LIGHTBLUE;"
+                                   text="Select Questions" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                   AnchorPane.topAnchor="0.0">
+                                <font>
+                                    <Font name="Agency FB" size="24.0"/>
+                                </font>
+                            </Label>
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane fx:id="step3Pane" prefHeight="200.0" prefWidth="200.0" visible="false"
+                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                AnchorPane.topAnchor="0.0">
+                        <children>
+                            <JFXListView fx:id="questionsGradesListView" layoutX="155.0" layoutY="26.0"
+                                         AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0"
+                                         AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+                            <Label layoutX="20.0" layoutY="442.0" text="Total:" AnchorPane.bottomAnchor="20.0"
+                                   AnchorPane.leftAnchor="20.0">
+                                <graphic>
+                                    <Label text="∑">
+                                        <font>
+                                            <Font name="System Bold" size="18.0"/>
+                                        </font>
+                                    </Label>
+                                </graphic>
+                            </Label>
+                            <Label fx:id="totalGradeCnt" layoutX="73.0" layoutY="459.0" text="0"/>
+                        </children>
+                    </AnchorPane>
+                </children>
+            </AnchorPane>
+        </items>
+    </SplitPane>
+    <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="70.0" style="-fx-background-color: #ADD8E6;"
+                AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+        <children>
+            <Text layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE EXAM"
+                  AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="465.953125"
+                  AnchorPane.topAnchor="20.0">
+                <font>
+                    <Font name="Agency FB" size="28.0"/>
+                </font>
+            </Text>
+            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
+                       preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                <image>
+                    <Image url="@../../../com/graphics/Icon.png"/>
+                </image>
+            </ImageView>
+        </children>
+    </AnchorPane>
+</AnchorPane>

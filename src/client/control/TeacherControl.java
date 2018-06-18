@@ -42,6 +42,7 @@ public class TeacherControl extends Application {
         INSTANCE = this;
         //fill data from database
         requestSubjectListByTeacher();
+        requestAllCourses();
         requestAllQuestions();
         requestAllExams();
         try {
@@ -68,6 +69,14 @@ public class TeacherControl extends Application {
             }
         });
 
+    }
+
+    private void requestAllCourses() {
+        try {
+            client.sendToServer(new Message(Contract.COURSES_BY_TEACHER, teacher.getUsername()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Subject communication Methods.

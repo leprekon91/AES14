@@ -112,6 +112,12 @@ public class SQLContract {
             "FROM teachers_teach_subjects JOIN subjects\n" +
             "ON subjects_id_subject=id_subject\n" +
             "WHERE teacher_name=?;";
+    public static final String COURSES_BY_TEACHER = "SELECT courses.id_course,courses.course_name,subjects.id_subject,subjects.subject_name FROM courses\n" +
+            "\tjoin subjects\n" +
+            "    on courses.subjects_id_subjects=subjects.id_subject\n" +
+            "\tJOIN teachers_teach_subjects\n" +
+            "    on teachers_teach_subjects.subjects_id_subject=subjects.id_subject\n" +
+            "WHERE teachers_teach_subjects.teacher_name = ?;";
 
     public static final String UPDATE_QUESTION_IN_EXAM = "UPDATE `exams_has_questions`\n" +
             "SET\n" +
