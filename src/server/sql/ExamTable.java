@@ -78,9 +78,9 @@ public class ExamTable {
         PreparedStatement stmtE = null;
         try {
             stmtE = con.prepareStatement(SQLContract.READ_EXAM);
-            stmtQ.setInt(1, examID);
-            stmtQ.setInt(2, exam.getExamCourse().getCourseNumber());
-            stmtQ.setInt(3, exam.getExamSubject().getSubjectID());
+            stmtE.setInt(1, examID);
+            stmtE.setInt(2, exam.getExamCourse().getCourseNumber());
+            stmtE.setInt(3, exam.getExamSubject().getSubjectID());
 
             ResultSet rs = stmtE.executeQuery();
             ArrayList<Question> questionArray = new ArrayList<Question>();
@@ -89,7 +89,7 @@ public class ExamTable {
             stmtQ.setInt(2, exam.getExamCourse().getCourseNumber());
             stmtQ.setInt(3, exam.getExamSubject().getSubjectID());
             ResultSet qrs = stmtQ.executeQuery();
-            int i = 0;
+            ArrayList<Integer> ExamsGrade = new ArrayList<Integer>();
             while (qrs.next()) {
                 Question question = new Question(
                         qrs.getString("question_text"),
@@ -112,8 +112,10 @@ public class ExamTable {
                                         2)
                         )
                 );
+                ExamsGrade.add(qrs.getInt("question_grade"));
                 question.setQID(qrs.getInt("id_question"));
                 questionArray.add(question);
+
 
 
             }
@@ -145,6 +147,7 @@ public class ExamTable {
                     rs.getBoolean("ExamType")
 
             );
+            // exam.setQuestionGrades(ExamsGrade);
             exam = resultExam;
             con.commit();
             stmtQ.close();
@@ -220,10 +223,14 @@ public class ExamTable {
                 stmtQ.setInt(1, exam.getExamNumber());
                 stmtQ.setInt(2, q.getQID());
                 stmtQ.setInt(3, q.getSubject().getSubjectID());
+                stmtQ.setInt(4, exam.getExamCourse().getCourseNumber());
             }
 
             stmtQ.execute();
             stmtE = con.prepareStatement(SQLContract.DELETE_EXAM);
+            stmtE.setInt(1, exam.getExamNumber());
+            stmtE.setInt(2, exam.getExamSubject().getSubjectID());
+            stmtE.setInt(3, exam.getExamCourse().getCourseNumber());
             stmtE.execute();
             con.commit();
             stmtQ.close();
@@ -275,8 +282,8 @@ public class ExamTable {
             while (rs.next()) {
                 stmtQ = con.prepareStatement(SQLContract.ALL_QUESTIONS_IN_EXAM);
                 stmtQ.setInt(1, rs.getInt("id_exam"));
-                stmtQ.setInt(2, rs.getInt("id_course"));
-                stmtQ.setInt(3, rs.getInt("id_subject"));
+                stmtQ.setInt(2, rs.getInt("courses_id_course"));
+                stmtQ.setInt(3, rs.getInt("subjects_id_subject"));
                 ResultSet qrs = stmtQ.executeQuery();
                 while (qrs.next()) {
                     Question question = new Question(
@@ -322,9 +329,9 @@ public class ExamTable {
                         ),
                         new Teacher(
                                 new User(
-                                        rs.getString("user_name"),
-                                        rs.getString("first_name"),
-                                        rs.getString("last_name"),
+                                        qrs.getString("user_name"),
+                                        qrs.getString("first_name"),
+                                        qrs.getString("last_name"),
                                         2)
                         ),
                         rs.getBoolean("used"),
@@ -336,6 +343,8 @@ public class ExamTable {
                 questionArray.clear();
                 data.add(exam);
             }
+            stmtE.execute();
+            stmtQ.execute();
             stmtQ.close();
             stmtE.close();
             con.close();
