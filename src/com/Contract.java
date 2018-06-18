@@ -69,4 +69,7 @@ public class Contract {
     public static final int BEGIN_EXAM = 70;
     public static final int CANT_BEGIN_EXAM = 71;
     public static final int STOP_EXAM = 72;
+    public static final int EXAM_SUBMITTED = 73;
+    public static final int CANT_SUBMIT_EXAM = 74;
+    public static final int EXAM_LOCK = 74;
 }

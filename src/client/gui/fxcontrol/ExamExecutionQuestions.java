@@ -2,6 +2,7 @@ package client.gui.fxcontrol;
 
 import com.Contract;
 import com.data.*;
+import com.jfoenix.controls.JFXRadioButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
@@ -30,6 +31,7 @@ public class ExamExecutionQuestions {
     public ProgressBar progress;
     public AnchorPane titleBar;
     public Label checkIcon;
+    public JFXRadioButton demo;
     private Exam exam;
     private Timeline timeline;
     private double duration = 0;
@@ -110,10 +112,10 @@ public class ExamExecutionQuestions {
         Label qText = new Label(q.getQuestionText());
 
         qText.setWrapText(true);
-        RadioButton ans1 = new RadioButton(q.getAns(0));
-        RadioButton ans2 = new RadioButton(q.getAns(1));
-        RadioButton ans3 = new RadioButton(q.getAns(2));
-        RadioButton ans4 = new RadioButton(q.getAns(3));
+        JFXRadioButton ans1 = new JFXRadioButton(q.getAns(0));
+        JFXRadioButton ans2 = new JFXRadioButton(q.getAns(1));
+        JFXRadioButton ans3 = new JFXRadioButton(q.getAns(2));
+        JFXRadioButton ans4 = new JFXRadioButton(q.getAns(3));
 
         ToggleGroup toggleGroup = new ToggleGroup();
 

@@ -15,6 +15,8 @@ public class ExamInProgress {
     private LocalDateTime dateTimeStart;            //when will the exam start
     private LocalDateTime dateTimeEnd;              //when will the exam end
     private ArrayList<Student> studentArrayList;    //list of students to take the exam
+    private ArrayList<ConnectionToClient> examineeList;//current students that are examined
+    private ArrayList<Solved_Exam> solutions;       //solutions list
     private String password;                        //access password for students
     private Teacher examiningTeacher;               //Teacher that conducts the exam
     private Exam exam;                              //Exam Object
@@ -27,6 +29,8 @@ public class ExamInProgress {
         this.password = password;
         this.examiningTeacher = examiningTeacher;
         this.exam = exam;
+        this.solutions = new ArrayList<>();
+        this.examineeList = new ArrayList<>();
     }
 
     //Getters and setters
@@ -88,11 +92,11 @@ public class ExamInProgress {
     }
 
     /**
-     * Check whether the exam has stopped
+     * Check whether the exam has expired
      *
      * @return true if yes, false otherwise
      */
-    public boolean hasStopped() {
+    public boolean hasExpired() {
         return LocalDateTime.now().isAfter(dateTimeEnd);
     }
 
@@ -102,11 +106,12 @@ public class ExamInProgress {
      * @param client   client thread that tries to start the exam
      * @param Password password string for the exam
      */
-    public void beginExam(ConnectionToClient client, String Password) {
+    public void studentBeginsExam(ConnectionToClient client, String Password) {
         try {
             String username = AuthorizeUser.getInstance().findUsernameByClient(client);
             if (username != null) {
                 if (studentExistsInList(username) && Password.equals(getPassword()) && this.hasBegun()) {
+                    this.examineeList.add(client);
                     client.sendToClient(new Message(Contract.BEGIN_EXAM, getExam()));
                 }
             } else client.sendToClient(new Message(Contract.CANT_BEGIN_EXAM, null));
@@ -114,6 +119,61 @@ public class ExamInProgress {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Student has submitted his solution.
+     * check whether the exam has not expired and that he is part of the examinees list.
+     *
+     * @param client   student client
+     * @param solution student's solution
+     */
+    public void studentSubmitsExamSolution(ConnectionToClient client, Solved_Exam solution) {
+        try {
+            if (studentExistsInList(solution.getSolvingStudent().getUsername()) &&
+                    examineeList.contains(client) &&
+                    !this.hasExpired()) {
+                solutions.add(solution);//add solution to solution list
+                examineeList.remove(client);//remove student's client from examinees list
+                client.sendToClient(new Message(Contract.EXAM_SUBMITTED, solution));
+
+            } else {
+                client.sendToClient(new Message(Contract.CANT_SUBMIT_EXAM, solution));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Lock the current exam.
+     * The Teacher has requested an exam lock.
+     */
+    public void lockExam() {
+        if (!hasExpired()) {
+            dateTimeEnd = LocalDateTime.now();
+        }
+        try {
+            for (ConnectionToClient c :
+                    examineeList) {
+
+                c.sendToClient(new Message(Contract.EXAM_LOCK, null));
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Extend the expiry time by minutes
+     *
+     * @param minutes extension amount.
+     */
+    public void extendExpiryDate(int minutes) {
+        if (!hasExpired()) dateTimeEnd.plusMinutes(minutes);
+    }
+
+
 
     /**
      * find user in the students list to be tested
