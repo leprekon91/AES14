@@ -104,7 +104,8 @@ public class Server extends AbstractServer {
 
 
             int contractType = ((Message) msg).getType();
-            ArrayList<Question> updatedQuestions = new ArrayList<>();
+            ArrayList<Question> updatedQuestions;
+            ArrayList<Exam> allExams = new ArrayList<>();
             //------------------------Message decode--------------------------------------------------------------------
             try {
                 switch (contractType) {
@@ -124,19 +125,24 @@ public class Server extends AbstractServer {
 
                         break;
                     case Contract.EXAMS:
-                        ArrayList<Exam> ans = new ArrayList<Exam>();
-                        ExamTable.selectAllExam(ans);
-                        client.sendToClient(new Message(Contract.EXAMS, ans));
+                        allExams = new ArrayList<>();
+                        ExamTable.selectAllExam(allExams);
+                        client.sendToClient(new Message(Contract.EXAMS, allExams));
                         break;
                     case Contract.CREATE_EXAM:              //Create a New Exam
                         ExamTable.createExam((Exam) ((Message) msg).getData());
-                        ArrayList<Exam> allExams = new ArrayList<Exam>();
+                        allExams = new ArrayList<>();
                         ExamTable.selectAllExam(allExams);
                         client.sendToClient(new Message(Contract.EXAMS, allExams));
                         break;
                     case Contract.READ_EXAM:                //Read Exam Object by ID
                     case Contract.UPDATE_EXAM:              //Update an existing Exam
                     case Contract.DELETE_EXAM:              //Delete an existing Exam
+                        ExamTable.deleteExam((Exam) ((Message) msg).getData());
+                        allExams = new ArrayList<>();
+                        ExamTable.selectAllExam(allExams);
+                        client.sendToClient(new Message(Contract.EXAMS, allExams));
+                        break;
                     case Contract.GET_EXAMS_BY_COURSE:      //Get Exams in a specific course
                     case Contract.GET_EXAMS_BY_SUBJECT:     //Get Exams in a specific Subject
                     case Contract.GET_EXAMS_BY_TEACHER:     //Get Exams written by a specific teacher

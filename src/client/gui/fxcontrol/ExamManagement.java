@@ -6,12 +6,15 @@ import com.data.Exam;
 import com.data.Message;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ExamManagement {
 
@@ -99,14 +102,41 @@ public class ExamManagement {
     }
 
     public void viewSelectedExam(ActionEvent actionEvent) {
-        //TODO Stub
+        Exam exam = (Exam) examList.getSelectionModel().getSelectedItems().get(0);
+        try {
+            ExamView.openWindow(new Stage(), exam);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteSelectedExam(ActionEvent actionEvent) {
-        //TODO Stub
+        if (examList.getSelectionModel().getSelectedItems().size() != 0) {
+            Exam exam = (Exam) examList.getSelectionModel().getSelectedItems().get(0);
+            if (exam.getExamAuthorTeacher().getUsername().equals(TeacherControl.getInstance().teacher.getUsername())) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Wait!");
+                alert.setHeaderText("Are You Sure?");
+                alert.setContentText("You can't restore the questions you delete! " +
+                        "\nAre you sure you wan't to delete this Exam (#" + exam.getExamIDStr() + ")?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    //send exam to deletion
+                    try {
+                        TeacherControl.getInstance().client.sendToServer(new Message(Contract.DELETE_EXAM, exam));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Can't Edit Exam!");
+                alert.setContentText("You can't edit Exams you didn't create!");
+                alert.showAndWait();
+            }
+
+        }
     }
 
-    public void editSelectedExam(ActionEvent actionEvent) {
-        //TODO Stub
-    }
 }

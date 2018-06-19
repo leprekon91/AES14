@@ -117,7 +117,6 @@ public class ExamTable {
                 questionArray.add(question);
 
 
-
             }
             Exam resultExam = new Exam(
                     questionArray,
@@ -217,23 +216,25 @@ public class ExamTable {
         PreparedStatement stmtQ = null;
         PreparedStatement stmtE = null;
         try {
-            stmtQ = con.prepareStatement(SQLContract.DELETE_QUESTION_FROM_EXAM);
+            if (exam.getExamQuestions().size() != 0) {
+                stmtQ = con.prepareStatement(SQLContract.DELETE_QUESTION_FROM_EXAM);
 
-            for (Question q : exam.getExamQuestions()) {
-                stmtQ.setInt(1, exam.getExamNumber());
-                stmtQ.setInt(2, q.getQID());
-                stmtQ.setInt(3, q.getSubject().getSubjectID());
-                stmtQ.setInt(4, exam.getExamCourse().getCourseNumber());
+                for (Question q : exam.getExamQuestions()) {
+                    stmtQ.setInt(1, exam.getExamNumber());
+                    stmtQ.setInt(2, q.getQID());
+                    stmtQ.setInt(3, q.getSubject().getSubjectID());
+                    stmtQ.setInt(4, exam.getExamCourse().getCourseNumber());
+                }
+
+                stmtQ.execute();
             }
-
-            stmtQ.execute();
             stmtE = con.prepareStatement(SQLContract.DELETE_EXAM);
             stmtE.setInt(1, exam.getExamNumber());
             stmtE.setInt(2, exam.getExamSubject().getSubjectID());
             stmtE.setInt(3, exam.getExamCourse().getCourseNumber());
             stmtE.execute();
-
-            stmtQ.close();
+            if (stmtQ != null)
+                stmtQ.close();
             stmtE.close();
             con.close();
         } catch (SQLException e) {
