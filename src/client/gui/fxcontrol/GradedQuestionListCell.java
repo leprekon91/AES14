@@ -27,7 +27,7 @@ public class GradedQuestionListCell extends JFXListCell<Question> {
 
         } else {
             if (mlLoader == null) {
-                mlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "QuestionListViewCell.fxml"));
+                mlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "GradedQuestionListCell.fxml"));
                 mlLoader.setController(this);
                 try {
                     mlLoader.load();
@@ -37,9 +37,12 @@ public class GradedQuestionListCell extends JFXListCell<Question> {
             }
             qidLbl.setText(item.getQIDString());
             qTextLabel.setText(item.getQuestionText());
+            grade.setText(String.valueOf(item.getGrade()));
             grade.textProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue.matches("\\d{0,3}?")) {
                     grade.setText(oldValue);
+                } else {
+                    item.setGrade(Integer.parseInt(oldValue));
                 }
             });
 

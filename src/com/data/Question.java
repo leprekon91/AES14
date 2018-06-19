@@ -15,6 +15,7 @@ public class Question implements Serializable {
     private int correctAnswer;
     private Subject subject;
     private Teacher author;
+    private int grade = 0; //for setting in exam creation !does not need to be saved!
 
     /**
      * Question constructors
@@ -107,6 +108,14 @@ public class Question implements Serializable {
                 ", subject=" + subject +
                 ", author='" + author + '\'' +
                 '}';
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
 }
 

@@ -9,6 +9,7 @@ import com.data.Subject;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,16 +24,20 @@ import javafx.stage.Stage;
 import org.controlsfx.control.ListSelectionView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CreateExamDialog {
+
     private Exam exam;
 
     //step 1
     public AnchorPane step1Pane;
     public JFXComboBox subjectCmb;
     public JFXComboBox courseCmb;
+    public JFXTextField assignedTimeField;
     public Label authorLbl;
     public Label step1Lbl;
+
 
     //step 2
     public AnchorPane step2Pane;
@@ -43,6 +48,7 @@ public class CreateExamDialog {
     public AnchorPane step3Pane;
     public JFXListView questionsGradesListView;
     public Label totalGradeCnt;
+    private int totalCnt = 0;
     public Label step3Lbl;
 
     //Main Pane
@@ -99,7 +105,6 @@ public class CreateExamDialog {
         questionSelectionList.setTargetItems(selectedQuestions);
 
         questionsGradesListView.setCellFactory(list -> new GradedQuestionListCell());
-
     }
 
 
@@ -115,12 +120,12 @@ public class CreateExamDialog {
             backBtn.setDisable(false);
             step1Lbl.setStyle("-fx-border-color:#555555;-fx-border-radius: 15;");
             step2Lbl.setStyle("-fx-border-color:LIGHTBLUE;-fx-border-radius: 15;");
+            unSelectedQuestions.clear();
+            selectedQuestions.clear();
             for (Question q :
                     TeacherControl.getInstance().questions) {
                 if (q.getSubject().getSubjectID() == selectedSubject.getSubjectID()) {
                     unSelectedQuestions.add(q);
-                } else {
-                    unSelectedQuestions.remove(q);
                 }
             }
             questionSelectionList.setSourceItems(unSelectedQuestions);
@@ -130,11 +135,12 @@ public class CreateExamDialog {
             step2Lbl.setStyle("-fx-border-color:#555555;-fx-border-radius: 15;");
             step3Lbl.setStyle("-fx-border-color:LIGHTBLUE;-fx-border-radius: 15;");
             nextBtn.setText("\u2714 Finish");
-            questionsGradesListView.setItems(questionSelectionList.getTargetItems());
+            questionsGradesListView.setItems(selectedQuestions);
         } else {
-            //finish
+            generateExam();
         }
     }
+
 
     public void prevStep(ActionEvent actionEvent) {
         hideAll();
@@ -158,5 +164,23 @@ public class CreateExamDialog {
         step1Pane.setVisible(false);
         step2Pane.setVisible(false);
         step3Pane.setVisible(false);
+    }
+
+    private void generateExam() {
+        exam.setExamSubject((Subject) subjectCmb.getSelectionModel().getSelectedItem());
+        exam.setExamAuthorTeacher(TeacherControl.getInstance().teacher);
+        exam.setExamCourse((Course) courseCmb.getSelectionModel().getSelectedItem());
+        ArrayList<Question> questions = new ArrayList<>();
+        ArrayList<Integer> grades = new ArrayList<>();
+        for (int i = 0; i < questionsGradesListView.getItems().size(); i++) {
+            questions.add((Question) questionsGradesListView.getItems().get(i));
+            grades.add(((Question) questionsGradesListView.getItems().get(i)).getGrade());
+        }
+        exam.setExamQuestions(questions);
+        exam.setQuestionGrades(grades.stream().mapToInt(i -> i).toArray());
+        exam.setUsed(false);
+        exam.setAssignedTime(Integer.parseInt(assignedTimeField.getText()));
+        exam.setWordExam(false);
+        //TODO write the exam to the database
     }
 }

@@ -76,6 +76,9 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                                 </padding>
                             </Label>
+                            <JFXTextField fx:id="assignedTimeField" layoutX="24.0" layoutY="187.0" prefWidth="500.0"
+                                          promptText="Assigned Time (in Minutes)" AnchorPane.leftAnchor="20.0"
+                                          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0"/>
                         </children>
                     </AnchorPane>
                     <AnchorPane fx:id="step2Pane" prefHeight="200.0" prefWidth="200.0" visible="false"
