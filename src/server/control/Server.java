@@ -89,13 +89,13 @@ public class Server extends AbstractServer {
      */
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        /*
+
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        */
+
         if (msg instanceof Message) {
             SUI.logMsg("Message received from Client: " + client.toString()
                     + " Message:\n" +
@@ -104,7 +104,8 @@ public class Server extends AbstractServer {
 
 
             int contractType = ((Message) msg).getType();
-            ArrayList<Question> updatedQuestions = new ArrayList<>();
+            ArrayList<Question> updatedQuestions;
+            ArrayList<Exam> allExams = new ArrayList<>();
             //------------------------Message decode--------------------------------------------------------------------
             try {
                 switch (contractType) {
@@ -124,15 +125,23 @@ public class Server extends AbstractServer {
 
                         break;
                     case Contract.EXAMS:
-                        ArrayList<Exam> ans = new ArrayList<Exam>();
-                        ExamTable.selectAllExam(ans);
-                        client.sendToClient(new Message(Contract.EXAMS, ans));
+                        allExams = new ArrayList<>();
+                        ExamTable.selectAllExam(allExams);
+                        client.sendToClient(new Message(Contract.EXAMS, allExams));
                         break;
                     case Contract.CREATE_EXAM:              //Create a New Exam
+                        ExamTable.createExam((Exam) ((Message) msg).getData());
+                        allExams = new ArrayList<>();
+                        ExamTable.selectAllExam(allExams);
+                        client.sendToClient(new Message(Contract.EXAMS, allExams));
                         break;
                     case Contract.READ_EXAM:                //Read Exam Object by ID
-                    case Contract.UPDATE_EXAM:              //Update an existing Exam
                     case Contract.DELETE_EXAM:              //Delete an existing Exam
+                        ExamTable.deleteExam((Exam) ((Message) msg).getData());
+                        allExams = new ArrayList<>();
+                        ExamTable.selectAllExam(allExams);
+                        client.sendToClient(new Message(Contract.EXAMS, allExams));
+                        break;
                     case Contract.GET_EXAMS_BY_COURSE:      //Get Exams in a specific course
                     case Contract.GET_EXAMS_BY_SUBJECT:     //Get Exams in a specific Subject
                     case Contract.GET_EXAMS_BY_TEACHER:     //Get Exams written by a specific teacher
@@ -219,9 +228,25 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.STUDENTS, students));
                         break;
                     case Contract.GET_REPORT_BY_STUDENT:
+                        //TODO stub for report testing
                         client.sendToClient(new Message(Contract.REPORT, new int[]{1, 11, 21, 31, 41, 51, 61, 71, 72, 81, 91}));
                         break;
+                    case Contract.START_EXAM:
+                        break;
+                    case Contract.STUDENT_STARTS_EXAM:
+                        break;
+                    case Contract.GET_EXAMS_IN_PROGRESS:
+                        //if it's a teacher return by teacher else, return by student
+                        if (((User) ((Message) msg).getData()).getType() == 1) {
 
+                        } else if (((User) ((Message) msg).getData()).getType() == 2) {
+
+                        }
+                        break;
+                    case Contract.LOCK_EXAM:
+                        break;
+                    case Contract.EXTEND_EXAM:
+                        break;
                 }
             } catch (IOException e) {
                 SUI.logMsg(e.getMessage());

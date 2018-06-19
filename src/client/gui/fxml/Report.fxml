@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -15,6 +16,7 @@
 
     </columnConstraints>
     <rowConstraints>
+        <RowConstraints/>
         <RowConstraints/>
         <RowConstraints/>
         <RowConstraints/>
@@ -72,5 +74,11 @@
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
             </padding>
         </Label>
+        <JFXButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveReport" styleClass="success"
+                   text="Save Report (.csv)" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </GridPane.margin>
+        </JFXButton>
     </children>
 </GridPane>

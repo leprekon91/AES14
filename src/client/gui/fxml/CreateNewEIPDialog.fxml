@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.CheckListView?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="556.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.CreateNewEIPDialog">
+    <children>
+        <AnchorPane fx:id="viewPane" layoutY="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+            <children>
+                <AnchorPane fx:id="detailsPane" prefHeight="660.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <JFXListView fx:id="examList" layoutX="20.0" layoutY="37.0" prefHeight="334.0" prefWidth="558.0"
+                                     AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="20.0"
+                                     AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+                        <JFXDatePicker fx:id="startDatePicker" layoutX="21.0" layoutY="379.0"
+                                       AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="20.0"/>
+                        <JFXTimePicker fx:id="startTimePicker" layoutX="21.0" layoutY="415.0" prefHeight="26.0"
+                                       prefWidth="191.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="20.0"/>
+                        <Label layoutX="82.0" layoutY="363.0" text="Start Time" AnchorPane.bottomAnchor="137.0"
+                               AnchorPane.leftAnchor="80.0"/>
+                        <JFXTimePicker fx:id="endTimePicker" layoutX="390.0" layoutY="415.0" prefHeight="26.0"
+                                       prefWidth="191.0" AnchorPane.bottomAnchor="75.0" AnchorPane.rightAnchor="20.0"/>
+                        <JFXDatePicker fx:id="endDatePicker" layoutX="390.0" layoutY="379.0"
+                                       AnchorPane.bottomAnchor="110.0" AnchorPane.rightAnchor="20.0"/>
+                        <Label layoutX="455.0" layoutY="363.0" text="End Time" AnchorPane.bottomAnchor="137.0"
+                               AnchorPane.rightAnchor="80.0"/>
+                        <JFXTextField fx:id="pswdField" labelFloat="true" layoutX="21.0" layoutY="475.0"
+                                      prefHeight="26.0" prefWidth="558.0" promptText="Password"
+                                      AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+                                      AnchorPane.rightAnchor="20.0"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="studentSelectionPane" prefHeight="200.0" prefWidth="200.0" visible="false"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <CheckListView layoutX="14.0" layoutY="14.0" prefHeight="433.0" prefWidth="560.0"
+                                       AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0"
+                                       AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
+                        <JFXButton layoutX="269.0" layoutY="476.0" mnemonicParsing="false" styleClass="success"
+                                   text="Done" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0"
+                                   AnchorPane.rightAnchor="20.0"/>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <JFXButton fx:id="studentSelectionBtn" layoutX="19.0" layoutY="14.0" mnemonicParsing="false"
+                   onAction="#switchToStudentSelection" styleClass="info" text="❰ Student Selection"
+                   AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="8.0"/>
+    </children>
+</AnchorPane>

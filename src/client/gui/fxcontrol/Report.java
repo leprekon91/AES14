@@ -2,6 +2,7 @@ package client.gui.fxcontrol;
 
 import com.Contract;
 import com.style.icons.FontAwesome;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,8 +11,11 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -25,7 +29,7 @@ public class Report {
     public String yLabel;
     public Label lblAvg;
     public Label lblMed;
-
+    private XYChart.Series series;
     public Label medianIcon;
     public Label averageIcon;
 
@@ -55,7 +59,7 @@ public class Report {
     }
 
     public void createData(String dataName, int[] data) {
-        XYChart.Series series = new XYChart.Series();
+        series = new XYChart.Series();
         series.setName(dataName);
         int[] dataMap = generateData(data);
 
@@ -107,6 +111,40 @@ public class Report {
         averageIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
         medianIcon.setFont(FontAwesome.getFont(FontAwesome.SOLID));
 
+
+    }
+
+    public void saveReport(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files (.csv)", ".csv"));
+        File file = fileChooser.showSaveDialog(averageIcon.getScene().getWindow());
+
+        try {
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.append(' ');
+            fileWriter.append(',');
+            fileWriter.append("Category");
+            fileWriter.append(',');
+            fileWriter.append("# of Grades");
+            fileWriter.append('\n');
+
+            for (int i = 0; i < series.getData().size(); i++) {
+                fileWriter.append(' ');
+                fileWriter.append(',');
+                XYChart.Data<String, Integer> data;
+                data = (XYChart.Data<String, Integer>) series.getData().get(i);
+                fileWriter.append(data.getXValue());
+                fileWriter.append(',');
+                fileWriter.append(String.valueOf(data.getYValue()));
+                fileWriter.append('\n');
+
+            }
+
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
