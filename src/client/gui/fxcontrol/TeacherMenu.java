@@ -20,6 +20,7 @@ public class TeacherMenu {
     public AnchorPane questionPane;
     public AnchorPane examPane;
     public BorderPane welcomeScreen;
+    public AnchorPane examInProgressPane;
 
     /**
      * initialize the window
@@ -28,6 +29,7 @@ public class TeacherMenu {
         //load question pane
         loadQuestionPane();
         loadExamPane();
+        loadEIPView();
         hideAll();
     }
 
@@ -68,12 +70,28 @@ public class TeacherMenu {
         }
     }
 
+    public void loadEIPView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "EIPManagement.fxml"));
+            Parent root = fxmlLoader.load();
+            examInProgressPane.getChildren().setAll(root);
+            AnchorPane.setTopAnchor(root, 0.0);
+            AnchorPane.setRightAnchor(root, 0.0);
+            AnchorPane.setLeftAnchor(root, 0.0);
+            AnchorPane.setBottomAnchor(root, 0.0);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * hide all viewes. and show the welcome screen.
      */
     private void hideAll() {
         questionPane.setVisible(false);
         examPane.setVisible(false);
+        examInProgressPane.setVisible(false);
         welcomeScreen.setVisible(true);
     }
 
@@ -84,7 +102,7 @@ public class TeacherMenu {
      */
     public void switchToQuestionView(ActionEvent actionEvent) {
 
-        examPane.setVisible(false);
+        hideAll();
         welcomeScreen.setVisible(false);
         questionPane.setVisible(true);
 
@@ -96,9 +114,15 @@ public class TeacherMenu {
      */
     public void switchToExamView(ActionEvent actionEvent) {
 
-        questionPane.setVisible(false);
+        hideAll();
         welcomeScreen.setVisible(false);
         examPane.setVisible(true);
 
+    }
+
+    public void switchToEIPView(ActionEvent actionEvent) {
+        hideAll();
+        welcomeScreen.setVisible(false);
+        examInProgressPane.setVisible(true);
     }
 }

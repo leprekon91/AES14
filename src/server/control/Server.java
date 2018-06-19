@@ -136,7 +136,6 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.EXAMS, allExams));
                         break;
                     case Contract.READ_EXAM:                //Read Exam Object by ID
-                    case Contract.UPDATE_EXAM:              //Update an existing Exam
                     case Contract.DELETE_EXAM:              //Delete an existing Exam
                         ExamTable.deleteExam((Exam) ((Message) msg).getData());
                         allExams = new ArrayList<>();
@@ -229,9 +228,25 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.STUDENTS, students));
                         break;
                     case Contract.GET_REPORT_BY_STUDENT:
+                        //TODO stub for report testing
                         client.sendToClient(new Message(Contract.REPORT, new int[]{1, 11, 21, 31, 41, 51, 61, 71, 72, 81, 91}));
                         break;
+                    case Contract.START_EXAM:
+                        break;
+                    case Contract.STUDENT_STARTS_EXAM:
+                        break;
+                    case Contract.GET_EXAMS_IN_PROGRESS:
+                        //if it's a teacher return by teacher else, return by student
+                        if (((User) ((Message) msg).getData()).getType() == 1) {
 
+                        } else if (((User) ((Message) msg).getData()).getType() == 2) {
+
+                        }
+                        break;
+                    case Contract.LOCK_EXAM:
+                        break;
+                    case Contract.EXTEND_EXAM:
+                        break;
                 }
             } catch (IOException e) {
                 SUI.logMsg(e.getMessage());
