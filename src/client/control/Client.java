@@ -120,8 +120,11 @@ public class Client extends AbstractClient {
      */
     public void receiveAuth(Message msg) {
         System.out.println("Authentication Reply Received");
-
-        authControl.receiveAuthenticationAnswer((User) msg.getData());
+        if (msg.getType() == Contract.AUTH_YES)
+            authControl.receiveAuthenticationAnswer((User) msg.getData());
+        else {
+            authControl.receiveAuthenticationAnswer(null);
+        }
     }
 
 }

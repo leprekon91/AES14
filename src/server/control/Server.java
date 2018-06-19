@@ -129,6 +129,10 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.EXAMS, ans));
                         break;
                     case Contract.CREATE_EXAM:              //Create a New Exam
+                        ExamTable.createExam((Exam) ((Message) msg).getData());
+                        ArrayList<Exam> allExams = new ArrayList<Exam>();
+                        ExamTable.selectAllExam(allExams);
+                        client.sendToClient(new Message(Contract.EXAMS, allExams));
                         break;
                     case Contract.READ_EXAM:                //Read Exam Object by ID
                     case Contract.UPDATE_EXAM:              //Update an existing Exam

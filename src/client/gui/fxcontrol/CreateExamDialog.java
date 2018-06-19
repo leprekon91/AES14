@@ -2,14 +2,8 @@ package client.gui.fxcontrol;
 
 import client.control.TeacherControl;
 import com.Contract;
-import com.data.Course;
-import com.data.Exam;
-import com.data.Question;
-import com.data.Subject;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextField;
+import com.data.*;
+import com.jfoenix.controls.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,11 +16,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.ListSelectionView;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateExamDialog {
+
 
     private Exam exam;
 
@@ -35,6 +32,8 @@ public class CreateExamDialog {
     public JFXComboBox subjectCmb;
     public JFXComboBox courseCmb;
     public JFXTextField assignedTimeField;
+    public JFXTextArea teachersNotesField;
+    public JFXTextArea studentsNotesField;
     public Label authorLbl;
     public Label step1Lbl;
 
@@ -71,11 +70,22 @@ public class CreateExamDialog {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(QuestionView.class.getResource(Contract.css).toExternalForm());
         stage.setTitle("Create Exam");
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.showAndWait();
     }
 
     public void initialize() {
+        ValidationSupport support = new ValidationSupport();
+        support.registerValidator(subjectCmb, Validator.createEmptyValidator("Subject Must Be Chosen!"));
+        support.registerValidator(courseCmb, Validator.createEmptyValidator("Course Must Be Chosen!"));
+        support.registerValidator(assignedTimeField, Validator.createEmptyValidator("Assigned Time Must Be Specified!"));
+        assignedTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d{0,3}?")) {
+                assignedTimeField.setText(oldValue);
+            }
+        });
+        nextBtn.disableProperty().bind(support.invalidProperty());
 
         authorLbl.setText(TeacherControl.getInstance().teacher.getFullName());
         subjectCmb.setItems(FXCollections.observableArrayList(TeacherControl.getInstance().teacher.getTeacherSubjectList()));
@@ -167,6 +177,8 @@ public class CreateExamDialog {
     }
 
     private void generateExam() {
+        exam.setTeacherNotes(teachersNotesField.getText());
+        exam.setStudentNotes(studentsNotesField.getText());
         exam.setExamSubject((Subject) subjectCmb.getSelectionModel().getSelectedItem());
         exam.setExamAuthorTeacher(TeacherControl.getInstance().teacher);
         exam.setExamCourse((Course) courseCmb.getSelectionModel().getSelectedItem());
@@ -181,6 +193,11 @@ public class CreateExamDialog {
         exam.setUsed(false);
         exam.setAssignedTime(Integer.parseInt(assignedTimeField.getText()));
         exam.setWordExam(false);
-        //TODO write the exam to the database
+        try {
+            TeacherControl.getInstance().client.sendToServer(new Message(Contract.CREATE_EXAM, exam));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ((Stage) assignedTimeField.getScene().getWindow()).close();
     }
 }

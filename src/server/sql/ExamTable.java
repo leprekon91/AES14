@@ -31,7 +31,7 @@ public class ExamTable {
             stmtE.setBoolean(7, exam.isUsed());
             stmtE.setBoolean(8, exam.ExamType());
             stmtE.execute();
-            con.commit();
+
             stmtE.close();
             try {
                 stmtExamID = con.createStatement();
@@ -41,7 +41,7 @@ public class ExamTable {
             }
 
             ResultSet ExamID = stmtExamID.executeQuery(SQLContract.RECIVE_EXAM_ID);
-            exam.setExamNumber(ExamID.getInt("id_exam"));
+            exam.setExamNumber(ExamID.getInt("LAST_INSERT_ID()"));
             stmtQ = con.prepareStatement(SQLContract.ADD_QUESTION_TO_EXAM);
             int i = 0;
             for (Question q : exam.getExamQuestions()) {
@@ -53,7 +53,7 @@ public class ExamTable {
             }
 
             stmtQ.execute();
-            con.commit();
+
             stmtQ.close();
             ExamID.close();
             con.close();
@@ -149,7 +149,7 @@ public class ExamTable {
             );
             // exam.setQuestionGrades(ExamsGrade);
             exam = resultExam;
-            con.commit();
+
             stmtQ.close();
             stmtE.close();
             con.close();
@@ -194,7 +194,7 @@ public class ExamTable {
 
             stmt.execute();
             stmtQ.execute();
-            con.commit();
+
             stmt.close();
             stmtQ.close();
             con.close();
@@ -232,7 +232,7 @@ public class ExamTable {
             stmtE.setInt(2, exam.getExamSubject().getSubjectID());
             stmtE.setInt(3, exam.getExamCourse().getCourseNumber());
             stmtE.execute();
-            con.commit();
+
             stmtQ.close();
             stmtE.close();
             con.close();
@@ -389,7 +389,7 @@ public class ExamTable {
             stmtS.setBoolean(7, solvedExam.isApproved());
             stmtS.setString(8, solvedExam.getTeacherGradingNotes());
             stmtS.execute();
-            con.commit();
+
             stmt.close();
             stmtS.close();
             con.close();
@@ -441,7 +441,7 @@ public class ExamTable {
                     solvedExam.getExam().getExamAuthorTeacher()
             );
             solvedExam = resultSolvedExam;
-            con.commit();
+
             stmtE.close();
             stmt.close();
             con.close();
@@ -487,7 +487,7 @@ public class ExamTable {
             stmtS.setString(9, solvedExam.getExam().getExamAuthorTeacher().getUsername());
             stmtS.setInt(10, solvedExam.getExam().getExamNumber());
             stmtS.execute();
-            con.commit();
+
             stmt.close();
             stmtS.close();
             con.close();
@@ -516,7 +516,7 @@ public class ExamTable {
             stmtS.setInt(1, solvedExam.getExam().getExamNumber());
             stmtS.setString(2, solvedExam.getSolvingStudent().getUsername());
             stmtS.execute();
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {

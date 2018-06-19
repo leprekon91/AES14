@@ -4,12 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-<GridPane fx:id="grid" maxWidth="1.7976931348623157E308" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121"
-          xmlns:fx="http://javafx.com/fxml/1">
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="grid" maxWidth="1.7976931348623157E308" minWidth="-Infinity"
+          xmlns="http://javafx.com/javafx/8.0.121">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+        <ColumnConstraints hgrow="ALWAYS" prefWidth="500.0"/>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0"/>
     </columnConstraints>
@@ -19,7 +19,7 @@
     <children>
         <Label text="❓"/>
         <Label fx:id="qidLbl" text="QID" GridPane.columnIndex="1"/>
-        <Label fx:id="qTextLabel" text="TEXT" wrapText="true" GridPane.columnIndex="2">
+        <Label fx:id="qTextLabel" text="TEXT" GridPane.columnIndex="2">
             <GridPane.margin>
                 <Insets left="50.0"/>
             </GridPane.margin>
