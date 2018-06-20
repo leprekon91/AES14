@@ -20,7 +20,6 @@ import server.sql.SQLContract;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.Optional;
 
 /**
  * Emtry point and the Run configuration point of beginning
@@ -146,13 +145,9 @@ public class Start extends Application implements ServerUI {
             return null;
         });
         while (true) {
-            Optional<Pair<String, String>> result = dialog.showAndWait();
-
-            //try to connect with database:
-            result.ifPresent(usernamePassword -> {
+            dialog.showAndWait().ifPresent(usernamePassword -> {
                 SQLContract.user = usernamePassword.getKey();
                 SQLContract.pass = usernamePassword.getValue();
-
             });
 
             Connection con = MysqlManager.ConnectToDB();
