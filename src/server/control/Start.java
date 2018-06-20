@@ -132,7 +132,7 @@ public class Start extends Application implements ServerUI {
         dialog.getDialogPane().setContent(grid);
 
         // Request focus on the username field by default.
-        Platform.runLater(() -> username.requestFocus());
+        Platform.runLater(username::requestFocus);
 
         // Convert the result to a username-password-pair when the login button is clicked.
         dialog.setResultConverter(dialogButton -> {
