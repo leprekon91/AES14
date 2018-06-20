@@ -95,7 +95,6 @@ public class ExamManagement {
         try {
             Exam exam = new Exam(new ArrayList<>(), "", "", null, null, TeacherControl.getInstance().teacher, false, 0, false);
             CreateExamDialog.openWindow(new Stage(), exam);
-            TeacherControl.getInstance().client.sendToServer(new Message(Contract.CREATE_EXAM, exam));
         } catch (IOException e) {
             e.printStackTrace();
         }
