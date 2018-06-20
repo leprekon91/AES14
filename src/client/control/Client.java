@@ -1,5 +1,6 @@
 package client.control;
 
+import client.gui.fxcontrol.CreateNewEIPDialog;
 import client.gui.fxcontrol.PrincipalReportsView;
 import client.ocsf.AbstractClient;
 import com.Contract;
@@ -78,6 +79,12 @@ public class Client extends AbstractClient {
                 break;
             case Contract.COURSES_BY_TEACHER:
                 TeacherControl.getInstance().teacher.setTeacherCourses((ArrayList<Course>) ((Message) msg).getData());
+                break;
+            case Contract.STUDENTS_BY_COURSE:
+                CreateNewEIPDialog.getInstance().receiveStudents((ArrayList<Student>) ((Message) msg).getData());
+                break;
+            case Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER:
+                TeacherControl.getInstance().eips.setAll((ArrayList<ExamInProgress>) ((Message) msg).getData());
                 break;
         }
 

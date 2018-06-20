@@ -105,7 +105,9 @@ public class Server extends AbstractServer {
 
             int contractType = ((Message) msg).getType();
             ArrayList<Question> updatedQuestions;
-            ArrayList<Exam> allExams = new ArrayList<>();
+            ArrayList<Exam> allExams;
+            ArrayList<Student> students;
+            ArrayList<ExamInProgress> eips;
             //------------------------Message decode--------------------------------------------------------------------
             try {
                 switch (contractType) {
@@ -220,7 +222,7 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.PRINCIPAL_REQUESTS, ((Message) msg).getData()));
                         break;
                     case Contract.STUDENTS:
-                        ArrayList<Student> students = new ArrayList<>();
+                        students = new ArrayList<>();
                         students.add(new Student(new User("t", "tom", "one", 1)));
                         students.add(new Student(new User("t", "john", "two", 1)));
                         students.add(new Student(new User("t", "bob", "three", 1)));
@@ -232,16 +234,26 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.REPORT, new int[]{1, 11, 21, 31, 41, 51, 61, 71, 72, 81, 91}));
                         break;
                     case Contract.START_EXAM:
+                        ExamInProgressManager.getInstance().addExamInProgress((ExamInProgress) ((Message) msg).getData());
+                        eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher((String) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER, eips));
                         break;
                     case Contract.STUDENT_STARTS_EXAM:
                         break;
                     case Contract.GET_EXAMS_IN_PROGRESS:
                         //if it's a teacher return by teacher else, return by student
                         if (((User) ((Message) msg).getData()).getType() == 1) {
-
+                            eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher((String) ((Message) msg).getData());
+                            client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER, eips));
                         } else if (((User) ((Message) msg).getData()).getType() == 2) {
 
                         }
+                        break;
+                    case Contract.STUDENTS_BY_COURSE:
+                        System.out.println(getClass().getName());
+                        students = new ArrayList<>();
+                        SubjectsTable.getAllStudentInCourse(students, (Course) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.STUDENTS_BY_COURSE, students));
                         break;
                     case Contract.LOCK_EXAM:
                         break;
@@ -258,7 +270,4 @@ public class Server extends AbstractServer {
 
     }
 
-    protected void messageDecode(Message msg) {
-
-    }
 }

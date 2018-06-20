@@ -1,7 +1,9 @@
 package server.sql;
 
 import com.data.Course;
+import com.data.Student;
 import com.data.Subject;
+import com.data.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -54,6 +56,34 @@ public class SubjectsTable {
                                 rs.getString("course_name"),
                                 new Subject(rs.getInt("id_subject"), rs.getString("subject_name"))
                         )
+                );
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+
+        }
+    }
+
+    public static void getAllStudentInCourse(ArrayList<Student> students, Course course) {
+
+        //------------------------------------
+        PreparedStatement stmt;
+        Connection con = MysqlManager.ConnectToDB();
+        //------------------------------------
+        try {
+            stmt = con.prepareStatement(SQLContract.GET_ALL_STUDENTS_IN_COURSE);
+            stmt.setInt(1, course.getCourseNumber());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                students.add(
+                        new Student(new User(
+                                rs.getString("user_name"),
+                                rs.getString("first_name"),
+                                rs.getString("last_name"),
+                                1
+                        ))
                 );
             }
             rs.close();

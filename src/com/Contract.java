@@ -47,11 +47,12 @@ public class Contract {
 
 
     // Courses/Subject Vocabulary
-    final public static int SUBJECT = 30;
+    public final static int SUBJECT = 30;
     public static final int SUBJECTS = 31;
-    final public static int GET_SUBJECT = 32;
+    public final static int GET_SUBJECT = 32;
     public static final int GET_SUBJECTS_BY_TEACHER = 33;
     public static final int COURSES_BY_TEACHER = 34;
+    public static final int STUDENTS_BY_COURSE = 35;
 
     //Grades Vocabulary
     final public static int GET_GRADES_BY_EXAM = 41;
@@ -73,11 +74,12 @@ public class Contract {
     public static final int EXAM_SUBMITTED = 73;
     public static final int CANT_SUBMIT_EXAM = 74;
     public static final int EXAM_LOCK = 74;
-
+    //EIP Vocabulary
     public static final int START_EXAM = 80;
     public static final int LOCK_EXAM = 81;
     public static final int GET_EXAMS_IN_PROGRESS = 82;
     public static final int EXTEND_EXAM = 83;
     public static final int STUDENT_STARTS_EXAM = 84;
-
+    public static final int GET_EXAMS_IN_PROGRESS_BY_TEACHER = 85;
+    public static final int GET_EXAMS_IN_PROGRESS_BY_STUDENT = 86;
 }
