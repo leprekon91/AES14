@@ -31,15 +31,9 @@ public class ExamTable {
             stmtE.setBoolean(7, exam.isUsed());
             stmtE.setBoolean(8, exam.ExamType());
             stmtE.execute();
-
             stmtE.close();
-            try {
-                stmtExamID = con.createStatement();
-            } catch (SQLException e1) {
 
-                e1.printStackTrace();
-            }
-
+            stmtExamID = con.createStatement();
             ResultSet ExamID = stmtExamID.executeQuery(SQLContract.RECIVE_EXAM_ID);
             ExamID.next();
             exam.setExamNumber(ExamID.getInt("LAST_INSERT_ID()"));
@@ -48,9 +42,10 @@ public class ExamTable {
             for (Question q : exam.getExamQuestions()) {
                 stmtQ = con.prepareStatement(SQLContract.ADD_QUESTION_TO_EXAM);
                 stmtQ.setInt(1, exam.getExamNumber());
-                stmtQ.setInt(2, q.getQID());
-                stmtQ.setInt(3, q.getSubject().getSubjectID());
-                stmtQ.setInt(4, exam.getQuestionGrades()[i]);
+                stmtQ.setInt(2, exam.getExamCourse().getCourseNumber());
+                stmtQ.setInt(3, q.getQID());
+                stmtQ.setInt(4, q.getSubject().getSubjectID());
+                stmtQ.setInt(5, exam.getQuestionGrades()[i]);
                 i++;
                 stmtQ.execute();
                 stmtQ = null;
@@ -219,16 +214,11 @@ public class ExamTable {
         PreparedStatement stmtQ = null;
         PreparedStatement stmtE = null;
         try {
-            if (exam.getExamQuestions().size() != 0) {
+            if (exam.getExamQuestions().size() >= 0) {
                 stmtQ = con.prepareStatement(SQLContract.DELETE_QUESTION_FROM_EXAM);
-
-                for (Question q : exam.getExamQuestions()) {
-                    stmtQ.setInt(1, exam.getExamNumber());
-                    stmtQ.setInt(2, q.getQID());
-                    stmtQ.setInt(3, q.getSubject().getSubjectID());
-                    stmtQ.setInt(4, exam.getExamCourse().getCourseNumber());
-                }
-
+                stmtQ.setInt(1, exam.getExamNumber());
+                stmtQ.setInt(2, exam.getExamSubject().getSubjectID());
+                stmtQ.setInt(3, exam.getExamCourse().getCourseNumber());
                 stmtQ.execute();
             }
             stmtE = con.prepareStatement(SQLContract.DELETE_EXAM);

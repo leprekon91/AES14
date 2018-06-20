@@ -94,11 +94,11 @@ public class SQLContract {
     public static final String DELETE_EXAM = "DELETE FROM exams " +
             "WHERE id_exam= ? AND subjects_id_subject = ? AND courses_id_course = ?;";
     public static final String DELETE_QUESTION_FROM_EXAM = "DELETE FROM exams_has_questions " +
-            "WHERE exams_id_exam = ? AND questions_id_question = ? AND questions_subjects_id_subject = ? AND exam_courses_id =?;";
+            "WHERE exams_id_exam = ? AND questions_subjects_id_subject = ? AND exam_courses_id =?;";
     //------------------------------------------------------------------------------------------------------------------
     public static final String ADD_QUESTION_TO_EXAM = "INSERT INTO exams_has_questions" +
-            "(exams_id_exam, questions_id_question, questions_subjects_id_subject, question_grade) " +
-            "VALUES (?,?,?,?);";
+            "(exams_id_exam,exam_courses_id, questions_id_question, questions_subjects_id_subject, question_grade) " +
+            "VALUES (?,?,?,?,?);";
     public static final String ADD_QUESTION_TO_NEW_EXAM = "INSERT INTO exams_has_questions" +
             "(exams_id_exam,questions_id_question,questions_subjects_id_subject,question_grade) " +
             "VALUES (LAST_INSERT_ID(),?,?,?);";

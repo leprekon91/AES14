@@ -39,11 +39,9 @@ public class GradedQuestionListCell extends JFXListCell<Question> {
             qTextLabel.setText(item.getQuestionText());
             grade.setText(String.valueOf(item.getGrade()));
             grade.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue.matches("\\d{0,3}?")) {
+                if (!newValue.matches("\\d{0,3}?"))
                     grade.setText(oldValue);
-                } else {
-                    grade.setText(oldValue);
-                }
+
             });
 
             setText(null);
