@@ -23,7 +23,7 @@ public class TeacherControl extends Application {
 
     public ObservableList<Question> questions = FXCollections.observableArrayList();
     public ObservableList<Exam> exams = FXCollections.observableArrayList();
-
+    public ObservableList<ExamInProgress> eips = FXCollections.observableArrayList();
 
     private static TeacherControl INSTANCE;
 
@@ -45,6 +45,7 @@ public class TeacherControl extends Application {
         requestAllCourses();
         requestAllQuestions();
         requestAllExams();
+        requestAllEips();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "TeacherMenu.fxml"));
             Parent root = fxmlLoader.load();
@@ -69,6 +70,14 @@ public class TeacherControl extends Application {
             }
         });
 
+    }
+
+    private void requestAllEips() {
+        try {
+            client.sendToServer(new Message(Contract.GET_EXAMS_IN_PROGRESS, teacher));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void requestAllCourses() {

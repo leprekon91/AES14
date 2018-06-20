@@ -107,6 +107,7 @@ public class Server extends AbstractServer {
             ArrayList<Question> updatedQuestions;
             ArrayList<Exam> allExams;
             ArrayList<Student> students;
+            ArrayList<ExamInProgress> eips;
             //------------------------Message decode--------------------------------------------------------------------
             try {
                 switch (contractType) {
@@ -233,13 +234,17 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.REPORT, new int[]{1, 11, 21, 31, 41, 51, 61, 71, 72, 81, 91}));
                         break;
                     case Contract.START_EXAM:
+                        ExamInProgressManager.getInstance().addExamInProgress((ExamInProgress) ((Message) msg).getData());
+                        eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher((String) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER, eips));
                         break;
                     case Contract.STUDENT_STARTS_EXAM:
                         break;
                     case Contract.GET_EXAMS_IN_PROGRESS:
                         //if it's a teacher return by teacher else, return by student
                         if (((User) ((Message) msg).getData()).getType() == 1) {
-
+                            eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher((String) ((Message) msg).getData());
+                            client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER, eips));
                         } else if (((User) ((Message) msg).getData()).getType() == 2) {
 
                         }

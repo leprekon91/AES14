@@ -5,13 +5,14 @@ import server.ocsf.ConnectionToClient;
 import server.sql.AuthorizeUser;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
  * Entity Class For Exam In Progress
  */
-public class ExamInProgress {
+public class ExamInProgress implements Serializable {
     private LocalDateTime dateTimeStart;            //when will the exam start
     private LocalDateTime dateTimeEnd;              //when will the exam end
     private ArrayList<Student> studentArrayList;    //list of students to take the exam

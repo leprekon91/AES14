@@ -80,5 +80,6 @@ public class Contract {
     public static final int GET_EXAMS_IN_PROGRESS = 82;
     public static final int EXTEND_EXAM = 83;
     public static final int STUDENT_STARTS_EXAM = 84;
-
+    public static final int GET_EXAMS_IN_PROGRESS_BY_TEACHER = 85;
+    public static final int GET_EXAMS_IN_PROGRESS_BY_STUDENT = 86;
 }

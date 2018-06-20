@@ -83,6 +83,9 @@ public class Client extends AbstractClient {
             case Contract.STUDENTS_BY_COURSE:
                 CreateNewEIPDialog.getInstance().receiveStudents((ArrayList<Student>) ((Message) msg).getData());
                 break;
+            case Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER:
+                TeacherControl.getInstance().eips.setAll((ArrayList<ExamInProgress>) ((Message) msg).getData());
+                break;
         }
 
     }
