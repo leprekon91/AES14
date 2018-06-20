@@ -41,18 +41,21 @@ public class ExamTable {
             }
 
             ResultSet ExamID = stmtExamID.executeQuery(SQLContract.RECIVE_EXAM_ID);
+            ExamID.next();
             exam.setExamNumber(ExamID.getInt("LAST_INSERT_ID()"));
-            stmtQ = con.prepareStatement(SQLContract.ADD_QUESTION_TO_EXAM);
+
             int i = 0;
             for (Question q : exam.getExamQuestions()) {
+                stmtQ = con.prepareStatement(SQLContract.ADD_QUESTION_TO_EXAM);
                 stmtQ.setInt(1, exam.getExamNumber());
                 stmtQ.setInt(2, q.getQID());
                 stmtQ.setInt(3, q.getSubject().getSubjectID());
                 stmtQ.setInt(4, exam.getQuestionGrades()[i]);
                 i++;
+                stmtQ.execute();
+                stmtQ = null;
             }
 
-            stmtQ.execute();
 
             stmtQ.close();
             ExamID.close();

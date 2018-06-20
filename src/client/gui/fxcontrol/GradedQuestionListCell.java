@@ -42,7 +42,7 @@ public class GradedQuestionListCell extends JFXListCell<Question> {
                 if (!newValue.matches("\\d{0,3}?")) {
                     grade.setText(oldValue);
                 } else {
-                    item.setGrade(Integer.parseInt(oldValue));
+                    grade.setText(oldValue);
                 }
             });
 

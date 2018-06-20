@@ -71,7 +71,7 @@ public class SQLContract {
             "(exam_duration,teacher_instructions,student_instructions,subjects_id_subject,courses_id_course,users_user_name,used,ExamType) " +
             "VALUES (?,?,?,?,?,?,?,?);";
     public static final String CREATE_EXAM_HAS_QUESTIONS = "INSERT INTO exams_has_questions" +
-            "(exams_id_exam,questions_id_question,questions_subjects_id_subject,exam_courses_id,question_grade) " +
+            "(exams_id_exam, questions_id_question, questions_subjects_id_subject, exam_courses_id, question_grade) " +
             "VALUES (?,?,?,?,?);";
 
     public static final String READ_EXAM = "SELECT exams.*,subjects.subject_name,courses.course_name,users.first_name ,users.last_name \n" +
@@ -97,7 +97,7 @@ public class SQLContract {
             "WHERE exams_id_exam = ? AND questions_id_question = ? AND questions_subjects_id_subject = ? AND exam_courses_id =?;";
     //------------------------------------------------------------------------------------------------------------------
     public static final String ADD_QUESTION_TO_EXAM = "INSERT INTO exams_has_questions" +
-            "(exams_id_exam,questions_id_question,questions_subjects_id_subject,question_grade) " +
+            "(exams_id_exam, questions_id_question, questions_subjects_id_subject, question_grade) " +
             "VALUES (?,?,?,?);";
     public static final String ADD_QUESTION_TO_NEW_EXAM = "INSERT INTO exams_has_questions" +
             "(exams_id_exam,questions_id_question,questions_subjects_id_subject,question_grade) " +
