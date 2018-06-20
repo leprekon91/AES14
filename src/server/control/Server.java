@@ -105,7 +105,8 @@ public class Server extends AbstractServer {
 
             int contractType = ((Message) msg).getType();
             ArrayList<Question> updatedQuestions;
-            ArrayList<Exam> allExams = new ArrayList<>();
+            ArrayList<Exam> allExams;
+            ArrayList<Student> students;
             //------------------------Message decode--------------------------------------------------------------------
             try {
                 switch (contractType) {
@@ -220,7 +221,7 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.PRINCIPAL_REQUESTS, ((Message) msg).getData()));
                         break;
                     case Contract.STUDENTS:
-                        ArrayList<Student> students = new ArrayList<>();
+                        students = new ArrayList<>();
                         students.add(new Student(new User("t", "tom", "one", 1)));
                         students.add(new Student(new User("t", "john", "two", 1)));
                         students.add(new Student(new User("t", "bob", "three", 1)));
@@ -243,6 +244,12 @@ public class Server extends AbstractServer {
 
                         }
                         break;
+                    case Contract.STUDENTS_BY_COURSE:
+                        System.out.println(getClass().getName());
+                        students = new ArrayList<>();
+                        SubjectsTable.getAllStudentInCourse(students, (Course) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.STUDENTS_BY_COURSE, students));
+                        break;
                     case Contract.LOCK_EXAM:
                         break;
                     case Contract.EXTEND_EXAM:
@@ -258,7 +265,4 @@ public class Server extends AbstractServer {
 
     }
 
-    protected void messageDecode(Message msg) {
-
-    }
 }

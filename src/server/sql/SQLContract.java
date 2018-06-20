@@ -105,7 +105,7 @@ public class SQLContract {
 
     public static final String GET_ALL_EXAMS_BY_SUBJECT = "SELECT * FROM exams " +
             "WHERE subjects_id_subject =?;";
-    public static final String GET_ALL_EXAMs_BY_COURSE = "SELECT * FROM exams " +
+    public static final String GET_ALL_EXAMS_BY_COURSE = "SELECT * FROM exams " +
             "WHERE courses_id_course =?;";
 
     public static final String SUBJECT_BY_TEACHER = "SELECT subjects.id_subject,subjects.subject_name\n" +
@@ -118,6 +118,11 @@ public class SQLContract {
             "\tJOIN teachers_teach_subjects\n" +
             "    on teachers_teach_subjects.subjects_id_subject=subjects.id_subject\n" +
             "WHERE teachers_teach_subjects.teacher_name = ?;";
+
+    public static final String GET_ALL_STUDENTS_IN_COURSE = "SELECT users.user_name,users.first_name,users.last_name FROM users\n" +
+            "\tJOIN student_studies_in_course\n" +
+            "    ON users.user_name=student_studies_in_course.student_name\n" +
+            "    where student_studies_in_course.courses_id_course=?;";
 
     public static final String UPDATE_QUESTION_IN_EXAM = "UPDATE `exams_has_questions`\n" +
             "SET\n" +
