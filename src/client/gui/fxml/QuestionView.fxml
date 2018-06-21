@@ -7,8 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0"
-          prefWidth="600.0" xmlns="http://javafx.com/javafx/9" fx:controller="client.gui.fxcontrol.QuestionView">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="client.gui.fxcontrol.QuestionView">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" percentWidth="100.0"
                            prefWidth="620.0"/>
@@ -21,98 +22,77 @@
         <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0"
                     prefWidth="600.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
             <content>
-                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+                <VBox prefHeight="390.0" prefWidth="598.0" spacing="5.0">
                     <children>
-                        <VBox layoutX="87.0" layoutY="206.0" prefHeight="390.0" prefWidth="598.0" spacing="5.0"
-                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                              AnchorPane.topAnchor="0.0">
+                        <Label fx:id="authorLbl" text="Written By Author"/>
+                        <HBox spacing="5.0">
                             <children>
-                                <Label fx:id="authorLbl" text="Written By Author" VBox.vgrow="ALWAYS"/>
-                                <HBox spacing="5.0" VBox.vgrow="ALWAYS">
-                                    <children>
-                                        <Label maxHeight="1.7976931348623157E308" text="#"/>
-                                        <Label fx:id="qidLbl" maxHeight="1.7976931348623157E308"
-                                               maxWidth="1.7976931348623157E308" text="Label"/>
-                                    </children>
-                                </HBox>
-                                <HBox spacing="5.0" VBox.vgrow="ALWAYS">
-                                    <children>
-                                        <Label maxHeight="1.7976931348623157E308" text="Subject:"/>
-                                        <Label fx:id="subjectLbl" maxHeight="1.7976931348623157E308" text="Label"/>
-                                    </children>
-                                </HBox>
-                                <Label fx:id="questionText" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="558.0"
-                                       style="-fx-border-color: #555555; -fx-border-radius: 5;" text="question text">
-                                    <opaqueInsets>
-                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                    </opaqueInsets>
-                                    <padding>
-                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                    </padding>
-                                </Label>
-                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
-                                    <children>
-                                        <Label fx:id="answer1Label" alignment="TOP_LEFT"
-                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer1"
-                                               HBox.hgrow="ALWAYS">
-                                            <opaqueInsets>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                            </opaqueInsets>
-                                            <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                            </padding>
-                                        </Label>
-                                        <Label fx:id="answer2Label" alignment="TOP_LEFT"
-                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                               minHeight="-Infinity" minWidth="-Infinity"
-                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer2"
-                                               HBox.hgrow="ALWAYS">
-                                            <opaqueInsets>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                            </opaqueInsets>
-                                            <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                            </padding>
-                                        </Label>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" VBox.vgrow="ALWAYS">
-                                    <children>
-                                        <Label fx:id="answer3Label" alignment="TOP_LEFT"
-                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                               minHeight="-Infinity" minWidth="-Infinity"
-                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer3"
-                                               HBox.hgrow="ALWAYS">
-                                            <opaqueInsets>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                            </opaqueInsets>
-                                            <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                            </padding>
-                                        </Label>
-                                        <Label fx:id="answer4Label" alignment="TOP_LEFT"
-                                               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                               minHeight="-Infinity" minWidth="-Infinity"
-                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer4"
-                                               HBox.hgrow="ALWAYS">
-                                            <opaqueInsets>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                            </opaqueInsets>
-                                            <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                                            </padding>
-                                        </Label>
-                                    </children>
-                                </HBox>
+                                <Label maxHeight="1.7976931348623157E308" text="#"/>
+                                <Label fx:id="qidLbl" maxHeight="1.7976931348623157E308"
+                                       maxWidth="1.7976931348623157E308" text="Label"/>
                             </children>
+                        </HBox>
+                        <HBox spacing="5.0">
+                            <children>
+                                <Label maxHeight="1.7976931348623157E308" text="Subject:"/>
+                                <Label fx:id="subjectLbl" maxHeight="1.7976931348623157E308" text="Label"/>
+                            </children>
+                        </HBox>
+                        <Label fx:id="questionText" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
+                               maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="558.0"
+                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="question text">
+                            <opaqueInsets>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </opaqueInsets>
                             <padding>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                             </padding>
-                        </VBox>
+                        </Label>
+                        <Label fx:id="answer1Label" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
+                               maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0"
+                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer1">
+                            <opaqueInsets>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </opaqueInsets>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </Label>
+                        <Label fx:id="answer3Label" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
+                               maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0"
+                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer2">
+                            <opaqueInsets>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </opaqueInsets>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </Label>
+                        <Label fx:id="answer3Label1" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
+                               maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0"
+                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer3">
+                            <opaqueInsets>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </opaqueInsets>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </Label>
+                        <Label fx:id="answer3Label2" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308"
+                               maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0"
+                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer4">
+                            <opaqueInsets>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </opaqueInsets>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </Label>
                     </children>
-                </AnchorPane>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </VBox>
             </content>
         </ScrollPane>
         <AnchorPane maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="70.0" prefWidth="583.0"
