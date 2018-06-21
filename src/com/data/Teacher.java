@@ -22,13 +22,15 @@ public class Teacher extends User {
 
     public Teacher(User user,
                    ArrayList<Exam> teacherExamsList,
-                   ArrayList<Subject> teacherSubjectList) {
+                   ArrayList<Subject> teacherSubjectList,
+                   ArrayList<Course> teacherCourses) {
         super(user.getUsername(), user.getPass());
         this.setFirst_name(user.getFirst_name());
         this.setLast_name(user.getLast_name());
         this.setType(user.getType());
         this.teacherExamsList = teacherExamsList;
         this.teacherSubjectList = teacherSubjectList;
+        this.teacherCourses = teacherCourses;
     }
 
     /**

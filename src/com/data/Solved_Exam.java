@@ -11,24 +11,29 @@ public class Solved_Exam {
     private Student solvingStudent;
     private int examSolvingDuration;
     private Teacher examinerTeacher;
+    private boolean isWordExam; //false = automatic, true = word
 
     private int examGrade; //fields designated for after the solution check
     private boolean approved;
     private String teacherGradingNotes;
+    private boolean isCopySuspect; //false = no suspicion, true = suspected for copying
 
     /**
      * Solved exam constructors
      */
-    public Solved_Exam(Exam exam, int[] studentAnswers, Student solvingStudent, int examSolvingDuration, Teacher examinerTeacher) {
+    public Solved_Exam(Exam exam, int[] studentAnswers, Student solvingStudent, int examSolvingDuration,
+                       Teacher examinerTeacher, boolean isWordExam) {
         this.exam = exam;
         this.studentAnswers = studentAnswers;
         this.solvingStudent = solvingStudent;
         this.examSolvingDuration = examSolvingDuration;
         this.examinerTeacher = examinerTeacher;
+        this.isWordExam = isWordExam;
     }
 
     public Solved_Exam(Exam exam, int[] studentAnswers, Student solvingStudent, int examSolvingDuration,
-                       Teacher examinerTeacher, int examGrade, boolean approved, String teacherGradingNotes) {
+                       Teacher examinerTeacher, int examGrade, boolean approved, String teacherGradingNotes,
+                       boolean isWordExam, boolean isCopySuspect) {
         this.exam = exam;
         this.studentAnswers = studentAnswers;
         this.solvingStudent = solvingStudent;
@@ -37,6 +42,8 @@ public class Solved_Exam {
         this.setExamGrade(examGrade);
         this.setApproved(approved);
         this.setTeacherGradingNotes(teacherGradingNotes);
+        this.isWordExam = isWordExam;
+        this.isCopySuspect = isCopySuspect;
     }
 
     /**
@@ -105,5 +112,22 @@ public class Solved_Exam {
     public void setTeacherGradingNotes(String teacherGradingNotes) {
         this.teacherGradingNotes = teacherGradingNotes;
     }
+
+    public boolean isWordExam() {
+        return isWordExam;
+    }
+
+    public void setWordExam(boolean isWordExam) {
+        this.isWordExam = isWordExam;
+    }
+
+    public boolean isCopySuspect() {
+        return isCopySuspect;
+    }
+
+    public void setCopySuspect(boolean isCopySuspect) {
+        this.isCopySuspect = isCopySuspect;
+    }
+
 }
 

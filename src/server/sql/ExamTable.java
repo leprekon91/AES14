@@ -29,7 +29,6 @@ public class ExamTable {
             stmtE.setInt(5, exam.getExamCourse().getCourseNumber());
             stmtE.setString(6, exam.getExamAuthorTeacher().getUsername());
             stmtE.setBoolean(7, exam.isUsed());
-            stmtE.setBoolean(8, exam.ExamType());
             stmtE.execute();
             stmtE.close();
 
@@ -329,8 +328,7 @@ public class ExamTable {
                                         2)
                         ),
                         rs.getBoolean("used"),
-                        rs.getInt("exam_duration"),
-                        rs.getBoolean("ExamType")
+                        rs.getInt("exam_duration")
 
 
                 );

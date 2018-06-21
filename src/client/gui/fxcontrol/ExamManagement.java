@@ -93,7 +93,7 @@ public class ExamManagement {
     public void createNewExam(ActionEvent actionEvent) {
 
         try {
-            Exam exam = new Exam(new ArrayList<>(), "", "", null, null, TeacherControl.getInstance().teacher, false, 0, false);
+            Exam exam = new Exam(new ArrayList<>(), "", "", null, null, TeacherControl.getInstance().teacher, false, 0);
             CreateExamDialog.openWindow(new Stage(), exam);
         } catch (IOException e) {
             e.printStackTrace();

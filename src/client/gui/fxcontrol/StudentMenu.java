@@ -31,7 +31,7 @@ public class StudentMenu {
                 new String[]{" 6 %", " 6.4 %", "6.2 %,", "6.1 %"}, 2, subject, teacher));
 
 
-        Exam exam = new Exam(questions, "", "", course, subject, teacher, false, 0, false);
+        Exam exam = new Exam(questions, "", "", course, subject, teacher, false, 0);
 
         //show password dialog
         String password = "123";
