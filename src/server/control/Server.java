@@ -229,7 +229,7 @@ public class Server extends AbstractServer {
                         break;
                     case Contract.START_EXAM:
                         ExamInProgressManager.getInstance().addExamInProgress((ExamInProgress) ((Message) msg).getData());
-                        eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher((String) ((Message) msg).getData());
+                        eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher(((ExamInProgress) ((Message) msg).getData()).getExaminingTeacher().getUsername());
                         client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER, eips));
                         break;
                     case Contract.STUDENT_STARTS_EXAM:

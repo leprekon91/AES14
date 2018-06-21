@@ -28,7 +28,7 @@ public class ExamInProgressManager {
         ArrayList<ExamInProgress> ans = new ArrayList<>();
         for (ExamInProgress eip :
                 eips) {
-            if (eip.getExam().getExamAuthorTeacher().equals(teacherUName))
+            if (eip.getExam().getExamAuthorTeacher().getUsername().equals(teacherUName))
                 ans.add(new ExamInProgress(
                                 eip.getDateTimeStart(),
                                 eip.getDateTimeEnd(),

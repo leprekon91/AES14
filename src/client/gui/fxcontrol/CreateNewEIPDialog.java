@@ -119,6 +119,7 @@ public class CreateNewEIPDialog {
     public void generateEIPObject(ActionEvent actionEvent) {
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
+
         LocalTime startTime = startTimePicker.getValue();
         LocalTime endTime = endTimePicker.getValue();
         LocalDateTime start = LocalDateTime.of(startDate, startTime);
@@ -126,7 +127,9 @@ public class CreateNewEIPDialog {
         String password = pswdField.getText();
         Teacher examiningTeacher = TeacherControl.getInstance().teacher;
         Exam examObj = this.exam;
-        ArrayList<Student> students = (ArrayList<Student>) studentCheckList.getCheckModel().getCheckedItems();
+        System.out.println(studentCheckList.getCheckModel().getCheckedItems().toArray());
+        ArrayList<Student> students;
+        students = new ArrayList<Student>(studentCheckList.getCheckModel().getCheckedItems());
         ExamInProgress examInProgress = new ExamInProgress(start, end, students, password, examiningTeacher, examObj);
         try {
             TeacherControl.getInstance().client.sendToServer(new Message(Contract.START_EXAM, examInProgress));
