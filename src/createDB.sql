@@ -141,7 +141,6 @@ CREATE TABLE IF NOT EXISTS `exams` (
   `courses_id_course` INT NOT NULL,
   `users_user_name` VARCHAR(50) NOT NULL,
   `used` TINYINT(1) NOT NULL,
-  `ExamType` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id_exam`, `subjects_id_subject`, `courses_id_course`),
   INDEX `fk_exams_subjects1_idx` (`subjects_id_subject` ASC),
   INDEX `fk_exams_courses1_idx` (`courses_id_course` ASC),
@@ -167,7 +166,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `exams_has_questions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`exams_has_questions` (
+CREATE TABLE IF NOT EXISTS `exams_has_questions` (
   `exams_id_exam` INT NOT NULL,
   `questions_id_question` INT NOT NULL,
   `exam_courses_id` INT NOT NULL,
@@ -192,7 +191,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `student_answers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `AES`.`student_answers` (
+CREATE TABLE IF NOT EXISTS `student_answers` (
   `answer` INT NOT NULL,
   `exams_has_questions_exams_id_exam` INT NOT NULL,
   `exams_has_questions_questions_id_question` INT NOT NULL,
@@ -228,7 +227,9 @@ CREATE TABLE IF NOT EXISTS `exam_solutions` (
   `teacher_notes` TEXT(200) NULL,
   `teacher_user` VARCHAR(50) NOT NULL,
   `execution_duration` VARCHAR(45) NULL,
-  PRIMARY KEY (`student_user`, `exams_id_exam`, `exams_subjects_id_subject`, `exams_courses_id_course`, `teacher_user`),
+  `suspected_of_copying` TINYINT(1) NOT NULL,
+  `exam_type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`student_user`, `exams_id_exam`, `exams_subjects_id_subject`, `exams_courses_id_course`),
   INDEX `fk_users_has_exams_exams1_idx` (`exams_id_exam` ASC, `exams_subjects_id_subject` ASC, `exams_courses_id_course` ASC),
   INDEX `fk_users_has_exams_users1_idx` (`student_user` ASC),
   INDEX `fk_student_grades_users1_idx` (`teacher_user` ASC),
@@ -245,6 +246,24 @@ CREATE TABLE IF NOT EXISTS `exam_solutions` (
   CONSTRAINT `fk_student_grades_users1`
     FOREIGN KEY (`teacher_user`)
     REFERENCES `AES`.`users` (`user_name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `word_file_solutions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `word_file_solutions` (
+  `exam_solutions_student_user` VARCHAR(50) NOT NULL,
+  `exam_solutions_exams_id_exam` INT NOT NULL,
+  `exam_solutions_exams_subjects_id_subject` INT NOT NULL,
+  `exam_solutions_exams_courses_id_course` INT NOT NULL,
+  `word_file_add` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`exam_solutions_student_user`, `exam_solutions_exams_id_exam`, `exam_solutions_exams_subjects_id_subject`, `exam_solutions_exams_courses_id_course`),
+  CONSTRAINT `fk_word_file_solutions_exam_solutions1`
+    FOREIGN KEY (`exam_solutions_student_user` , `exam_solutions_exams_id_exam` , `exam_solutions_exams_subjects_id_subject` , `exam_solutions_exams_courses_id_course`)
+    REFERENCES `AES`.`exam_solutions` (`student_user` , `exams_id_exam` , `exams_subjects_id_subject` , `exams_courses_id_course`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

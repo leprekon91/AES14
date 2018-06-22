@@ -37,15 +37,14 @@ public class ExamTable {
             ExamID.next();
             exam.setExamNumber(ExamID.getInt("LAST_INSERT_ID()"));
 
-            int i = 0;
+
             for (Question q : exam.getExamQuestions()) {
                 stmtQ = con.prepareStatement(SQLContract.ADD_QUESTION_TO_EXAM);
                 stmtQ.setInt(1, exam.getExamNumber());
-                stmtQ.setInt(2, exam.getExamCourse().getCourseNumber());
-                stmtQ.setInt(3, q.getQID());
-                stmtQ.setInt(4, q.getSubject().getSubjectID());
-                stmtQ.setInt(5, exam.getQuestionGrades()[i]);
-                i++;
+                stmtQ.setInt(2, q.getQID());
+                stmtQ.setInt(3, q.getSubject().getSubjectID());
+                stmtQ.setInt(4, exam.getExamCourse().getCourseNumber());
+                stmtQ.setInt(5, q.getGrade());
                 stmtQ.execute();
                 stmtQ = null;
             }
@@ -63,28 +62,30 @@ public class ExamTable {
     /**
      * Read Exam entry from the database, create a Exam object and return it.
      *
-     * @param exam empty Exam object to be filled with data from the DB, required exam ID
+     * @param examID exam integer ID
+     * @param course sourse integer id
      * @return Exam Object filled with the entry data.
      */
-    public static void readExam(Exam exam, int examID) {
+    public static Exam readExam(int examID, int course, int subject) {
         System.out.println("ExamTable - Read Exam\n" +
-                "Exam ID: " + exam.getExamNumber());
+                "Exam ID: " + examID);
 
         Connection con = MysqlManager.ConnectToDB();
         PreparedStatement stmtQ = null;
         PreparedStatement stmtE = null;
         try {
+
             stmtE = con.prepareStatement(SQLContract.READ_EXAM);
             stmtE.setInt(1, examID);
-            stmtE.setInt(2, exam.getExamCourse().getCourseNumber());
-            stmtE.setInt(3, exam.getExamSubject().getSubjectID());
-
+            stmtE.setInt(2, course);
+            stmtE.setInt(3, subject);
             ResultSet rs = stmtE.executeQuery();
+
             ArrayList<Question> questionArray = new ArrayList<Question>();
             stmtQ = con.prepareStatement(SQLContract.ALL_QUESTIONS_IN_EXAM);
             stmtQ.setInt(1, examID);
-            stmtQ.setInt(2, exam.getExamCourse().getCourseNumber());
-            stmtQ.setInt(3, exam.getExamSubject().getSubjectID());
+            stmtQ.setInt(2, course);
+            stmtQ.setInt(3, subject);
             ResultSet qrs = stmtQ.executeQuery();
             ArrayList<Integer> ExamsGrade = new ArrayList<Integer>();
             while (qrs.next()) {
@@ -115,6 +116,9 @@ public class ExamTable {
 
 
             }
+            rs.next();
+
+
             Exam resultExam = new Exam(
                     questionArray,
                     rs.getString("teacher_instructions"),
@@ -123,7 +127,7 @@ public class ExamTable {
                             rs.getInt("courses_id_course"),
                             rs.getString("course_name"),
                             new Subject(
-                                    rs.getInt("id_subject"),
+                                    rs.getInt("subjects_id_subject"),
                                     rs.getString("subject_name")
                             )
                     ),
@@ -133,26 +137,29 @@ public class ExamTable {
                     ),
                     new Teacher(
                             new User(
-                                    qrs.getString("users_user_name"),
-                                    qrs.getString("first_name"),
-                                    qrs.getString("last_name"),
+                                    rs.getString("users_user_name"),
+                                    rs.getString("first_name"),
+                                    rs.getString("last_name"),
                                     2)
                     ),
                     rs.getBoolean("used"),
-                    rs.getInt("exam_duration"),
-                    rs.getBoolean("ExamType")
+                    rs.getInt("exam_duration")
 
             );
-            // exam.setQuestionGrades(ExamsGrade);
-            exam = resultExam;
 
-            stmtQ.close();
-            stmtE.close();
+            resultExam.setExamNumber(rs.getInt("id_exam"));
+            if (stmtQ != null)
+                stmtQ.close();
+            if (stmtE != null)
+                stmtE.close();
             con.close();
+            return (resultExam);
 
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);
         }
+        return null;
+
     }
 
     /**
@@ -364,25 +371,33 @@ public class ExamTable {
                 stmt = con.prepareStatement(SQLContract.CREATE_QUESTION_SOLUTION);
                 stmt.setString(1, solvedExam.getSolvingStudent().getUsername());
                 stmt.setInt(2, solvedExam.getExam().getExamNumber());
-                stmt.setInt(3, q.getQID());
+                stmt.setInt(3, solvedExam.getExam().getExamCourse().getCourseNumber());
                 stmt.setInt(4, q.getSubject().getSubjectID());
-                stmt.setInt(5, solvedExam.getStudentAnswers()[i]);
+                stmt.setInt(5, q.getQID());
+                stmt.setInt(6, solvedExam.getStudentAnswers()[i]);
                 i++;
+                stmt.execute();
+                stmt = null;
             }
-            stmt.execute();
+            //stmt.execute();
 
             stmtS = con.prepareStatement(SQLContract.CREATE_EXAM_SOLUTION);
-            stmtS.setString(1, solvedExam.getExam().getExamAuthorTeacher().getUsername());
+            stmtS.setString(1, solvedExam.getSolvingStudent().getUsername());
             stmtS.setInt(2, solvedExam.getExam().getExamNumber());
             stmtS.setInt(3, solvedExam.getExam().getExamSubject().getSubjectID());
             stmtS.setInt(4, solvedExam.getExam().getExamCourse().getCourseNumber());
             stmtS.setInt(5, solvedExam.getExamGrade());
-            stmtS.setInt(6, solvedExam.getExamSolvingDuration());
-            stmtS.setBoolean(7, solvedExam.isApproved());
-            stmtS.setString(8, solvedExam.getTeacherGradingNotes());
-            stmtS.execute();
+            stmtS.setBoolean(6, solvedExam.isApproved());
+            stmtS.setString(7, solvedExam.getTeacherGradingNotes());
+            stmtS.setString(8, solvedExam.getExam().getExamAuthorTeacher().getUsername());
+            stmtS.setInt(9, solvedExam.getExamSolvingDuration());
+            stmtS.setBoolean(10, solvedExam.isCopySuspect());
+            stmtS.setBoolean(11, solvedExam.isWordExam());
 
-            stmt.close();
+
+            stmtS.execute();
+            if (stmt != null)
+                stmt.close();
             stmtS.close();
             con.close();
         } catch (SQLException e) {
@@ -390,24 +405,29 @@ public class ExamTable {
         }
     }
 
-    public static void readSolvedExam(Solved_Exam solvedExam, int examID, String studentName) {
+    public static Solved_Exam readSolvedExam(Solved_Exam solvedExam, int examID, int course, int subject, String studentName) {
         System.out.println("StudentAnswersTable - Read SolvedExam\n" +
                 "Solved Exam ID: " + solvedExam.getExam().getExamNumber());
         //users_user_name, exams_id_exam, exams_subjects_id_subject, exams_courses_id_course, grade, execution_duration, approved, teacher_notes
         Connection con = MysqlManager.ConnectToDB();
         PreparedStatement stmt = null;
         PreparedStatement stmtE = null;
-        ExamTable.readExam(solvedExam.getExam(), examID);
+
+        solvedExam.setExam(readExam(examID, course, subject));
         try {
             stmtE = con.prepareStatement(SQLContract.READ_EXAM_SOLUTION);
             stmtE.setInt(1, examID);
-            stmtE.setString(2, studentName);
+            stmtE.setInt(2, course);
+            stmtE.setInt(3, subject);
+            stmtE.setString(4, studentName);
             ResultSet rs = stmtE.executeQuery();
 
 
             stmt = con.prepareStatement(SQLContract.READ_QUESTION_SOLUTION);
             stmt.setInt(1, examID);
-            stmt.setString(2, studentName);
+            stmt.setInt(2, course);
+            stmt.setInt(3, subject);
+            stmt.setString(4, studentName);
             ResultSet qrs = stmt.executeQuery();
 
             ArrayList<Integer> answersArrayl = new ArrayList<Integer>();
@@ -419,6 +439,7 @@ public class ExamTable {
             for (Integer ansNum : answersArrayl)
                 answersArray[i] = ansNum;
 
+            rs.next();
             Solved_Exam resultSolvedExam = new Solved_Exam(
                     solvedExam.getExam(),
                     answersArray,
@@ -430,17 +451,30 @@ public class ExamTable {
                                     1)
                     ),
                     rs.getInt("execution_duration"),
-                    solvedExam.getExam().getExamAuthorTeacher()
+                    new Teacher(
+                            new User(
+                                    rs.getString("user_name"),
+                                    rs.getString("first_name"),
+                                    rs.getString("last_name"),
+                                    2)
+                    ),
+                    rs.getInt("grade"),
+                    rs.getBoolean("approved"),
+                    rs.getString("teacher_notes"),
+                    rs.getBoolean("exam_type"),
+                    rs.getBoolean("suspected_of_copying")
             );
-            solvedExam = resultSolvedExam;
+
 
             stmtE.close();
             stmt.close();
             con.close();
+            return resultSolvedExam;
 
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);
         }
+        return null;
 
     }
 
@@ -455,32 +489,33 @@ public class ExamTable {
             int i = 0;
             for (Question q : solvedExam.getExam().getExamQuestions()) {
                 stmt = con.prepareStatement(SQLContract.UPDATE_QUESTION_SOLUTION);
-                stmt.setString(1, solvedExam.getSolvingStudent().getUsername());
-                stmt.setInt(2, solvedExam.getExam().getExamNumber());
-                stmt.setInt(3, q.getQID());
-                stmt.setInt(4, q.getSubject().getSubjectID());
-                stmt.setInt(5, solvedExam.getStudentAnswers()[i]);
-                stmt.setString(6, solvedExam.getSolvingStudent().getUsername());
-                stmt.setInt(7, solvedExam.getExam().getExamNumber());
-                stmt.setInt(8, q.getQID());
+                stmt.setInt(1, solvedExam.getStudentAnswers()[i]);
+                stmt.setString(2, solvedExam.getSolvingStudent().getUsername());
+                stmt.setInt(3, solvedExam.getExam().getExamNumber());
+                stmt.setInt(4, solvedExam.getExam().getExamCourse().getCourseNumber());
+                stmt.setInt(5, q.getSubject().getSubjectID());
+                stmt.setInt(6, q.getQID());
                 i++;
+                stmt.execute();
+
+                stmt = null;
             }
-            stmt.execute();
 
             stmtS = con.prepareStatement(SQLContract.UPDATE_EXAM_SOLUTION);
-            stmtS.setString(1, solvedExam.getExam().getExamAuthorTeacher().getUsername());
-            stmtS.setInt(2, solvedExam.getExam().getExamNumber());
-            stmtS.setInt(3, solvedExam.getExam().getExamSubject().getSubjectID());
-            stmtS.setInt(4, solvedExam.getExam().getExamCourse().getCourseNumber());
-            stmtS.setInt(5, solvedExam.getExamGrade());
+            stmtS.setInt(1, solvedExam.getExamGrade());
+            stmtS.setBoolean(2, solvedExam.isApproved());
+            stmtS.setString(3, solvedExam.getTeacherGradingNotes());
+            stmtS.setBoolean(4, solvedExam.isCopySuspect());
+            stmtS.setBoolean(5, solvedExam.isWordExam());
             stmtS.setInt(6, solvedExam.getExamSolvingDuration());
-            stmtS.setBoolean(7, solvedExam.isApproved());
-            stmtS.setString(8, solvedExam.getTeacherGradingNotes());
-            stmtS.setString(9, solvedExam.getExam().getExamAuthorTeacher().getUsername());
-            stmtS.setInt(10, solvedExam.getExam().getExamNumber());
-            stmtS.execute();
+            stmtS.setString(7, solvedExam.getSolvingStudent().getUsername());
+            stmtS.setInt(8, solvedExam.getExam().getExamNumber());
+            stmtS.setInt(9, solvedExam.getExam().getExamCourse().getCourseNumber());
+            stmtS.setInt(10, solvedExam.getExam().getExamSubject().getSubjectID());
 
-            stmt.close();
+            stmtS.execute();
+            if (stmt != null)
+                stmt.close();
             stmtS.close();
             con.close();
         } catch (SQLException e) {
@@ -488,6 +523,7 @@ public class ExamTable {
         }
 
     }
+
 
     public static void deleteSolvedExam(Solved_Exam solvedExam) {
         System.out.println("StudentAnswersTable - Delete Exam\n" +
@@ -499,17 +535,23 @@ public class ExamTable {
             for (Question q : solvedExam.getExam().getExamQuestions()) {
                 stmt = con.prepareStatement(SQLContract.DELETE_QUESTION_SOLUTION);
                 stmt.setInt(1, solvedExam.getExam().getExamNumber());
-                stmt.setString(2, solvedExam.getSolvingStudent().getUsername());
-                stmt.setInt(3, q.getQID());
+                stmt.setInt(2, solvedExam.getExam().getExamCourse().getCourseNumber());
+                stmt.setInt(3, solvedExam.getExam().getExamSubject().getSubjectID());
+                stmt.setString(4, solvedExam.getSolvingStudent().getUsername());
+                stmt.setInt(5, q.getQID());
+                stmt.execute();
+                stmt = null;
             }
-            stmt.execute();
+
 
             stmtS = con.prepareStatement(SQLContract.DELETE_EXAM_SOLUTION);
             stmtS.setInt(1, solvedExam.getExam().getExamNumber());
-            stmtS.setString(2, solvedExam.getSolvingStudent().getUsername());
+            stmtS.setInt(2, solvedExam.getExam().getExamCourse().getCourseNumber());
+            stmtS.setInt(3, solvedExam.getExam().getExamSubject().getSubjectID());
+            stmtS.setString(4, solvedExam.getSolvingStudent().getUsername());
             stmtS.execute();
-
-            stmt.close();
+            if (stmt != null)
+                stmt.close();
             con.close();
         } catch (SQLException e) {
             MysqlManager.sqlExceptionHandler(e);

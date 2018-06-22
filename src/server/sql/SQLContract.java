@@ -56,7 +56,7 @@ public class SQLContract {
             "\t\tON questions.teacher_user = users.user_name\n" +
             "\tJOIN exams_has_questions\n" +
             "\t\tON questions.id_question= exams_has_questions.questions_id_question\n" +
-            "WHERE (users.user_name=questions.teacher_user AND questions.subjects_id_subject=subjects.id_subject AND exams_has_questions.exams_id_exam =? AND exams_has_questions.exam_courses_id= ? AND exams_has_questions.questions_subjects_id_subject = ?);";
+            "WHERE users.user_name=questions.teacher_user AND questions.subjects_id_subject=subjects.id_subject AND exams_has_questions.exams_id_exam =? AND exams_has_questions.exam_courses_id= ? AND exams_has_questions.questions_subjects_id_subject = ?;";
     public static final String RECIVE_EXAM_ID = "SELECT LAST_INSERT_ID();";
     public static final String SHOW_TEACHERS_QUESTION = "SELECT * FROM questions " +
             "WHERE teacher_user =?;";
@@ -68,10 +68,10 @@ public class SQLContract {
     //Queries for Exam Table
     //-----------------CRUD---------------------------------------------------------------------------------------------
     public static final String CREATE_EXAM = "INSERT INTO exams" +
-            "(exam_duration,teacher_instructions,student_instructions,subjects_id_subject,courses_id_course,users_user_name,used,ExamType) " +
-            "VALUES (?,?,?,?,?,?,?,?);";
+            "(exam_duration,teacher_instructions,student_instructions,subjects_id_subject,courses_id_course,users_user_name,used) " +
+            "VALUES (?,?,?,?,?,?,?);";
     public static final String CREATE_EXAM_HAS_QUESTIONS = "INSERT INTO exams_has_questions" +
-            "(exams_id_exam, questions_id_question, questions_subjects_id_subject, exam_courses_id, question_grade) " +
+            "(exams_id_exam,questions_id_question,questions_subjects_id_subject,exam_courses_id,question_grade) " +
             "VALUES (?,?,?,?,?);";
 
     public static final String READ_EXAM = "SELECT exams.*,subjects.subject_name,courses.course_name,users.first_name ,users.last_name \n" +
@@ -81,7 +81,8 @@ public class SQLContract {
             "\tJOIN courses\n" +
             "\t\tON exams.courses_id_course = courses.id_course \n" +
             "\tJOIN users\n" +
-            "\t\tON exams.users_user_name = users.user_name;";
+            "\t\tON exams.users_user_name = users.user_name \n" +
+            "WHERE exams.id_exam = ? AND exams.courses_id_course = ? AND exams.subjects_id_subject = ?;";
 
     static final String UPDATE_EXAM = "UPDATE exams\n" +
             "SET\n" +
@@ -96,12 +97,12 @@ public class SQLContract {
     public static final String DELETE_QUESTION_FROM_EXAM = "DELETE FROM exams_has_questions " +
             "WHERE exams_id_exam = ? AND questions_subjects_id_subject = ? AND exam_courses_id =?;";
     //------------------------------------------------------------------------------------------------------------------
-    public static final String ADD_QUESTION_TO_EXAM = "INSERT INTO exams_has_questions" +
-            "(exams_id_exam,exam_courses_id, questions_id_question, questions_subjects_id_subject, question_grade) " +
+    public static final String ADD_QUESTION_TO_EXAM = "INSERT INTO exams_has_questions\n" +
+            "(exams_id_exam,questions_id_question,questions_subjects_id_subject,exam_courses_id,question_grade) \n" +
             "VALUES (?,?,?,?,?);";
     public static final String ADD_QUESTION_TO_NEW_EXAM = "INSERT INTO exams_has_questions" +
-            "(exams_id_exam,questions_id_question,questions_subjects_id_subject,question_grade) " +
-            "VALUES (LAST_INSERT_ID(),?,?,?);";
+            "(exams_id_exam,questions_id_question,questions_subjects_id_subject,exam_courses_id,question_grade) " +
+            "VALUES (LAST_INSERT_ID(),?,?,?,?);";
 
     public static final String GET_ALL_EXAMS_BY_SUBJECT = "SELECT * FROM exams " +
             "WHERE subjects_id_subject =?;";
@@ -119,10 +120,7 @@ public class SQLContract {
             "    on teachers_teach_subjects.subjects_id_subject=subjects.id_subject\n" +
             "WHERE teachers_teach_subjects.teacher_name = ?;";
 
-    public static final String GET_ALL_STUDENTS_IN_COURSE = "SELECT users.user_name,users.first_name,users.last_name FROM users\n" +
-            "\tJOIN student_studies_in_course\n" +
-            "    ON users.user_name=student_studies_in_course.student_name\n" +
-            "    where student_studies_in_course.courses_id_course=?;";
+
 
     public static final String UPDATE_QUESTION_IN_EXAM = "UPDATE `exams_has_questions`\n" +
             "SET\n" +
@@ -142,50 +140,48 @@ public class SQLContract {
             "\t\tON exams.users_user_name = users.user_name;";
     //---------------------------------------------------------------------------------------------------------------
     //Queries for Exam solutions Table
-    public static final String CREATE_QUESTION_SOLUTION = "INSERT INTO student_answers" +
-            "(users_user_name, exams_has_questions_exams_id_exam, exams_has_questions_questions_id_question, exams_has_questions_questions_subjects_id_subject, answer)" +
-            " VALUES (?,?,?,?,?);";
-    public static final String CREATE_EXAM_SOLUTION = "INSERT INTO exam_solutions" +
-            "(users_user_name, exams_id_exam, exams_subjects_id_subject, exams_courses_id_course, grade, execution_duration, approved, teacher_notes)" +
-            " VALUES (?,?,?,?,?,?,?,?);";
+    public static final String CREATE_QUESTION_SOLUTION = "INSERT INTO student_answers\n" +
+            "(student_user,exams_has_questions_exams_id_exam, exams_has_questions_exam_courses_id, exams_has_questions_questions_subjects_id_subject, exams_has_questions_questions_id_question, answer )\n" +
+            "VALUES (?,?,?,?,?,?);";
+    public static final String CREATE_EXAM_SOLUTION = "INSERT INTO exam_solutions\n" +
+            "(student_user, exams_id_exam, exams_subjects_id_subject, exams_courses_id_course, grade, approved, teacher_notes, teacher_user, execution_duration,suspected_of_copying, exam_type )\n" +
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+
     public static final String READ_QUESTION_SOLUTION =
-            "SELECT * FROM student_answers " +
-                    "WHERE exams_has_questions_exams_id_exam =? AND users_user_name = ?;";
+            "SELECT * FROM student_answers\n" +
+                    "                    WHERE exams_has_questions_exams_id_exam = ? AND exams_has_questions_exam_courses_id = ? AND exams_has_questions_questions_subjects_id_subject = ? AND student_user = ?;";
     public static final String READ_EXAM_SOLUTION =
-            "SELECT exam_solutions.*,users.*\n" +
-                    "FROM student_answers\n" +
+            " SELECT exam_solutions.* ,users.user_name, users.first_name, users.last_name\n" +
+                    "FROM exam_solutions\n" +
                     "\tJOIN users\n" +
-                    "\t\tON users_user_name = user_name\n" +
-                    "WHERE `exams_id_exam` =? AND users_user_name = ?;";
+                    "\t\tON exam_solutions.student_user = users.user_name\n" +
+                    "WHERE exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ? AND student_user = ?;";
 
     public static final String UPDATE_QUESTION_SOLUTION =
             "UPDATE student_answers\n" +
                     "SET\n" +
-                    "users_user_name = ?,\n" +
-                    "exams_has_questions_exams_id_exam = ?,\n" +
-                    "exams_has_questions_questions_id_question = ?,\n" +
-                    "exams_has_questions_questions_subjects_id_subject = ?\n" +
                     "answer = ?\n" +
-                    "WHERE users_user_name = ? AND exams_has_questions_exams_id_exam = ? AND exams_has_questions_questions_id_question = ?;";
+                    "WHERE student_user = ? AND exams_has_questions_exams_id_exam = ? AND exams_has_questions_exam_courses_id = ? AND exams_has_questions_questions_subjects_id_subject = ? AND exams_has_questions_questions_id_question =? ;";
     public static final String UPDATE_EXAM_SOLUTION =
             "UPDATE exam_solutions\n" +
                     "SET\n" +
-                    "users_user_name = ?,\n" +
-                    "exams_id_exam = ?,\n" +
-                    "exams_subjects_id_subject = ?,\n" +
-                    "exams_courses_id_course = ?\n" +
-                    "grade = ?\n" +
-                    "execution_duration = ?\n" +
-                    "approved = ?\n" +
-                    "teacher_notes = ?\n" +
-                    "WHERE users_user_name = ? AND exams_id_exam = ?;";
-    public static final String DELETE_QUESTION_SOLUTION = "DELETE FROM student_answers " +
-            "WHERE exams_has_questions_exams_id_exam = ? AND users_user_name = ? exams_has_questions_questions_id_question = ?;";
-    public static final String DELETE_EXAM_SOLUTION = "DELETE FROM exam_solutions " +
-            "WHERE exams_id_exam = ? AND users_user_name = ?;";
+                    "grade = ?,\n" +
+                    "approved = ?,\n" +
+                    "teacher_notes = ?,\n" +
+                    "suspected_of_copying = ?,\n" +
+                    "exam_type = ? ,\n" +
+                    "execution_duration= ?\n" +
+                    "WHERE student_user = ? AND exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ?;";
+    public static final String DELETE_QUESTION_SOLUTION = "DELETE FROM student_answers \n" +
+            "WHERE exams_has_questions_exams_id_exam = ? AND exams_has_questions_exam_courses_id =? AND exams_has_questions_questions_subjects_id_subject =? AND student_user = ? AND exams_has_questions_questions_id_question = ?;";
+    public static final String DELETE_EXAM_SOLUTION = "DELETE FROM exam_solutions \n" +
+            "WHERE exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ? AND student_user = ?;";
 
     // ------------------------------------------------------------------
-
+    public static final String GET_ALL_STUDENTS_IN_COURSE = "SELECT users.user_name,users.first_name,users.last_name FROM users\n" +
+            "\tJOIN student_studies_in_course\n" +
+            "    ON users.user_name=student_studies_in_course.student_name\n" +
+            "    where student_studies_in_course.courses_id_course=?;";
     //statistics
     public static final String STATISTICS_BY_COURSE = "select exam_solutions.grade from exam_solutions where exams_courses_id_course = ?;";
     public static final String STATISTICS_BY_SUBJECT = "select exam_solutions.grade from exam_solutions where  exams_subjects_id_subject= ?;";
