@@ -46,11 +46,11 @@ public class ExamTable {
                 stmtQ.setInt(4, exam.getExamCourse().getCourseNumber());
                 stmtQ.setInt(5, q.getGrade());
                 stmtQ.execute();
-                stmtQ = null;
+                stmtQ.close();
+
             }
 
 
-            stmtQ.close();
             ExamID.close();
             con.close();
 

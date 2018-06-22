@@ -42,10 +42,7 @@ public class TeacherControl extends Application {
         INSTANCE = this;
         //fill data from database
         requestSubjectListByTeacher();
-        requestAllCourses();
-        requestAllQuestions();
-        requestAllExams();
-        requestAllEips();
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "TeacherMenu.fxml"));
             Parent root = fxmlLoader.load();
@@ -88,6 +85,12 @@ public class TeacherControl extends Application {
         }
     }
 
+    public void receiveAllCourses(ArrayList<Course> data) {
+        teacher.setTeacherCourses(data);
+        requestAllQuestions();
+
+    }
+
     //Subject communication Methods.
     public void requestSubjectListByTeacher() {
         Message message = new Message(Contract.GET_SUBJECTS_BY_TEACHER, teacher);
@@ -101,10 +104,13 @@ public class TeacherControl extends Application {
 
     public void receiveSubjectListByTeacher(ArrayList<Subject> subjects) {
         this.teacher.setTeacherSubjectList(subjects);
+        requestAllCourses();
+
     }
 
     public void receiveAllQuestions(ArrayList<Question> questions) {
         Platform.runLater(() -> this.questions.setAll(questions));
+        requestAllExams();
     }
 
     public void requestAllQuestions() {
@@ -125,5 +131,6 @@ public class TeacherControl extends Application {
 
     public void receiveAllExams(ArrayList<Exam> receivedExams) {
         Platform.runLater(() -> this.exams.setAll(receivedExams));
+        requestAllEips();
     }
 }

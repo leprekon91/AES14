@@ -63,12 +63,14 @@ public class Server extends AbstractServer {
     @Override
     protected synchronized void clientException(ConnectionToClient client, Throwable e) {
         super.clientException(client, e);
-        SUI.logMsg("Client: " + client.toString() + " has encountered an exception!");
+        SUI.logMsg("Client: " + client.toString() + " has encountered an exception!\n" +
+                "Consider the system log for details.");
         StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
         String exceptionAsString = sw.toString();
         SUI.logMsg(exceptionAsString);
         (AuthorizeUser.getInstance()).deleteUserByClient(client);
+        e.printStackTrace();
     }
 
     /**

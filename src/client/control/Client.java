@@ -78,7 +78,7 @@ public class Client extends AbstractClient {
                 Platform.runLater(() -> PrincipalReportsView.getInstance().receiveAllStudentsForReport((ArrayList<Student>) ((Message) msg).getData()));
                 break;
             case Contract.COURSES_BY_TEACHER:
-                TeacherControl.getInstance().teacher.setTeacherCourses((ArrayList<Course>) ((Message) msg).getData());
+                TeacherControl.getInstance().receiveAllCourses((ArrayList<Course>) ((Message) msg).getData());
                 break;
             case Contract.STUDENTS_BY_COURSE:
                 CreateNewEIPDialog.getInstance().receiveStudents((ArrayList<Student>) ((Message) msg).getData());

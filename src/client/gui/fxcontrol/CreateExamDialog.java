@@ -177,25 +177,27 @@ public class CreateExamDialog {
     }
 
     private void generateExam() {
-        exam.setTeacherNotes(teachersNotesField.getText());
-        exam.setStudentNotes(studentsNotesField.getText());
-        exam.setExamSubject((Subject) subjectCmb.getSelectionModel().getSelectedItem());
-        exam.setExamAuthorTeacher(TeacherControl.getInstance().teacher);
-        exam.setExamCourse((Course) courseCmb.getSelectionModel().getSelectedItem());
-        ArrayList<Question> questions = new ArrayList<>();
-        ArrayList<Integer> grades = new ArrayList<>();
-        for (int i = 0; i < questionsGradesListView.getItems().size(); i++) {
-            questions.add((Question) questionsGradesListView.getItems().get(i));
-            grades.add(((Question) questionsGradesListView.getItems().get(i)).getGrade());
-        }
-        exam.setExamQuestions(questions);
-        exam.setQuestionGrades(grades.stream().mapToInt(i -> i).toArray());
-        exam.setUsed(false);
-        exam.setAssignedTime(Integer.parseInt(assignedTimeField.getText()));
-        exam.setWordExam(false);
         try {
+            exam.setTeacherNotes(teachersNotesField.getText());
+            exam.setStudentNotes(studentsNotesField.getText());
+            exam.setExamSubject((Subject) subjectCmb.getSelectionModel().getSelectedItem());
+            exam.setExamAuthorTeacher(TeacherControl.getInstance().teacher);
+            exam.setExamCourse((Course) courseCmb.getSelectionModel().getSelectedItem());
+            ArrayList<Question> questions = new ArrayList<>();
+            ArrayList<Integer> grades = new ArrayList<>();
+            for (int i = 0; i < questionsGradesListView.getItems().size(); i++) {
+                questions.add((Question) questionsGradesListView.getItems().get(i));
+                grades.add(((Question) questionsGradesListView.getItems().get(i)).getGrade());
+            }
+            exam.setExamQuestions(questions);
+            exam.setQuestionGrades(grades.stream().mapToInt(i -> i).toArray());
+            exam.setUsed(false);
+            exam.setAssignedTime(Integer.parseInt(assignedTimeField.getText()));
+
             TeacherControl.getInstance().client.sendToServer(new Message(Contract.CREATE_EXAM, exam));
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         ((Stage) assignedTimeField.getScene().getWindow()).close();

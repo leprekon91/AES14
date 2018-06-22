@@ -1,7 +1,10 @@
 package client.gui.fxcontrol;
 
 import com.Contract;
-import com.data.*;
+import com.data.Exam;
+import com.data.Question;
+import com.data.Student;
+import com.data.User;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.animation.KeyFrame;
@@ -25,7 +28,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class ExamExecutionQuestions {
@@ -214,8 +216,8 @@ public class ExamExecutionQuestions {
 
     public void generateAndSendSolvedExam() {
         Student solvingStudent = new Student(new User("j", "john", "smithy", 1));
-        Solved_Exam solved_exam = new Solved_Exam(exam, generateAnswerArray(), solvingStudent, (int) (elapsed / 60), exam.getExamAuthorTeacher());
-        System.out.println("Sending to server: " + Arrays.toString(solved_exam.getStudentAnswers()));
+        //Solved_Exam solved_exam = new Solved_Exam(exam, generateAnswerArray(), solvingStudent, (int) (elapsed / 60), exam.getExamAuthorTeacher(),);
+        // System.out.println("Sending to server: " + Arrays.toString(solved_exam.getStudentAnswers()));
     }
 
 }

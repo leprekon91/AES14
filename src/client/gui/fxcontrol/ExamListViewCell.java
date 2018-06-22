@@ -41,7 +41,11 @@ public class ExamListViewCell extends ListCell<Exam> {
             subjectLbl.setText(item.getExamSubject().getSubjectName());
             teacherLbl.setText(item.getExamAuthorTeacher().getFullName());
             courseLbl.setText(item.getExamCourse().getCourseName());
-            statusLbl.setText("TODO");
+            if (item.isUsed()) {
+                statusLbl.setText("Was Used");
+            } else {
+                statusLbl.setText("Never Used");
+            }
             setText(null);
             setGraphic(grid);
         }
