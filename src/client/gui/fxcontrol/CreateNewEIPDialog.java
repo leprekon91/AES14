@@ -37,6 +37,7 @@ public class CreateNewEIPDialog {
     public JFXTextField pswdField;
     private static CreateNewEIPDialog INSTANCE;
     public MaskerPane mask;
+    public JFXCheckBox wordCheck;
     private ExamInProgress examInProgress;
     public CheckListView studentCheckList;
     private ObservableList<Student> students = FXCollections.observableArrayList();
@@ -122,6 +123,10 @@ public class CreateNewEIPDialog {
 
         LocalTime startTime = startTimePicker.getValue();
         LocalTime endTime = endTimePicker.getValue();
+        if (startTime == null || endTime == null) {
+            startTime = LocalTime.MIDNIGHT;
+            endTime = LocalTime.MIDNIGHT;
+        }
         LocalDateTime start = LocalDateTime.of(startDate, startTime);
         LocalDateTime end = LocalDateTime.of(endDate, endTime);
         String password = pswdField.getText();
@@ -130,7 +135,7 @@ public class CreateNewEIPDialog {
         System.out.println(studentCheckList.getCheckModel().getCheckedItems().toArray());
         ArrayList<Student> students;
         students = new ArrayList<Student>(studentCheckList.getCheckModel().getCheckedItems());
-        ExamInProgress examInProgress = new ExamInProgress(start, end, students, password, examiningTeacher, examObj);
+        examInProgress = new ExamInProgress(start, end, students, password, examiningTeacher, examObj, wordCheck.isSelected());
         try {
             TeacherControl.getInstance().client.sendToServer(new Message(Contract.START_EXAM, examInProgress));
         } catch (IOException e) {

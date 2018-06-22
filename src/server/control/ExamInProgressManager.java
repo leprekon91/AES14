@@ -1,6 +1,7 @@
 package server.control;
 
 import com.data.ExamInProgress;
+import server.sql.ExamTable;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -21,6 +22,7 @@ public class ExamInProgressManager {
 
     public void addExamInProgress(ExamInProgress eip) {
         this.eips.add(eip);
+        ExamTable.examSetUsed(eip.getExam());
     }
 
     public ArrayList<ExamInProgress> getExamInProgressArrayByTeacher(String teacherUName) {
@@ -35,7 +37,8 @@ public class ExamInProgressManager {
                                 eip.getStudentArrayList(),
                                 eip.getPassword(),
                                 eip.getExaminingTeacher(),
-                                eip.getExam()
+                        eip.getExam(),
+                        eip.isWordType()
                         )
                 );
         }

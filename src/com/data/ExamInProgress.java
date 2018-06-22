@@ -21,17 +21,20 @@ public class ExamInProgress implements Serializable {
     private String password;                        //access password for students
     private Teacher examiningTeacher;               //Teacher that conducts the exam
     private Exam exam;                              //Exam Object
+    private boolean wordType;
 
     //Constructor
-    public ExamInProgress(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, ArrayList<Student> studentArrayList, String password, Teacher examiningTeacher, Exam exam) {
+    public ExamInProgress(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, ArrayList<Student> studentArrayList, String password, Teacher examiningTeacher, Exam exam, boolean wordType) {
         this.dateTimeStart = dateTimeStart;
         this.dateTimeEnd = dateTimeEnd;
         this.studentArrayList = studentArrayList;
         this.password = password;
         this.examiningTeacher = examiningTeacher;
         this.exam = exam;
+        this.wordType = wordType;
         this.solutions = new ArrayList<>();
         this.examineeList = new ArrayList<>();
+
     }
 
     //Getters and setters
@@ -113,7 +116,10 @@ public class ExamInProgress implements Serializable {
             if (username != null) {
                 if (studentExistsInList(username) && Password.equals(getPassword()) && this.hasBegun()) {
                     this.examineeList.add(client);
-                    client.sendToClient(new Message(Contract.BEGIN_EXAM, getExam()));
+                    if (isWordType()) {
+                        client.sendToClient(new Message(Contract.BEGIN_EXAM_WORD, this));
+                    }
+                    client.sendToClient(new Message(Contract.BEGIN_EXAM, this));
                 }
             } else client.sendToClient(new Message(Contract.CANT_BEGIN_EXAM, null));
         } catch (IOException e) {
@@ -190,4 +196,11 @@ public class ExamInProgress implements Serializable {
     }
 
 
+    public boolean isWordType() {
+        return wordType;
+    }
+
+    public void setWordType(boolean wordType) {
+        this.wordType = wordType;
+    }
 }

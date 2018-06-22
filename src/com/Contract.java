@@ -73,8 +73,9 @@ public class Contract {
     public static final int STOP_EXAM = 72;
     public static final int EXAM_SUBMITTED = 73;
     public static final int CANT_SUBMIT_EXAM = 74;
-    public static final int EXAM_LOCK = 74;
-    //EIP Vocabulary
+    public static final int EXAM_LOCK = 75;
+    public static final int BEGIN_EXAM_WORD = 76;
+
     public static final int START_EXAM = 80;
     public static final int LOCK_EXAM = 81;
     public static final int GET_EXAMS_IN_PROGRESS = 82;
@@ -82,4 +83,5 @@ public class Contract {
     public static final int STUDENT_STARTS_EXAM = 84;
     public static final int GET_EXAMS_IN_PROGRESS_BY_TEACHER = 85;
     public static final int GET_EXAMS_IN_PROGRESS_BY_STUDENT = 86;
+
 }

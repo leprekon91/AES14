@@ -36,6 +36,7 @@ public class AuthorizeUser {
      *
      * @param username
      * @param password
+     * @param connectionToClient
      * @return Reply with Yes Or NO
      */
     public Message authorize(String username, String password, ConnectionToClient connectionToClient) {

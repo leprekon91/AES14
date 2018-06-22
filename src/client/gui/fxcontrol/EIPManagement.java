@@ -47,7 +47,7 @@ public class EIPManagement {
     }
 
     public void startNewExam(ActionEvent actionEvent) {
-        ExamInProgress examInProgress = new ExamInProgress(null, null, null, null, TeacherControl.getInstance().teacher, null);
+        ExamInProgress examInProgress = new ExamInProgress(null, null, null, null, TeacherControl.getInstance().teacher, null, false);
         try {
             CreateNewEIPDialog.openWindow(new Stage(), examInProgress);
         } catch (IOException e) {

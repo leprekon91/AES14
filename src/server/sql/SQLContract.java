@@ -92,10 +92,14 @@ public class SQLContract {
             "`users_user_name` = ?\n" +
             "`used` = ?\n" +
             "WHERE `id_exam` = ? AND `subjects_id_subject` = ? AND `courses_id_course` = ?;";
-    public static final String DELETE_EXAM = "DELETE FROM exams " +
+    static final String DELETE_EXAM = "DELETE FROM exams " +
             "WHERE id_exam= ? AND subjects_id_subject = ? AND courses_id_course = ?;";
-    public static final String DELETE_QUESTION_FROM_EXAM = "DELETE FROM exams_has_questions " +
+    static final String DELETE_QUESTION_FROM_EXAM = "DELETE FROM exams_has_questions " +
             "WHERE exams_id_exam = ? AND questions_subjects_id_subject = ? AND exam_courses_id =?;";
+    static final String EXAM_SET_USED = "UPDATE `exams`\n" +
+            "SET\n" +
+            "`used` = 1\n" +
+            "WHERE `id_exam` = ? AND `subjects_id_subject` = ? AND `courses_id_course` = ?;";
     //------------------------------------------------------------------------------------------------------------------
     public static final String ADD_QUESTION_TO_EXAM = "INSERT INTO exams_has_questions\n" +
             "(exams_id_exam,questions_id_question,questions_subjects_id_subject,exam_courses_id,question_grade) \n" +
@@ -146,22 +150,42 @@ public class SQLContract {
     public static final String CREATE_EXAM_SOLUTION = "INSERT INTO exam_solutions\n" +
             "(student_user, exams_id_exam, exams_subjects_id_subject, exams_courses_id_course, grade, approved, teacher_notes, teacher_user, execution_duration,suspected_of_copying, exam_type )\n" +
             " VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+    public static final String CREATE_WORD_EXAM_SOLUTION = "INSERT INTO word_file_solutions\n" +
+            "(exam_solutions_student_user, exam_solutions_exams_id_exam, exam_solutions_exams_courses_id_course, exam_solutions_exams_subjects_id_subject, word_file_add )\n" +
+            " VALUES (?,?,?,?,?);";
 
     public static final String READ_QUESTION_SOLUTION =
             "SELECT * FROM student_answers\n" +
                     "                    WHERE exams_has_questions_exams_id_exam = ? AND exams_has_questions_exam_courses_id = ? AND exams_has_questions_questions_subjects_id_subject = ? AND student_user = ?;";
     public static final String READ_EXAM_SOLUTION =
-            " SELECT exam_solutions.* ,users.user_name, users.first_name, users.last_name\n" +
+            "SELECT exam_solutions.* ,users.user_name, users.first_name, users.last_name\n" +
                     "FROM exam_solutions\n" +
                     "\tJOIN users\n" +
                     "\t\tON exam_solutions.student_user = users.user_name\n" +
                     "WHERE exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ? AND student_user = ?;";
 
+    public static final String READ_WORD_EXAM_SOLUTION =
+            "SELECT word_file_solutions.*\n" +
+                    "FROM word_file_solutions\n" +
+                    "WHERE exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ? AND student_user = ?;";
+
+    public static final String CHECK_SOLVED_EXAM_TYPE =
+            "SELECT exam_solutions.exam_type\n" +
+                    "FROM word_file_solutions\n" +
+                    "WHERE exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ? AND student_user = ?;";
+
     public static final String UPDATE_QUESTION_SOLUTION =
             "UPDATE student_answers\n" +
                     "SET\n" +
-                    "answer = ?\n" +
+                    "exam_solutions.exam_type = ?\n" +
                     "WHERE student_user = ? AND exams_has_questions_exams_id_exam = ? AND exams_has_questions_exam_courses_id = ? AND exams_has_questions_questions_subjects_id_subject = ? AND exams_has_questions_questions_id_question =? ;";
+
+    public static final String UPDATE_WORD_EXAM_SOLUTION =
+            "UPDATE word_file_solutions\n" +
+                    "SET\n" +
+                    "word_file_solutions.word_file_add = ?\n" +
+                    "WHERE exam_solutions_student_user = ? AND exam_solutions_exams_id_exam = ? AND exam_solutions_exams_courses_id_course = ? AND exam_solutions_exams_subjects_id_subject = ?;";
+
     public static final String UPDATE_EXAM_SOLUTION =
             "UPDATE exam_solutions\n" +
                     "SET\n" +
@@ -172,22 +196,52 @@ public class SQLContract {
                     "exam_type = ? ,\n" +
                     "execution_duration= ?\n" +
                     "WHERE student_user = ? AND exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ?;";
+
     public static final String DELETE_QUESTION_SOLUTION = "DELETE FROM student_answers \n" +
             "WHERE exams_has_questions_exams_id_exam = ? AND exams_has_questions_exam_courses_id =? AND exams_has_questions_questions_subjects_id_subject =? AND student_user = ? AND exams_has_questions_questions_id_question = ?;";
+
     public static final String DELETE_EXAM_SOLUTION = "DELETE FROM exam_solutions \n" +
             "WHERE exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ? AND student_user = ?;";
 
-    // ------------------------------------------------------------------
+    public static final String DELETE_WORD_EXAM_SOLUTION = "DELETE FROM word_file_solutions \n" +
+            "WHERE exam_solutions_student_user = ? AND exam_solutions_exams_id_exam = ? AND exam_solutions_exams_courses_id_course = ? AND exam_solutions_exams_subjects_id_subject = ?;";
+    /**
+     * Delete section?
+     */
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public static final String GET_ALL_STUDENTS_IN_COURSE = "SELECT users.user_name,users.first_name,users.last_name FROM users\n" +
             "\tJOIN student_studies_in_course\n" +
             "    ON users.user_name=student_studies_in_course.student_name\n" +
             "    where student_studies_in_course.courses_id_course=?;";
-    //statistics
+
     public static final String STATISTICS_BY_COURSE = "select exam_solutions.grade from exam_solutions where exams_courses_id_course = ?;";
     public static final String STATISTICS_BY_SUBJECT = "select exam_solutions.grade from exam_solutions where  exams_subjects_id_subject= ?;";
     public static final String STATISTICS_BY_STUDENT = "select exam_solutions.grade from exam_solutions where student_user = ?;";
     public static final String STATISTICS_BY_EXAM = "select exam_solutions.grade from exam_solutions " +
             "WHERE  exams_subjects_id_subject= ? AND exams_courses_id_course = ? AND exams_id_exam = ?;";
     public static final String STATISTICS_BY_TEACHER = "select exam_solutions.grade from exam_solutions where  teacher_user= ?;";
+    //-----------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     * statistics quarry's
+     */
+    public static final String ALL_SOLVED_EXAMS_BY_STUDENT = "SELECT exam_solutions.*\n" +
+            "FROM exam_solutions \n" +
+            "WHERE (student_user = ?);";
+
+    public static final String ALL_SOLVED_EXAMS_BY_EXAMINER_TEACHER = "SELECT exam_solutions.*\n" +
+            "FROM exam_solutions \n" +
+            "WHERE teacher_user = ?;";
+
+
+    public static final String ALL_SOLVED_EXAMS_BY_AUTHOR_TEACHER = "SELECT exam_solutions.*, exams.users_user_name\n" +
+            "FROM exam_solutions \n" +
+            "\tJOIN exams \n" +
+            "\t\tON exam_solutions.exams_id_exam = exams.id_exam AND exam_solutions.exams_courses_id_course = exams.courses_id_course AND exam_solutions.exams_subjects_id_subject = exams.subjects_id_subject\n" +
+            "WHERE exams.users_user_name = ?;";
+
+    public static final String ALL_SOLVED_EXAMS_BY_COURSE = "SELECT exam_solutions.*\n" +
+            "FROM exam_solutions \n" +
+            "WHERE exams_courses_id_course= ?;";
+
 
 }
