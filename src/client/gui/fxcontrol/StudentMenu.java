@@ -2,6 +2,7 @@ package client.gui.fxcontrol;
 
 import client.control.StudentControl;
 import com.Contract;
+import com.WordDocument;
 import com.data.ExamInProgress;
 import com.data.Message;
 import com.jfoenix.controls.JFXListView;
@@ -12,9 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 public class StudentMenu {
@@ -77,7 +82,23 @@ public class StudentMenu {
     }
 
     public void beginExam(ExamInProgress eip) {
-        ExamExecutionQuestions.openWindow(new Stage(), eip.getExam(), eip.getExam().getAssignedTime(), eip.getExaminingTeacher());
+        if (eip.isWordType()) {
+            FileChooser fileChooser = new FileChooser();
+
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(examView.getScene().getWindow());
+
+            if (file != null) {
+                saveFile(eip, file);
+            }
+            WordExamUpload.openWindow(new Stage(), eip);
+        } else {
+            ExamExecutionQuestions.openWindow(new Stage(), eip.getExam(), eip.getExam().getAssignedTime(), eip.getExaminingTeacher());
+        }
     }
 
     public void receiveBeginExamDecline() {
@@ -103,7 +124,17 @@ public class StudentMenu {
         });
     }
 
+    private void saveFile(ExamInProgress eip, File file) {
+        try {
+            LocalDate localDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+            String date = localDate.format(formatter);
+            WordDocument.createExamDoc(eip.getExam(), eip.getExaminingTeacher(), file.toPath().toString(), date);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
+    }
     public void switchToExamsView(ActionEvent actionEvent) {
         welcomeView.setVisible(false);
         examView.setVisible(true);

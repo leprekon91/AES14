@@ -4,10 +4,10 @@ import client.control.PrincipalControl;
 import com.Contract;
 import com.data.ExtensionRequest;
 import com.data.Message;
+import com.jfoenix.controls.JFXListCell;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
@@ -27,17 +27,17 @@ public class PrincipalMessagesView {
 
     public void initialize() {
         messageDetailPane.setVisible(false);
-        messagesList.setCellFactory(new Callback<ListView<ExtensionRequest>, ListCell<ExtensionRequest>>() {
+        messagesList.setCellFactory(new Callback<ListView<ExtensionRequest>, JFXListCell<ExtensionRequest>>() {
             @Override
-            public ListCell<ExtensionRequest> call(ListView<ExtensionRequest> p) {
+            public JFXListCell<ExtensionRequest> call(ListView<ExtensionRequest> p) {
 
-                ListCell<ExtensionRequest> cell = new ListCell<ExtensionRequest>() {
+                JFXListCell<ExtensionRequest> cell = new JFXListCell<ExtensionRequest>() {
 
                     @Override
                     protected void updateItem(ExtensionRequest t, boolean bln) {
                         super.updateItem(t, bln);
                         if (t != null) {
-                            setText("\t•" + t.getTeacher().getFullName() + " | " + "Requests Time Extension For  Exam - #" + t.getExamInProgress().getExam().getExamIDStr());
+                            setText("\t\uD83D\uDCE7" + t.getTeacher().getFullName() + " | " + "Requests Time Extension For  Exam - #" + t.getExamInProgress().getExam().getExamIDStr());
                         }
                     }
 

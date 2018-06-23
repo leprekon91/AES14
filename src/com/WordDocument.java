@@ -92,7 +92,7 @@ public class WordDocument
         wd.addParagraph(studentNotes);
         int qnum = 1;
         for (Question q : exam.getExamQuestions()) {
-            wd.addSubTitle("(Question #" + qnum + ")" + " - [" + q.getGrade() + "points]", "000000", null);
+            wd.addSubTitle("(Question #" + qnum + ")" + " - [" + exam.getQuestionGrades()[qnum - 1] + "points]", "000000", null);
             wd.addSubTitle(" > " + q.getQuestionText(), "000000", null);
             wd.addParagraph("❶ " + q.getPossibleAnswers()[0]);
             wd.addParagraph("❷ " + q.getPossibleAnswers()[1]);

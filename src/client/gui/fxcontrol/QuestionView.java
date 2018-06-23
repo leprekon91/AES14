@@ -50,16 +50,16 @@ public class QuestionView {
         answer4Label.setText(q.getAns(3));
         switch (q.getCorrectAnswer()) {
             case 1:
-                answer1Label.setStyle("-fx-backgroung-color: LIGHTGREEN;");
+                answer1Label.setStyle(answer1Label.getStyle() + "-fx-background-color: #90EE90;");
                 break;
             case 2:
-                answer2Label.setStyle("-fx-backgroung-color: LIGHTGREEN;");
+                answer2Label.setStyle(answer2Label.getStyle() + "-fx-background-color: #90EE90;");
                 break;
             case 3:
-                answer3Label.setStyle("-fx-backgroung-color: LIGHTGREEN;");
+                answer3Label.setStyle(answer3Label.getStyle() + "-fx-background-color: #90EE90;");
                 break;
             case 4:
-                answer4Label.setStyle("-fx-backgroung-color: LIGHTGREEN;");
+                answer4Label.setStyle(answer4Label.getStyle() + "-fx-background-color: #90EE90;");
                 break;
         }
         questionViewTitle.setText("Question #" + q.getQIDString());

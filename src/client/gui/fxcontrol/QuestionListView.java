@@ -46,6 +46,16 @@ public class QuestionListView {
         deleteBtn.disableProperty().bind(support.invalidProperty());
 
         questionList.setCellFactory(questionListView -> new QuestionListViewCell());
+        questionList.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Question q = (Question) questionList.getSelectionModel().getSelectedItems().get(0);
+                try {
+                    QuestionView.openWindow(new Stage(), q);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         FilteredList<Question> filteredData = new FilteredList<>(
                 TeacherControl.getInstance().questions,
                 s -> true

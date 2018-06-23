@@ -220,9 +220,6 @@ public class ExamExecutionQuestions {
 
     public void generateAndSendSolvedExam() {
         Student solvingStudent = StudentControl.getInstance().student;
-        //Solved_Exam solved_exam = new Solved_Exam(exam, generateAnswerArray(), solvingStudent, (int) (elapsed / 60), exam.getExamAuthorTeacher(),);
-
-
         Solved_Exam solved_exam = new Solved_Exam(
                 exam,
                 generateAnswerArray(),

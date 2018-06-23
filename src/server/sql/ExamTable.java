@@ -323,7 +323,7 @@ public class ExamTable {
                 stmt.setInt(2, solvedExam.getExam().getExamNumber());
                 stmt.setInt(3, solvedExam.getExam().getExamCourse().getCourseNumber());
                 stmt.setInt(4, solvedExam.getExam().getExamSubject().getSubjectID());
-                stmt.setString(5, ((Word_Solved_Exam) solvedExam).getSolvedExamFile().getPath());
+                stmt.setString(5, ((Word_Solved_Exam) solvedExam).getPath());
                 stmt.execute();
                 stmt = null;
             }
@@ -501,7 +501,7 @@ public class ExamTable {
                 }
             } else {
                 stmt = con.prepareStatement(SQLContract.UPDATE_WORD_EXAM_SOLUTION);
-                stmt.setString(1, ((Word_Solved_Exam) solvedExam).getSolvedExamFile().getPath());
+                stmt.setString(1, ((Word_Solved_Exam) solvedExam).getPath());
                 stmt.setString(2, solvedExam.getSolvingStudent().getUsername());
                 stmt.setInt(3, solvedExam.getExam().getExamNumber());
                 stmt.setInt(4, solvedExam.getExam().getExamCourse().getCourseNumber());
@@ -559,7 +559,7 @@ public class ExamTable {
                 }
             } else {
                 stmt = con.prepareStatement(SQLContract.DELETE_WORD_EXAM_SOLUTION);
-                stmt.setString(1, ((Word_Solved_Exam) solvedExam).getSolvedExamFile().getPath());
+                stmt.setString(1, ((Word_Solved_Exam) solvedExam).getPath());
                 stmt.setString(2, solvedExam.getSolvingStudent().getUsername());
                 stmt.setInt(3, solvedExam.getExam().getExamNumber());
                 stmt.setInt(4, solvedExam.getExam().getExamCourse().getCourseNumber());
