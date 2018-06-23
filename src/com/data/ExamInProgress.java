@@ -18,6 +18,8 @@ public class ExamInProgress implements Serializable {
     private LocalDateTime dateTimeEnd;              //when will the exam end
     private ArrayList<Student> studentArrayList;    //list of students to take the exam
     private ArrayList<ConnectionToClient> examineeList;//current students that are examined
+
+
     private ArrayList<Solved_Exam> solutions;       //solutions list
     private String password;                        //access password for students
     private Teacher examiningTeacher;               //Teacher that conducts the exam
@@ -200,6 +202,15 @@ public class ExamInProgress implements Serializable {
     public void setWordType(boolean wordType) {
         this.wordType = wordType;
     }
+
+    public ArrayList<Solved_Exam> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(ArrayList<Solved_Exam> solutions) {
+        this.solutions = solutions;
+    }
+
 
     @Override
     public boolean equals(Object o) {

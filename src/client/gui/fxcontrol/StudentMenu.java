@@ -86,7 +86,7 @@ public class StudentMenu {
             FileChooser fileChooser = new FileChooser();
 
             //Set extension filter
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Word Files(.docx)", "*.docx");
             fileChooser.getExtensionFilters().add(extFilter);
 
             //Show save file dialog
@@ -95,6 +95,7 @@ public class StudentMenu {
             if (file != null) {
                 saveFile(eip, file);
             }
+            //show upload file dialog
             WordExamUpload.openWindow(new Stage(), eip);
         } else {
             ExamExecutionQuestions.openWindow(new Stage(), eip.getExam(), eip.getExam().getAssignedTime(), eip.getExaminingTeacher());
@@ -104,8 +105,8 @@ public class StudentMenu {
     public void receiveBeginExamDecline() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error!");
-        alert.setHeaderText("Can't Begin Exam!");
-        alert.setContentText(null);
+        alert.setHeaderText(null);
+        alert.setContentText("Can't Begin Exam!");
         alert.showAndWait();
     }
 

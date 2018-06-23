@@ -229,6 +229,7 @@ public class ExamExecutionQuestions {
                 false
         );
         System.out.println("Sending to server: " + solved_exam);
+        //todo solvedexam send to server
     }
 
     public void lockExam() {

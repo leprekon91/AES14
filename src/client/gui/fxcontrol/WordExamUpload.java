@@ -43,7 +43,7 @@ public class WordExamUpload {
             Parent root = fxmlLoader.load();
             WordExamUpload dialogController = fxmlLoader.getController();
             dialogController.setEip(eip);
-            dialogController.setDuration(eip.getExam().getAssignedTime());
+            dialogController.setDuration(eip.getExam().getAssignedTime() * 60);
             Scene scene = new Scene(root, 600, 500);
             scene.getStylesheets().add(QuestionView.class.getResource(Contract.css).toExternalForm());
             stage.setTitle("Upload Solution");

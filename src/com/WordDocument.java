@@ -3,16 +3,10 @@ package com;
 import com.data.Exam;
 import com.data.Question;
 import com.data.Teacher;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
 public class WordDocument
@@ -43,19 +37,6 @@ public class WordDocument
         subTitleRun.setTextPosition(20);
     }
 
-    public void addImage(String imageLocation, int width, int height) {
-        XWPFParagraph image = createParagraph();
-        image.setAlignment(ParagraphAlignment.CENTER);
-        XWPFRun imageRun = image.createRun();
-        imageRun.setTextPosition(0);
-        try {
-            Path imagePath = Paths.get(ClassLoader.getSystemResource(imageLocation).toURI());
-            imageRun.addPicture(Files.newInputStream(imagePath), 5,
-                    imagePath.getFileName().toString(), Units.toEMU(width), Units.toEMU(height));
-        } catch (URISyntaxException | InvalidFormatException | IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void addParagraph(String text) {
         XWPFParagraph para = createParagraph();
@@ -85,14 +66,16 @@ public class WordDocument
         String studentNotes = exam.getStudentNotes();
 
 
-        wd.addTitle(title, "FF1010", null);
-        wd.addSubTitle("Course Teacher:  ", "000000", null);
+        wd.addTitle(title, "FF1010", "Times New Roman");
+        wd.addSubTitle("Course Teacher:  ", "000000", "Times New Roman");
         wd.addParagraph(Teacher);
-        wd.addSubTitle("Notes:  ", "000000", null);
+        wd.addSubTitle("Notes:  ", "000000", "Times New Roman");
         wd.addParagraph(studentNotes);
+        wd.addParagraph("");
         int qnum = 1;
         for (Question q : exam.getExamQuestions()) {
-            wd.addSubTitle("(Question #" + qnum + ")" + " - [" + exam.getQuestionGrades()[qnum - 1] + "points]", "000000", null);
+            wd.addTitle("", "FF1010", null);
+            wd.addSubTitle("(❓ #" + qnum + ")" + " - [" + q.getGrade() + " pts.]", "000000", null);
             wd.addSubTitle(" > " + q.getQuestionText(), "000000", null);
             wd.addParagraph("❶ " + q.getPossibleAnswers()[0]);
             wd.addParagraph("❷ " + q.getPossibleAnswers()[1]);
@@ -100,7 +83,7 @@ public class WordDocument
             wd.addParagraph("❹ " + q.getPossibleAnswers()[3]);
             qnum++;
         }
-        wd.addTitle("Good Luck!", "FF1010", "Times New Roman");
+        wd.addTitle("Good Luck!", "93C382", "Times New Roman");
         wd.writeDocument(fileLocation);
         wd.close();
     }

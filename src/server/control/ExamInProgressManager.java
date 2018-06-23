@@ -1,6 +1,7 @@
 package server.control;
 
 import com.data.ExamInProgress;
+import com.data.Solved_Exam;
 import server.ocsf.ConnectionToClient;
 import server.sql.ExamTable;
 
@@ -90,8 +91,12 @@ public class ExamInProgressManager {
         public void run() {
             for (ExamInProgress eip :
                     eips) {
-                if (eip.hasExpired()) eip.lockExam();
+                if (eip.hasExpired()) {
+                    eip.lockExam();
+                    Solved_Exam.runSolutionCalculator(eip.getSolutions());
+                }
             }
         }
     }
 }
+

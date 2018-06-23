@@ -1,6 +1,7 @@
 package com.data;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Solved_Exam {
@@ -145,6 +146,59 @@ public class Solved_Exam {
                 "\n teacherGradingNotes='" + teacherGradingNotes + '\'' +
                 "\n isCopySuspect=" + isCopySuspect +
                 '}';
+    }
+
+    public static void runSolutionCalculator(ArrayList<Solved_Exam> solved_exams) {
+        CheckExam((Solved_Exam[]) solved_exams.toArray());
+        plagiarismSuspect((Solved_Exam[]) solved_exams.toArray());
+    }
+
+    /**
+     * @param solvedExam
+     */
+    public static void CheckExam(Solved_Exam[] solvedExam) {
+        int finalGrade = 0;
+        for (int j = 0; j < solvedExam.length; j++) {
+            for (int i = 0; i < solvedExam[j].getStudentAnswers().length; i++) {
+
+                if (solvedExam[j].getExam().getExamQuestions().get(i).getCorrectAnswer() == solvedExam[j].getStudentAnswers()[i])
+                    finalGrade += solvedExam[j].getExam().getExamQuestions().get(i).getGrade();
+
+            }
+            solvedExam[j].setExamGrade(finalGrade);
+            finalGrade = 0;
+        }
+    }
+
+
+    /**
+     * The function checks if the student is cheating
+     *
+     * @param solvedExam
+     */
+    public static void plagiarismSuspect(Solved_Exam[] solvedExam) {
+        boolean flag = true;
+        for (int i = 0; i < solvedExam.length - 1; i++) {
+            for (int j = i + 1; j < solvedExam.length; j++) {
+                for (int k = 0; k < solvedExam[i].getStudentAnswers().length; k++) {
+
+                    if (!(solvedExam[j].getStudentAnswers()[k] == solvedExam[i].getStudentAnswers()[k])) {
+                        flag = false;
+                        //break;
+                    }
+                }
+                if ((solvedExam[i].getSolvingStudent().getUsername() != solvedExam[j].getSolvingStudent().getUsername()))
+                    if ((flag) && (solvedExam[i].getExamGrade() != 100)) {
+
+                        solvedExam[j].setCopySuspect(true);
+                        solvedExam[i].setCopySuspect(true);
+
+                    }
+                flag = true;
+            }
+
+
+        }
     }
 }
 

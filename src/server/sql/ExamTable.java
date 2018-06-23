@@ -238,7 +238,7 @@ public class ExamTable {
                                             2)
                             )
                     );
-
+                    question.setGrade(qrs.getInt("question_grade"));
                     question.setQID(qrs.getInt("id_question"));
                     questionArray.add(question);
                 }
