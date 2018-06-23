@@ -61,7 +61,8 @@ public class Contract {
     //Extension Requests Vocabulary
     public static final int GET_PRINCIPAL_REQUESTS = 50;
     public static final int PRINCIPAL_REQUESTS = 51;
-    public static final int SEND_PRINCIPAL_REQUEST_ANSWER = 52;
+    public static final int PRINCIPAL_REQUEST_ANSWER = 52;
+    public static final int ADD_REQUEST = 53;
 
     //Reports Vocabulary
     public static final int REPORT = 60;

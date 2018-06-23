@@ -48,6 +48,20 @@ public class QuestionView {
         answer2Label.setText(q.getAns(1));
         answer3Label.setText(q.getAns(2));
         answer4Label.setText(q.getAns(3));
+        switch (q.getCorrectAnswer()) {
+            case 1:
+                answer1Label.setStyle("-fx-backgroung-color: LIGHTGREEN;");
+                break;
+            case 2:
+                answer2Label.setStyle("-fx-backgroung-color: LIGHTGREEN;");
+                break;
+            case 3:
+                answer3Label.setStyle("-fx-backgroung-color: LIGHTGREEN;");
+                break;
+            case 4:
+                answer4Label.setStyle("-fx-backgroung-color: LIGHTGREEN;");
+                break;
+        }
         questionViewTitle.setText("Question #" + q.getQIDString());
     }
 }

@@ -17,5 +17,10 @@ public class RequestManager {
         this.requests = new ArrayList<>();
     }
 
-
+    public void removeRequest(ExtensionRequest er) {
+        for (ExtensionRequest request :
+                this.requests) {
+            if (request.equals(er)) this.requests.remove(request);
+        }
+    }
 }

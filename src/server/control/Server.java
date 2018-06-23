@@ -217,6 +217,19 @@ public class Server extends AbstractServer {
                         ((ArrayList<ExtensionRequest>) (((Message) msg).getData())).addAll(RequestManager.getInstance().requests);
                         client.sendToClient(new Message(Contract.PRINCIPAL_REQUESTS, ((Message) msg).getData()));
                         break;
+                    case Contract.PRINCIPAL_REQUEST_ANSWER:
+                        if (((ExtensionRequest) ((Message) msg).getData()).isApproved()) {
+                            //extend the exam
+                            ExamInProgressManager.getInstance().extendExamInProgress(
+                                    ((ExtensionRequest) ((Message) msg).getData()).getExamInProgress(),
+                                    ((ExtensionRequest) ((Message) msg).getData()).getExtAmnt()
+                            );
+                        }
+                        RequestManager.getInstance().removeRequest((ExtensionRequest) ((Message) msg).getData());
+                        break;
+                    case Contract.ADD_REQUEST:
+                        RequestManager.getInstance().requests.add((ExtensionRequest) ((Message) msg).getData());
+                        break;
                     case Contract.STUDENTS:
                         students = new ArrayList<>();
                         students.add(new Student(new User("t", "tom", "one", 1)));

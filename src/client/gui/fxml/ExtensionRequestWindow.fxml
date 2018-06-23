@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.ExtensionRequest">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.ExtensionRequestWindow">
     <children>
         <AnchorPane maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="70.0" prefWidth="583.0"
                     style="-fx-background-color: #ADD8E6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"

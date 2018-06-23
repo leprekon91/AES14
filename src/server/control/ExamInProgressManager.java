@@ -66,6 +66,15 @@ public class ExamInProgressManager {
         return ans;
     }
 
+    public void extendExamInProgress(ExamInProgress examInProgress, int amount) {
+        for (ExamInProgress eip :
+                this.eips) {
+            if (eip.equals(examInProgress)) {
+                eip.extendExpiryDate(amount);
+            }
+        }
+    }
+
     public void studentStartsAnExam(ConnectionToClient studentClient, ExamInProgress EIP) {
         //search for EIP in List:
         for (ExamInProgress eip : this.eips) {
