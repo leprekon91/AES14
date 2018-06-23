@@ -4,25 +4,27 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="grid" hgap="8.0" maxHeight="-Infinity"
-          maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0"
-          xmlns="http://javafx.com/javafx/9">
+<GridPane fx:id="grid" hgap="8.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="40.0" xmlns="http://javafx.com/javafx/8.0.121"
+          xmlns:fx="http://javafx.com/fxml/1">
     <columnConstraints>
-        <ColumnConstraints halignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0"/>
+        <ColumnConstraints halignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"/>
         <ColumnConstraints hgrow="ALWAYS"/>
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity"
                            prefWidth="50.0"/>
         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="100.0"/>
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity"
-                           prefWidth="30.0"/>
+                           prefWidth="40.0"/>
         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Label fx:id="qIcon" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="❓" textFill="#555555"
+        <Label fx:id="qIcon" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+               minWidth="-Infinity" prefHeight="35.0" prefWidth="35.0"
+               style="-fx-border-color: #555555; -fx-border-radius: 100;" text="❓" textFill="#555555"
                GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER"
                GridPane.vgrow="ALWAYS">
             <font>
@@ -35,9 +37,9 @@
         <Label fx:id="qidLbl" text="QID" GridPane.columnIndex="1"/>
         <Label fx:id="qTextLbl" maxWidth="250.0" minWidth="-Infinity" prefWidth="100.0" text="Question Text"
                wrapText="true" GridPane.columnIndex="2"/>
-        <Label alignment="CENTER" prefHeight="30.0" prefWidth="30.0"
-               style="-fx-border-color: #555555; -fx-border-radius: 50;" text="✒" textFill="#555555"
-               GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+        <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+               prefHeight="35.0" prefWidth="35.0" style="-fx-border-color: #555555; -fx-border-radius: 100;" text="👨"
+               textFill="#555555" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
             <font>
                 <Font size="24.0"/>
             </font>
@@ -46,7 +48,14 @@
             </GridPane.margin>
         </Label>
         <Label fx:id="authorLbl" text="Author" GridPane.columnIndex="4"/>
-        <Label fx:id="subjectIcon" alignment="CENTER" text="" GridPane.columnIndex="5"/>
+        <Label fx:id="subjectIcon" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+               minWidth="-Infinity" prefHeight="35.0" prefWidth="35.0"
+               style="-fx-border-color: #555555; -fx-border-radius: 100;" text="🎒" textFill="#555555"
+               GridPane.columnIndex="5">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
         <Label fx:id="subjectLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Subject"
                GridPane.columnIndex="6"/>
 

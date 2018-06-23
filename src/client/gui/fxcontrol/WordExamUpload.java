@@ -7,6 +7,7 @@ import com.data.Word_Solved_Exam;
 import com.jfoenix.controls.JFXProgressBar;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -93,7 +94,8 @@ public class WordExamUpload {
         icon.setTextFill(c);
         icon.setText("\uD83D\uDDBF");
         iconLbl.setText("Upload Is Locked!\n Time ran out or the exam was locked remotely");
-
+        dragboardPane.setOnMouseClicked(null);
+        dragboardPane.setOnDragDropped(null);
 
     }
 
@@ -101,6 +103,7 @@ public class WordExamUpload {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Exam File");
         uploadFile = fileChooser.showOpenDialog(dragboardPane.getScene().getWindow());
+
     }
 
     public void fileDropped(DragEvent event) {
@@ -108,6 +111,12 @@ public class WordExamUpload {
         boolean success = false;
         if (db.hasString()) {
             uploadFile = new File(db.getString());
+            iconLbl.setText("File: " + db.getString());
+            Color c = Color.web("0x93C382");
+            iconLbl.setTextFill(c);
+            icon.setTextFill(c);
+            icon.setText("\uD83D\uDDC0");
+
             success = true;
         }
         /*
@@ -117,10 +126,9 @@ public class WordExamUpload {
         event.setDropCompleted(success);
 
         event.consume();
-
     }
 
-    public void generateSolution(File upload) {
+    public void generateSolution(ActionEvent event) {
         Word_Solved_Exam word_solved_exam = new Word_Solved_Exam(
                 eip.getExam(),
                 StudentControl.getInstance().student,
@@ -130,7 +138,10 @@ public class WordExamUpload {
                 false,
                 "",
                 true,
-                false, upload);
+                false, uploadFile);
+        System.out.println(word_solved_exam.getPath());
+        //TODO send solution to server
+        ((Stage) dragboardPane.getScene().getWindow()).close();
     }
 
     public ExamInProgress getEip() {
@@ -148,4 +159,6 @@ public class WordExamUpload {
     public void setDuration(double duration) {
         this.duration = duration;
     }
+
+
 }
