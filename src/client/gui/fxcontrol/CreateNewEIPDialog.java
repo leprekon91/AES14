@@ -79,6 +79,10 @@ public class CreateNewEIPDialog {
                 pswdField.setText(newValue);
             }
         });
+        startDatePicker.setValue(LocalDate.now());
+        endDatePicker.setValue(LocalDate.now());
+        startTimePicker.setValue(LocalTime.MIDNIGHT);
+        endTimePicker.setValue(LocalTime.MIDNIGHT);
     }
 
     private void setExamInProgress(ExamInProgress eip) {

@@ -33,8 +33,8 @@
                 <JFXButton fx:id="studentSelectionBtn" layoutX="229.0" layoutY="476.0" mnemonicParsing="false"
                            onAction="#switchToStudentSelection" styleClass="info" text="❰ Student Selection"
                            AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
-                <JFXCheckBox fx:id="wordCheck" layoutX="571.0" layoutY="322.0" prefHeight="18.0" prefWidth="200.0"
-                             text="As Word File?" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="320.0"/>
+                <JFXCheckBox fx:id="wordCheck" layoutX="571.0" layoutY="322.0" prefWidth="200.0" text="As Word File?"
+                             AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="320.0"/>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="studentSelectionPane" prefHeight="200.0" prefWidth="200.0" visible="false"

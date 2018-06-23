@@ -9,6 +9,7 @@ import server.sql.ExamTable;
 import server.sql.QuestionTable;
 import server.sql.SubjectsTable;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -63,14 +64,15 @@ public class Server extends AbstractServer {
     @Override
     protected synchronized void clientException(ConnectionToClient client, Throwable e) {
         super.clientException(client, e);
-        SUI.logMsg("Client: " + client.toString() + " has encountered an exception!\n" +
-                "Consider the system log for details.");
-        StringWriter sw = new StringWriter();
-        e.printStackTrace(new PrintWriter(sw));
-        String exceptionAsString = sw.toString();
-        SUI.logMsg(exceptionAsString);
-        (AuthorizeUser.getInstance()).deleteUserByClient(client);
-        e.printStackTrace();
+        if (!(e instanceof EOFException)) {
+            SUI.logMsg("Client: " + client.toString() + " has encountered an exception!\n" +
+                    "Consider the system log for details.");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            SUI.logMsg(exceptionAsString);
+            (AuthorizeUser.getInstance()).deleteUserByClient(client);
+        }
     }
 
     /**

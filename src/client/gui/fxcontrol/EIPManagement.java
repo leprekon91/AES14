@@ -34,7 +34,7 @@ public class EIPManagement {
     }
 
     public void openExtensionRequest(ActionEvent actionEvent) {
-        //TODO open extensionRequestDialog
+        ExtensionRequestWindow.openWindow((ExamInProgress) eipList.getSelectionModel().getSelectedItems().get(0));
     }
 
     public void lockExam(ActionEvent actionEvent) {
