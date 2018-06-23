@@ -3,8 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<GridPane fx:id="grid" hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/"
+<?import javafx.scene.text.Font?><GridPane fx:id="grid" hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/"
           xmlns:fx="http://javafx.com/fxml/">
     <columnConstraints>
         <ColumnConstraints/>
@@ -18,7 +17,6 @@
     <rowConstraints>
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0"/>
     </rowConstraints>
-    <children>
 
         <Label fx:id="icon" text="IC" GridPane.columnIndex="0">
             <GridPane.margin>
@@ -39,5 +37,4 @@
         <Label fx:id="endIcon" text="End" GridPane.columnIndex="5"/>
         <Label fx:id="endLabel" text="EndDate" GridPane.columnIndex="6"/>
 
-    </children>
-</GridPane>
+    </GridPane>
