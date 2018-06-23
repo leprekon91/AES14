@@ -6,9 +6,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+<?import javafx.scene.text.*?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="600.0"
           xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="client.gui.fxcontrol.ExamView">
     <columnConstraints>
@@ -46,19 +45,67 @@
                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                       AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label fx:id="authorLbl" text="Written By Author"/>
+                        <Label fx:id="authorLbl" alignment="CENTER" maxWidth="1.7976931348623157E308"
+                               text="Written By Author" VBox.vgrow="ALWAYS">
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                        </Label>
                         <HBox spacing="5.0">
                             <children>
-                                <Label maxHeight="1.7976931348623157E308" text="Subject:"/>
+                                <Label maxHeight="1.7976931348623157E308" text="Subject:" underline="true">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
                                 <Label fx:id="subjectLbl" maxHeight="1.7976931348623157E308" text="Label"/>
                             </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefWidth="200.0" VBox.vgrow="NEVER">
                             <children>
-                                <Label text="Course:"/>
+                                <Label text="Course:" underline="true">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
                                 <Label fx:id="course" text=" Label"/>
                             </children>
                         </HBox>
+                        <HBox>
+                            <children>
+                                <Label text="Assigned Time:" underline="true">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="assignedTimeLbl" text=" 60 minutes"/>
+                            </children>
+                        </HBox>
+                        <Label text="Notes:" underline="true">
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="studentNoteLbl" maxWidth="1.7976931348623157E308"
+                               style="-fx-border-color: #550000; -fx-border-radius: 5;" text="For Students">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </Label>
+                        <Label fx:id="teacherNoteLbl" maxWidth="1.7976931348623157E308"
+                               style="-fx-border-color: #005500; -fx-border-radius: 5;" text="For Teachers">
+                            <VBox.margin>
+                                <Insets/>
+                            </VBox.margin>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </Label>
+                        <Label text="Questions:" underline="true">
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                        </Label>
                         <JFXListView fx:id="questionList" maxHeight="1.7976931348623157E308"
                                      maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
                     </children>

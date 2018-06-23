@@ -21,8 +21,10 @@ public class ExamView {
     public Label authorLbl;
     public Label subjectLbl;
     public Label course;
-    public Label qidLbl;
     public JFXListView questionList;
+    public Label assignedTimeLbl;
+    public Label studentNoteLbl;
+    public Label teacherNoteLbl;
     private ObservableList<Question> questions = FXCollections.observableArrayList();
 
     public static void openWindow(Stage stage, Exam exam) throws IOException {
@@ -62,6 +64,9 @@ public class ExamView {
         authorLbl.setText("Written by:" + exam.getExamAuthorTeacher().getFullName());
         subjectLbl.setText(exam.getExamSubject().getSubjectName() + " (" + exam.getExamSubject().getSubjectID() + ')');
         course.setText(exam.getExamCourse().getCourseName() + " (" + exam.getExamCourse().getCourseNumber() + ')');
+        assignedTimeLbl.setText(" " + exam.getAssignedTime() + " minutes.");
+        studentNoteLbl.setText("For Students:\n" + exam.getStudentNotes());
+        teacherNoteLbl.setText("For Teachers:\n" + exam.getTeacherNotes());
         questions.setAll(exam.getExamQuestions());
         System.out.println(TeacherControl.getInstance().exams);
     }

@@ -6,8 +6,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<SplitPane xmlns:fx="http://javafx.com/fxml/1" dividerPositions="0.5" minHeight="-Infinity" prefHeight="400.0"
-           xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.TeacherMenu">
+<SplitPane dividerPositions="0.7735849056603774" minHeight="-Infinity" prefHeight="400.0"
+           xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="client.gui.fxcontrol.TeacherMenu">
     <AnchorPane prefHeight="400.0" prefWidth="600.0">
         <BorderPane fx:id="welcomeScreen" layoutX="-1.0" layoutY="-1.0" AnchorPane.bottomAnchor="0.0"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -33,19 +34,17 @@
         <AnchorPane fx:id="examInProgressPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
     </AnchorPane>
-    <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0">
+    <VBox alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0">
         <children>
-            <Button focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false"
-                    onAction="#switchToQuestionView" prefHeight="35.0" styleClass="navigation" text="Questions"
-                    textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0"/>
-            <Button focusTraversable="false" layoutX="29.0" layoutY="35.0" maxHeight="-Infinity" minHeight="-Infinity"
-                    mnemonicParsing="false" onAction="#switchToExamView" prefHeight="35.0" styleClass="navigation"
-                    text="Exams" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0"/>
-            <Button focusTraversable="false" layoutX="10.0" layoutY="40.0" maxHeight="-Infinity" minHeight="-Infinity"
-                    mnemonicParsing="false" onAction="#switchToEIPView" prefHeight="35.0" styleClass="navigation"
-                    text="Exams In Progress" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="65.0"/>
+            <Button focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
+                    minHeight="-Infinity" mnemonicParsing="false" onAction="#switchToQuestionView" prefHeight="35.0"
+                    styleClass="navigation" text="Questions" textFill="WHITE"/>
+            <Button focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
+                    minHeight="-Infinity" mnemonicParsing="false" onAction="#switchToExamView" prefHeight="35.0"
+                    styleClass="navigation" text="Exams"/>
+            <Button focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
+                    minHeight="-Infinity" mnemonicParsing="false" onAction="#switchToEIPView" prefHeight="35.0"
+                    styleClass="navigation" text="Exams In Progress"/>
         </children>
-    </AnchorPane>
+    </VBox>
 </SplitPane>

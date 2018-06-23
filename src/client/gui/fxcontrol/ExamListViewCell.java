@@ -2,14 +2,14 @@ package client.gui.fxcontrol;
 
 import com.Contract;
 import com.data.Exam;
+import com.jfoenix.controls.JFXListCell;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 
-public class ExamListViewCell extends ListCell<Exam> {
+public class ExamListViewCell extends JFXListCell<Exam> {
     public Label eidLbl;
     public Label subjectLbl;
     public Label teacherLbl;

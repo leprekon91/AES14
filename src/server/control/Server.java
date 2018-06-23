@@ -241,8 +241,8 @@ public class Server extends AbstractServer {
                         if (((User) ((Message) msg).getData()).getType() == 2) {
                             eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher(((Teacher) ((Message) msg).getData()).getUsername());
                             client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER, eips));
-                        } else if (((User) ((Message) msg).getData()).getType() == 2) {
-                            eips = ExamInProgressManager.getInstance().getExamInProgressArrayByStudent((String) ((Message) msg).getData());
+                        } else if (((User) ((Message) msg).getData()).getType() == 1) {
+                            eips = ExamInProgressManager.getInstance().getExamInProgressArrayByStudent(((Student) ((Message) msg).getData()).getUsername());
                             client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_STUDENT, eips));
                         }
                         break;

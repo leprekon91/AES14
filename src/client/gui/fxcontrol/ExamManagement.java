@@ -4,11 +4,11 @@ import client.control.TeacherControl;
 import com.Contract;
 import com.data.Exam;
 import com.data.Message;
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class ExamManagement {
 
-    public ListView examList;
+    public JFXListView examList;
     public TextField nameIdFilter;
     public TextField subjectFilter;
     public TextField teacherFilter;
