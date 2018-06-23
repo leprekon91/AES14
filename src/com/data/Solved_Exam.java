@@ -1,6 +1,8 @@
 package com.data;
 
 
+import java.util.Arrays;
+
 public class Solved_Exam {
 
     /**
@@ -129,5 +131,20 @@ public class Solved_Exam {
         this.isCopySuspect = isCopySuspect;
     }
 
+    @Override
+    public String toString() {
+        return "Solved_Exam{" +
+                "exam=" + exam +
+                ", studentAnswers=" + Arrays.toString(studentAnswers) +
+                ", solvingStudent=" + solvingStudent +
+                ", examSolvingDuration=" + examSolvingDuration +
+                ", examinerTeacher=" + examinerTeacher +
+                ", isWordExam=" + isWordExam +
+                ", examGrade=" + examGrade +
+                ", approved=" + approved +
+                ", teacherGradingNotes='" + teacherGradingNotes + '\'' +
+                ", isCopySuspect=" + isCopySuspect +
+                '}';
+    }
 }
 

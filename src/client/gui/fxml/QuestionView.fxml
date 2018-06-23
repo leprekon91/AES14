@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
@@ -59,7 +58,8 @@
                                         <Label fx:id="answer1Label" alignment="TOP_LEFT"
                                                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                                prefHeight="100.0" prefWidth="100.0"
-                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer1">
+                                               style="-fx-border-color: #555555; -fx-border-radius: 5 5 0 0;"
+                                               text="answer1">
                                             <opaqueInsets>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                                             </opaqueInsets>
@@ -69,8 +69,8 @@
                                         </Label>
                                         <Label fx:id="answer2Label" alignment="TOP_LEFT"
                                                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                               prefHeight="100.0" prefWidth="100.0"
-                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer2">
+                                               prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: #555555;"
+                                               text="answer2">
                                             <opaqueInsets>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                                             </opaqueInsets>
@@ -80,8 +80,8 @@
                                         </Label>
                                         <Label fx:id="answer3Label" alignment="TOP_LEFT"
                                                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                               prefHeight="100.0" prefWidth="100.0"
-                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer3">
+                                               prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: #555555;"
+                                               text="answer3">
                                             <opaqueInsets>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                                             </opaqueInsets>
@@ -92,7 +92,8 @@
                                         <Label fx:id="answer4Label" alignment="TOP_LEFT"
                                                maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                                                prefHeight="100.0" prefWidth="100.0"
-                                               style="-fx-border-color: #555555; -fx-border-radius: 5;" text="answer4">
+                                               style="-fx-border-color: #555555; -fx-border-radius: 0 0 5 5;"
+                                               text="answer4">
                                             <opaqueInsets>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                                             </opaqueInsets>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane fx:id="grid" hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.121"
+          xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+        <ColumnConstraints hgrow="NEVER" minWidth="10.0"/>
+        <ColumnConstraints hgrow="NEVER" minWidth="10.0"/>
+        <ColumnConstraints hgrow="NEVER" minWidth="10.0"/>
+        <ColumnConstraints hgrow="NEVER" minWidth="10.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0"/>
+    </rowConstraints>
+    <children>
+
+        <Label fx:id="icon" text="IC" GridPane.columnIndex="0">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </GridPane.margin>
+        </Label>
+        <Label fx:id="eidLbl" text="EXAMID" GridPane.columnIndex="1">
+            <font>
+                <Font size="24.0"/>
+            </font>
+            <GridPane.margin>
+                <Insets left="10.0"/>
+            </GridPane.margin>
+        </Label>
+        <Label fx:id="teacherLbl" text="Teacher" GridPane.columnIndex="2"/>
+        <Label fx:id="startIcon" text="Start" GridPane.columnIndex="3"/>
+        <Label fx:id="startLabel" text="StartDate" GridPane.columnIndex="4"/>
+        <Label fx:id="endIcon" text="End" GridPane.columnIndex="5"/>
+        <Label fx:id="endLabel" text="EndDate" GridPane.columnIndex="6"/>
+
+    </children>
+</GridPane>

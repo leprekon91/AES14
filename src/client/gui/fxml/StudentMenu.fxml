@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<SplitPane dividerPositions="0.1507823613086771, 0.8520625889046942" prefHeight="502.0" prefWidth="883.0"
-           xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1"
+<?import javafx.scene.text.Font?>
+<SplitPane dividerPositions="0.1507823613086771" prefHeight="502.0" prefWidth="883.0"
+           xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="client.gui.fxcontrol.StudentMenu">
     <items>
-        <AnchorPane>
-            <children>
-                <Button mnemonicParsing="false" onAction="#doExamTest" text="do exam test"/>
-            </children>
-        </AnchorPane>
         <AnchorPane fx:id="viewPane">
             <children>
-                <BorderPane>
+                <BorderPane fx:id="welcomeView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <center>
                         <ImageView fitHeight="500.0" fitWidth="500.0" opacity="0.5" pickOnBounds="true"
                                    preserveRatio="true" BorderPane.alignment="CENTER">
@@ -25,17 +24,79 @@
                             </image>
                         </ImageView>
                     </center>
+                    <top>
+                        <Button mnemonicParsing="false" onAction="#doExamTest" text="do exam test"
+                                BorderPane.alignment="CENTER"/>
+                    </top>
                 </BorderPane>
+                <AnchorPane fx:id="examView" prefHeight="200.0" prefWidth="200.0" visible="false"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <AnchorPane maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="70.0"
+                                prefWidth="583.0" style="-fx-background-color: #ADD8E6;" AnchorPane.leftAnchor="0.0"
+                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <children>
+                            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0"
+                                       pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="5.0"
+                                       AnchorPane.topAnchor="5.0">
+                                <image>
+                                    <Image url="@../../../com/graphics/Icon.png"/>
+                                </image>
+                            </ImageView>
+                            <Label layoutX="26.0" layoutY="27.0" text="Exams" AnchorPane.bottomAnchor="20.0"
+                                   AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                <font>
+                                    <Font name="Agency FB" size="28.0"/>
+                                </font>
+                            </Label>
+                        </children>
+                    </AnchorPane>
+                    <JFXListView fx:id="eipList" depth="5" layoutX="31.0" layoutY="92.0" AnchorPane.bottomAnchor="90.0"
+                                 AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                                 AnchorPane.topAnchor="90.0"/>
+
+                </AnchorPane>
+                <AnchorPane fx:id="gradesView" prefHeight="200.0" prefWidth="200.0" visible="false"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <children>
+                        <AnchorPane maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="70.0"
+                                    prefWidth="583.0" style="-fx-background-color: #ADD8E6;" AnchorPane.leftAnchor="0.0"
+                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0"
+                                           pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="5.0"
+                                           AnchorPane.topAnchor="5.0">
+                                    <image>
+                                        <Image url="@../../../com/graphics/Icon.png"/>
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="26.0" layoutY="27.0" text="Grades" AnchorPane.bottomAnchor="20.0"
+                                       AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <font>
+                                        <Font name="Agency FB" size="28.0"/>
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <JFXListView fx:id="gradesList" layoutX="14.0" layoutY="88.0" AnchorPane.bottomAnchor="90.0"
+                                     AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                                     AnchorPane.topAnchor="90.0"/>
+                    </children>
+                </AnchorPane>
             </children>
         </AnchorPane>
         <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0">
             <children>
-                <Button layoutX="34.0" layoutY="39.0" maxHeight="-Infinity" minHeight="-Infinity"
-                        mnemonicParsing="false" prefHeight="30.0" styleClass="navigation" text="Exams"
-                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                <Button layoutX="24.0" layoutY="45.0" maxHeight="-Infinity" minHeight="-Infinity"
-                        mnemonicParsing="false" prefHeight="30.0" styleClass="navigation" text="Grades"
-                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0"/>
+                <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <JFXButton maxWidth="1.7976931348623157E308" onAction="#switchToExamsView"
+                                   styleClass="navigation" text="Exams" VBox.vgrow="ALWAYS"/>
+                        <JFXButton maxWidth="1.7976931348623157E308" onAction="#switchToGradesView"
+                                   styleClass="navigation" text="Grades" VBox.vgrow="ALWAYS"/>
+                    </children>
+                </VBox>
             </children>
         </AnchorPane>
     </items>

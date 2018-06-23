@@ -162,51 +162,6 @@ public class ExamTable {
 
     }
 
-    /**
-     * Update a exam entry with a new exam object data
-     *
-     * @param exam object corresponding to the entry that is going to be updated
-     */
-    public static void updateExam(Exam exam) {
-        System.out.println("ExamsTable - Update Exam\n" +
-                "Exam: " + exam);
-
-        Connection con = MysqlManager.ConnectToDB();
-        PreparedStatement stmt = null;
-        PreparedStatement stmtQ = null;
-        try {
-            stmt = con.prepareStatement(SQLContract.UPDATE_EXAM);
-            stmt.setInt(1, exam.getAssignedTime());
-            stmt.setString(2, exam.getTeacherNotes());
-            stmt.setString(3, exam.getStudentNotes());
-            stmt.setString(4, exam.getExamAuthorTeacher().getUsername());
-            stmt.setBoolean(5, exam.isUsed());
-            stmt.setInt(6, exam.getExamNumber());
-            stmt.setInt(7, exam.getExamSubject().getSubjectID());
-            stmt.setInt(8, exam.getExamCourse().getCourseNumber());
-
-            int i = 0;
-            stmtQ = con.prepareStatement(SQLContract.UPDATE_QUESTION_IN_EXAM);
-            for (Question q : exam.getExamQuestions()) {
-                stmtQ.setInt(1, exam.getQuestionGrades()[i]);
-                stmtQ.setInt(2, exam.getExamNumber());
-                stmtQ.setInt(3, q.getQID());
-                stmtQ.setInt(4, q.getSubject().getSubjectID());
-                i++;
-            }
-
-            stmt.execute();
-            stmtQ.execute();
-
-            stmt.close();
-            stmtQ.close();
-            con.close();
-        } catch (SQLException e) {
-            MysqlManager.sqlExceptionHandler(e);
-        }
-
-    }
-
 
     /**
      * Delete Exam(and the question of the exam) from the database.
@@ -241,6 +196,9 @@ public class ExamTable {
         }
     }
 
+    /**
+     * @param data
+     */
     public static void selectAllExam(ArrayList<Exam> data) {
         System.out.println("ExamTable - All Exam\n");
 
@@ -285,7 +243,7 @@ public class ExamTable {
                     questionArray.add(question);
                 }
                 Exam exam = new Exam(
-                        questionArray,
+                        new ArrayList<>(questionArray),
                         rs.getString("teacher_instructions"),
                         rs.getString("student_instructions"),
                         new Course(

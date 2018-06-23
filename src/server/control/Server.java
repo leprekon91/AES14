@@ -238,11 +238,12 @@ public class Server extends AbstractServer {
                         break;
                     case Contract.GET_EXAMS_IN_PROGRESS:
                         //if it's a teacher return by teacher else, return by student
-                        if (((User) ((Message) msg).getData()).getType() == 1) {
-                            eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher((String) ((Message) msg).getData());
+                        if (((User) ((Message) msg).getData()).getType() == 2) {
+                            eips = ExamInProgressManager.getInstance().getExamInProgressArrayByTeacher(((Teacher) ((Message) msg).getData()).getUsername());
                             client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER, eips));
                         } else if (((User) ((Message) msg).getData()).getType() == 2) {
-
+                            eips = ExamInProgressManager.getInstance().getExamInProgressArrayByStudent((String) ((Message) msg).getData());
+                            client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_STUDENT, eips));
                         }
                         break;
                     case Contract.STUDENTS_BY_COURSE:

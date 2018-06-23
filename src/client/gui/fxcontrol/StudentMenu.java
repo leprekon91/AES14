@@ -1,24 +1,40 @@
 package client.gui.fxcontrol;
 
+import client.control.StudentControl;
 import com.Contract;
 import com.data.*;
+import com.jfoenix.controls.JFXListView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
 public class StudentMenu {
+    public AnchorPane viewPane;
+
+    public BorderPane welcomeView;
+
+    public AnchorPane examView;
+    public JFXListView eipList;
+
+    public AnchorPane gradesView;
+    public JFXListView gradesList;
+
+
+
     public void doExamTest(ActionEvent actionEvent) {
-        Subject subject = new Subject(1, "Mathematics");
+        Subject subject = new Subject(1, "Math");
         Teacher teacher = new Teacher(new User("t", "John", "Smith", 2));
-        Course course = new Course(2, "Algebra", subject);
+        Course course = new Course(1, "Algebra", subject);
         ArrayList<Question> questions = new ArrayList<>();
-        questions.add(new Question("1. Mrs. Rodger got a weekly raise of $145. If she gets paid every other week, write an integer describing how the raise will affect her paycheck.",
+        questions.add(new Question("Mrs. Rodger got a weekly raise of $145. If she gets paid every other week, write an integer describing how the raise will affect her paycheck.",
                 new String[]{"85", "257", "145", "14"}, 3, subject, teacher));
         questions.add(new Question("2. The value of x + x(x^x) when x = 2 is:",
                 new String[]{"16", "10", "18", "64"},
@@ -57,7 +73,8 @@ public class StudentMenu {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
-            if (result.get().equals(password)) ExamExecutionQuestions.openWindow(new Stage(), exam, 1);
+            if (result.get().equals(password))
+                ExamExecutionQuestions.openWindow(new Stage(), exam, 1, new Teacher(new User("t1", "John", "Teacher", 2)));
             else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error!");
@@ -66,5 +83,29 @@ public class StudentMenu {
                 alert.showAndWait();
             }
         }
+    }
+
+    public void initialize() {
+        hideAll();
+        eipList.setItems(StudentControl.getInstance().eips);
+        eipList.setCellFactory(list -> new EipListCell());
+    }
+
+    public void switchToExamsView(ActionEvent actionEvent) {
+        welcomeView.setVisible(false);
+        examView.setVisible(true);
+        gradesView.setVisible(false);
+    }
+
+    public void switchToGradesView(ActionEvent actionEvent) {
+        welcomeView.setVisible(false);
+        examView.setVisible(false);
+        gradesView.setVisible(true);
+    }
+
+    public void hideAll() {
+        welcomeView.setVisible(true);
+        examView.setVisible(false);
+        gradesView.setVisible(false);
     }
 }

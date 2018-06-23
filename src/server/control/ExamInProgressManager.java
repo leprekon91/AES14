@@ -30,17 +30,37 @@ public class ExamInProgressManager {
         ArrayList<ExamInProgress> ans = new ArrayList<>();
         for (ExamInProgress eip :
                 eips) {
-            if (eip.getExam().getExamAuthorTeacher().getUsername().equals(teacherUName))
+            if (eip.getExaminingTeacher().getUsername().equals(teacherUName))
                 ans.add(new ExamInProgress(
                                 eip.getDateTimeStart(),
                                 eip.getDateTimeEnd(),
                                 eip.getStudentArrayList(),
                                 eip.getPassword(),
                                 eip.getExaminingTeacher(),
-                        eip.getExam(),
-                        eip.isWordType()
+                                eip.getExam(),
+                                eip.isWordType()
                         )
                 );
+        }
+        return ans;
+    }
+
+    public ArrayList<ExamInProgress> getExamInProgressArrayByStudent(String studentUName) {
+        ArrayList<ExamInProgress> ans = new ArrayList<ExamInProgress>();
+        for (ExamInProgress eip :
+                this.eips) {
+            if (eip.studentExistsInList(studentUName)) {
+                ans.add(new ExamInProgress(
+                                eip.getDateTimeStart(),
+                                eip.getDateTimeEnd(),
+                                eip.getStudentArrayList(),
+                                eip.getPassword(),
+                                eip.getExaminingTeacher(),
+                                eip.getExam(),
+                                eip.isWordType()
+                        )
+                );
+            }
         }
         return ans;
     }

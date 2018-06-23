@@ -1,10 +1,8 @@
 package client.gui.fxcontrol;
 
+import client.control.StudentControl;
 import com.Contract;
-import com.data.Exam;
-import com.data.Question;
-import com.data.Student;
-import com.data.User;
+import com.data.*;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.animation.KeyFrame;
@@ -37,15 +35,16 @@ public class ExamExecutionQuestions {
     public JFXProgressBar progress;
     public AnchorPane titleBar;
     public Label checkIcon;
-    public JFXRadioButton demo;
+
     private Exam exam;
     private Timeline timeline;
     private double duration = 0;
     private double elapsed = 0;
     private double time;
     private HashMap<Question, Integer> answers;
+    public Teacher examineeTeacher;
 
-    public static void openWindow(Stage primaryStage, Exam exam, int duration) {
+    public static void openWindow(Stage primaryStage, Exam exam, int duration, Teacher examineeTeacher) {
         FXMLLoader fxmlLoader = new FXMLLoader(ExamExecutionQuestions.class.getResource(Contract.clientFXML + "ExamExecutionQuestions.fxml"));
         Parent root = null;
         try {
@@ -53,6 +52,7 @@ public class ExamExecutionQuestions {
             ExamExecutionQuestions examExecutionQuestions = fxmlLoader.getController();
             examExecutionQuestions.setDuration(duration);
             examExecutionQuestions.setExam(exam);
+            examExecutionQuestions.examineeTeacher = examineeTeacher;
 
             primaryStage.setTitle("Exam " + exam.getExamIDStr());
             Scene scene = new Scene(root);
@@ -215,9 +215,19 @@ public class ExamExecutionQuestions {
     }
 
     public void generateAndSendSolvedExam() {
-        Student solvingStudent = new Student(new User("j", "john", "smithy", 1));
+        Student solvingStudent = StudentControl.getInstance().student;
         //Solved_Exam solved_exam = new Solved_Exam(exam, generateAnswerArray(), solvingStudent, (int) (elapsed / 60), exam.getExamAuthorTeacher(),);
-        // System.out.println("Sending to server: " + Arrays.toString(solved_exam.getStudentAnswers()));
+
+
+        Solved_Exam solved_exam = new Solved_Exam(
+                exam,
+                generateAnswerArray(),
+                solvingStudent,
+                (int) elapsed / 60,
+                examineeTeacher,
+                false
+        );
+        System.out.println("Sending to server: " + solved_exam);
     }
 
 }

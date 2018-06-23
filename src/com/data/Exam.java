@@ -2,6 +2,7 @@ package com.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Entity Class Defining Exam Object
@@ -133,6 +134,22 @@ public class Exam implements Serializable {
 
     public void setAssignedTime(int assignedTime) {
         this.assignedTime = assignedTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "examNumber=" + examNumber +
+                ", examQuestions=" + examQuestions +
+                ", questionGrades=" + Arrays.toString(questionGrades) +
+                ", teacherNotes='" + teacherNotes + '\'' +
+                ", studentNotes='" + studentNotes + '\'' +
+                ", examCourse=" + examCourse +
+                ", examSubject=" + examSubject +
+                ", examAuthorTeacher=" + examAuthorTeacher +
+                ", used=" + used +
+                ", assignedTime=" + assignedTime +
+                '}';
     }
 }
 

@@ -1,9 +1,12 @@
 package client.control;
 
 import com.Contract;
+import com.data.ExamInProgress;
 import com.data.Message;
 import com.data.Student;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +18,7 @@ public class StudentControl extends Application {
     public Student student;
     public Client client;
     private static StudentControl INSTANCE;
+    public ObservableList<ExamInProgress> eips = FXCollections.observableArrayList();
 
     public static StudentControl getInstance() {
         if (INSTANCE == null) INSTANCE = new StudentControl();
@@ -24,6 +28,7 @@ public class StudentControl extends Application {
     @Override
     public void start(Stage primaryStage)  {
         INSTANCE = this;
+        requestEipsByStudent();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "StudentMenu.fxml"));
             Parent root = fxmlLoader.load();
@@ -46,6 +51,14 @@ public class StudentControl extends Application {
             }
         });
 
+    }
+
+    private void requestEipsByStudent() {
+        try {
+            client.sendToServer(new Message(Contract.GET_EXAMS_IN_PROGRESS, student));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
