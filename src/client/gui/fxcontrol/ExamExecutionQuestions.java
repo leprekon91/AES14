@@ -237,12 +237,11 @@ public class ExamExecutionQuestions {
     public void lockExam() {
         timeline.stop();
         pagination.setVisible(false);
-        icon.setText("✗");
+        icon.setText("❎");
         icon.setTextFill(Color.RED);
         icon.setStyle("-fx-border-color: red;");
         checkIcon.setText("Exam Is Locked!");
         checkIcon.setTextFill(Color.RED);
-        checkIcon.setStyle("-fx-border-color: red;");
         ScaleTransition scaleTransition = new ScaleTransition();
 
         //Setting the duration for the transition

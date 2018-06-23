@@ -38,7 +38,7 @@
         <children>
             <Button focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
                     minHeight="-Infinity" mnemonicParsing="false" onAction="#switchToQuestionView" prefHeight="35.0"
-                    styleClass="navigation" text="Questions" textFill="WHITE"/>
+                    styleClass="navigation" text="Questions"/>
             <Button focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
                     minHeight="-Infinity" mnemonicParsing="false" onAction="#switchToExamView" prefHeight="35.0"
                     styleClass="navigation" text="Exams"/>

@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.ListView?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.EIPManagement">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.EIPManagement">
     <children>
-        <ListView fx:id="eipList" layoutX="14.0" layoutY="14.0" prefHeight="308.0" prefWidth="557.0"
-                  AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0"
-                  AnchorPane.topAnchor="14.0"/>
-        <JFXButton layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#startNewExam" styleClass="success"
-                   text="✚ Start New" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0"/>
+        <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="70.0" style="-fx-background-color: #ADD8E6;"
+                    AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+            <children>
+                <Text layoutX="46.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EXAM CATALOG"
+                      AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="465.953125"
+                      AnchorPane.topAnchor="20.0">
+                    <font>
+                        <Font name="Agency FB" size="28.0"/>
+                    </font>
+                </Text>
+                <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="520.0" layoutY="5.0" pickOnBounds="true"
+                           preserveRatio="true" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                    <image>
+                        <Image url="@../../../com/graphics/Icon.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <JFXButton layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#startNewExam" prefWidth="120.0"
+                   styleClass="success" text="➕ Start New" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"/>
+        <JFXButton layoutX="126.0" layoutY="361.0" onAction="#lockExam" prefWidth="120.0" styleClass="danger"
+                   text="➖ Lock Exam" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="160.0"/>
+        <JFXListView fx:id="eipList" layoutX="241.0" layoutY="100.0" AnchorPane.bottomAnchor="60.0"
+                     AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="90.0"/>
+        <JFXButton layoutX="307.0" layoutY="552.0" onAction="#openExtensionRequest" styleClass="info"
+                   text="⌚ Request Extension" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="300.0"/>
     </children>
 </AnchorPane>

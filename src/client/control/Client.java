@@ -93,6 +93,8 @@ public class Client extends AbstractClient {
             case Contract.EXAM_LOCK:
                 ExamExecutionQuestions.INSTANCE.lockExam();
                 break;
+            case Contract.BEGIN_EXAM:
+                Exam
 
         }
 

@@ -64,9 +64,9 @@ public class StudentMenu {
                 alert.setContentText(EIP.getExam().getStudentNotes());
                 alert.showAndWait();
 
-
                 try {
                     StudentControl.getInstance().client.sendToServer(new Message(Contract.STUDENT_STARTS_EXAM, EIP));
+                    beginExam(EIP);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -76,7 +76,7 @@ public class StudentMenu {
         }
     }
 
-    public void receiveBeginExamConfirm(ExamInProgress eip) {
+    public void beginExam(ExamInProgress eip) {
         ExamExecutionQuestions.openWindow(new Stage(), eip.getExam(), eip.getExam().getAssignedTime(), eip.getExaminingTeacher());
     }
 
