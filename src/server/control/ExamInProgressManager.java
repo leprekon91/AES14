@@ -1,6 +1,7 @@
 package server.control;
 
 import com.data.ExamInProgress;
+import server.ocsf.ConnectionToClient;
 import server.sql.ExamTable;
 
 import java.util.ArrayList;
@@ -63,6 +64,15 @@ public class ExamInProgressManager {
             }
         }
         return ans;
+    }
+
+    public void studentStartsAnExam(ConnectionToClient studentClient, ExamInProgress EIP) {
+        //search for EIP in List:
+        for (ExamInProgress eip : this.eips) {
+            if (eip.equals(EIP)) {
+                ExamInProgress.studentBeginsExam(studentClient, eip);
+            }
+        }
     }
 
     public class LockerTask extends TimerTask {

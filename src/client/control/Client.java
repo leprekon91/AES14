@@ -1,6 +1,7 @@
 package client.control;
 
 import client.gui.fxcontrol.CreateNewEIPDialog;
+import client.gui.fxcontrol.ExamExecutionQuestions;
 import client.gui.fxcontrol.PrincipalReportsView;
 import client.ocsf.AbstractClient;
 import com.Contract;
@@ -89,6 +90,10 @@ public class Client extends AbstractClient {
             case Contract.GET_EXAMS_IN_PROGRESS_BY_STUDENT:
                 StudentControl.getInstance().eips.setAll((ArrayList<ExamInProgress>) ((Message) msg).getData());
                 break;
+            case Contract.EXAM_LOCK:
+                ExamExecutionQuestions.INSTANCE.lockExam();
+                break;
+
         }
 
     }

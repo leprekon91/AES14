@@ -3,6 +3,7 @@ package client.gui.fxcontrol;
 import client.control.StudentControl;
 import com.Contract;
 import com.data.ExamInProgress;
+import com.data.Message;
 import com.jfoenix.controls.JFXListView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -13,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class StudentMenu {
@@ -54,7 +56,7 @@ public class StudentMenu {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
-            if (result.get().equals(password)) {
+            if (result.get().equals(password) && EIP.hasBegun()) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
                 alert.setTitle("Teacher' Note");
@@ -62,16 +64,28 @@ public class StudentMenu {
                 alert.setContentText(EIP.getExam().getStudentNotes());
                 alert.showAndWait();
 
-                ExamExecutionQuestions.openWindow(new Stage(), EIP.getExam(), EIP.getExam().getAssignedTime(), EIP.getExaminingTeacher());
-            }
-            else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error!");
-                alert.setHeaderText("Wrong Password!");
-                alert.setContentText(null);
-                alert.showAndWait();
+
+                try {
+                    StudentControl.getInstance().client.sendToServer(new Message(Contract.STUDENT_STARTS_EXAM, EIP));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                receiveBeginExamDecline();
             }
         }
+    }
+
+    public void receiveBeginExamConfirm(ExamInProgress eip) {
+        ExamExecutionQuestions.openWindow(new Stage(), eip.getExam(), eip.getExam().getAssignedTime(), eip.getExaminingTeacher());
+    }
+
+    public void receiveBeginExamDecline() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error!");
+        alert.setHeaderText("Can't Begin Exam!");
+        alert.setContentText(null);
+        alert.showAndWait();
     }
 
     public void initialize() {
@@ -88,6 +102,7 @@ public class StudentMenu {
             }
         });
     }
+
 
     public void switchToExamsView(ActionEvent actionEvent) {
         welcomeView.setVisible(false);

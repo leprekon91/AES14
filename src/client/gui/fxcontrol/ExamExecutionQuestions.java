@@ -22,6 +22,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,6 +36,7 @@ public class ExamExecutionQuestions {
     public JFXProgressBar progress;
     public AnchorPane titleBar;
     public Label checkIcon;
+    public Label icon;
 
     private Exam exam;
     private Timeline timeline;
@@ -43,8 +45,10 @@ public class ExamExecutionQuestions {
     private double time;
     private HashMap<Question, Integer> answers;
     public Teacher examineeTeacher;
+    public static ExamExecutionQuestions INSTANCE;
 
     public static void openWindow(Stage primaryStage, Exam exam, int duration, Teacher examineeTeacher) {
+
         FXMLLoader fxmlLoader = new FXMLLoader(ExamExecutionQuestions.class.getResource(Contract.clientFXML + "ExamExecutionQuestions.fxml"));
         Parent root = null;
         try {
@@ -53,7 +57,7 @@ public class ExamExecutionQuestions {
             examExecutionQuestions.setDuration(duration);
             examExecutionQuestions.setExam(exam);
             examExecutionQuestions.examineeTeacher = examineeTeacher;
-
+            INSTANCE = examExecutionQuestions;
             primaryStage.setTitle("Exam " + exam.getExamIDStr());
             Scene scene = new Scene(root);
             scene.getStylesheets().add(ExamExecutionQuestions.class.getResource(Contract.css).toExternalForm());
@@ -230,4 +234,37 @@ public class ExamExecutionQuestions {
         System.out.println("Sending to server: " + solved_exam);
     }
 
+    public void lockExam() {
+        timeline.stop();
+        pagination.setVisible(false);
+        icon.setText("✗");
+        icon.setTextFill(Color.RED);
+        icon.setStyle("-fx-border-color: red;");
+        checkIcon.setText("Exam Is Locked!");
+        checkIcon.setTextFill(Color.RED);
+        checkIcon.setStyle("-fx-border-color: red;");
+        ScaleTransition scaleTransition = new ScaleTransition();
+
+        //Setting the duration for the transition
+        scaleTransition.setDuration(Duration.millis(100));
+
+        //Setting the node for the transition
+        scaleTransition.setNode(checkIcon);
+        scaleTransition.setByX(0.5);
+        scaleTransition.setByY(0.5);
+        scaleTransition.setCycleCount(2);
+        scaleTransition.setAutoReverse(true);
+        //Playing the animation
+        scaleTransition.play();
+        scaleTransition.setOnFinished(event -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            ((Stage) solutionView.getScene().getWindow()).close();
+        });
+        solutionView.getChildren().setAll(checkIcon);
+        generateAndSendSolvedExam();
+    }
 }

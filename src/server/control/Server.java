@@ -235,6 +235,7 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.GET_EXAMS_IN_PROGRESS_BY_TEACHER, eips));
                         break;
                     case Contract.STUDENT_STARTS_EXAM:
+                        ExamInProgressManager.getInstance().studentStartsAnExam(client, (ExamInProgress) ((Message) msg).getData());
                         break;
                     case Contract.GET_EXAMS_IN_PROGRESS:
                         //if it's a teacher return by teacher else, return by student

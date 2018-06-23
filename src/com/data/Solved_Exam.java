@@ -135,15 +135,15 @@ public class Solved_Exam {
     public String toString() {
         return "Solved_Exam{" +
                 "exam=" + exam +
-                ", studentAnswers=" + Arrays.toString(studentAnswers) +
-                ", solvingStudent=" + solvingStudent +
-                ", examSolvingDuration=" + examSolvingDuration +
-                ", examinerTeacher=" + examinerTeacher +
-                ", isWordExam=" + isWordExam +
-                ", examGrade=" + examGrade +
-                ", approved=" + approved +
-                ", teacherGradingNotes='" + teacherGradingNotes + '\'' +
-                ", isCopySuspect=" + isCopySuspect +
+                "\n studentAnswers=" + Arrays.toString(studentAnswers) +
+                "\n solvingStudent=" + solvingStudent +
+                "\n examSolvingDuration=" + examSolvingDuration +
+                "\n examinerTeacher=" + examinerTeacher +
+                "\n isWordExam=" + isWordExam +
+                "\n examGrade=" + examGrade +
+                "\n approved=" + approved +
+                "\n teacherGradingNotes='" + teacherGradingNotes + '\'' +
+                "\n isCopySuspect=" + isCopySuspect +
                 '}';
     }
 }

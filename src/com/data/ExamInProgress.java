@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Entity Class For Exam In Progress
@@ -105,21 +106,17 @@ public class ExamInProgress implements Serializable {
     }
 
     /**
-     * A user has requested to begin an exam: check his credentials,password and has the exam started.
+     * Register a Students client that does the exam right now.
      *
      * @param client   client thread that tries to start the exam
-     * @param Password password string for the exam
+     * @param eip examInProgress that has begun
      */
-    public void studentBeginsExam(ConnectionToClient client, String Password) {
+    public static void studentBeginsExam(ConnectionToClient client, ExamInProgress eip) {
         try {
             String username = AuthorizeUser.getInstance().findUsernameByClient(client);
             if (username != null) {
-                if (studentExistsInList(username) && Password.equals(getPassword()) && this.hasBegun()) {
-                    this.examineeList.add(client);
-                    if (isWordType()) {
-                        client.sendToClient(new Message(Contract.BEGIN_EXAM_WORD, this));
-                    }
-                    client.sendToClient(new Message(Contract.BEGIN_EXAM, this));
+                if (eip.studentExistsInList(username) && eip.hasBegun() && !eip.hasExpired()) {
+                    eip.examineeList.add(client);
                 }
             } else client.sendToClient(new Message(Contract.CANT_BEGIN_EXAM, null));
         } catch (IOException e) {
@@ -202,5 +199,27 @@ public class ExamInProgress implements Serializable {
 
     public void setWordType(boolean wordType) {
         this.wordType = wordType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExamInProgress that = (ExamInProgress) o;
+        return isWordType() == that.isWordType() &&
+                Objects.equals(getDateTimeStart(), that.getDateTimeStart()) &&
+                Objects.equals(getDateTimeEnd(), that.getDateTimeEnd()) &&
+                Objects.equals(getStudentArrayList(), that.getStudentArrayList()) &&
+                Objects.equals(examineeList, that.examineeList) &&
+                Objects.equals(solutions, that.solutions) &&
+                Objects.equals(getPassword(), that.getPassword()) &&
+                Objects.equals(getExaminingTeacher(), that.getExaminingTeacher()) &&
+                Objects.equals(getExam(), that.getExam());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getDateTimeStart(), getDateTimeEnd(), getStudentArrayList(), examineeList, solutions, getPassword(), getExaminingTeacher(), getExam(), isWordType());
     }
 }
