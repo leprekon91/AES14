@@ -5,8 +5,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.PrincipalMenu">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="client.gui.fxcontrol.PrincipalMenu">
     <children>
         <SplitPane dividerPositions="0.7809364548494984" layoutX="200.0" layoutY="130.0" prefHeight="160.0"
                    prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
@@ -50,8 +50,6 @@
                                 <Label text="📕"/>
                             </graphic>
                         </Button>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="navigation"
-                                text="Catalogs"/>
                     </children>
                 </VBox>
             </items>

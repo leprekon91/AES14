@@ -224,7 +224,7 @@ public class ExamExecutionQuestions {
                 exam,
                 generateAnswerArray(),
                 solvingStudent,
-                (int) elapsed / 60,
+                (int) (elapsed / 60),
                 examineeTeacher,
                 false
         );

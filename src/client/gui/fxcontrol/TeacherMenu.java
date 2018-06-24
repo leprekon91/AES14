@@ -21,6 +21,7 @@ public class TeacherMenu {
     public AnchorPane examPane;
     public BorderPane welcomeScreen;
     public AnchorPane examInProgressPane;
+    public AnchorPane gradesForApproval;
 
     /**
      * initialize the window
@@ -124,5 +125,11 @@ public class TeacherMenu {
         hideAll();
         welcomeScreen.setVisible(false);
         examInProgressPane.setVisible(true);
+    }
+
+    public void gradesForApprovalView(ActionEvent actionEvent) {
+        hideAll();
+        welcomeScreen.setVisible(false);
+        gradesForApproval.setVisible(true);
     }
 }

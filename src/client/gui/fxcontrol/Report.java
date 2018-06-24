@@ -136,15 +136,22 @@ public class Report {
 
         try {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.append(' ');
+            fileWriter.append("Average");
             fileWriter.append(',');
+            fileWriter.append(lblAvg.getText());
+            fileWriter.append('\n');
+            fileWriter.append("Median");
+            fileWriter.append(',');
+            fileWriter.append(lblMed.getText());
+            fileWriter.append('\n');
+            fileWriter.append('\n');
             fileWriter.append("Category");
             fileWriter.append(',');
             fileWriter.append("# of Grades");
             fileWriter.append('\n');
 
             for (int i = 0; i < series.getData().size(); i++) {
-                fileWriter.append(' ');
+
                 fileWriter.append(',');
                 XYChart.Data<String, Integer> data;
                 data = (XYChart.Data<String, Integer>) series.getData().get(i);

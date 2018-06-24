@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <SplitPane dividerPositions="0.1507823613086771" prefHeight="502.0" prefWidth="883.0"
-           xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+           xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="client.gui.fxcontrol.StudentMenu">
     <AnchorPane fx:id="viewPane">
         <BorderPane fx:id="welcomeView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"

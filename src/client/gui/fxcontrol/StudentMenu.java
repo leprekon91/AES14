@@ -5,7 +5,9 @@ import com.Contract;
 import com.WordDocument;
 import com.data.ExamInProgress;
 import com.data.Message;
+import com.data.Solved_Exam;
 import com.jfoenix.controls.JFXListView;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -129,8 +131,13 @@ public class StudentMenu {
 
             }
         });
-        gradesList.setItems(StudentControl.getInstance().grades);
+        FilteredList<Solved_Exam> filteredGrades = new FilteredList<>(
+                StudentControl.getInstance().grades,
+                s -> s.isApproved()
+        );
+        gradesList.setItems(filteredGrades);
         gradesList.setCellFactory(list -> new SolvedExamListViewCell());
+
     }
 
     /**

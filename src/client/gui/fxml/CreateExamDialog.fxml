@@ -9,7 +9,7 @@
 <?import javafx.scene.text.*?>
 <?import org.controlsfx.control.ListSelectionView?>
 <?import java.lang.String?>
-<AnchorPane prefHeight="573.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.121"
+<AnchorPane prefHeight="573.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.CreateExamDialog">
     <SplitPane dividerPositions="0.5" layoutY="70.0" prefHeight="83.0" prefWidth="162.0" AnchorPane.bottomAnchor="0.0"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">

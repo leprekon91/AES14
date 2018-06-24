@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="grid" xmlns="http://javafx.com/javafx/8.0.121">
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="grid" xmlns="http://javafx.com/javafx/">
 
     <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20.0"/>

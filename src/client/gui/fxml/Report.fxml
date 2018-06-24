@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" maxHeight="1.7976931348623157E308"
           maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" vgap="10"
-          xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.Report">
+          xmlns="http://javafx.com/javafx/" fx:controller="client.gui.fxcontrol.Report">
     <columnConstraints>
         <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="520.0"/>
 
