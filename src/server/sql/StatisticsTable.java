@@ -47,7 +47,7 @@ public class StatisticsTable {
 
             }
 
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {
@@ -71,7 +71,7 @@ public class StatisticsTable {
 
             }
 
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {
@@ -95,7 +95,7 @@ public class StatisticsTable {
 
             }
 
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {
@@ -119,7 +119,7 @@ public class StatisticsTable {
 
             }
 
-            con.commit();
+
             stmt.close();
             con.close();
         } catch (SQLException e) {

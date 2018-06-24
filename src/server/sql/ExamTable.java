@@ -358,8 +358,7 @@ public class ExamTable {
      * @return Solved Exam Object filled with the entry data.
      */
     public static Solved_Exam readSolvedExam(Solved_Exam solvedExam, int examID, int courseID, int subjectID, String studentName) {
-        System.out.println("StudentAnswersTable - Read SolvedExam\n" +
-                "Solved Exam ID: " + solvedExam.getExam().getExamNumber());
+
         Connection con = MysqlManager.ConnectToDB();
         PreparedStatement stmt = null;
         PreparedStatement stmtE = null;
@@ -604,7 +603,7 @@ public class ExamTable {
      * Statistic functions
      */
 
-    public ArrayList<Solved_Exam> selectAllSolvedExamsBy_Student(String studentUserName) {
+    public static ArrayList<Solved_Exam> selectAllSolvedExamsBy_Student(String studentUserName) {
 
         ArrayList<Solved_Exam> resultArray = new ArrayList<Solved_Exam>();
         Connection con = MysqlManager.ConnectToDB();
@@ -628,7 +627,7 @@ public class ExamTable {
         return resultArray;
     }
 
-    public ArrayList<Solved_Exam> selectAllSolvedExamsBy_ExaminerTeacher(String TeacherUserName) {
+    public static ArrayList<Solved_Exam> selectAllSolvedExamsBy_ExaminerTeacher(String TeacherUserName) {
 
         ArrayList<Solved_Exam> resultArray = new ArrayList<Solved_Exam>();
         Connection con = MysqlManager.ConnectToDB();
@@ -652,7 +651,7 @@ public class ExamTable {
         return resultArray;
     }
 
-    public ArrayList<Solved_Exam> selectAllSolvedExamsBy_AuthorTeacher(String TeacherUserName) {
+    public static ArrayList<Solved_Exam> selectAllSolvedExamsBy_AuthorTeacher(String TeacherUserName) {
 
         ArrayList<Solved_Exam> resultArray = new ArrayList<Solved_Exam>();
         Connection con = MysqlManager.ConnectToDB();
@@ -676,7 +675,7 @@ public class ExamTable {
         return resultArray;
     }
 
-    public ArrayList<Solved_Exam> selectAllSolvedExamsBy_CourseNumber(int courseId) {
+    public static ArrayList<Solved_Exam> selectAllSolvedExamsBy_CourseNumber(int courseId) {
 
         ArrayList<Solved_Exam> resultArray = new ArrayList<Solved_Exam>();
         Connection con = MysqlManager.ConnectToDB();

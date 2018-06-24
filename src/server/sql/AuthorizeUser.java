@@ -2,13 +2,13 @@ package server.sql;
 
 import com.Contract;
 import com.data.Message;
+import com.data.Student;
+import com.data.Teacher;
 import com.data.User;
 import server.ocsf.ConnectionToClient;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -30,6 +30,7 @@ public class AuthorizeUser {
     private AuthorizeUser() {
         this.loggedInUsers = new HashMap<>();
     }
+
 
     /**
      * Handle Login Request. checks the database against the username and password received.
@@ -149,6 +150,54 @@ public class AuthorizeUser {
             if (u.getValue().equals(client)) {
                 loggedInUsers.remove(u);
             }
+        }
+    }
+
+    public static void getAllTeachers(ArrayList<Teacher> teachers) {
+        Connection con = MysqlManager.ConnectToDB();
+        Statement stmt = null;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(SQLContract.ALL_TEACHERS);
+
+            while (rs.next()) {
+                Teacher t = new Teacher(
+                        new User(
+                                rs.getString("user_name"),
+                                rs.getString("first_name"),
+                                rs.getString("last_name"),
+                                2)
+                );
+                teachers.add(t);
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+        }
+    }
+
+    public static void getAllStudents(ArrayList<Student> students) {
+        Connection con = MysqlManager.ConnectToDB();
+        Statement stmt = null;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(SQLContract.ALL_STUDENTS);
+
+            while (rs.next()) {
+                Student t = new Student(
+                        new User(
+                                rs.getString("user_name"),
+                                rs.getString("first_name"),
+                                rs.getString("last_name"),
+                                2)
+                );
+                students.add(t);
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
         }
     }
 }

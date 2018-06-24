@@ -6,7 +6,6 @@ import client.gui.fxcontrol.PrincipalReportsView;
 import client.ocsf.AbstractClient;
 import com.Contract;
 import com.data.*;
-import javafx.application.Platform;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,11 +71,14 @@ public class Client extends AbstractClient {
             case Contract.PRINCIPAL_REQUESTS:
                 PrincipalControl.getInstance().receiveNewRequests((ArrayList<ExtensionRequest>) ((Message) msg).getData());
                 break;
-            case Contract.REPORT:
-                Platform.runLater(() -> PrincipalReportsView.getInstance().openReport((int[]) ((Message) msg).getData()));
-                break;
             case Contract.STUDENTS:
-                Platform.runLater(() -> PrincipalReportsView.getInstance().receiveAllStudentsForReport((ArrayList<Student>) ((Message) msg).getData()));
+                PrincipalControl.getInstance().students.setAll((ArrayList<Student>) ((Message) msg).getData());
+                break;
+            case Contract.TEACHERS:
+                PrincipalControl.getInstance().teachers.setAll((ArrayList<Teacher>) ((Message) msg).getData());
+                break;
+            case Contract.COURSES:
+                PrincipalControl.getInstance().courses.setAll((ArrayList<Course>) ((Message) msg).getData());
                 break;
             case Contract.COURSES_BY_TEACHER:
                 TeacherControl.getInstance().receiveAllCourses((ArrayList<Course>) ((Message) msg).getData());
@@ -94,6 +96,10 @@ public class Client extends AbstractClient {
                 ExamExecutionQuestions.INSTANCE.lockExam();
                 break;
             case Contract.BEGIN_EXAM:
+                break;
+            case Contract.REPORT:
+                PrincipalReportsView.getInstance().openReport((ArrayList<Solved_Exam>) ((Message) msg).getData());
+                break;
 
 
         }

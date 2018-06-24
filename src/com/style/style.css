@@ -973,3 +973,11 @@ VBox > .split-menu-button.last > .arrow-button {
 	-fx-text-fill: #000000;
 	-fx-effect:none;
  }
+.tab{
+    -fx-background-color:LIGHTBLUE;
+    -fx-pref-width:200;
+    -fx-pref-height:60;
+}
+.tab-header-background{
+-fx-background-color:LIGHTBLUE;
+}

@@ -21,6 +21,7 @@ public class Contract {
     //Users Vocabulary
     public static final int STUDENTS = 3;   //get/receive all students
     public static final int TEACHERS = 4;   //get/receive all teachers
+    public static final int COURSES = 5;
 
     // Exam Vocabulary
     final public static int EXAM = 10;
@@ -67,6 +68,8 @@ public class Contract {
     //Reports Vocabulary
     public static final int REPORT = 60;
     public static final int GET_REPORT_BY_STUDENT = 61;
+    public static final int GET_REPORT_BY_TEACHER = 62;
+    public static final int GET_REPORT_BY_COURSE = 63;
 
     //Exam In Progress Vocabulary
     public static final int BEGIN_EXAM = 70;
@@ -84,5 +87,6 @@ public class Contract {
     public static final int STUDENT_STARTS_EXAM = 84;
     public static final int GET_EXAMS_IN_PROGRESS_BY_TEACHER = 85;
     public static final int GET_EXAMS_IN_PROGRESS_BY_STUDENT = 86;
+
 
 }

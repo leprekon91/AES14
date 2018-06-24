@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.MaskerPane?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1"
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.PrincipalReportsView">
     <children>
-        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#showStudentReportDialog"
-                text="Get Student Grade Summary" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0"
-                AnchorPane.topAnchor="14.0"/>
         <MaskerPane fx:id="progressPane" layoutX="290.0" layoutY="167.0" visible="false" AnchorPane.bottomAnchor="0.0"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        <JFXTabPane layoutX="222.0" layoutY="143.0" prefHeight="168.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab text="Students">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <JFXListView fx:id="studentList" AnchorPane.bottomAnchor="20.0"
+                                             AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                                             AnchorPane.topAnchor="20.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Teachers">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <JFXListView fx:id="teacherList" AnchorPane.bottomAnchor="20.0"
+                                             AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                                             AnchorPane.topAnchor="20.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Courses">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <JFXListView fx:id="courseList" AnchorPane.bottomAnchor="20.0"
+                                             AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                                             AnchorPane.topAnchor="20.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </JFXTabPane>
     </children>
 </AnchorPane>

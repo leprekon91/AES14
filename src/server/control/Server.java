@@ -106,6 +106,8 @@ public class Server extends AbstractServer {
             ArrayList<Exam> allExams;
             ArrayList<Student> students;
             ArrayList<ExamInProgress> eips;
+            ArrayList<Teacher> teachers;
+            ArrayList<Solved_Exam> solvedExams;
             //------------------------Message decode--------------------------------------------------------------------
             try {
                 switch (contractType) {
@@ -234,15 +236,8 @@ public class Server extends AbstractServer {
                         break;
                     case Contract.STUDENTS:
                         students = new ArrayList<>();
-                        students.add(new Student(new User("t", "tom", "one", 1)));
-                        students.add(new Student(new User("t", "john", "two", 1)));
-                        students.add(new Student(new User("t", "bob", "three", 1)));
-                        students.add(new Student(new User("t", "max", "four", 1)));
+                        AuthorizeUser.getAllStudents(students);
                         client.sendToClient(new Message(Contract.STUDENTS, students));
-                        break;
-                    case Contract.GET_REPORT_BY_STUDENT:
-                        //TODO stub for report testing
-                        client.sendToClient(new Message(Contract.REPORT, new int[]{1, 11, 21, 31, 41, 51, 61, 71, 72, 81, 91}));
                         break;
                     case Contract.START_EXAM:
                         ExamInProgressManager.getInstance().addExamInProgress((ExamInProgress) ((Message) msg).getData());
@@ -270,10 +265,36 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.STUDENTS_BY_COURSE, students));
                         break;
                     case Contract.LOCK_EXAM:
+                        ExamInProgressManager.getInstance().lockExamInProgress((ExamInProgress) ((Message) msg).getData());
                         break;
                     case Contract.EXTEND_EXAM:
+                        ExtensionRequest er = (ExtensionRequest) ((Message) msg).getData();
+                        ExamInProgressManager.getInstance().extendExamInProgress(er.getExamInProgress(), er.getExtAmnt());
+                        break;
+                    case Contract.TEACHERS:
+                        teachers = new ArrayList<>();
+                        AuthorizeUser.getAllTeachers(teachers);
+                        client.sendToClient(new Message(Contract.TEACHERS, teachers));
+                        break;
+                    case Contract.COURSES:
+                        courses = new ArrayList<>();
+                        SubjectsTable.getAllCourses(courses);
+                        client.sendToClient(new Message(Contract.COURSES, courses));
+                        break;
+                    case Contract.GET_REPORT_BY_STUDENT:
+                        solvedExams = ExamTable.selectAllSolvedExamsBy_Student((String) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.REPORT, solvedExams));
+                        break;
+                    case Contract.GET_REPORT_BY_TEACHER:
+                        solvedExams = ExamTable.selectAllSolvedExamsBy_Student((String) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.REPORT, solvedExams));
+                        break;
+                    case Contract.GET_REPORT_BY_COURSE:
+                        solvedExams = ExamTable.selectAllSolvedExamsBy_Student((String) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.REPORT, solvedExams));
                         break;
                 }
+
             } catch (IOException e) {
                 SUI.logMsg(e.getMessage());
             }

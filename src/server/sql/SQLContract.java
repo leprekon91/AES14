@@ -11,6 +11,11 @@ public class SQLContract {
             "&useLegacyDatetimeCode=false" +
             "&serverTimezone=UTC" +
             "&useSSL=false";
+    public static final String ALL_TEACHERS = "SELECT user_name,first_name,last_name FROM aes.users WHERE type=2;";
+    public static final String ALL_STUDENTS = "SELECT user_name,first_name,last_name FROM aes.users WHERE type=1;";
+    public static final String ALL_COURSES = "SELECT * FROM courses\n" +
+            "join subjects\n" +
+            "\t\ton courses.subjects_id_subjects=subjects.id_subject;";
 
 
     public static String user = "root";       //default database user

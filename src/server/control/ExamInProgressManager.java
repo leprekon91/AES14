@@ -2,6 +2,7 @@ package server.control;
 
 import com.data.ExamInProgress;
 import com.data.Solved_Exam;
+import com.data.Word_Solved_Exam;
 import server.ocsf.ConnectionToClient;
 import server.sql.ExamTable;
 
@@ -85,6 +86,14 @@ public class ExamInProgressManager {
         }
     }
 
+    public void lockExamInProgress(ExamInProgress EIP) {
+        for (ExamInProgress eip : this.eips) {
+            if (eip.equals(EIP)) {
+                eip.lockExam();
+            }
+        }
+    }
+
     public class LockerTask extends TimerTask {
 
         @Override
@@ -93,7 +102,18 @@ public class ExamInProgressManager {
                     eips) {
                 if (eip.hasExpired()) {
                     eip.lockExam();
-                    Solved_Exam.runSolutionCalculator(eip.getSolutions());
+                    if (!eip.isWordType())
+                        Solved_Exam.runSolutionCalculator(eip.getSolutions());
+                    else
+                        for (Solved_Exam se :
+                                eip.getSolutions()) {
+                            ((Word_Solved_Exam) se).setPath(((Word_Solved_Exam) se).writeByteArray());
+                        }
+                    //save solutions to database
+                    for (Solved_Exam se :
+                            eip.getSolutions()) {
+                        ExamTable.createSolvedExam(se);
+                    }
                 }
             }
         }

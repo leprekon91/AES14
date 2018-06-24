@@ -93,4 +93,30 @@ public class SubjectsTable {
 
         }
     }
+
+    public static void getAllCourses(ArrayList<Course> courses) {
+        //------------------------------------
+        PreparedStatement stmt;
+        Connection con = MysqlManager.ConnectToDB();
+        //------------------------------------
+        try {
+            stmt = con.prepareStatement(SQLContract.ALL_COURSES);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                courses.add(
+                        new Course(
+                                rs.getInt("id_course"),
+                                rs.getString("course_name"),
+                                new Subject(rs.getInt("id_subject"), rs.getString("subject_name"))
+                        )
+                );
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            MysqlManager.sqlExceptionHandler(e);
+
+        }
+    }
 }

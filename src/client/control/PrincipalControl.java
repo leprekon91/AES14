@@ -1,9 +1,7 @@
 package client.control;
 
 import com.Contract;
-import com.data.ExtensionRequest;
-import com.data.Message;
-import com.data.Principal;
+import com.data.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +17,10 @@ public class PrincipalControl extends Application {
     public Principal principal;
     public Client client;
     private static PrincipalControl INSTANCE;
-    public ObservableList<ExtensionRequest> requestList;
+    public ObservableList<ExtensionRequest> requestList = FXCollections.observableArrayList();
+    public ObservableList<Teacher> teachers = FXCollections.observableArrayList();
+    public ObservableList<Student> students = FXCollections.observableArrayList();
+    public ObservableList<Course> courses = FXCollections.observableArrayList();
 
     public static PrincipalControl getInstance() {
         if (INSTANCE == null) INSTANCE = new PrincipalControl();
@@ -30,7 +31,9 @@ public class PrincipalControl extends Application {
     @Override
     public void start(Stage primaryStage) {
         INSTANCE = this;
-        requestList = FXCollections.observableArrayList();
+        requestAllTeachers();
+        requestAllStudents();
+        requestAllCourses();
         try {
 
             client.sendToServer(new Message(Contract.GET_PRINCIPAL_REQUESTS, new ArrayList<>()));//rewuest all messages requesting extensions
@@ -55,6 +58,30 @@ public class PrincipalControl extends Application {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void requestAllCourses() {
+        try {
+            client.sendToServer(new Message(Contract.COURSES, null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void requestAllStudents() {
+        try {
+            client.sendToServer(new Message(Contract.STUDENTS, null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void requestAllTeachers() {
+        try {
+            client.sendToServer(new Message(Contract.TEACHERS, null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void begin() {
