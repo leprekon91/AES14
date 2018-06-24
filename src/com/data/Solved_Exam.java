@@ -1,10 +1,11 @@
 package com.data;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Solved_Exam {
+public class Solved_Exam implements Serializable {
 
     /**
      * Solved exam fields

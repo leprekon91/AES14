@@ -49,7 +49,7 @@ public class QuestionTable {
      * @return Question Object filled with the entry data.
      */
     public static Question readQuestion(Question question) {
-        //TODO test
+
         System.out.println("QuestionTable - Read Question\n" +
                 "Question ID: " + question.getQID());
         return question;
@@ -113,7 +113,7 @@ public class QuestionTable {
     }
 
     public static ArrayList<Question> selectAllQuestionsBySubject(int subjectID) {
-        //TODO STUB method
+
         System.out.println("QuestionTable - Select Questions By Subject\n" +
                 "Subject: " + subjectID);
         ArrayList<Question> questions = new ArrayList<>();
@@ -122,7 +122,7 @@ public class QuestionTable {
     }
 
     public static ArrayList<Question> selectAllQuestionsByExam(int examID) {
-        //TODO STUB method
+
         ArrayList<Question> questions = new ArrayList<>();
         System.out.println("QuestionTable - Select Questions By Exam\n" +
                 "Exam: " + examID);
@@ -130,7 +130,7 @@ public class QuestionTable {
     }
 
     public static ArrayList<Question> selectAllQuestionsByTeacher(String teacherID) {
-        //TODO STUB method
+
         System.out.println("QuestionTable - Select Questions By teacher\n" +
                 "Teacher: " + teacherID);
         ArrayList<Question> questions = new ArrayList<>();

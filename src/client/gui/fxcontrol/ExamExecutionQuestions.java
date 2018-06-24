@@ -229,7 +229,11 @@ public class ExamExecutionQuestions {
                 false
         );
         System.out.println("Sending to server: " + solved_exam);
-        //todo solvedexam send to server
+        try {
+            StudentControl.getInstance().client.sendToServer(new Message(Contract.EXAM_SUBMITTED, solved_exam));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void lockExam() {

@@ -3,6 +3,7 @@ package client.gui.fxcontrol;
 import client.control.StudentControl;
 import com.Contract;
 import com.data.ExamInProgress;
+import com.data.Message;
 import com.data.Word_Solved_Exam;
 import com.jfoenix.controls.JFXProgressBar;
 import javafx.animation.KeyFrame;
@@ -140,7 +141,11 @@ public class WordExamUpload {
                 true,
                 false, uploadFile);
         System.out.println(word_solved_exam.getPath());
-        //TODO send solution to server
+        try {
+            StudentControl.getInstance().client.sendToServer(new Message(Contract.EXAM_SUBMITTED, word_solved_exam));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ((Stage) dragboardPane.getScene().getWindow()).close();
     }
 

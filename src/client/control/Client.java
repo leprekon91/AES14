@@ -44,7 +44,7 @@ public class Client extends AbstractClient {
 
     @Override
     protected void handleMessageFromServer(Object msg) {
-        // TODO handle message from server
+
         if (!(msg instanceof Message)) {
             System.out.println("Server sent an unidentifiable message!");
         }

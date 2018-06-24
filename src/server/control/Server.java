@@ -293,6 +293,9 @@ public class Server extends AbstractServer {
                         solvedExams = ExamTable.selectAllSolvedExamsBy_Student((String) ((Message) msg).getData());
                         client.sendToClient(new Message(Contract.REPORT, solvedExams));
                         break;
+                    case Contract.EXAM_SUBMITTED:
+                        ExamTable.createSolvedExam((Solved_Exam) ((Message) msg).getData());
+                        break;
                 }
 
             } catch (IOException e) {

@@ -4,7 +4,6 @@ import client.control.PrincipalControl;
 import com.Contract;
 import com.data.*;
 import com.jfoenix.controls.JFXListView;
-import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import org.controlsfx.control.MaskerPane;
 
@@ -89,6 +88,11 @@ public class PrincipalReportsView {
         }
     }
 
+    /**
+     * open report using solved exams
+     *
+     * @param ses
+     */
     public void openReport(ArrayList<Solved_Exam> ses) {
         progressPane.setVisible(false);
         ArrayList<Integer> dataList = new ArrayList<>();
@@ -100,18 +104,11 @@ public class PrincipalReportsView {
         openReport(arr);
     }
 
-    public void showStudentReportDialog(ActionEvent actionEvent) {
-        //start task of getting all students
-        progressPane.setVisible(true);
-        try {
-            PrincipalControl.getInstance().client.sendToServer(new Message(Contract.STUDENTS, new ArrayList<Student>()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-    }
-
-
+    /**
+     * open report using integer array
+     * @param data
+     */
     public void openReport(int[] data) {
         progressPane.setVisible(false);
         try {
