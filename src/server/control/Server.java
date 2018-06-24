@@ -216,6 +216,8 @@ public class Server extends AbstractServer {
                         break;
                     case Contract.GET_GRADES_BY_EXAM:       //Get Grades of an exam
                     case Contract.GET_GRADES_BY_STUDENT:    //Get grades of a specific student
+                        solvedExams = ExamTable.selectAllSolvedExamsBy_Student((String) ((Message) msg).getData());
+                        client.sendToClient(new Message(Contract.GET_GRADES_BY_STUDENT, solvedExams));
                         break;
                     case Contract.GET_PRINCIPAL_REQUESTS:
                         ((ArrayList<ExtensionRequest>) (((Message) msg).getData())).addAll(RequestManager.getInstance().requests);
@@ -296,6 +298,7 @@ public class Server extends AbstractServer {
                     case Contract.EXAM_SUBMITTED:
                         ExamTable.createSolvedExam((Solved_Exam) ((Message) msg).getData());
                         break;
+
                 }
 
             } catch (IOException e) {

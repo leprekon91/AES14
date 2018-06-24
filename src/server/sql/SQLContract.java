@@ -176,7 +176,7 @@ public class SQLContract {
 
     public static final String CHECK_SOLVED_EXAM_TYPE =
             "SELECT exam_solutions.exam_type\n" +
-                    "FROM word_file_solutions\n" +
+                    "FROM exam_solutions\n" +
                     "WHERE exams_id_exam = ? AND exams_courses_id_course = ? AND exams_subjects_id_subject = ? AND student_user = ?;";
 
     public static final String UPDATE_QUESTION_SOLUTION =

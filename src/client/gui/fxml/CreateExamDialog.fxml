@@ -75,18 +75,8 @@
                                 AnchorPane.topAnchor="0.0">
                         <children>
                             <JFXListView fx:id="questionsGradesListView" layoutX="155.0" layoutY="26.0"
-                                         AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0"
+                                         AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
                                          AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
-                            <Label layoutX="20.0" layoutY="442.0" text="Total:" AnchorPane.bottomAnchor="20.0"
-                                   AnchorPane.leftAnchor="20.0">
-                                <graphic>
-                                    <Label text="∑">
-                                        <font>
-                                            <Font name="System Bold" size="18.0"/>
-                                        </font>
-                                    </Label>
-                                </graphic>
-                            </Label>
                             <Label fx:id="totalGradeCnt" layoutX="73.0" layoutY="459.0" text="0"/>
                         </children>
                     </AnchorPane>

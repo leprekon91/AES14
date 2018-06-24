@@ -3,6 +3,7 @@ package client.control;
 import com.Contract;
 import com.data.ExamInProgress;
 import com.data.Message;
+import com.data.Solved_Exam;
 import com.data.Student;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ public class StudentControl extends Application {
     public Client client;
     private static StudentControl INSTANCE;
     public ObservableList<ExamInProgress> eips = FXCollections.observableArrayList();
+    public ObservableList<Solved_Exam> grades = FXCollections.observableArrayList();
 
     public static StudentControl getInstance() {
         if (INSTANCE == null) INSTANCE = new StudentControl();
@@ -29,6 +31,7 @@ public class StudentControl extends Application {
     public void start(Stage primaryStage)  {
         INSTANCE = this;
         requestEipsByStudent();
+        requestGrades();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(Contract.clientFXML + "StudentMenu.fxml"));
             Parent root = fxmlLoader.load();
@@ -51,6 +54,14 @@ public class StudentControl extends Application {
             }
         });
 
+    }
+
+    private void requestGrades() {
+        try {
+            client.sendToServer(new Message(Contract.GET_GRADES_BY_STUDENT, student.getUsername()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void requestEipsByStudent() {

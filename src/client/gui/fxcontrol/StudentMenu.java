@@ -123,6 +123,8 @@ public class StudentMenu {
 
             }
         });
+        gradesList.setItems(StudentControl.getInstance().grades);
+        gradesList.setCellFactory(list -> new SolvedExamListViewCell());
     }
 
     private void saveFile(ExamInProgress eip, File file) {

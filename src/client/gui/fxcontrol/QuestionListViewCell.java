@@ -3,16 +3,16 @@ package client.gui.fxcontrol;
 import client.control.TeacherControl;
 import com.Contract;
 import com.data.Question;
+import com.jfoenix.controls.JFXListCell;
 import com.style.icons.FontAwesome;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
-public class QuestionListViewCell extends ListCell<Question> {
+public class QuestionListViewCell extends JFXListCell<Question> {
     public Label qIcon;
     public Label subjectIcon;
     public Label qidLbl;
