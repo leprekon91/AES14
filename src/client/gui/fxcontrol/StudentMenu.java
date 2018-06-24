@@ -81,6 +81,9 @@ public class StudentMenu {
         }
     }
 
+    /**
+     * @param eip
+     */
     public void beginExam(ExamInProgress eip) {
         if (eip.isWordType()) {
             FileChooser fileChooser = new FileChooser();
@@ -102,6 +105,9 @@ public class StudentMenu {
         }
     }
 
+    /**
+     *
+     */
     public void receiveBeginExamDecline() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error!");
@@ -127,6 +133,10 @@ public class StudentMenu {
         gradesList.setCellFactory(list -> new SolvedExamListViewCell());
     }
 
+    /**
+     * @param eip
+     * @param file
+     */
     private void saveFile(ExamInProgress eip, File file) {
         try {
             LocalDate localDate = LocalDate.now();
@@ -138,18 +148,30 @@ public class StudentMenu {
         }
 
     }
+
+    /**
+     *
+     * @param actionEvent
+     */
     public void switchToExamsView(ActionEvent actionEvent) {
         welcomeView.setVisible(false);
         examView.setVisible(true);
         gradesView.setVisible(false);
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     public void switchToGradesView(ActionEvent actionEvent) {
         welcomeView.setVisible(false);
         examView.setVisible(false);
         gradesView.setVisible(true);
     }
 
+    /**
+     *
+     */
     public void hideAll() {
         welcomeView.setVisible(true);
         examView.setVisible(false);
