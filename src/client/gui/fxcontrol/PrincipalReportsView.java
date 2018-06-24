@@ -53,7 +53,7 @@ public class PrincipalReportsView {
 
             if (click.getClickCount() == 2) {
                 //Use ListView's getSelected Item
-                Course c = (Course) studentList.getSelectionModel()
+                Course c = (Course) courseList.getSelectionModel()
                         .getSelectedItem();
                 requestCourseReport(c);
 

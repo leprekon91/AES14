@@ -288,11 +288,11 @@ public class Server extends AbstractServer {
                         client.sendToClient(new Message(Contract.REPORT, solvedExams));
                         break;
                     case Contract.GET_REPORT_BY_TEACHER:
-                        solvedExams = ExamTable.selectAllSolvedExamsBy_Student((String) ((Message) msg).getData());
+                        solvedExams = ExamTable.selectAllSolvedExamsBy_ExaminerTeacher((String) ((Message) msg).getData());
                         client.sendToClient(new Message(Contract.REPORT, solvedExams));
                         break;
                     case Contract.GET_REPORT_BY_COURSE:
-                        solvedExams = ExamTable.selectAllSolvedExamsBy_Student((String) ((Message) msg).getData());
+                        solvedExams = ExamTable.selectAllSolvedExamsBy_CourseNumber((int) ((Message) msg).getData());
                         client.sendToClient(new Message(Contract.REPORT, solvedExams));
                         break;
                     case Contract.EXAM_SUBMITTED:

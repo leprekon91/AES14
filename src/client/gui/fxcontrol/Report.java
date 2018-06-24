@@ -63,17 +63,29 @@ public class Report {
         series.setName(dataName);
         int[] dataMap = generateData(data);
 
-
-        series.getData().add(new XYChart.Data<>("0-9", dataMap[0]));
-        series.getData().add(new XYChart.Data<>("10-19", dataMap[1]));
-        series.getData().add(new XYChart.Data<>("20-29", dataMap[2]));
-        series.getData().add(new XYChart.Data<>("30-39", dataMap[3]));
-        series.getData().add(new XYChart.Data<>("40-49", dataMap[4]));
-        series.getData().add(new XYChart.Data<>("50-59", dataMap[5]));
-        series.getData().add(new XYChart.Data<>("60-69", dataMap[6]));
-        series.getData().add(new XYChart.Data<>("70-79", dataMap[7]));
-        series.getData().add(new XYChart.Data<>("80-89", dataMap[8]));
-        series.getData().add(new XYChart.Data<>("90-100", dataMap[9]));
+        if (dataMap.length != 0) {
+            series.getData().add(new XYChart.Data<>("0-9", dataMap[0]));
+            series.getData().add(new XYChart.Data<>("10-19", dataMap[1]));
+            series.getData().add(new XYChart.Data<>("20-29", dataMap[2]));
+            series.getData().add(new XYChart.Data<>("30-39", dataMap[3]));
+            series.getData().add(new XYChart.Data<>("40-49", dataMap[4]));
+            series.getData().add(new XYChart.Data<>("50-59", dataMap[5]));
+            series.getData().add(new XYChart.Data<>("60-69", dataMap[6]));
+            series.getData().add(new XYChart.Data<>("70-79", dataMap[7]));
+            series.getData().add(new XYChart.Data<>("80-89", dataMap[8]));
+            series.getData().add(new XYChart.Data<>("90-100", dataMap[9]));
+        } else {
+            series.getData().add(new XYChart.Data<>("0-9", 0));
+            series.getData().add(new XYChart.Data<>("10-19", 0));
+            series.getData().add(new XYChart.Data<>("20-29", 0));
+            series.getData().add(new XYChart.Data<>("30-39", 0));
+            series.getData().add(new XYChart.Data<>("40-49", 0));
+            series.getData().add(new XYChart.Data<>("50-59", 0));
+            series.getData().add(new XYChart.Data<>("60-69", 0));
+            series.getData().add(new XYChart.Data<>("70-79", 0));
+            series.getData().add(new XYChart.Data<>("80-89", 0));
+            series.getData().add(new XYChart.Data<>("90-100", 0));
+        }
         barChart.getData().add(series);
 
 
@@ -87,6 +99,9 @@ public class Report {
     }
 
     public int[] generateData(int[] data) {
+        if (data.length == 0) {
+            return data;
+        }
         int[] cnts = new int[10];
         int sum = 0;
         for (int i = 0; i < data.length; i++) {

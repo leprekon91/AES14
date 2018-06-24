@@ -5,10 +5,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="client.gui.fxcontrol.PrincipalMenu">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui.fxcontrol.PrincipalMenu">
     <children>
-        <SplitPane dividerPositions="0.7040133779264214" layoutX="200.0" layoutY="130.0" prefHeight="160.0"
+        <SplitPane dividerPositions="0.7809364548494984" layoutX="200.0" layoutY="130.0" prefHeight="160.0"
                    prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -27,13 +27,11 @@
                         </BorderPane>
                     </children>
                 </AnchorPane>
-                <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity"
-                            prefWidth="100.0">
+                <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="130.0">
                     <children>
-                        <Button focusTraversable="false" layoutX="42.0" layoutY="33.0" maxHeight="-Infinity"
+                        <Button focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
                                 minHeight="-Infinity" mnemonicParsing="false" onAction="#switchToRequests"
-                                prefHeight="30.0" styleClass="navigation" text="Requests" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                prefHeight="30.0" styleClass="navigation" text="Requests">
                             <graphic>
                                 <Label fx:id="requestNumIcon" alignment="CENTER" minHeight="-Infinity" prefHeight="20.0"
                                        prefWidth="20.0"
@@ -45,16 +43,17 @@
                                 </Label>
                             </graphic>
                         </Button>
-                        <Button focusTraversable="false" layoutX="35.0" layoutY="79.0" maxHeight="-Infinity"
+                        <Button focusTraversable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
                                 minHeight="-Infinity" mnemonicParsing="false" onAction="#switchToReports"
-                                prefHeight="30.0" styleClass="navigation" text="Reports" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                                prefHeight="30.0" styleClass="navigation" text="Reports">
                             <graphic>
                                 <Label text="📕"/>
                             </graphic>
                         </Button>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="navigation"
+                                text="Catalogs"/>
                     </children>
-                </AnchorPane>
+                </VBox>
             </items>
         </SplitPane>
     </children>

@@ -16,6 +16,7 @@ public class PrincipalMenu {
     public AnchorPane viewPane;
     public AnchorPane requestPane;
     public AnchorPane reportPane;
+    public AnchorPane catalogsPane;
     public Label requestNumIcon;
 
     public void initialize() {
@@ -47,6 +48,7 @@ public class PrincipalMenu {
         setAnchors(requestPane);
 
     }
+
 
     public void loadReportsView() {
         reportPane = new AnchorPane();
