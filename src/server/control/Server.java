@@ -19,12 +19,12 @@ import java.util.ArrayList;
 public class Server extends AbstractServer {
 
     private ServerUI SUI;
-    private SQLInjection sqli;
+
 
     public Server(int port, ServerUI sui, SQLInjection sqli) {
         super(port);
         this.SUI = sui;
-        this.sqli = sqli;
+        AuthorizeUser.getInstance().sqli = sqli;
     }
 
     /**
@@ -116,7 +116,6 @@ public class Server extends AbstractServer {
                     case Contract.AUTHORIZE: //Client Requests Authorization
 
                         User u = (User) ((Message) msg).getData();
-                        AuthorizeUser.getInstance().sqli = this.sqli;
                         Message authResponse = (AuthorizeUser.getInstance()).authorize(u.getUsername(), u.getPass(), client);
                         client.sendToClient(authResponse);
 

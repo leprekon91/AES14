@@ -1,6 +1,7 @@
 package com.data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Message data type, used in communication between the server and the
@@ -45,4 +46,28 @@ public class Message implements Serializable {
     }
 
     // Getters and Setters - END
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return getType() == message.getType() &&
+                Objects.equals(getData(), message.getData());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getType(), getData());
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "type=" + type +
+                ", data=" + data +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package com.data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Serializable {
     /**
@@ -83,6 +84,24 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return getFullName();
+        return getFullName() + " type=" + getType() + " u/p=" + getUsername() + '/' + getPass();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return getType() == user.getType() &&
+                Objects.equals(getUsername(), user.getUsername()) &&
+                Objects.equals(getPass(), user.getPass()) &&
+                Objects.equals(getFirst_name(), user.getFirst_name()) &&
+                Objects.equals(getLast_name(), user.getLast_name());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getUsername(), getPass(), getFirst_name(), getLast_name(), getType());
     }
 }
