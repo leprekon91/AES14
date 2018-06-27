@@ -43,10 +43,12 @@ public class AuthorizeUser {
     public Message authorize(String username, String password, ConnectionToClient connectionToClient) {
         //Prepare Answer Message:
         Message ans = new Message(0, null);
+        //check if the user is already logged in
         if (usernameExistsInLoggedInUsers(username)) {
             ans.setType(Contract.AUTH_NO);
             return ans;
         }
+
         //Statement
         PreparedStatement stmt;
         //Connect to database
@@ -83,6 +85,7 @@ public class AuthorizeUser {
 
         return ans;
     }
+
 
     /**
      * Get Instance for singleton
