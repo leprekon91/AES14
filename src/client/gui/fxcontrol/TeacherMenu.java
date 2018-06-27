@@ -94,6 +94,7 @@ public class TeacherMenu {
         examPane.setVisible(false);
         examInProgressPane.setVisible(false);
         welcomeScreen.setVisible(true);
+        gradesForApproval.setVisible(false);
     }
 
     /**
