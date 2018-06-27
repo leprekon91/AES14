@@ -17,6 +17,7 @@ import javafx.util.Pair;
 import server.gui.fxcontrol.Dashboard;
 import server.sql.MysqlManager;
 import server.sql.SQLContract;
+import server.sql.UserTable;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -56,7 +57,7 @@ public class Start extends Application implements ServerUI {
             e.printStackTrace();
         }
         //Start the Server
-        sv = new Server(Contract.DEFAULT_PORT, this);
+        sv = new Server(Contract.DEFAULT_PORT, this, new UserTable());
         //display LOGIN dialog for server credentials
         login();
 

@@ -4,10 +4,7 @@ import com.Contract;
 import com.data.*;
 import server.ocsf.AbstractServer;
 import server.ocsf.ConnectionToClient;
-import server.sql.AuthorizeUser;
-import server.sql.ExamTable;
-import server.sql.QuestionTable;
-import server.sql.SubjectsTable;
+import server.sql.*;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -22,10 +19,12 @@ import java.util.ArrayList;
 public class Server extends AbstractServer {
 
     private ServerUI SUI;
+    private SQLInjection sqli;
 
-    public Server(int port, ServerUI sui) {
+    public Server(int port, ServerUI sui, SQLInjection sqli) {
         super(port);
         this.SUI = sui;
+        this.sqli = sqli;
     }
 
     /**
@@ -95,6 +94,7 @@ public class Server extends AbstractServer {
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 
         if (msg instanceof Message) {
+            //Log message on the sever:
             SUI.logMsg("Message received from Client: " + client.toString()
                     + " Message:\n" +
                     "\ttype:" + ((Message) msg).getType()
@@ -102,18 +102,21 @@ public class Server extends AbstractServer {
 
 
             int contractType = ((Message) msg).getType();
+
             ArrayList<Question> updatedQuestions;
             ArrayList<Exam> allExams;
             ArrayList<Student> students;
             ArrayList<ExamInProgress> eips;
             ArrayList<Teacher> teachers;
             ArrayList<Solved_Exam> solvedExams;
+
             //------------------------Message decode--------------------------------------------------------------------
             try {
                 switch (contractType) {
                     case Contract.AUTHORIZE: //Client Requests Authorization
 
                         User u = (User) ((Message) msg).getData();
+                        AuthorizeUser.getInstance().sqli = this.sqli;
                         Message authResponse = (AuthorizeUser.getInstance()).authorize(u.getUsername(), u.getPass(), client);
                         client.sendToClient(authResponse);
 

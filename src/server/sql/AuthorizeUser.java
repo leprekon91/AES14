@@ -7,7 +7,10 @@ import com.data.Teacher;
 import com.data.User;
 import server.ocsf.ConnectionToClient;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +22,7 @@ import java.util.Set;
 public class AuthorizeUser {
     //Singleton Instance
     private static AuthorizeUser INSTANCE = null;
+    public SQLInjection sqli;
     //current connection to client
     // public ConnectionToClient connectionToClient;
     //User List <'user_name',Client Thread> of logged-in users.
@@ -43,45 +47,24 @@ public class AuthorizeUser {
     public Message authorize(String username, String password, ConnectionToClient connectionToClient) {
         //Prepare Answer Message:
         Message ans = new Message(0, null);
+
         //check if the user is already logged in
         if (usernameExistsInLoggedInUsers(username)) {
             ans.setType(Contract.AUTH_NO);
             return ans;
         }
 
-        //Statement
-        PreparedStatement stmt;
-        //Connect to database
-        Connection con = MysqlManager.ConnectToDB();
-        try {
-            stmt = con.prepareStatement(SQLContract.USER_AUTH);
-            stmt.setString(1, username);
+        //Get User Object using the unique user name
+        User user = sqli.getUser(username, password);
 
-            ResultSet rs = stmt.executeQuery();
-            //if user exists,set the message to authorized
-            User user = new User("", "");
-            while (rs.next()) {
-
-                //Create new User Object from database values
-                user.setUsername(rs.getString("user_name"));
-                user.setPass(rs.getString("pass"));
-                user.setFirst_name(rs.getString("first_name"));
-                user.setLast_name(rs.getString("last_name"));
-                user.setType(rs.getInt("type"));
-            }
-            if (password.equals(user.getPass())) {
-                ans.setType(Contract.AUTH_YES);
-                this.loggedInUsers.put(user.getUsername(), connectionToClient);
-            } else {
-                ans.setType(Contract.AUTH_NO);
-            }
-            ans.setData(user);
-            if (stmt != null)
-                stmt.close();
-            MysqlManager.closeConnection(con);
-        } catch (SQLException e) {
-            MysqlManager.sqlExceptionHandler(e);
+        //check if the password matches and the user that was returned is initialized from the DB
+        if (password.equals(user.getPass()) && user.getType() != 0) {
+            ans.setType(Contract.AUTH_YES);
+            this.loggedInUsers.put(user.getUsername(), connectionToClient);
+        } else {
+            ans.setType(Contract.AUTH_NO);
         }
+        ans.setData(user);
 
         return ans;
     }
