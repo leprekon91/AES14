@@ -29,10 +29,10 @@ public class AuthorizeUserTest {
     public void authorizeUser() {
         System.out.println(getClass().getName() + ": TEST 1 - Log In User control test");
         //get actual user:
-        Message actual = AuthorizeUser.getInstance().authorize("u", "p", null);
+        Message actual = AuthorizeUser.getInstance().authorize("s", "p1", null);
         //set up expected value
-        User expectedUser = new User("a", "John", "Smith", 1);
-        expectedUser.setPass("p");
+        User expectedUser = new User("s", "John", "Student", 1);
+        expectedUser.setPass("p1");
         Message expectedMsg = new Message(Contract.AUTH_YES, expectedUser);
         //print all of it:
         System.out.println(expectedMsg);

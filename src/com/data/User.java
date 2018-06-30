@@ -28,6 +28,14 @@ public class User implements Serializable {
         this.type = type;
     }
 
+    public User(String username, String pass, String first_name, String last_name, int type) {
+        this.username = username;
+        this.pass = pass;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.type = type;
+    }
+
     /**
      * User entity getters and setters
      */
