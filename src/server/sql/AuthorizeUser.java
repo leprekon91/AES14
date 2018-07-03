@@ -58,12 +58,15 @@ public class AuthorizeUser {
         User user = sqli.getUser(username, password);
 
         //check if the password matches and the user that was returned is initialized from the DB
-        if (password.equals(user.getPass()) && user.getType() != 0) {
-            ans.setType(Contract.AUTH_YES);
-            this.loggedInUsers.put(user.getUsername(), connectionToClient);
+        if ((user != null) && (password != null)) {
+            if (password.equals(user.getPass()) && user.getType() != 0) {
+                ans.setType(Contract.AUTH_YES);
+                this.loggedInUsers.put(user.getUsername(), connectionToClient);
+            }
         } else {
             ans.setType(Contract.AUTH_NO);
         }
+
         ans.setData(user);
 
         return ans;

@@ -23,7 +23,11 @@ public class Server extends AbstractServer {
 
     public Server(int port, ServerUI sui, SQLInjection sqli) {
         super(port);
-        this.SUI = sui;
+        if (sui != null) {
+            this.SUI = sui;
+        } else {
+            this.SUI = new SUIConsole();
+        }
         AuthorizeUser.getInstance().sqli = sqli;
     }
 

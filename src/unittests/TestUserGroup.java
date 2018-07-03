@@ -12,6 +12,7 @@ public class TestUserGroup {
         users.add(new User("s", "p1", "John", "Student", 1));
         users.add(new User("t", "p2", "John", "Teacher", 2));
         users.add(new User("p", "p3", "John", "Principal", 3));
+        users.add(new User("t2", "p4", "John", "Teacher", 2));
     }
 
     public static TestUserGroup getInstance() {

@@ -24,7 +24,7 @@ public class Client extends AbstractClient {
 
     public User user;
     public TeacherControl teacherControl;
-    private AuthControl authControl;//reference for authentication controller
+    private AuthorizationResponse authorizationResponse;//reference for authentication controller
 
     /**
      * Client constructor, opens connection to server once he is created.
@@ -127,10 +127,10 @@ public class Client extends AbstractClient {
      * Also, save the reference to the class that asked for it.
      *
      * @param user
-     * @param authControl
+     * @param authorizationResponse
      */
-    public void requestAuth(User user, AuthControl authControl) {
-        this.authControl = authControl;
+    public void requestAuth(User user, AuthorizationResponse authorizationResponse) {
+        this.authorizationResponse = authorizationResponse;
         try {
             System.out.println("Sending request for login");
             this.sendToServer(new Message(Contract.AUTHORIZE, user));
@@ -141,16 +141,16 @@ public class Client extends AbstractClient {
 
     /**
      * Recieve and apply Auth. reply Message from Server
-     * through authControl.
+     * through authorizationResponse.
      *
      * @param msg Message recieved from server.
      */
     public void receiveAuth(Message msg) {
         System.out.println("Authentication Reply Received");
         if (msg.getType() == Contract.AUTH_YES)
-            authControl.receiveAuthenticationAnswer((User) msg.getData());
+            authorizationResponse.receiveAuthenticationAnswer((User) msg.getData());
         else {
-            authControl.receiveAuthenticationAnswer(null);
+            authorizationResponse.receiveAuthenticationAnswer(null);
         }
     }
 

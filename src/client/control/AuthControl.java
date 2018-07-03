@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * This Class Will Run Authentication for The User
  */
-public class AuthControl {
+public class AuthControl implements AuthorizationResponse {
     public Client client;
     private LoginScreen loginScreen;
     Stage stage;
@@ -65,7 +65,7 @@ public class AuthControl {
      *
      * @param user user object holds information for the menu.
      */
-    void receiveAuthenticationAnswer(User user) {
+    public void receiveAuthenticationAnswer(User user) {
 
         if (user == null) {
             loginScreen.displayErrorMessage();
